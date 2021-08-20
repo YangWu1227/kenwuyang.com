@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R Programming | Yang (Ken) Wu</title>
-    <link>https://academic-demo.netlify.app/tag/r-programming/</link>
-      <atom:link href="https://academic-demo.netlify.app/tag/r-programming/index.xml" rel="self" type="application/rss+xml" />
+    <link>YangWu1227.github.io/tag/r-programming/</link>
+      <atom:link href="YangWu1227.github.io/tag/r-programming/index.xml" rel="self" type="application/rss+xml" />
     <description>R Programming</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Yang Wu</copyright><lastBuildDate>Wed, 01 Jan 2020 21:13:14 -0500</lastBuildDate>
     <image>
-      <url>https://academic-demo.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <url>/YangWu1227.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>R Programming</title>
-      <link>https://academic-demo.netlify.app/tag/r-programming/</link>
+      <link>YangWu1227.github.io/tag/r-programming/</link>
     </image>
     
     <item>
       <title>Control Flows in R</title>
-      <link>https://academic-demo.netlify.app/post/control-flow-in-r/</link>
+      <link>YangWu1227.github.io/post/control-flow-in-r/</link>
       <pubDate>Wed, 01 Jan 2020 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/control-flow-in-r/</guid>
+      <guid>YangWu1227.github.io/post/control-flow-in-r/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/control-flow-in-r/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/control-flow-in-r/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;control-flow&#34; class=&#34;section level2&#34;&gt;
@@ -164,7 +164,7 @@ ggplot(data = tibble(time, pension), mapping = aes(x = time, y = pension)) +
     panel.background = element_rect(fill = &amp;quot;grey97&amp;quot;),
     panel.grid = element_blank()
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/control-flow-in-r/index_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/control-flow-in-r/index_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;hr /&gt;
 &lt;/div&gt;
 &lt;div id=&#34;duration-of-a-fixed-payment-loan-under-monthly-compounding-interest-while-loop&#34; class=&#34;section level2&#34;&gt;
@@ -240,7 +240,7 @@ ggplot(data = tibble(x_vals, y_vals)) +
     panel.background = element_rect(fill = &amp;quot;grey97&amp;quot;),
     panel.grid = element_blank()
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/control-flow-in-r/index_files/figure-html/unnamed-chunk-16-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/control-flow-in-r/index_files/figure-html/unnamed-chunk-16-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Implement the function using &lt;code&gt;case_when()&lt;/code&gt; (Note that the function is &lt;span class=&#34;math inline&#34;&gt;\(-x^3\)&lt;/span&gt; when &lt;span class=&#34;math inline&#34;&gt;\(x \leq 0\)&lt;/span&gt;; hence the negative sign in front of x)&lt;/li&gt;
 &lt;/ul&gt;
@@ -725,11 +725,11 @@ max(x)
     
     <item>
       <title>Implementing Mathematical Concepts in R</title>
-      <link>https://academic-demo.netlify.app/post/implementing-math-concepts-in-r/</link>
+      <link>YangWu1227.github.io/post/implementing-math-concepts-in-r/</link>
       <pubDate>Tue, 29 Oct 2019 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/implementing-math-concepts-in-r/</guid>
+      <guid>YangWu1227.github.io/post/implementing-math-concepts-in-r/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/implementing-math-concepts-in-r/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/implementing-math-concepts-in-r/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;In this post, we will be implementing some interesting mathematical objects in R.&lt;/p&gt;

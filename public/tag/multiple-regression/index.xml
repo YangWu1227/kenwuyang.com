@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Multiple Regression | Yang (Ken) Wu</title>
-    <link>https://academic-demo.netlify.app/tag/multiple-regression/</link>
-      <atom:link href="https://academic-demo.netlify.app/tag/multiple-regression/index.xml" rel="self" type="application/rss+xml" />
+    <link>YangWu1227.github.io/tag/multiple-regression/</link>
+      <atom:link href="YangWu1227.github.io/tag/multiple-regression/index.xml" rel="self" type="application/rss+xml" />
     <description>Multiple Regression</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Yang Wu</copyright><lastBuildDate>Sat, 01 May 2021 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://academic-demo.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <url>/YangWu1227.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>Multiple Regression</title>
-      <link>https://academic-demo.netlify.app/tag/multiple-regression/</link>
+      <link>YangWu1227.github.io/tag/multiple-regression/</link>
     </image>
     
     <item>
       <title>Modeling Prostate-Specific Antigen Levels in Cancer Patients</title>
-      <link>https://academic-demo.netlify.app/project/modeling-prostate-specific-antigen-levels/</link>
+      <link>YangWu1227.github.io/project/modeling-prostate-specific-antigen-levels/</link>
       <pubDate>Sat, 01 May 2021 00:00:00 +0000</pubDate>
-      <guid>https://academic-demo.netlify.app/project/modeling-prostate-specific-antigen-levels/</guid>
+      <guid>YangWu1227.github.io/project/modeling-prostate-specific-antigen-levels/</guid>
       <description>&lt;p&gt;       This scenario-based project was given to us as an assignment in my &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-statistics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;linear regression model class&lt;/a&gt;.
 A university medical center had data on several variables of interest relating to prostate cancer patients. The general assignment was to develop a model that uses the variables (or an
 appropriate subset thereof) in the data set provided to us in order to describe and predict the main variable of interest&amp;mdash; prostate-specific antigen levels. There were needs for analysis in the following areas:&lt;/p&gt;
@@ -27,7 +27,7 @@ appropriate subset thereof) in the data set provided to us in order to describe 
 family confidence of 95%.&lt;/li&gt;
 &lt;li&gt;Perform appropriate diagnostics such as residual analysis, assumptions validation, etc.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;The finished report can be found &lt;a href=&#34;https://academic-demo.netlify.app/project/Modeling%20Prostate-Specific%20Antigen%20Levels/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;; for those interested, here&amp;rsquo;s the &lt;a href=&#34;https://academic-demo.netlify.app/project/Modeling%20Prostate-Specific%20Antigen%20Levels/yang_wu_prostate_data.csv&#34; target=&#34;_blank&#34;&gt;data&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The finished report can be found &lt;a href=&#34;YangWu1227.github.io/YangWu1227.github.io/project/Modeling%20Prostate-Specific%20Antigen%20Levels/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;; for those interested, here&amp;rsquo;s the &lt;a href=&#34;YangWu1227.github.io/YangWu1227.github.io/project/Modeling%20Prostate-Specific%20Antigen%20Levels/yang_wu_prostate_data.csv&#34; target=&#34;_blank&#34;&gt;data&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     

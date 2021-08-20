@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Optimization | Yang (Ken) Wu</title>
-    <link>https://academic-demo.netlify.app/tag/optimization/</link>
-      <atom:link href="https://academic-demo.netlify.app/tag/optimization/index.xml" rel="self" type="application/rss+xml" />
+    <link>YangWu1227.github.io/tag/optimization/</link>
+      <atom:link href="YangWu1227.github.io/tag/optimization/index.xml" rel="self" type="application/rss+xml" />
     <description>Optimization</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Yang Wu</copyright><lastBuildDate>Sat, 14 Mar 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://academic-demo.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <url>/YangWu1227.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>Optimization</title>
-      <link>https://academic-demo.netlify.app/tag/optimization/</link>
+      <link>YangWu1227.github.io/tag/optimization/</link>
     </image>
     
     <item>
       <title>Braess&#39; Paradox in City Planning</title>
-      <link>https://academic-demo.netlify.app/project/braess-paradox-in-city-planning/</link>
+      <link>YangWu1227.github.io/project/braess-paradox-in-city-planning/</link>
       <pubDate>Sat, 14 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>https://academic-demo.netlify.app/project/braess-paradox-in-city-planning/</guid>
+      <guid>YangWu1227.github.io/project/braess-paradox-in-city-planning/</guid>
       <description>&lt;p&gt;       This paper was written for my undergraduate &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-mathematics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Calculus III&lt;/a&gt; class. The project was an instance where I applied the standard techniques of optimization from my multivariable calculus course to analyze a semi-realistic phenomenon&amp;mdash; Braess&#39; Paradox.&lt;/p&gt;
 &lt;p&gt;       Braess’ Paradox is a counterintuitive phenomenon, in which the removal of an edge in a congested network actually results in improved flow. In the 1968 paper “Uber ein Paradoxon aus der Verkehrsplanung” [Braess, 1968] or in English, “On a paradox of traffic planning” [Braess, 2005], Dietrich Braess proposed a mathematical framework for detecting this paradox in a network. When Braess’ paper appeared in 1968, the application of mathematics to traffic planning was an relatively untapped vein of inquiry. Today, the framework continues to be analyzed by researchers and used by transportation specialists in the design of traffic networks. The key techniques that are relevant in this project are as follows:&lt;/p&gt;
 &lt;ul&gt;
@@ -24,7 +24,7 @@
 &lt;li&gt;Partial derivatives&lt;/li&gt;
 &lt;li&gt;Critical points and the second derivative test for surfaces&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;The project outline is designed by &lt;a href=&#34;https://monks.frontrange.edu/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Kenneth M Monks&lt;/a&gt;, and the assignment can be found &lt;a href=&#34;https://academic-demo.netlify.app/project/Braess%27%20Paradox/Assignment.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. My finished paper can be retrieved &lt;a href=&#34;https://academic-demo.netlify.app/project/Braess%27%20Paradox/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The project outline is designed by &lt;a href=&#34;https://monks.frontrange.edu/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Kenneth M Monks&lt;/a&gt;, and the assignment can be found &lt;a href=&#34;YangWu1227.github.io/YangWu1227.github.io/project/Braess%27%20Paradox/Assignment.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. My finished paper can be retrieved &lt;a href=&#34;YangWu1227.github.io/YangWu1227.github.io/project/Braess%27%20Paradox/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

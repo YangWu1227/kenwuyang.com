@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Yang (Ken) Wu</title>
-    <link>https://academic-demo.netlify.app/</link>
-      <atom:link href="https://academic-demo.netlify.app/index.xml" rel="self" type="application/rss+xml" />
+    <link>YangWu1227.github.io/</link>
+      <atom:link href="YangWu1227.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>Yang (Ken) Wu</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Yang Wu</copyright><lastBuildDate>Sat, 01 Jun 2030 13:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://academic-demo.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <url>/YangWu1227.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>Yang (Ken) Wu</title>
-      <link>https://academic-demo.netlify.app/</link>
+      <link>YangWu1227.github.io/</link>
     </image>
     
     <item>
       <title>Python basics</title>
-      <link>https://academic-demo.netlify.app/courses/example/python/</link>
+      <link>YangWu1227.github.io/courses/example/python/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>https://academic-demo.netlify.app/courses/example/python/</guid>
+      <guid>YangWu1227.github.io/courses/example/python/</guid>
       <description>&lt;p&gt;Build a foundation in Python.&lt;/p&gt;
 &lt;p&gt;
   &lt;i class=&#34;fas fa-clock  pr-1 fa-fw&#34;&gt;&lt;/i&gt; 1-2 hours per week, for 8 weeks&lt;/p&gt;
@@ -51,9 +51,9 @@
     
     <item>
       <title>Visualization</title>
-      <link>https://academic-demo.netlify.app/courses/example/visualization/</link>
+      <link>YangWu1227.github.io/courses/example/visualization/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>https://academic-demo.netlify.app/courses/example/visualization/</guid>
+      <guid>YangWu1227.github.io/courses/example/visualization/</guid>
       <description>&lt;p&gt;Learn how to visualize data with Plotly.&lt;/p&gt;
 &lt;p&gt;
   &lt;i class=&#34;fas fa-clock  pr-1 fa-fw&#34;&gt;&lt;/i&gt; 1-2 hours per week, for 8 weeks&lt;/p&gt;
@@ -81,9 +81,9 @@ fig.show()
     
     <item>
       <title>Statistics</title>
-      <link>https://academic-demo.netlify.app/courses/example/stats/</link>
+      <link>YangWu1227.github.io/courses/example/stats/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      <guid>https://academic-demo.netlify.app/courses/example/stats/</guid>
+      <guid>YangWu1227.github.io/courses/example/stats/</guid>
       <description>&lt;p&gt;Introduction to statistics for data science.&lt;/p&gt;
 &lt;p&gt;
   &lt;i class=&#34;fas fa-clock  pr-1 fa-fw&#34;&gt;&lt;/i&gt; 1-2 hours per week, for 8 weeks&lt;/p&gt;
@@ -109,9 +109,9 @@ The variance of the distribution is $\sigma^{2}$.
     
     <item>
       <title>Example Talk</title>
-      <link>https://academic-demo.netlify.app/talk/example-talk/</link>
+      <link>YangWu1227.github.io/talk/example-talk/</link>
       <pubDate>Sat, 01 Jun 2030 13:00:00 +0000</pubDate>
-      <guid>https://academic-demo.netlify.app/talk/example-talk/</guid>
+      <guid>YangWu1227.github.io/talk/example-talk/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Click on the &lt;strong&gt;Slides&lt;/strong&gt; button above to view the built-in slides feature.
@@ -129,11 +129,11 @@ The variance of the distribution is $\sigma^{2}$.
     
     <item>
       <title>Portfolio Optimization Dashboard</title>
-      <link>https://academic-demo.netlify.app/post/portfolio-optimization-continued/</link>
+      <link>YangWu1227.github.io/post/portfolio-optimization-continued/</link>
       <pubDate>Sun, 20 Jun 2021 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/portfolio-optimization-continued/</guid>
+      <guid>YangWu1227.github.io/post/portfolio-optimization-continued/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/portfolio-optimization-continued/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/portfolio-optimization-continued/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;In the previous post, we created a customizable portfolio dashboard using shiny. We could also create a portfolio optimization dashboard; take a look a the following &lt;a href=&#34;https://rpubs.com/yangwu1227/personal_project&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
@@ -142,11 +142,11 @@ The variance of the distribution is $\sigma^{2}$.
     
     <item>
       <title>Customizable Portfolio Dashboard</title>
-      <link>https://academic-demo.netlify.app/post/customizable-portfolio-dashboard/</link>
+      <link>YangWu1227.github.io/post/customizable-portfolio-dashboard/</link>
       <pubDate>Thu, 17 Jun 2021 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/customizable-portfolio-dashboard/</guid>
+      <guid>YangWu1227.github.io/post/customizable-portfolio-dashboard/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/customizable-portfolio-dashboard/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/customizable-portfolio-dashboard/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;For a better experience, please see this &lt;a href=&#34;https://kenyangwu1227.shinyapps.io/Yang-Wu-Customizable-Portfolio-Dashboard/&#34;&gt;application&lt;/a&gt; on the shiny server.&lt;/p&gt;
@@ -157,54 +157,54 @@ The variance of the distribution is $\sigma^{2}$.
     
     <item>
       <title>Visualizing Asset Returns</title>
-      <link>https://academic-demo.netlify.app/post/visualization-asset-returns/</link>
+      <link>YangWu1227.github.io/post/visualization-asset-returns/</link>
       <pubDate>Sat, 01 May 2021 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/visualization-asset-returns/</guid>
+      <guid>YangWu1227.github.io/post/visualization-asset-returns/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/jquery/jquery.min.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/proj4js/proj4.js&#34;&gt;&lt;/script&gt;
-&lt;link href=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/css/motion.css&#34; rel=&#34;stylesheet&#34; /&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/highcharts.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/highcharts-3d.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/highcharts-more.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/stock.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/map.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/annotations.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/data.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/drilldown.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/item-series.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/offline-exporting.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/overlapping-datalabels.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/exporting.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/export-data.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/funnel.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/heatmap.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/treemap.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/sankey.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/dependency-wheel.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/organization.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/solid-gauge.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/streamgraph.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/sunburst.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/vector.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/wordcloud.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/xrange.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/tilemap.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/venn.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/gantt.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/timeline.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/parallel-coordinates.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/bullet.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/coloraxis.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/dumbbell.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/lollipop.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/series-label.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/plugins/motion.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/custom/reset.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/boost.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highchart-binding/highchart.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/jquery/jquery.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/proj4js/proj4.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/css/motion.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/highcharts.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/highcharts-3d.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/highcharts-more.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/stock.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/map.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/annotations.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/data.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/drilldown.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/item-series.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/offline-exporting.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/overlapping-datalabels.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/exporting.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/export-data.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/funnel.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/heatmap.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/treemap.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/sankey.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/dependency-wheel.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/organization.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/solid-gauge.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/streamgraph.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/sunburst.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/vector.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/wordcloud.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/xrange.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/tilemap.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/venn.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/gantt.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/timeline.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/parallel-coordinates.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/bullet.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/coloraxis.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/dumbbell.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/lollipop.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/series-label.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/plugins/motion.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/custom/reset.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/boost.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highchart-binding/highchart.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;visualization-asset-returns-in-xts&#34; class=&#34;section level2&#34;&gt;
@@ -367,7 +367,7 @@ ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
     panel.background = element_rect(fill = &amp;quot;grey97&amp;quot;),
     panel.grid = element_blank(),
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Histogram with panels
 ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
   geom_histogram(
@@ -381,7 +381,7 @@ ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
     panel.background = element_rect(fill = &amp;quot;grey97&amp;quot;),
     panel.grid = element_blank(),
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-7-2.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-7-2.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;hr /&gt;
 &lt;/div&gt;
 &lt;div id=&#34;densty&#34; class=&#34;section level3&#34;&gt;
@@ -394,7 +394,7 @@ ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
     panel.background = element_rect(fill = &amp;quot;grey97&amp;quot;),
     panel.grid = element_blank(),
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Density plot with panels
 ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
   geom_density(mapping = aes(color = asset)) +
@@ -409,7 +409,7 @@ ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
     panel.background = element_rect(fill = &amp;quot;grey97&amp;quot;),
     panel.grid = element_blank(),
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-8-2.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-8-2.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description>
@@ -417,9 +417,9 @@ ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
     
     <item>
       <title>Modeling Prostate-Specific Antigen Levels in Cancer Patients</title>
-      <link>https://academic-demo.netlify.app/project/modeling-prostate-specific-antigen-levels/</link>
+      <link>YangWu1227.github.io/project/modeling-prostate-specific-antigen-levels/</link>
       <pubDate>Sat, 01 May 2021 00:00:00 +0000</pubDate>
-      <guid>https://academic-demo.netlify.app/project/modeling-prostate-specific-antigen-levels/</guid>
+      <guid>YangWu1227.github.io/project/modeling-prostate-specific-antigen-levels/</guid>
       <description>&lt;p&gt;       This scenario-based project was given to us as an assignment in my &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-statistics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;linear regression model class&lt;/a&gt;.
 A university medical center had data on several variables of interest relating to prostate cancer patients. The general assignment was to develop a model that uses the variables (or an
 appropriate subset thereof) in the data set provided to us in order to describe and predict the main variable of interest&amp;mdash; prostate-specific antigen levels. There were needs for analysis in the following areas:&lt;/p&gt;
@@ -430,15 +430,15 @@ appropriate subset thereof) in the data set provided to us in order to describe 
 family confidence of 95%.&lt;/li&gt;
 &lt;li&gt;Perform appropriate diagnostics such as residual analysis, assumptions validation, etc.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;The finished report can be found &lt;a href=&#34;https://academic-demo.netlify.app/project/Modeling%20Prostate-Specific%20Antigen%20Levels/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;; for those interested, here&amp;rsquo;s the &lt;a href=&#34;https://academic-demo.netlify.app/project/Modeling%20Prostate-Specific%20Antigen%20Levels/yang_wu_prostate_data.csv&#34; target=&#34;_blank&#34;&gt;data&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The finished report can be found &lt;a href=&#34;YangWu1227.github.io/YangWu1227.github.io/project/Modeling%20Prostate-Specific%20Antigen%20Levels/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;; for those interested, here&amp;rsquo;s the &lt;a href=&#34;YangWu1227.github.io/YangWu1227.github.io/project/Modeling%20Prostate-Specific%20Antigen%20Levels/yang_wu_prostate_data.csv&#34; target=&#34;_blank&#34;&gt;data&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Modeling Lumber Volume From Tree Diameter</title>
-      <link>https://academic-demo.netlify.app/project/modeling-lumber-volume-from-tree-diameter/</link>
+      <link>YangWu1227.github.io/project/modeling-lumber-volume-from-tree-diameter/</link>
       <pubDate>Mon, 19 Apr 2021 00:00:00 +0000</pubDate>
-      <guid>https://academic-demo.netlify.app/project/modeling-lumber-volume-from-tree-diameter/</guid>
+      <guid>YangWu1227.github.io/project/modeling-lumber-volume-from-tree-diameter/</guid>
       <description>&lt;p&gt;       This scenario-based project was given to us as an assignment in my &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-statistics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;linear regression model class&lt;/a&gt;. A production planning supervisor for a lumber company has hired us to help with developing a predictive model. The lumber company wishes to use the diameter of a tree to predict the volume of lumber obtained from the tree after processing. A successful model will help the planning supervisor schedule tree-cutting and mill processing. There were needs for analysis in the following areas:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Develop a mathematical model, or two, to predict lumber volume from tree diameters.&lt;/li&gt;
@@ -447,15 +447,15 @@ family confidence of 95%.&lt;/li&gt;
 &lt;li&gt;Provide a rough gauge of average production for small, medium, and large trees. Use confidence intervals.&lt;/li&gt;
 &lt;li&gt;Estimate the total lumber volume of a single pallet of sixteen trees.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;       The finished report can be found &lt;a href=&#34;https://academic-demo.netlify.app/project/Modeling%20Lumber%20Volume/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;; for those interested, here&amp;rsquo;s the &lt;a href=&#34;https://academic-demo.netlify.app/project/Modeling%20Lumber%20Volume/yang_wu_lumber_data.csv&#34; target=&#34;_blank&#34;&gt;data&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;       The finished report can be found &lt;a href=&#34;YangWu1227.github.io/YangWu1227.github.io/project/Modeling%20Lumber%20Volume/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;; for those interested, here&amp;rsquo;s the &lt;a href=&#34;YangWu1227.github.io/YangWu1227.github.io/project/Modeling%20Lumber%20Volume/yang_wu_lumber_data.csv&#34; target=&#34;_blank&#34;&gt;data&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Gender Pay Gap in Professional Sports</title>
-      <link>https://academic-demo.netlify.app/project/pay-in-the-wnba/</link>
+      <link>YangWu1227.github.io/project/pay-in-the-wnba/</link>
       <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>
-      <guid>https://academic-demo.netlify.app/project/pay-in-the-wnba/</guid>
+      <guid>YangWu1227.github.io/project/pay-in-the-wnba/</guid>
       <description>&lt;p&gt;“To put it really simple: If you don’t respect women’s basketball, you’re a joke. You’re a joke, man.”&lt;/p&gt;
 &lt;p&gt;                               — Isiah Thomas, Former NBA All-Star&lt;/p&gt;
 &lt;p&gt; &lt;/p&gt;
@@ -464,17 +464,17 @@ family confidence of 95%.&lt;/li&gt;
 &lt;p&gt; &lt;/p&gt;
 &lt;p&gt;       The quotes above seem to embody the sentiments that typify the social discourse surrounding the issue of equity of pay in the WNBA. A major drawback in today’s discussions pertaining to the issue of fair pay is that it is often scrutinized as a political issue. &lt;em&gt;It is&lt;/em&gt;. But framing the issue as entirely political omits the fact that it is also economic.&lt;/p&gt;
 &lt;p&gt;       While the arms of normative economics wrestle with the question of fairness, positive economics is concerned with the description, quantification and explanation of economic issues. This paper adds to the current discourse regarding fair pay by examining the talent market of the Women’s National Basketball Association as a case study. Framing the issue of equitable compensation as a study of economic efficiency, I focus my analysis primarily on entertaining the “what is” question. Is there an inefficiency in the labor market for the WNBA players in terms of player pay?&lt;/p&gt;
-&lt;p&gt;       The finished paper can be found &lt;a href=&#34;https://academic-demo.netlify.app/project/Pay%20in%20the%20WNBA/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. And, for those interested, here&amp;rsquo;s the &lt;a href=&#34;https://academic-demo.netlify.app/project/Pay%20in%20the%20WNBA/yang_wu_WNBA_data.xlsx&#34; target=&#34;_blank&#34;&gt;data&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;       The finished paper can be found &lt;a href=&#34;YangWu1227.github.io/YangWu1227.github.io/project/Pay%20in%20the%20WNBA/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. And, for those interested, here&amp;rsquo;s the &lt;a href=&#34;YangWu1227.github.io/YangWu1227.github.io/project/Pay%20in%20the%20WNBA/yang_wu_WNBA_data.xlsx&#34; target=&#34;_blank&#34;&gt;data&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Portfolio Optimization &amp; Returns</title>
-      <link>https://academic-demo.netlify.app/post/portfolio-returns-and-optimization/</link>
+      <link>YangWu1227.github.io/post/portfolio-returns-and-optimization/</link>
       <pubDate>Tue, 01 Dec 2020 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/portfolio-returns-and-optimization/</guid>
+      <guid>YangWu1227.github.io/post/portfolio-returns-and-optimization/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/portfolio-returns-and-optimization/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/portfolio-returns-and-optimization/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;optimal-weights-for-the-five-asset-portfolio-minimum-variance&#34; class=&#34;section level2&#34;&gt;
@@ -904,19 +904,19 @@ head(four_computational_methods, 10)
     
     <item>
       <title>The Central Limit Theorem and Power Simulation</title>
-      <link>https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/</link>
+      <link>YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/</link>
       <pubDate>Wed, 04 Nov 2020 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/</guid>
+      <guid>YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/plotly-binding/plotly.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/typedarray/typedarray.min.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/jquery/jquery.min.js&#34;&gt;&lt;/script&gt;
-&lt;link href=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/crosstalk/css/crosstalk.css&#34; rel=&#34;stylesheet&#34; /&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/crosstalk/js/crosstalk.min.js&#34;&gt;&lt;/script&gt;
-&lt;link href=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/plotly-htmlwidgets-css/plotly-htmlwidgets.css&#34; rel=&#34;stylesheet&#34; /&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/plotly-main/plotly-latest.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/plotly-binding/plotly.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/typedarray/typedarray.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/jquery/jquery.min.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/crosstalk/css/crosstalk.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/crosstalk/js/crosstalk.min.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/plotly-htmlwidgets-css/plotly-htmlwidgets.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/plotly-main/plotly-latest.min.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;central-limit-theorem&#34; class=&#34;section level2&#34;&gt;
@@ -974,7 +974,7 @@ p &amp;lt;- p + ggtitle(&amp;quot;Density Plot of Sampling Distributions&amp;quo
 p &amp;lt;- p + xlab(&amp;quot;Distributions of Sample Means&amp;quot;) + ylab(&amp;quot;Density&amp;quot;)
 p &amp;lt;- p + theme(panel.background = element_rect(fill = &amp;quot;azure2&amp;quot;))
 p&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The dashed line in the figure above indicates &lt;span class=&#34;math inline&#34;&gt;\(\lambda= 9.1667\)&lt;/span&gt;. Evidently, as sample size gets larger, the spread of the distribution of sample means gets smaller. We have a visual confirmation of the CTL that standard error of the mean should become smaller as &lt;span class=&#34;math inline&#34;&gt;\(n \to \infty\)&lt;/span&gt;. Below, we compute the standard deviations of these distributions:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Using tapply
 round(tapply(sampling_distributions$sample_means, sampling_distributions$sample_size, sd), digits = 5)&lt;/code&gt;&lt;/pre&gt;
@@ -1062,7 +1062,7 @@ p &amp;lt;- p + ggtitle(&amp;quot;Scatter Plot of Bivariate Normal Random Variab
 p &amp;lt;- p + xlab(&amp;quot;X1&amp;quot;) + ylab(&amp;quot;X2&amp;quot;)
 p &amp;lt;- p + theme(panel.background = element_rect(fill = &amp;quot;azure2&amp;quot;))
 p&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Here’s a 3D plot of the joint probability density function of the two random variables:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Bandwidth
 # Using a rule-of-thumb for choosing the bandwidth of a Gaussian kernel density estimator
@@ -1093,7 +1093,7 @@ p &amp;lt;- p + ggtitle(&amp;quot;Scatter Plot of Bivariate Normal Random Variab
 p &amp;lt;- p + xlab(&amp;quot;X1&amp;quot;) + ylab(&amp;quot;X2&amp;quot;)
 p &amp;lt;- p + theme(panel.background = element_rect(fill = &amp;quot;azure2&amp;quot;))
 p&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Bandwidth
 bw_vector &amp;lt;- c(bandwidth.nrd(strong_negative[, 1]), bandwidth.nrd(strong_negative[, 2]))
 bw_strong_negative &amp;lt;- mean(bw_vector)
@@ -1377,7 +1377,7 @@ p &amp;lt;- p + ylim(c(0, 1))
 p &amp;lt;- p + ggtitle(&amp;quot;Power Estimates by Sample Size&amp;quot;) + xlab(&amp;quot;Sample Size&amp;quot;) + ylab(&amp;quot;Power Estimates&amp;quot;)
 p &amp;lt;- p + theme(panel.background = element_rect(fill = &amp;quot;azure2&amp;quot;))
 p&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;As can be seen, our power estimates increase as sample size increases. If we take 0.8 as the rough rule of thumb of desired level of power, then a sample size of &lt;span class=&#34;math inline&#34;&gt;\(\approx350\)&lt;/span&gt; would yield us that level of power given the set of parameters I chose.&lt;/p&gt;
 &lt;/div&gt;
 </description>
@@ -1385,11 +1385,11 @@ p&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Data Wrangling with Economics Data</title>
-      <link>https://academic-demo.netlify.app/post/data-wrangling-in-economics/</link>
+      <link>YangWu1227.github.io/post/data-wrangling-in-economics/</link>
       <pubDate>Mon, 04 May 2020 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/data-wrangling-in-economics/</guid>
+      <guid>YangWu1227.github.io/post/data-wrangling-in-economics/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/data-wrangling-in-economics/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/data-wrangling-in-economics/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;data-wrangling&#34; class=&#34;section level2&#34;&gt;
@@ -1732,11 +1732,11 @@ nested_data
     
     <item>
       <title>Applications of Subsetting in R</title>
-      <link>https://academic-demo.netlify.app/post/applications-of-subsetting-in-r/</link>
+      <link>YangWu1227.github.io/post/applications-of-subsetting-in-r/</link>
       <pubDate>Thu, 23 Apr 2020 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/applications-of-subsetting-in-r/</guid>
+      <guid>YangWu1227.github.io/post/applications-of-subsetting-in-r/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/applications-of-subsetting-in-r/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/applications-of-subsetting-in-r/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;matching-and-merging-by-hand-integer-subsetting&#34; class=&#34;section level2&#34;&gt;
@@ -2313,9 +2313,9 @@ as_tibble(order_columns(data = USArrests))
     
     <item>
       <title>Braess&#39; Paradox in City Planning</title>
-      <link>https://academic-demo.netlify.app/project/braess-paradox-in-city-planning/</link>
+      <link>YangWu1227.github.io/project/braess-paradox-in-city-planning/</link>
       <pubDate>Sat, 14 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>https://academic-demo.netlify.app/project/braess-paradox-in-city-planning/</guid>
+      <guid>YangWu1227.github.io/project/braess-paradox-in-city-planning/</guid>
       <description>&lt;p&gt;       This paper was written for my undergraduate &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-mathematics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Calculus III&lt;/a&gt; class. The project was an instance where I applied the standard techniques of optimization from my multivariable calculus course to analyze a semi-realistic phenomenon&amp;mdash; Braess&#39; Paradox.&lt;/p&gt;
 &lt;p&gt;       Braess’ Paradox is a counterintuitive phenomenon, in which the removal of an edge in a congested network actually results in improved flow. In the 1968 paper “Uber ein Paradoxon aus der Verkehrsplanung” [Braess, 1968] or in English, “On a paradox of traffic planning” [Braess, 2005], Dietrich Braess proposed a mathematical framework for detecting this paradox in a network. When Braess’ paper appeared in 1968, the application of mathematics to traffic planning was an relatively untapped vein of inquiry. Today, the framework continues to be analyzed by researchers and used by transportation specialists in the design of traffic networks. The key techniques that are relevant in this project are as follows:&lt;/p&gt;
 &lt;ul&gt;
@@ -2323,17 +2323,17 @@ as_tibble(order_columns(data = USArrests))
 &lt;li&gt;Partial derivatives&lt;/li&gt;
 &lt;li&gt;Critical points and the second derivative test for surfaces&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;The project outline is designed by &lt;a href=&#34;https://monks.frontrange.edu/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Kenneth M Monks&lt;/a&gt;, and the assignment can be found &lt;a href=&#34;https://academic-demo.netlify.app/project/Braess%27%20Paradox/Assignment.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. My finished paper can be retrieved &lt;a href=&#34;https://academic-demo.netlify.app/project/Braess%27%20Paradox/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The project outline is designed by &lt;a href=&#34;https://monks.frontrange.edu/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Kenneth M Monks&lt;/a&gt;, and the assignment can be found &lt;a href=&#34;YangWu1227.github.io/YangWu1227.github.io/project/Braess%27%20Paradox/Assignment.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. My finished paper can be retrieved &lt;a href=&#34;YangWu1227.github.io/YangWu1227.github.io/project/Braess%27%20Paradox/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Profit Maximization in Sports Economics</title>
-      <link>https://academic-demo.netlify.app/post/understanding-price-elasticity-in-professional-sports/</link>
+      <link>YangWu1227.github.io/post/understanding-price-elasticity-in-professional-sports/</link>
       <pubDate>Sat, 29 Feb 2020 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/understanding-price-elasticity-in-professional-sports/</guid>
+      <guid>YangWu1227.github.io/post/understanding-price-elasticity-in-professional-sports/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/understanding-price-elasticity-in-professional-sports/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/understanding-price-elasticity-in-professional-sports/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;when-in-doubt-derive-the-equation&#34; class=&#34;section level2&#34;&gt;
@@ -2443,11 +2443,11 @@ as_tibble(order_columns(data = USArrests))
     
     <item>
       <title>Control Flows in R</title>
-      <link>https://academic-demo.netlify.app/post/control-flow-in-r/</link>
+      <link>YangWu1227.github.io/post/control-flow-in-r/</link>
       <pubDate>Wed, 01 Jan 2020 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/control-flow-in-r/</guid>
+      <guid>YangWu1227.github.io/post/control-flow-in-r/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/control-flow-in-r/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/control-flow-in-r/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;control-flow&#34; class=&#34;section level2&#34;&gt;
@@ -2593,7 +2593,7 @@ ggplot(data = tibble(time, pension), mapping = aes(x = time, y = pension)) +
     panel.background = element_rect(fill = &amp;quot;grey97&amp;quot;),
     panel.grid = element_blank()
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/control-flow-in-r/index_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/control-flow-in-r/index_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;hr /&gt;
 &lt;/div&gt;
 &lt;div id=&#34;duration-of-a-fixed-payment-loan-under-monthly-compounding-interest-while-loop&#34; class=&#34;section level2&#34;&gt;
@@ -2669,7 +2669,7 @@ ggplot(data = tibble(x_vals, y_vals)) +
     panel.background = element_rect(fill = &amp;quot;grey97&amp;quot;),
     panel.grid = element_blank()
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/control-flow-in-r/index_files/figure-html/unnamed-chunk-16-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/control-flow-in-r/index_files/figure-html/unnamed-chunk-16-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Implement the function using &lt;code&gt;case_when()&lt;/code&gt; (Note that the function is &lt;span class=&#34;math inline&#34;&gt;\(-x^3\)&lt;/span&gt; when &lt;span class=&#34;math inline&#34;&gt;\(x \leq 0\)&lt;/span&gt;; hence the negative sign in front of x)&lt;/li&gt;
 &lt;/ul&gt;
@@ -3154,9 +3154,9 @@ max(x)
     
     <item>
       <title>Measles Epidemic: the SIR model</title>
-      <link>https://academic-demo.netlify.app/project/measles-epidemic-the-sir-model/</link>
+      <link>YangWu1227.github.io/project/measles-epidemic-the-sir-model/</link>
       <pubDate>Thu, 19 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>https://academic-demo.netlify.app/project/measles-epidemic-the-sir-model/</guid>
+      <guid>YangWu1227.github.io/project/measles-epidemic-the-sir-model/</guid>
       <description>&lt;p&gt;       This report was written for my undergraduate &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-mathematics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Calculus II&lt;/a&gt; class. The mock-scenario involves a measles outbreak on an isolated island with 50,000 inhabitants. To help monitor the situation, I employed a naive epidemiological model to provide estimations for the rate of transmission under various conditions.&lt;/p&gt;
 &lt;p&gt;       I implemented the model &lt;em&gt;naively&lt;/em&gt; by making three simplifying, but not necessarily implausible assumptions:&lt;/p&gt;
 &lt;ul&gt;
@@ -3164,17 +3164,17 @@ max(x)
 &lt;li&gt;Permanent immunity once recovered&lt;/li&gt;
 &lt;li&gt;Short time horizon in which there is no need to consider immigration and emigration&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Other diseases may require a more complex model. The finished paper can be found &lt;a href=&#34;https://academic-demo.netlify.app/project/SIR%20model/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Other diseases may require a more complex model. The finished paper can be found &lt;a href=&#34;YangWu1227.github.io/YangWu1227.github.io/project/SIR%20model/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Implementing Mathematical Concepts in R</title>
-      <link>https://academic-demo.netlify.app/post/implementing-math-concepts-in-r/</link>
+      <link>YangWu1227.github.io/post/implementing-math-concepts-in-r/</link>
       <pubDate>Tue, 29 Oct 2019 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/implementing-math-concepts-in-r/</guid>
+      <guid>YangWu1227.github.io/post/implementing-math-concepts-in-r/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/implementing-math-concepts-in-r/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/implementing-math-concepts-in-r/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;In this post, we will be implementing some interesting mathematical objects in R.&lt;/p&gt;
@@ -3306,9 +3306,9 @@ purrr::map2_dbl(
     
     <item>
       <title>An example preprint / working paper</title>
-      <link>https://academic-demo.netlify.app/publication/preprint/</link>
+      <link>YangWu1227.github.io/publication/preprint/</link>
       <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
-      <guid>https://academic-demo.netlify.app/publication/preprint/</guid>
+      <guid>YangWu1227.github.io/publication/preprint/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Create your slides in Markdown - click the &lt;em&gt;Slides&lt;/em&gt; button to check out the example.
@@ -3320,9 +3320,9 @@ purrr::map2_dbl(
     
     <item>
       <title>Slides</title>
-      <link>https://academic-demo.netlify.app/slides/example/</link>
+      <link>YangWu1227.github.io/slides/example/</link>
       <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>https://academic-demo.netlify.app/slides/example/</guid>
+      <guid>YangWu1227.github.io/slides/example/</guid>
       <description>&lt;h1 id=&#34;create-slides-in-markdown-with-wowchemy&#34;&gt;Create slides in Markdown with Wowchemy&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&#34;https://wowchemy.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Wowchemy&lt;/a&gt; | &lt;a href=&#34;https://owchemy.com/docs/managing-content/#create-slides&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Documentation&lt;/a&gt;&lt;/p&gt;
 &lt;hr&gt;
@@ -3449,9 +3449,9 @@ Three
     
     <item>
       <title>An example journal article</title>
-      <link>https://academic-demo.netlify.app/publication/journal-article/</link>
+      <link>YangWu1227.github.io/publication/journal-article/</link>
       <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
-      <guid>https://academic-demo.netlify.app/publication/journal-article/</guid>
+      <guid>YangWu1227.github.io/publication/journal-article/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
@@ -3468,9 +3468,9 @@ Three
     
     <item>
       <title>An example conference paper</title>
-      <link>https://academic-demo.netlify.app/publication/conference-paper/</link>
+      <link>YangWu1227.github.io/publication/conference-paper/</link>
       <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
-      <guid>https://academic-demo.netlify.app/publication/conference-paper/</guid>
+      <guid>YangWu1227.github.io/publication/conference-paper/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
@@ -3487,9 +3487,9 @@ Three
     
     <item>
       <title></title>
-      <link>https://academic-demo.netlify.app/admin/config.yml</link>
+      <link>YangWu1227.github.io/admin/config.yml</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://academic-demo.netlify.app/admin/config.yml</guid>
+      <guid>YangWu1227.github.io/admin/config.yml</guid>
       <description></description>
     </item>
     

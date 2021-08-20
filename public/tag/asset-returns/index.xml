@@ -2,66 +2,66 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Asset Returns | Yang (Ken) Wu</title>
-    <link>https://academic-demo.netlify.app/tag/asset-returns/</link>
-      <atom:link href="https://academic-demo.netlify.app/tag/asset-returns/index.xml" rel="self" type="application/rss+xml" />
+    <link>YangWu1227.github.io/tag/asset-returns/</link>
+      <atom:link href="YangWu1227.github.io/tag/asset-returns/index.xml" rel="self" type="application/rss+xml" />
     <description>Asset Returns</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Yang Wu</copyright><lastBuildDate>Sat, 01 May 2021 21:13:14 -0500</lastBuildDate>
     <image>
-      <url>https://academic-demo.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <url>/YangWu1227.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>Asset Returns</title>
-      <link>https://academic-demo.netlify.app/tag/asset-returns/</link>
+      <link>YangWu1227.github.io/tag/asset-returns/</link>
     </image>
     
     <item>
       <title>Visualizing Asset Returns</title>
-      <link>https://academic-demo.netlify.app/post/visualization-asset-returns/</link>
+      <link>YangWu1227.github.io/post/visualization-asset-returns/</link>
       <pubDate>Sat, 01 May 2021 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/visualization-asset-returns/</guid>
+      <guid>YangWu1227.github.io/post/visualization-asset-returns/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/jquery/jquery.min.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/proj4js/proj4.js&#34;&gt;&lt;/script&gt;
-&lt;link href=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/css/motion.css&#34; rel=&#34;stylesheet&#34; /&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/highcharts.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/highcharts-3d.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/highcharts-more.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/stock.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/map.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/annotations.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/data.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/drilldown.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/item-series.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/offline-exporting.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/overlapping-datalabels.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/exporting.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/export-data.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/funnel.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/heatmap.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/treemap.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/sankey.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/dependency-wheel.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/organization.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/solid-gauge.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/streamgraph.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/sunburst.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/vector.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/wordcloud.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/xrange.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/tilemap.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/venn.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/gantt.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/timeline.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/parallel-coordinates.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/bullet.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/coloraxis.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/dumbbell.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/lollipop.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/series-label.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/plugins/motion.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/custom/reset.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/boost.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highchart-binding/highchart.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/jquery/jquery.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/proj4js/proj4.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/css/motion.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/highcharts.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/highcharts-3d.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/highcharts-more.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/stock.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/map.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/annotations.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/data.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/drilldown.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/item-series.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/offline-exporting.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/overlapping-datalabels.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/exporting.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/export-data.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/funnel.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/heatmap.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/treemap.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/sankey.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/dependency-wheel.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/organization.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/solid-gauge.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/streamgraph.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/sunburst.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/vector.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/wordcloud.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/xrange.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/tilemap.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/venn.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/gantt.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/timeline.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/parallel-coordinates.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/bullet.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/coloraxis.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/dumbbell.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/lollipop.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/series-label.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/plugins/motion.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/custom/reset.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/boost.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highchart-binding/highchart.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;visualization-asset-returns-in-xts&#34; class=&#34;section level2&#34;&gt;
@@ -224,7 +224,7 @@ ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
     panel.background = element_rect(fill = &amp;quot;grey97&amp;quot;),
     panel.grid = element_blank(),
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Histogram with panels
 ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
   geom_histogram(
@@ -238,7 +238,7 @@ ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
     panel.background = element_rect(fill = &amp;quot;grey97&amp;quot;),
     panel.grid = element_blank(),
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-7-2.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-7-2.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;hr /&gt;
 &lt;/div&gt;
 &lt;div id=&#34;densty&#34; class=&#34;section level3&#34;&gt;
@@ -251,7 +251,7 @@ ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
     panel.background = element_rect(fill = &amp;quot;grey97&amp;quot;),
     panel.grid = element_blank(),
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Density plot with panels
 ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
   geom_density(mapping = aes(color = asset)) +
@@ -266,7 +266,7 @@ ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
     panel.background = element_rect(fill = &amp;quot;grey97&amp;quot;),
     panel.grid = element_blank(),
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-8-2.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-8-2.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description>

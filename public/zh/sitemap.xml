@@ -2,64 +2,64 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://academic-demo.netlify.app/zh/authors/</loc>
+    <loc>YangWu1227.github.io/zh/authors/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://academic-demo.netlify.app/authors/"
+                href="YangWu1227.github.io/authors/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://academic-demo.netlify.app/zh/authors/"
+                href="YangWu1227.github.io/zh/authors/"
                 />
   </url><url>
-    <loc>https://academic-demo.netlify.app/zh/categories/</loc>
+    <loc>YangWu1227.github.io/zh/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://academic-demo.netlify.app/categories/"
+                href="YangWu1227.github.io/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://academic-demo.netlify.app/zh/categories/"
+                href="YangWu1227.github.io/zh/categories/"
                 />
   </url><url>
-    <loc>https://academic-demo.netlify.app/zh/publication_types/</loc>
+    <loc>YangWu1227.github.io/zh/publication_types/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://academic-demo.netlify.app/publication_types/"
+                href="YangWu1227.github.io/publication_types/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://academic-demo.netlify.app/zh/publication_types/"
+                href="YangWu1227.github.io/zh/publication_types/"
                 />
   </url><url>
-    <loc>https://academic-demo.netlify.app/zh/tags/</loc>
+    <loc>YangWu1227.github.io/zh/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://academic-demo.netlify.app/tags/"
+                href="YangWu1227.github.io/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://academic-demo.netlify.app/zh/tags/"
+                href="YangWu1227.github.io/zh/tags/"
                 />
   </url><url>
-    <loc>https://academic-demo.netlify.app/zh/</loc>
+    <loc>YangWu1227.github.io/zh/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://academic-demo.netlify.app/"
+                href="YangWu1227.github.io/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="https://academic-demo.netlify.app/zh/"
+                href="YangWu1227.github.io/zh/"
                 />
   </url>
 </urlset>

@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts | Yang (Ken) Wu</title>
-    <link>https://academic-demo.netlify.app/post/</link>
-      <atom:link href="https://academic-demo.netlify.app/post/index.xml" rel="self" type="application/rss+xml" />
+    <link>YangWu1227.github.io/post/</link>
+      <atom:link href="YangWu1227.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Yang Wu</copyright><lastBuildDate>Sun, 20 Jun 2021 21:13:14 -0500</lastBuildDate>
     <image>
-      <url>https://academic-demo.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <url>/YangWu1227.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>Posts</title>
-      <link>https://academic-demo.netlify.app/post/</link>
+      <link>YangWu1227.github.io/post/</link>
     </image>
     
     <item>
       <title>Portfolio Optimization Dashboard</title>
-      <link>https://academic-demo.netlify.app/post/portfolio-optimization-continued/</link>
+      <link>YangWu1227.github.io/post/portfolio-optimization-continued/</link>
       <pubDate>Sun, 20 Jun 2021 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/portfolio-optimization-continued/</guid>
+      <guid>YangWu1227.github.io/post/portfolio-optimization-continued/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/portfolio-optimization-continued/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/portfolio-optimization-continued/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;In the previous post, we created a customizable portfolio dashboard using shiny. We could also create a portfolio optimization dashboard; take a look a the following &lt;a href=&#34;https://rpubs.com/yangwu1227/personal_project&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
@@ -27,11 +27,11 @@
     
     <item>
       <title>Customizable Portfolio Dashboard</title>
-      <link>https://academic-demo.netlify.app/post/customizable-portfolio-dashboard/</link>
+      <link>YangWu1227.github.io/post/customizable-portfolio-dashboard/</link>
       <pubDate>Thu, 17 Jun 2021 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/customizable-portfolio-dashboard/</guid>
+      <guid>YangWu1227.github.io/post/customizable-portfolio-dashboard/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/customizable-portfolio-dashboard/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/customizable-portfolio-dashboard/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;For a better experience, please see this &lt;a href=&#34;https://kenyangwu1227.shinyapps.io/Yang-Wu-Customizable-Portfolio-Dashboard/&#34;&gt;application&lt;/a&gt; on the shiny server.&lt;/p&gt;
@@ -42,54 +42,54 @@
     
     <item>
       <title>Visualizing Asset Returns</title>
-      <link>https://academic-demo.netlify.app/post/visualization-asset-returns/</link>
+      <link>YangWu1227.github.io/post/visualization-asset-returns/</link>
       <pubDate>Sat, 01 May 2021 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/visualization-asset-returns/</guid>
+      <guid>YangWu1227.github.io/post/visualization-asset-returns/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/jquery/jquery.min.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/proj4js/proj4.js&#34;&gt;&lt;/script&gt;
-&lt;link href=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/css/motion.css&#34; rel=&#34;stylesheet&#34; /&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/highcharts.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/highcharts-3d.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/highcharts-more.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/stock.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/map.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/annotations.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/data.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/drilldown.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/item-series.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/offline-exporting.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/overlapping-datalabels.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/exporting.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/export-data.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/funnel.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/heatmap.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/treemap.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/sankey.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/dependency-wheel.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/organization.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/solid-gauge.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/streamgraph.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/sunburst.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/vector.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/wordcloud.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/xrange.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/tilemap.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/venn.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/gantt.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/timeline.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/parallel-coordinates.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/bullet.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/coloraxis.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/dumbbell.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/lollipop.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/series-label.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/plugins/motion.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/custom/reset.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/boost.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highchart-binding/highchart.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/jquery/jquery.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/proj4js/proj4.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/css/motion.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/highcharts.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/highcharts-3d.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/highcharts-more.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/stock.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/map.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/annotations.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/data.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/drilldown.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/item-series.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/offline-exporting.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/overlapping-datalabels.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/exporting.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/export-data.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/funnel.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/heatmap.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/treemap.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/sankey.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/dependency-wheel.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/organization.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/solid-gauge.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/streamgraph.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/sunburst.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/vector.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/wordcloud.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/xrange.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/tilemap.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/venn.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/gantt.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/timeline.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/parallel-coordinates.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/bullet.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/coloraxis.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/dumbbell.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/lollipop.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/series-label.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/plugins/motion.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/custom/reset.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highcharts/modules/boost.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/highchart-binding/highchart.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;visualization-asset-returns-in-xts&#34; class=&#34;section level2&#34;&gt;
@@ -252,7 +252,7 @@ ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
     panel.background = element_rect(fill = &amp;quot;grey97&amp;quot;),
     panel.grid = element_blank(),
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Histogram with panels
 ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
   geom_histogram(
@@ -266,7 +266,7 @@ ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
     panel.background = element_rect(fill = &amp;quot;grey97&amp;quot;),
     panel.grid = element_blank(),
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-7-2.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-7-2.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;hr /&gt;
 &lt;/div&gt;
 &lt;div id=&#34;densty&#34; class=&#34;section level3&#34;&gt;
@@ -279,7 +279,7 @@ ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
     panel.background = element_rect(fill = &amp;quot;grey97&amp;quot;),
     panel.grid = element_blank(),
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Density plot with panels
 ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
   geom_density(mapping = aes(color = asset)) +
@@ -294,7 +294,7 @@ ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
     panel.background = element_rect(fill = &amp;quot;grey97&amp;quot;),
     panel.grid = element_blank(),
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-8-2.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-8-2.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description>
@@ -302,11 +302,11 @@ ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
     
     <item>
       <title>Portfolio Optimization &amp; Returns</title>
-      <link>https://academic-demo.netlify.app/post/portfolio-returns-and-optimization/</link>
+      <link>YangWu1227.github.io/post/portfolio-returns-and-optimization/</link>
       <pubDate>Tue, 01 Dec 2020 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/portfolio-returns-and-optimization/</guid>
+      <guid>YangWu1227.github.io/post/portfolio-returns-and-optimization/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/portfolio-returns-and-optimization/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/portfolio-returns-and-optimization/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;optimal-weights-for-the-five-asset-portfolio-minimum-variance&#34; class=&#34;section level2&#34;&gt;
@@ -736,19 +736,19 @@ head(four_computational_methods, 10)
     
     <item>
       <title>The Central Limit Theorem and Power Simulation</title>
-      <link>https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/</link>
+      <link>YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/</link>
       <pubDate>Wed, 04 Nov 2020 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/</guid>
+      <guid>YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/plotly-binding/plotly.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/typedarray/typedarray.min.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/jquery/jquery.min.js&#34;&gt;&lt;/script&gt;
-&lt;link href=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/crosstalk/css/crosstalk.css&#34; rel=&#34;stylesheet&#34; /&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/crosstalk/js/crosstalk.min.js&#34;&gt;&lt;/script&gt;
-&lt;link href=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/plotly-htmlwidgets-css/plotly-htmlwidgets.css&#34; rel=&#34;stylesheet&#34; /&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/plotly-main/plotly-latest.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/plotly-binding/plotly.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/typedarray/typedarray.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/jquery/jquery.min.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/crosstalk/css/crosstalk.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/crosstalk/js/crosstalk.min.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/plotly-htmlwidgets-css/plotly-htmlwidgets.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/plotly-main/plotly-latest.min.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;central-limit-theorem&#34; class=&#34;section level2&#34;&gt;
@@ -806,7 +806,7 @@ p &amp;lt;- p + ggtitle(&amp;quot;Density Plot of Sampling Distributions&amp;quo
 p &amp;lt;- p + xlab(&amp;quot;Distributions of Sample Means&amp;quot;) + ylab(&amp;quot;Density&amp;quot;)
 p &amp;lt;- p + theme(panel.background = element_rect(fill = &amp;quot;azure2&amp;quot;))
 p&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The dashed line in the figure above indicates &lt;span class=&#34;math inline&#34;&gt;\(\lambda= 9.1667\)&lt;/span&gt;. Evidently, as sample size gets larger, the spread of the distribution of sample means gets smaller. We have a visual confirmation of the CTL that standard error of the mean should become smaller as &lt;span class=&#34;math inline&#34;&gt;\(n \to \infty\)&lt;/span&gt;. Below, we compute the standard deviations of these distributions:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Using tapply
 round(tapply(sampling_distributions$sample_means, sampling_distributions$sample_size, sd), digits = 5)&lt;/code&gt;&lt;/pre&gt;
@@ -894,7 +894,7 @@ p &amp;lt;- p + ggtitle(&amp;quot;Scatter Plot of Bivariate Normal Random Variab
 p &amp;lt;- p + xlab(&amp;quot;X1&amp;quot;) + ylab(&amp;quot;X2&amp;quot;)
 p &amp;lt;- p + theme(panel.background = element_rect(fill = &amp;quot;azure2&amp;quot;))
 p&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Here’s a 3D plot of the joint probability density function of the two random variables:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Bandwidth
 # Using a rule-of-thumb for choosing the bandwidth of a Gaussian kernel density estimator
@@ -925,7 +925,7 @@ p &amp;lt;- p + ggtitle(&amp;quot;Scatter Plot of Bivariate Normal Random Variab
 p &amp;lt;- p + xlab(&amp;quot;X1&amp;quot;) + ylab(&amp;quot;X2&amp;quot;)
 p &amp;lt;- p + theme(panel.background = element_rect(fill = &amp;quot;azure2&amp;quot;))
 p&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Bandwidth
 bw_vector &amp;lt;- c(bandwidth.nrd(strong_negative[, 1]), bandwidth.nrd(strong_negative[, 2]))
 bw_strong_negative &amp;lt;- mean(bw_vector)
@@ -1209,7 +1209,7 @@ p &amp;lt;- p + ylim(c(0, 1))
 p &amp;lt;- p + ggtitle(&amp;quot;Power Estimates by Sample Size&amp;quot;) + xlab(&amp;quot;Sample Size&amp;quot;) + ylab(&amp;quot;Power Estimates&amp;quot;)
 p &amp;lt;- p + theme(panel.background = element_rect(fill = &amp;quot;azure2&amp;quot;))
 p&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;As can be seen, our power estimates increase as sample size increases. If we take 0.8 as the rough rule of thumb of desired level of power, then a sample size of &lt;span class=&#34;math inline&#34;&gt;\(\approx350\)&lt;/span&gt; would yield us that level of power given the set of parameters I chose.&lt;/p&gt;
 &lt;/div&gt;
 </description>
@@ -1217,11 +1217,11 @@ p&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Data Wrangling with Economics Data</title>
-      <link>https://academic-demo.netlify.app/post/data-wrangling-in-economics/</link>
+      <link>YangWu1227.github.io/post/data-wrangling-in-economics/</link>
       <pubDate>Mon, 04 May 2020 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/data-wrangling-in-economics/</guid>
+      <guid>YangWu1227.github.io/post/data-wrangling-in-economics/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/data-wrangling-in-economics/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/data-wrangling-in-economics/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;data-wrangling&#34; class=&#34;section level2&#34;&gt;
@@ -1564,11 +1564,11 @@ nested_data
     
     <item>
       <title>Applications of Subsetting in R</title>
-      <link>https://academic-demo.netlify.app/post/applications-of-subsetting-in-r/</link>
+      <link>YangWu1227.github.io/post/applications-of-subsetting-in-r/</link>
       <pubDate>Thu, 23 Apr 2020 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/applications-of-subsetting-in-r/</guid>
+      <guid>YangWu1227.github.io/post/applications-of-subsetting-in-r/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/applications-of-subsetting-in-r/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/applications-of-subsetting-in-r/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;matching-and-merging-by-hand-integer-subsetting&#34; class=&#34;section level2&#34;&gt;
@@ -2145,11 +2145,11 @@ as_tibble(order_columns(data = USArrests))
     
     <item>
       <title>Profit Maximization in Sports Economics</title>
-      <link>https://academic-demo.netlify.app/post/understanding-price-elasticity-in-professional-sports/</link>
+      <link>YangWu1227.github.io/post/understanding-price-elasticity-in-professional-sports/</link>
       <pubDate>Sat, 29 Feb 2020 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/understanding-price-elasticity-in-professional-sports/</guid>
+      <guid>YangWu1227.github.io/post/understanding-price-elasticity-in-professional-sports/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/understanding-price-elasticity-in-professional-sports/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/understanding-price-elasticity-in-professional-sports/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;when-in-doubt-derive-the-equation&#34; class=&#34;section level2&#34;&gt;
@@ -2259,11 +2259,11 @@ as_tibble(order_columns(data = USArrests))
     
     <item>
       <title>Control Flows in R</title>
-      <link>https://academic-demo.netlify.app/post/control-flow-in-r/</link>
+      <link>YangWu1227.github.io/post/control-flow-in-r/</link>
       <pubDate>Wed, 01 Jan 2020 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/control-flow-in-r/</guid>
+      <guid>YangWu1227.github.io/post/control-flow-in-r/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/control-flow-in-r/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/control-flow-in-r/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;control-flow&#34; class=&#34;section level2&#34;&gt;
@@ -2409,7 +2409,7 @@ ggplot(data = tibble(time, pension), mapping = aes(x = time, y = pension)) +
     panel.background = element_rect(fill = &amp;quot;grey97&amp;quot;),
     panel.grid = element_blank()
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/control-flow-in-r/index_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/control-flow-in-r/index_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;hr /&gt;
 &lt;/div&gt;
 &lt;div id=&#34;duration-of-a-fixed-payment-loan-under-monthly-compounding-interest-while-loop&#34; class=&#34;section level2&#34;&gt;
@@ -2485,7 +2485,7 @@ ggplot(data = tibble(x_vals, y_vals)) +
     panel.background = element_rect(fill = &amp;quot;grey97&amp;quot;),
     panel.grid = element_blank()
   )&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/control-flow-in-r/index_files/figure-html/unnamed-chunk-16-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/control-flow-in-r/index_files/figure-html/unnamed-chunk-16-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Implement the function using &lt;code&gt;case_when()&lt;/code&gt; (Note that the function is &lt;span class=&#34;math inline&#34;&gt;\(-x^3\)&lt;/span&gt; when &lt;span class=&#34;math inline&#34;&gt;\(x \leq 0\)&lt;/span&gt;; hence the negative sign in front of x)&lt;/li&gt;
 &lt;/ul&gt;
@@ -2970,11 +2970,11 @@ max(x)
     
     <item>
       <title>Implementing Mathematical Concepts in R</title>
-      <link>https://academic-demo.netlify.app/post/implementing-math-concepts-in-r/</link>
+      <link>YangWu1227.github.io/post/implementing-math-concepts-in-r/</link>
       <pubDate>Tue, 29 Oct 2019 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/implementing-math-concepts-in-r/</guid>
+      <guid>YangWu1227.github.io/post/implementing-math-concepts-in-r/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/implementing-math-concepts-in-r/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/implementing-math-concepts-in-r/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;In this post, we will be implementing some interesting mathematical objects in R.&lt;/p&gt;

@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Probability | Yang (Ken) Wu</title>
-    <link>https://academic-demo.netlify.app/tag/probability/</link>
-      <atom:link href="https://academic-demo.netlify.app/tag/probability/index.xml" rel="self" type="application/rss+xml" />
+    <link>YangWu1227.github.io/tag/probability/</link>
+      <atom:link href="YangWu1227.github.io/tag/probability/index.xml" rel="self" type="application/rss+xml" />
     <description>Probability</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Yang Wu</copyright><lastBuildDate>Wed, 04 Nov 2020 21:13:14 -0500</lastBuildDate>
     <image>
-      <url>https://academic-demo.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <url>/YangWu1227.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>Probability</title>
-      <link>https://academic-demo.netlify.app/tag/probability/</link>
+      <link>YangWu1227.github.io/tag/probability/</link>
     </image>
     
     <item>
       <title>The Central Limit Theorem and Power Simulation</title>
-      <link>https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/</link>
+      <link>YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/</link>
       <pubDate>Wed, 04 Nov 2020 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/</guid>
+      <guid>YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/plotly-binding/plotly.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/typedarray/typedarray.min.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/jquery/jquery.min.js&#34;&gt;&lt;/script&gt;
-&lt;link href=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/crosstalk/css/crosstalk.css&#34; rel=&#34;stylesheet&#34; /&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/crosstalk/js/crosstalk.min.js&#34;&gt;&lt;/script&gt;
-&lt;link href=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/plotly-htmlwidgets-css/plotly-htmlwidgets.css&#34; rel=&#34;stylesheet&#34; /&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/plotly-main/plotly-latest.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/plotly-binding/plotly.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/typedarray/typedarray.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/jquery/jquery.min.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/crosstalk/css/crosstalk.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/crosstalk/js/crosstalk.min.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/plotly-htmlwidgets-css/plotly-htmlwidgets.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/plotly-main/plotly-latest.min.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;central-limit-theorem&#34; class=&#34;section level2&#34;&gt;
@@ -84,7 +84,7 @@ p &amp;lt;- p + ggtitle(&amp;quot;Density Plot of Sampling Distributions&amp;quo
 p &amp;lt;- p + xlab(&amp;quot;Distributions of Sample Means&amp;quot;) + ylab(&amp;quot;Density&amp;quot;)
 p &amp;lt;- p + theme(panel.background = element_rect(fill = &amp;quot;azure2&amp;quot;))
 p&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The dashed line in the figure above indicates &lt;span class=&#34;math inline&#34;&gt;\(\lambda= 9.1667\)&lt;/span&gt;. Evidently, as sample size gets larger, the spread of the distribution of sample means gets smaller. We have a visual confirmation of the CTL that standard error of the mean should become smaller as &lt;span class=&#34;math inline&#34;&gt;\(n \to \infty\)&lt;/span&gt;. Below, we compute the standard deviations of these distributions:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Using tapply
 round(tapply(sampling_distributions$sample_means, sampling_distributions$sample_size, sd), digits = 5)&lt;/code&gt;&lt;/pre&gt;
@@ -172,7 +172,7 @@ p &amp;lt;- p + ggtitle(&amp;quot;Scatter Plot of Bivariate Normal Random Variab
 p &amp;lt;- p + xlab(&amp;quot;X1&amp;quot;) + ylab(&amp;quot;X2&amp;quot;)
 p &amp;lt;- p + theme(panel.background = element_rect(fill = &amp;quot;azure2&amp;quot;))
 p&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Here’s a 3D plot of the joint probability density function of the two random variables:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Bandwidth
 # Using a rule-of-thumb for choosing the bandwidth of a Gaussian kernel density estimator
@@ -203,7 +203,7 @@ p &amp;lt;- p + ggtitle(&amp;quot;Scatter Plot of Bivariate Normal Random Variab
 p &amp;lt;- p + xlab(&amp;quot;X1&amp;quot;) + ylab(&amp;quot;X2&amp;quot;)
 p &amp;lt;- p + theme(panel.background = element_rect(fill = &amp;quot;azure2&amp;quot;))
 p&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Bandwidth
 bw_vector &amp;lt;- c(bandwidth.nrd(strong_negative[, 1]), bandwidth.nrd(strong_negative[, 2]))
 bw_strong_negative &amp;lt;- mean(bw_vector)
@@ -487,7 +487,7 @@ p &amp;lt;- p + ylim(c(0, 1))
 p &amp;lt;- p + ggtitle(&amp;quot;Power Estimates by Sample Size&amp;quot;) + xlab(&amp;quot;Sample Size&amp;quot;) + ylab(&amp;quot;Power Estimates&amp;quot;)
 p &amp;lt;- p + theme(panel.background = element_rect(fill = &amp;quot;azure2&amp;quot;))
 p&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;As can be seen, our power estimates increase as sample size increases. If we take 0.8 as the rough rule of thumb of desired level of power, then a sample size of &lt;span class=&#34;math inline&#34;&gt;\(\approx350\)&lt;/span&gt; would yield us that level of power given the set of parameters I chose.&lt;/p&gt;
 &lt;/div&gt;
 </description>
@@ -495,11 +495,11 @@ p&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Implementing Mathematical Concepts in R</title>
-      <link>https://academic-demo.netlify.app/post/implementing-math-concepts-in-r/</link>
+      <link>YangWu1227.github.io/post/implementing-math-concepts-in-r/</link>
       <pubDate>Tue, 29 Oct 2019 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/implementing-math-concepts-in-r/</guid>
+      <guid>YangWu1227.github.io/post/implementing-math-concepts-in-r/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/implementing-math-concepts-in-r/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/implementing-math-concepts-in-r/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;In this post, we will be implementing some interesting mathematical objects in R.&lt;/p&gt;

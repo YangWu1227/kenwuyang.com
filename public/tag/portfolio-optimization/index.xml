@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Portfolio Optimization | Yang (Ken) Wu</title>
-    <link>https://academic-demo.netlify.app/tag/portfolio-optimization/</link>
-      <atom:link href="https://academic-demo.netlify.app/tag/portfolio-optimization/index.xml" rel="self" type="application/rss+xml" />
+    <link>YangWu1227.github.io/tag/portfolio-optimization/</link>
+      <atom:link href="YangWu1227.github.io/tag/portfolio-optimization/index.xml" rel="self" type="application/rss+xml" />
     <description>Portfolio Optimization</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Yang Wu</copyright><lastBuildDate>Sun, 20 Jun 2021 21:13:14 -0500</lastBuildDate>
     <image>
-      <url>https://academic-demo.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <url>/YangWu1227.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>Portfolio Optimization</title>
-      <link>https://academic-demo.netlify.app/tag/portfolio-optimization/</link>
+      <link>YangWu1227.github.io/tag/portfolio-optimization/</link>
     </image>
     
     <item>
       <title>Portfolio Optimization Dashboard</title>
-      <link>https://academic-demo.netlify.app/post/portfolio-optimization-continued/</link>
+      <link>YangWu1227.github.io/post/portfolio-optimization-continued/</link>
       <pubDate>Sun, 20 Jun 2021 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/portfolio-optimization-continued/</guid>
+      <guid>YangWu1227.github.io/post/portfolio-optimization-continued/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/portfolio-optimization-continued/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/portfolio-optimization-continued/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;In the previous post, we created a customizable portfolio dashboard using shiny. We could also create a portfolio optimization dashboard; take a look a the following &lt;a href=&#34;https://rpubs.com/yangwu1227/personal_project&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
@@ -27,11 +27,11 @@
     
     <item>
       <title>Portfolio Optimization &amp; Returns</title>
-      <link>https://academic-demo.netlify.app/post/portfolio-returns-and-optimization/</link>
+      <link>YangWu1227.github.io/post/portfolio-returns-and-optimization/</link>
       <pubDate>Tue, 01 Dec 2020 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/portfolio-returns-and-optimization/</guid>
+      <guid>YangWu1227.github.io/post/portfolio-returns-and-optimization/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/portfolio-returns-and-optimization/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/portfolio-returns-and-optimization/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;optimal-weights-for-the-five-asset-portfolio-minimum-variance&#34; class=&#34;section level2&#34;&gt;

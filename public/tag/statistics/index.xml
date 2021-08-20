@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Statistics | Yang (Ken) Wu</title>
-    <link>https://academic-demo.netlify.app/tag/statistics/</link>
-      <atom:link href="https://academic-demo.netlify.app/tag/statistics/index.xml" rel="self" type="application/rss+xml" />
+    <link>YangWu1227.github.io/tag/statistics/</link>
+      <atom:link href="YangWu1227.github.io/tag/statistics/index.xml" rel="self" type="application/rss+xml" />
     <description>Statistics</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Yang Wu</copyright><lastBuildDate>Sat, 01 May 2021 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://academic-demo.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <url>/YangWu1227.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>Statistics</title>
-      <link>https://academic-demo.netlify.app/tag/statistics/</link>
+      <link>YangWu1227.github.io/tag/statistics/</link>
     </image>
     
     <item>
       <title>Modeling Prostate-Specific Antigen Levels in Cancer Patients</title>
-      <link>https://academic-demo.netlify.app/project/modeling-prostate-specific-antigen-levels/</link>
+      <link>YangWu1227.github.io/project/modeling-prostate-specific-antigen-levels/</link>
       <pubDate>Sat, 01 May 2021 00:00:00 +0000</pubDate>
-      <guid>https://academic-demo.netlify.app/project/modeling-prostate-specific-antigen-levels/</guid>
+      <guid>YangWu1227.github.io/project/modeling-prostate-specific-antigen-levels/</guid>
       <description>&lt;p&gt;       This scenario-based project was given to us as an assignment in my &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-statistics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;linear regression model class&lt;/a&gt;.
 A university medical center had data on several variables of interest relating to prostate cancer patients. The general assignment was to develop a model that uses the variables (or an
 appropriate subset thereof) in the data set provided to us in order to describe and predict the main variable of interest&amp;mdash; prostate-specific antigen levels. There were needs for analysis in the following areas:&lt;/p&gt;
@@ -27,15 +27,15 @@ appropriate subset thereof) in the data set provided to us in order to describe 
 family confidence of 95%.&lt;/li&gt;
 &lt;li&gt;Perform appropriate diagnostics such as residual analysis, assumptions validation, etc.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;The finished report can be found &lt;a href=&#34;https://academic-demo.netlify.app/project/Modeling%20Prostate-Specific%20Antigen%20Levels/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;; for those interested, here&amp;rsquo;s the &lt;a href=&#34;https://academic-demo.netlify.app/project/Modeling%20Prostate-Specific%20Antigen%20Levels/yang_wu_prostate_data.csv&#34; target=&#34;_blank&#34;&gt;data&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The finished report can be found &lt;a href=&#34;YangWu1227.github.io/YangWu1227.github.io/project/Modeling%20Prostate-Specific%20Antigen%20Levels/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;; for those interested, here&amp;rsquo;s the &lt;a href=&#34;YangWu1227.github.io/YangWu1227.github.io/project/Modeling%20Prostate-Specific%20Antigen%20Levels/yang_wu_prostate_data.csv&#34; target=&#34;_blank&#34;&gt;data&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Modeling Lumber Volume From Tree Diameter</title>
-      <link>https://academic-demo.netlify.app/project/modeling-lumber-volume-from-tree-diameter/</link>
+      <link>YangWu1227.github.io/project/modeling-lumber-volume-from-tree-diameter/</link>
       <pubDate>Mon, 19 Apr 2021 00:00:00 +0000</pubDate>
-      <guid>https://academic-demo.netlify.app/project/modeling-lumber-volume-from-tree-diameter/</guid>
+      <guid>YangWu1227.github.io/project/modeling-lumber-volume-from-tree-diameter/</guid>
       <description>&lt;p&gt;       This scenario-based project was given to us as an assignment in my &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-statistics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;linear regression model class&lt;/a&gt;. A production planning supervisor for a lumber company has hired us to help with developing a predictive model. The lumber company wishes to use the diameter of a tree to predict the volume of lumber obtained from the tree after processing. A successful model will help the planning supervisor schedule tree-cutting and mill processing. There were needs for analysis in the following areas:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Develop a mathematical model, or two, to predict lumber volume from tree diameters.&lt;/li&gt;
@@ -44,25 +44,25 @@ family confidence of 95%.&lt;/li&gt;
 &lt;li&gt;Provide a rough gauge of average production for small, medium, and large trees. Use confidence intervals.&lt;/li&gt;
 &lt;li&gt;Estimate the total lumber volume of a single pallet of sixteen trees.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;       The finished report can be found &lt;a href=&#34;https://academic-demo.netlify.app/project/Modeling%20Lumber%20Volume/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;; for those interested, here&amp;rsquo;s the &lt;a href=&#34;https://academic-demo.netlify.app/project/Modeling%20Lumber%20Volume/yang_wu_lumber_data.csv&#34; target=&#34;_blank&#34;&gt;data&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;       The finished report can be found &lt;a href=&#34;YangWu1227.github.io/YangWu1227.github.io/project/Modeling%20Lumber%20Volume/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;; for those interested, here&amp;rsquo;s the &lt;a href=&#34;YangWu1227.github.io/YangWu1227.github.io/project/Modeling%20Lumber%20Volume/yang_wu_lumber_data.csv&#34; target=&#34;_blank&#34;&gt;data&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>The Central Limit Theorem and Power Simulation</title>
-      <link>https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/</link>
+      <link>YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/</link>
       <pubDate>Wed, 04 Nov 2020 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/</guid>
+      <guid>YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/plotly-binding/plotly.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/typedarray/typedarray.min.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/jquery/jquery.min.js&#34;&gt;&lt;/script&gt;
-&lt;link href=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/crosstalk/css/crosstalk.css&#34; rel=&#34;stylesheet&#34; /&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/crosstalk/js/crosstalk.min.js&#34;&gt;&lt;/script&gt;
-&lt;link href=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/plotly-htmlwidgets-css/plotly-htmlwidgets.css&#34; rel=&#34;stylesheet&#34; /&gt;
-&lt;script src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/plotly-main/plotly-latest.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/htmlwidgets/htmlwidgets.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/plotly-binding/plotly.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/typedarray/typedarray.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/jquery/jquery.min.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/crosstalk/css/crosstalk.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/crosstalk/js/crosstalk.min.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/plotly-htmlwidgets-css/plotly-htmlwidgets.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/plotly-main/plotly-latest.min.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;central-limit-theorem&#34; class=&#34;section level2&#34;&gt;
@@ -120,7 +120,7 @@ p &amp;lt;- p + ggtitle(&amp;quot;Density Plot of Sampling Distributions&amp;quo
 p &amp;lt;- p + xlab(&amp;quot;Distributions of Sample Means&amp;quot;) + ylab(&amp;quot;Density&amp;quot;)
 p &amp;lt;- p + theme(panel.background = element_rect(fill = &amp;quot;azure2&amp;quot;))
 p&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The dashed line in the figure above indicates &lt;span class=&#34;math inline&#34;&gt;\(\lambda= 9.1667\)&lt;/span&gt;. Evidently, as sample size gets larger, the spread of the distribution of sample means gets smaller. We have a visual confirmation of the CTL that standard error of the mean should become smaller as &lt;span class=&#34;math inline&#34;&gt;\(n \to \infty\)&lt;/span&gt;. Below, we compute the standard deviations of these distributions:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Using tapply
 round(tapply(sampling_distributions$sample_means, sampling_distributions$sample_size, sd), digits = 5)&lt;/code&gt;&lt;/pre&gt;
@@ -208,7 +208,7 @@ p &amp;lt;- p + ggtitle(&amp;quot;Scatter Plot of Bivariate Normal Random Variab
 p &amp;lt;- p + xlab(&amp;quot;X1&amp;quot;) + ylab(&amp;quot;X2&amp;quot;)
 p &amp;lt;- p + theme(panel.background = element_rect(fill = &amp;quot;azure2&amp;quot;))
 p&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Here’s a 3D plot of the joint probability density function of the two random variables:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Bandwidth
 # Using a rule-of-thumb for choosing the bandwidth of a Gaussian kernel density estimator
@@ -239,7 +239,7 @@ p &amp;lt;- p + ggtitle(&amp;quot;Scatter Plot of Bivariate Normal Random Variab
 p &amp;lt;- p + xlab(&amp;quot;X1&amp;quot;) + ylab(&amp;quot;X2&amp;quot;)
 p &amp;lt;- p + theme(panel.background = element_rect(fill = &amp;quot;azure2&amp;quot;))
 p&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Bandwidth
 bw_vector &amp;lt;- c(bandwidth.nrd(strong_negative[, 1]), bandwidth.nrd(strong_negative[, 2]))
 bw_strong_negative &amp;lt;- mean(bw_vector)
@@ -523,7 +523,7 @@ p &amp;lt;- p + ylim(c(0, 1))
 p &amp;lt;- p + ggtitle(&amp;quot;Power Estimates by Sample Size&amp;quot;) + xlab(&amp;quot;Sample Size&amp;quot;) + ylab(&amp;quot;Power Estimates&amp;quot;)
 p &amp;lt;- p + theme(panel.background = element_rect(fill = &amp;quot;azure2&amp;quot;))
 p&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://academic-demo.netlify.app/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/index_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;576&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;As can be seen, our power estimates increase as sample size increases. If we take 0.8 as the rough rule of thumb of desired level of power, then a sample size of &lt;span class=&#34;math inline&#34;&gt;\(\approx350\)&lt;/span&gt; would yield us that level of power given the set of parameters I chose.&lt;/p&gt;
 &lt;/div&gt;
 </description>
@@ -531,11 +531,11 @@ p&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Implementing Mathematical Concepts in R</title>
-      <link>https://academic-demo.netlify.app/post/implementing-math-concepts-in-r/</link>
+      <link>YangWu1227.github.io/post/implementing-math-concepts-in-r/</link>
       <pubDate>Tue, 29 Oct 2019 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/implementing-math-concepts-in-r/</guid>
+      <guid>YangWu1227.github.io/post/implementing-math-concepts-in-r/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/implementing-math-concepts-in-r/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/implementing-math-concepts-in-r/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;In this post, we will be implementing some interesting mathematical objects in R.&lt;/p&gt;

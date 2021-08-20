@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Subsetting | Yang (Ken) Wu</title>
-    <link>https://academic-demo.netlify.app/tag/subsetting/</link>
-      <atom:link href="https://academic-demo.netlify.app/tag/subsetting/index.xml" rel="self" type="application/rss+xml" />
+    <link>YangWu1227.github.io/tag/subsetting/</link>
+      <atom:link href="YangWu1227.github.io/tag/subsetting/index.xml" rel="self" type="application/rss+xml" />
     <description>Subsetting</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Yang Wu</copyright><lastBuildDate>Thu, 23 Apr 2020 21:13:14 -0500</lastBuildDate>
     <image>
-      <url>https://academic-demo.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <url>/YangWu1227.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>Subsetting</title>
-      <link>https://academic-demo.netlify.app/tag/subsetting/</link>
+      <link>YangWu1227.github.io/tag/subsetting/</link>
     </image>
     
     <item>
       <title>Applications of Subsetting in R</title>
-      <link>https://academic-demo.netlify.app/post/applications-of-subsetting-in-r/</link>
+      <link>YangWu1227.github.io/post/applications-of-subsetting-in-r/</link>
       <pubDate>Thu, 23 Apr 2020 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/applications-of-subsetting-in-r/</guid>
+      <guid>YangWu1227.github.io/post/applications-of-subsetting-in-r/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/applications-of-subsetting-in-r/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/applications-of-subsetting-in-r/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;matching-and-merging-by-hand-integer-subsetting&#34; class=&#34;section level2&#34;&gt;

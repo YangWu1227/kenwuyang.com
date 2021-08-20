@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Economics | Yang (Ken) Wu</title>
-    <link>https://academic-demo.netlify.app/tag/economics/</link>
-      <atom:link href="https://academic-demo.netlify.app/tag/economics/index.xml" rel="self" type="application/rss+xml" />
+    <link>YangWu1227.github.io/tag/economics/</link>
+      <atom:link href="YangWu1227.github.io/tag/economics/index.xml" rel="self" type="application/rss+xml" />
     <description>Economics</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Yang Wu</copyright><lastBuildDate>Fri, 05 Mar 2021 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://academic-demo.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <url>/YangWu1227.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>Economics</title>
-      <link>https://academic-demo.netlify.app/tag/economics/</link>
+      <link>YangWu1227.github.io/tag/economics/</link>
     </image>
     
     <item>
       <title>Gender Pay Gap in Professional Sports</title>
-      <link>https://academic-demo.netlify.app/project/pay-in-the-wnba/</link>
+      <link>YangWu1227.github.io/project/pay-in-the-wnba/</link>
       <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>
-      <guid>https://academic-demo.netlify.app/project/pay-in-the-wnba/</guid>
+      <guid>YangWu1227.github.io/project/pay-in-the-wnba/</guid>
       <description>&lt;p&gt;“To put it really simple: If you don’t respect women’s basketball, you’re a joke. You’re a joke, man.”&lt;/p&gt;
 &lt;p&gt;                               — Isiah Thomas, Former NBA All-Star&lt;/p&gt;
 &lt;p&gt; &lt;/p&gt;
@@ -25,17 +25,17 @@
 &lt;p&gt; &lt;/p&gt;
 &lt;p&gt;       The quotes above seem to embody the sentiments that typify the social discourse surrounding the issue of equity of pay in the WNBA. A major drawback in today’s discussions pertaining to the issue of fair pay is that it is often scrutinized as a political issue. &lt;em&gt;It is&lt;/em&gt;. But framing the issue as entirely political omits the fact that it is also economic.&lt;/p&gt;
 &lt;p&gt;       While the arms of normative economics wrestle with the question of fairness, positive economics is concerned with the description, quantification and explanation of economic issues. This paper adds to the current discourse regarding fair pay by examining the talent market of the Women’s National Basketball Association as a case study. Framing the issue of equitable compensation as a study of economic efficiency, I focus my analysis primarily on entertaining the “what is” question. Is there an inefficiency in the labor market for the WNBA players in terms of player pay?&lt;/p&gt;
-&lt;p&gt;       The finished paper can be found &lt;a href=&#34;https://academic-demo.netlify.app/project/Pay%20in%20the%20WNBA/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. And, for those interested, here&amp;rsquo;s the &lt;a href=&#34;https://academic-demo.netlify.app/project/Pay%20in%20the%20WNBA/yang_wu_WNBA_data.xlsx&#34; target=&#34;_blank&#34;&gt;data&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;       The finished paper can be found &lt;a href=&#34;YangWu1227.github.io/YangWu1227.github.io/project/Pay%20in%20the%20WNBA/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. And, for those interested, here&amp;rsquo;s the &lt;a href=&#34;YangWu1227.github.io/YangWu1227.github.io/project/Pay%20in%20the%20WNBA/yang_wu_WNBA_data.xlsx&#34; target=&#34;_blank&#34;&gt;data&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Data Wrangling with Economics Data</title>
-      <link>https://academic-demo.netlify.app/post/data-wrangling-in-economics/</link>
+      <link>YangWu1227.github.io/post/data-wrangling-in-economics/</link>
       <pubDate>Mon, 04 May 2020 21:13:14 -0500</pubDate>
-      <guid>https://academic-demo.netlify.app/post/data-wrangling-in-economics/</guid>
+      <guid>YangWu1227.github.io/post/data-wrangling-in-economics/</guid>
       <description>
-&lt;script src=&#34;https://academic-demo.netlify.app/post/data-wrangling-in-economics/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;YangWu1227.github.io/post/data-wrangling-in-economics/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;data-wrangling&#34; class=&#34;section level2&#34;&gt;

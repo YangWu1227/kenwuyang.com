@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Technical Report | Yang (Ken) Wu</title>
-    <link>https://academic-demo.netlify.app/tag/technical-report/</link>
-      <atom:link href="https://academic-demo.netlify.app/tag/technical-report/index.xml" rel="self" type="application/rss+xml" />
+    <link>YangWu1227.github.io/tag/technical-report/</link>
+      <atom:link href="YangWu1227.github.io/tag/technical-report/index.xml" rel="self" type="application/rss+xml" />
     <description>Technical Report</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Yang Wu</copyright><lastBuildDate>Thu, 19 Dec 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://academic-demo.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <url>/YangWu1227.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
       <title>Technical Report</title>
-      <link>https://academic-demo.netlify.app/tag/technical-report/</link>
+      <link>YangWu1227.github.io/tag/technical-report/</link>
     </image>
     
     <item>
       <title>Measles Epidemic: the SIR model</title>
-      <link>https://academic-demo.netlify.app/project/measles-epidemic-the-sir-model/</link>
+      <link>YangWu1227.github.io/project/measles-epidemic-the-sir-model/</link>
       <pubDate>Thu, 19 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>https://academic-demo.netlify.app/project/measles-epidemic-the-sir-model/</guid>
+      <guid>YangWu1227.github.io/project/measles-epidemic-the-sir-model/</guid>
       <description>&lt;p&gt;       This report was written for my undergraduate &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-mathematics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Calculus II&lt;/a&gt; class. The mock-scenario involves a measles outbreak on an isolated island with 50,000 inhabitants. To help monitor the situation, I employed a naive epidemiological model to provide estimations for the rate of transmission under various conditions.&lt;/p&gt;
 &lt;p&gt;       I implemented the model &lt;em&gt;naively&lt;/em&gt; by making three simplifying, but not necessarily implausible assumptions:&lt;/p&gt;
 &lt;ul&gt;
@@ -24,7 +24,7 @@
 &lt;li&gt;Permanent immunity once recovered&lt;/li&gt;
 &lt;li&gt;Short time horizon in which there is no need to consider immigration and emigration&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Other diseases may require a more complex model. The finished paper can be found &lt;a href=&#34;https://academic-demo.netlify.app/project/SIR%20model/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Other diseases may require a more complex model. The finished paper can be found &lt;a href=&#34;YangWu1227.github.io/YangWu1227.github.io/project/SIR%20model/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
