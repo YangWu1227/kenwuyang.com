@@ -1,0 +1,388 @@
+---
+title: "The Central Limit Theorem and Power Simulation"
+summary: 'An implementation of the Central Limit Theorem in R and Power Simulation'
+author: "Ken Wu"
+date: 2020-11-04T21:13:14-05:00
+categories: ["R"]
+tags: ["Simulation", "Central Limit Theorem", "Statistics", "Probability", "Statistical Power"]
+featuredImage: "featured.jpg"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(comment = NA)
+knitr::opts_chunk$set(fig.width = 6, fig.height = 5, fig.align = "center")
+library(paramtest)
+library(lattice)
+library(knitr)
+library(plyr)
+library(dplyr)
+library(ggplot2)
+library(MASS)
+library(plotly)
+```
+
+## Central Limit Theorem
+
+The central limit theorem, crudely speaking, states that--- if there is a distriubtion with expected value given by the mean $\mu$ and finite variance $\sigma^2$ and we take *sufficiently* large random samples from this distribution with replacement, then the distribution of the sample means will be *approximately* normally distributed. This will hold true regardless of whether the source or "parent" distribution is normal, conditional on the fact that the sample size is sufficiently large (say, n > 30). Below we demonstrate two characteristics of the CLT:
+
+1. The mean of the distribution of sample means, $\mu_{\bar{x}}$ should converge towards the mean of the "parent population," the population from which the random samples are drawn, as $n \to \infty$.
+
+2. The standard deviation of the distribution of sample means, also known as the standard error of the mean, $\sigma_{\bar{x}}= \frac{\sigma}{\sqrt{n}}$, should become smaller as $n \to \infty$. In other words, the spread of the distribution of sample means should decrease as sample size, n, increases. 
+
+Here, we examine a poisson distribution $X\sim pois(220/24)$:
+```{r}
+# Lambda is the number of geese that arrive per hour
+lambda <- 220 / 24
+# Number of random samples to be drawn
+numsim <- 10000
+# Initialize variables
+mean5 <- rep(0, numsim)
+mean15 <- rep(0, numsim)
+mean30 <- rep(0, numsim)
+mean100 <- rep(0, numsim)
+mean200 <- rep(0, numsim)
+# Loop for simulating
+for (i in 1:numsim) {
+
+  # sample means
+  mean5[i] <- mean(rpois(5, lambda))
+  mean15[i] <- mean(rpois(15, lambda))
+  mean30[i] <- mean(rpois(30, lambda))
+  mean100[i] <- mean(rpois(100, lambda))
+  mean200[i] <- mean(rpois(200, lambda))
+}
+# Create five data frames for these sampling distributions with varying sample sizes
+# Create a variable "sample_size" used as an identifier
+n_5 <- data.frame(sample_size = as.factor(rep(5, 10000)), sample_means = mean5)
+n_15 <- data.frame(sample_size = as.factor(rep(15, 10000)), sample_means = mean15)
+n_30 <- data.frame(sample_size = as.factor(rep(30, 10000)), sample_means = mean30)
+n_100 <- data.frame(sample_size = as.factor(rep(100, 10000)), sample_means = mean100)
+n_200 <- data.frame(sample_size = as.factor(rep(200, 10000)), sample_means = mean200)
+# Combine into a single data frame
+# rbind() combines data frames by rows
+sampling_distributions <- rbind(n_5, n_15, n_30, n_100, n_200)
+```
+
+The first characteristic of the CLT states that $\mu_{\bar{x}}$ should converge towards $\lambda= 9.1667$ as $n \to \infty$. Let's check:
+
+```{r}
+# Using tapply
+round(tapply(
+  sampling_distributions$sample_means,
+  sampling_distributions$sample_size, mean
+), digits = 5)
+```
+
+As can be seen, $\mu_{\bar{x}}$ gets closer and closer to $\lambda= 9.1667$ as sample size becomes larger. For the second characteristic, let's examine the overlay density plots of these sampling distributions: 
+```{r}
+# Using ggplot()
+p <- ggplot(data = sampling_distributions, aes(x = sample_means))
+p <- p + geom_density(aes(fill = sample_size, color = sample_size), alpha = 0.2)
+p <- p + geom_vline(xintercept = lambda, linetype = "dashed")
+p <- p + ggtitle("Density Plot of Sampling Distributions")
+p <- p + xlab("Distributions of Sample Means") + ylab("Density")
+p <- p + theme(panel.background = element_rect(fill = "azure2"))
+p
+```
+
+The dashed line in the figure above indicates $\lambda= 9.1667$. Evidently, as sample size gets larger, the spread of the distribution of sample means gets smaller. We have a visual confirmation of the CTL that standard error of the mean should become smaller as $n \to \infty$. Below, we compute the standard deviations of these distributions:
+```{r}
+# Using tapply
+round(tapply(sampling_distributions$sample_means, sampling_distributions$sample_size, sd), digits = 5)
+```
+
+Now, we have a numeric proof of this characteristic as well. Additionally, we may also compare these simulated values to our analytical solutions. We know that the standard deviation of a poisson distribution is simply the square root of the mean, $\lambda$. Before we run any simulations, we may compute the standard errors of the mean, given a sample size, n, analytically, using the formula: $\sigma_{\bar{x}}= \frac{\sigma}{\sqrt{n}}$.  
+```{r}
+# sd of the distribution of a random sample n=5
+sd_5 <- sqrt(lambda) / sqrt(5)
+# sd of the distribution of a random sample n=15
+sd_15 <- sqrt(lambda) / sqrt(15)
+# sd of the distribution of a random sample n=30
+sd_30 <- sqrt(lambda) / sqrt(30)
+# sd of the distribution of a random sample n=100
+sd_100 <- sqrt(lambda) / sqrt(100)
+# sd of the distribution of a random sample n=200
+sd_200 <- sqrt(lambda) / sqrt(200)
+# store in one vector
+se <- c(sd_5, sd_15, sd_30, sd_100, sd_200)
+names(se) <- c("5", "15", "30", "100", "200")
+se
+```
+
+Here, we see that our simulated values match pretty well with our analytical solutions.
+
+## Multivariate Normal Distribution
+
+When two random variables $X_{1}$ and $X_{2}$ have a bivariate normal distribution, we can express them using matrix notations. 
+
+\vspace{5mm}
+
+A random $2 \times 1$ column vector X and its mean:  
+
+\begin{align*}
+X &= \begin{pmatrix} X_{1}\\ X_{2} \end{pmatrix} \\
+\mu &= \begin{pmatrix} \mu_{X_{1}}\\ \mu_{X_{2}} \end{pmatrix}
+\end{align*}
+
+A $2 \times 2$ covariance matrix:
+
+\begin{align*}
+\sum &= \begin{pmatrix} Var_{X_{1}} & Cov_{X_{2}X_{1}}\\ Cov_{X_{1}X_{2}} & Var_{X_{2}} \end{pmatrix} \\
+     &= \begin{pmatrix} \sigma^2_{X_{1}} & \rho\cdot\sigma_{X_{2}}\cdot\sigma_{X_{1}} \\ \rho\cdot \sigma_{X_{1}}\cdot\sigma_{X_{2}} & \sigma^2_{X_{2}} \end{pmatrix}
+\end{align*}
+
+Then, we say $X \sim N(\mu,\sum)$. From Horton's code, we have the following user-defined function:
+```{r}
+# Define a function for genearting random multivariate normals
+rmultnorm <- function(n, mu, vmat, tol = 1e-07) {
+  p <- ncol(vmat)
+  if (length(mu) != p) {
+    stop("alright, alright, alright, mu vector is the wrong length")
+  }
+  if (max(abs(vmat - t(vmat))) > tol) {
+    stop("vmat not symmetric")
+  }
+  vs <- svd(vmat)
+  vsqrt <- t(vs$v %*% (t(vs$u) * sqrt(vs$d)))
+  ans <- matrix(rnorm(n * p), nrow = n) %*% vsqrt
+  ans <- sweep(ans, 2, mu, "+")
+  dimnames(ans) <- list(NULL, dimnames(vmat)[[2]])
+  return(ans)
+}
+```
+
+We now have a function for genearting random multivariate normals. If we would like simulate observations from a bivariate normal distribution with mean 100, variance 14, and *moderate* negative association, and we use the Cohen (1988) convention for interpreting the strength of the correlation coefficient, we need to find $X_{1}$ and $X_{2}$ with a correlation coefficient, $\rho$, of $\approx$ -0.3:
+
+\begin{align*}
+\frac{Cov_{X_{1}X_{2}}}{\sigma_{X_{1}}\sigma_{X_{2}}}&=-0.3\\
+Cov_{X_{1}X_{2}}&=\sigma_{X_{1}}\sigma_{X_{2}}\cdot(-0.3)\\
+Cov_{X_{1}X_{2}}&=-0.3\sqrt{14}\sqrt{14}\\
+Cov_{X_{1}X_{2}}&\approx-4.2
+\end{align*}
+
+We modify the inputs of the function defined above:
+```{r}
+# Sample size
+n <- 100
+# Mean Vector
+mean <- c(100, 100)
+# Variance
+var_1 <- 14
+var_2 <- var_1
+# Covariance
+cov <- -0.3 * sqrt(14) * sqrt(14)
+# Generate two normal random variables with rho = -0.3
+set.seed(12)
+moderate_negative <- rmultnorm(n, mean, matrix(c(var_1, cov, cov, var_2), nrow = 2))
+```
+
+Here is a scatter plot on the xy-plane:
+```{r}
+# Using ggplot()
+p <- ggplot(data = data.frame(moderate_negative), aes(
+  x = moderate_negative[, 1],
+  y = moderate_negative[, 2]
+))
+p <- p + geom_point(color = "orange")
+p <- p + xlim(c(86, 115)) + ylim(c(88, 112))
+p <- p + ggtitle("Scatter Plot of Bivariate Normal Random Variables
+                 with Moderate Negative Association (rho = -0.24)")
+p <- p + xlab("X1") + ylab("X2")
+p <- p + theme(panel.background = element_rect(fill = "azure2"))
+p
+```
+
+Here's a 3D plot of the joint probability density function of the two random variables:
+```{r}
+# Bandwidth
+# Using a rule-of-thumb for choosing the bandwidth of a Gaussian kernel density estimator
+bw_vector <- c(bandwidth.nrd(moderate_negative[, 1]), bandwidth.nrd(moderate_negative[, 2]))
+bw_moderate_negative <- mean(bw_vector)
+# Using the kde2d() function from the MASS package
+# kde2d() is used for 2d kernel density estimation
+joint_pdf <- kde2d(x = moderate_negative[, 1], y = moderate_negative[, 2], h = bw_moderate_negative)
+# Using plot_ly() from the plotly graphics library
+# the pipe operator %>% will forward the result of an expression into the next function call
+joint_pdf2d <- plot_ly(x = joint_pdf$x, y = joint_pdf$y, z = joint_pdf$z)
+joint_pdf2d <- joint_pdf2d %>% layout(title = "Bivariate Density (rho = -0.29)")
+joint_pdf2d <- joint_pdf2d %>% add_surface()
+joint_pdf2d
+```
+
+As can be seen, when $\rho$ is negative, the bell-shaped surface becomes flattened on a negative sloping line extending out towards the top left and bottom right corners. So for $\rho \approx -0.29$, X1 varies negatively with X2 (X2 is denoted as Y in the figure).
+
+To simulate observations from a bivariate normal distribution with a *strong* negative association, say, $\rho = -0.8$, we again modify the inputs to the function we defined in the begining. Here are the scatter plot and the plot of their joint probability function:
+```{r, include=FALSE}
+# Sample size
+n <- 100
+# Mean Vector
+mean <- c(100, 100)
+# Variance
+var_1 <- 14
+var_2 <- var_1
+# Covariance
+cov <- -0.8 * sqrt(14) * sqrt(14)
+# Generate two normal random variables with rho = -0.8
+set.seed(77)
+strong_negative <- rmultnorm(n, mean, matrix(c(var_1, cov, cov, var_2), nrow = 2))
+```
+
+```{r}
+# Using ggplot()
+p <- ggplot(data = data.frame(strong_negative), aes(
+  x = strong_negative[, 1],
+  y = strong_negative[, 2]
+))
+p <- p + geom_point(color = "orange")
+p <- p + xlim(c(89, 112)) + ylim(c(86, 111))
+p <- p + ggtitle("Scatter Plot of Bivariate Normal Random Variables
+                 with Strong Negative Association (rho = -0.81)")
+p <- p + xlab("X1") + ylab("X2")
+p <- p + theme(panel.background = element_rect(fill = "azure2"))
+p
+```
+
+```{r}
+# Bandwidth
+bw_vector <- c(bandwidth.nrd(strong_negative[, 1]), bandwidth.nrd(strong_negative[, 2]))
+bw_strong_negative <- mean(bw_vector)
+# 2d kernel density estimation
+joint_pdf <- kde2d(x = strong_negative[, 1], y = strong_negative[, 2], h = bw_strong_negative)
+# Using plot_ly()
+joint_pdf2d <- plot_ly(x = joint_pdf$x, y = joint_pdf$y, z = joint_pdf$z)
+joint_pdf2d <- joint_pdf2d %>% layout(title = "Bivariate Density (rho = -0.80)")
+joint_pdf2d <- joint_pdf2d %>% add_surface()
+joint_pdf2d
+```
+
+## Simulating Power
+
+There is a variety of perspectives on the definition of power. Simply put, power is the probability of avoiding a Type II error, according to Neil Weiss in Introductory Statistics. In the section below we explore the concept of power by examining a two-way ANOVA with interaction. Note that for simplicity, I used arbitrarily picked values for the model instead of real empirical data. In the context of a two-way ANOVA with interaction, we could interpret power as *the probability that a test of significance will pick up on an effect that is present*.
+```{r}
+# Define a function for a two-way anova model with interaction
+two_way_anova_interaction_regression <- function(n, b0, b1, b2, b3,
+                                                 x1_mean = 0, x1_sd = 1, err_mean = 0, err_sd = 1) {
+
+  # x1 draws n values from a normal distribution with a mean of 0 & sd of 1
+  # x2 draws integers btw 0 to 1, n times (i.e., n numbers of either 0 or 1)
+  x1 <- rnorm(n, mean = x1_mean, sd = x1_sd)
+  x2 <- sample(0:1, n, replace = TRUE)
+
+  # y is a linear combination of x1 & x2 multiplied by coefficients/effect sizes
+  # the last term is the error term-- i.e. the unexplained portion of y
+  y <- b0 + (b1 * x1) + (b2 * x2) + (b3 * x1 * x2) + rnorm(n, mean = err_mean, sd = err_sd)
+
+  # regression model
+  anova_model <- lm(y ~ x1 * x2)
+  summary(anova_model)
+
+  # store model outputs
+  output <- summary(anova_model)$coefficients
+  coeffs <- output[, 1]
+  p_values <- output[, 4]
+  r_sqr <- summary(anova_model)$r.squared
+
+  # output
+  results <- c(coeffs, p_values, r_sqr)
+  names(results) <- c(
+    "$\\beta_{0}$", "$\\beta_{1}$", "$\\beta_{2}$",
+    "$\\beta_{3}$", "$\\beta_{0}$_pvalue",
+    "$\\beta_{1}$_pvalue", "$\\beta_{2}$_pvalue",
+    "$\\beta_{3}$_pvalue", "$r^2$"
+  )
+  return(results)
+}
+```
+
+Let's try using this function :
+```{r}
+# Using arbitrarily picked values
+anova_model <- two_way_anova_interaction_regression(n = 100, b0 = 0, b1 = 0.2, b2 = 0.4, b3 = 0.5)
+# Generate table using kable () function from the knitr package
+knitr::kable(anova_model, caption = "Two-way ANOVA Regression Model with Interaction")
+```
+
+Now, we run 1000 simulations of the model, finding the coefficients and their associating p-values for each iteration. The output would be a data frame, with one row per simulation:
+```{r}
+# Number of simulations
+num_sims <- 1000
+# Using a function called ldply() from the plyr package by Hadley Wickham
+# ldply () applies function for each element of a list then combine results into a data frame.
+power_simulations <- ldply(1:num_sims, two_way_anova_interaction_regression,
+  n = 100, b0 = 0, b1 = 0.2, b2 = 0.4, b3 = 0.5
+)
+# First 5 rows
+knitr::kable(power_simulations[1:5, ], caption = "Two-way ANOVA Regression Model with Interaction")
+```
+
+We can estimate power by finding the proportion of p-values that are significant. We are primarily interested in the p-value for the interaction effect, $\beta_{3}$. We use a logical expression to find out whether the p-values of $\beta_{3}$ is less than .05. This would return a logical vector of TRUEs and FALSEs. We then sum this vector (TRUE gets counted as 1 & FALSE as 0). Finally, we divide this value by the total number of simulations, 1000, to get the proportion:
+```{r}
+# Estimating Power
+power <- sum(power_simulations[[8]] < .05) / nrow(power_simulations)
+cat(power)
+```
+
+We could tweak the parameters to see how it affects our power estimate. For instance, we could investigate what happens when we increase sample sizes for x1 and x2:
+```{r}
+# Create a vector of sample sizes ranging from 50 to 500
+sample_sizes <- c(50, 100, 200, 300, 500)
+# Initualize variable
+results <- list()
+# For Loop
+for (val in sample_sizes) {
+
+  # cycle through each value in "sample_sizes" and sets val to be that value
+  # then pass that value to the simulation function as the sample size n
+  power_simulations <- ldply(1:1000, two_way_anova_interaction_regression,
+    n = val, b0 = 0, b1 = 0.3, b2 = 0.2, b3 = 0.3
+  )
+
+  # create new variable called n in the output data frame "results"
+  # this variable functions as an indentifier
+  power_simulations$n <- as.factor(val)
+
+
+  # rbind() combines data frames by rows
+  # notice that the first argument "results" in rbind() is an empty list when val=50
+  # after each cycle, this dataframe gets 1000 more rows added to it
+  # in the end we should have a single data frame with 5000 rows as there are five values in "sample_sizes"
+  results <- rbind(results, power_simulations)
+}
+```
+
+We could examine the results using a table and a plot:
+```{r}
+# Split results into five individual data frames using the variable "n" as the identifier
+list_of_results <- split(results, results[[10]])
+# Find the power estimates associated with each sample size
+power_n_50 <- sum(list_of_results[["50"]][[8]] < .05) / nrow(list_of_results[["50"]])
+power_n_100 <- sum(list_of_results[["100"]][[8]] < .05) / nrow(list_of_results[["100"]])
+power_n_200 <- sum(list_of_results[["200"]][[8]] < .05) / nrow(list_of_results[["200"]])
+power_n_300 <- sum(list_of_results[["300"]][[8]] < .05) / nrow(list_of_results[["300"]])
+power_n_500 <- sum(list_of_results[["500"]][[8]] < .05) / nrow(list_of_results[["500"]])
+# Store all power estimates in one single vector
+power_estimates <- c(power_n_50, power_n_100, power_n_200, power_n_300, power_n_500)
+# Create data frame
+power_table <- data.frame(
+  "Sample Size" = sample_sizes,
+  "Power Estimate" = power_estimates
+)
+# Generate table using kable () function from the knitr package
+knitr::kable(power_table, caption = "Power Estimates by Sample Size")
+```
+
+```{r}
+# Using ggplot()
+p <- ggplot(data = power_table, aes(x = Sample.Size, y = Power.Estimate))
+p <- p + geom_point(color = "orange")
+p <- p + geom_line(color = "orange")
+p <- p + geom_hline(yintercept = 0.8, linetype = "dashed")
+p <- p + ylim(c(0, 1))
+p <- p + ggtitle("Power Estimates by Sample Size") + xlab("Sample Size") + ylab("Power Estimates")
+p <- p + theme(panel.background = element_rect(fill = "azure2"))
+p
+```
+
+As can be seen, our power estimates increase as sample size increases. If we take 0.8 as the rough rule of thumb of desired level of power, then a sample size of $\approx350$ would yield us that level of power given the set of parameters I chose. 

@@ -1,0 +1,712 @@
+---
+title: "Control Flows in R"
+summary: 'Problem solving using control flows and vectorization in R'
+author: "Ken Wu"
+date: 2020-01-01T21:13:14-05:00
+categories: ["R"]
+tags: ["Vectorization", "R Programming", "Control Flows"]
+featuredImage: "featured.jpg"
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="control-flow" class="section level2">
+<h2>Control Flow</h2>
+<p>Loops are an important programming concept, allowing programmers to execute blocks of code repeatedly, usually with varying options. This post will cover the three types of loops— for, while, and repeat. We will then solve some problems using loops to demonstrate the power of iteration in programming. Whenever possible, we attempt to solve problems using different methods, including different types of loops as well as parallel processing. Many of R’s functions are vectorized, meaning that the function will operate on all elements of a vector without needing to loop through and act on each element one at a time. We leverage this unique feature of R to show that many problems that seem to involve loops can actually be solved differently in R, although the resulting programs may be harder to intuit.</p>
+</div>
+<div id="for-loop" class="section level2">
+<h2>for loop</h2>
+<pre class="r"><code># Import image
+knitr::include_graphics(&quot;for loop.png&quot;)</code></pre>
+<p><img src="for%20loop.png" width="60%" height="60%" style="display: block; margin: auto;" /></p>
+<p>Basic syntax:</p>
+<pre class="r"><code>for (item in vector) perform_action</code></pre>
+<p>For each item in vector, perform_action is called once; updating the value of item each time. There are two ways to terminate a for loop early:</p>
+<ul>
+<li>next exits the current iteration</li>
+<li>break exits the entire for loop</li>
+</ul>
+<pre class="r"><code>for (i in 1:10) {
+  if (i &lt; 3) {
+    next
+  }
+
+  print(i)
+
+  if (i &gt; 5) {
+    break
+  }
+}
+[1] 3
+[1] 4
+[1] 5
+[1] 6</code></pre>
+<hr />
+</div>
+<div id="common-pitfalls" class="section level2">
+<h2>Common pitfalls</h2>
+<ol style="list-style-type: decimal">
+<li>Use <code>seq_along(x)</code> as the vector in <code>for()</code> since it always returns a value the same length as x, even when x is a length zero vector:</li>
+</ol>
+<pre class="r"><code># Declare variables
+means &lt;- c()
+out &lt;- vector(&quot;list&quot;, length(means))
+# For loop
+for (i in seq_along(means)) {
+  out[[i]] &lt;- rnorm(10, means[[i]])
+}</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>When iterating over S3 vectors, loops typically strip the attributes. Use [[ to work around this:</li>
+</ol>
+<pre class="r"><code># Date
+xs &lt;- as.Date(c(&quot;2020-01-01&quot;, &quot;2010-01-01&quot;))
+# Loop
+for (i in seq_along(xs)) {
+  print(xs[[i]] + 10)
+}
+[1] &quot;2020-01-11&quot;
+[1] &quot;2010-01-11&quot;</code></pre>
+<hr />
+</div>
+<div id="while-loop" class="section level2">
+<h2>while loop</h2>
+<pre class="r"><code># Import image
+knitr::include_graphics(&quot;while loop.png&quot;)</code></pre>
+<p><img src="while%20loop.png" width="60%" height="60%" style="display: block; margin: auto;" /></p>
+<p>Basic syntax:</p>
+<pre class="r"><code>while (condition) {
+  expression_1
+  ...
+}</code></pre>
+<p>When a while command is executed, logical_expression is evaluated first. If it is true, then the group expressions in {} is executed. Control is then passed back to the start of the command: if logical_expression is still TRUE then the grouped expressions are executed again, and so on. For the loop to stop, logical_expression must eventually be FALSE. To achieve this, logical_expression usually depends on a variable that is altered within the grouped expressions.</p>
+<hr />
+</div>
+<div id="repeat-loop" class="section level2">
+<h2>repeat loop</h2>
+<pre class="r"><code># Import image
+knitr::include_graphics(&quot;repeat loop.png&quot;)</code></pre>
+<p><img src="repeat%20loop.png" width="60%" height="60%" style="display: block; margin: auto;" /></p>
+<p>Basic syntax:</p>
+<pre class="r"><code>repeat{
+  expression_1
+  ...
+
+  if (condition) {
+    break
+  }
+}</code></pre>
+<p>It is a simple loop that will run the same statement or a group of statements repeatedly until the stop condition has been encountered. Repeat loop does not have any condition to terminate the loop, a programmer must specifically place a condition within the loop’s body and use the declaration of a break statement to terminate this loop. If no condition is present in the body of the repeat loop then it will iterate infinitely.</p>
+<hr />
+</div>
+<div id="forecast-pension-growth-under-compounding-interest-for-loop" class="section level2">
+<h2>Forecast pension growth under compounding interest (for loop)</h2>
+<ul>
+<li>Inputs</li>
+</ul>
+<pre class="r"><code># Annual interest rate
+r &lt;- 0.11
+# Forecast duration (in years)
+term &lt;- 10
+# Time between payments (in years)
+period &lt;- 1 / 12
+# Amount deposited each period
+payments &lt;- 100</code></pre>
+<ul>
+<li>Calculations. The function <code>ceiling()</code> takes a single numeric argument x and returns a numeric vector containing the <em>smallest integers not less than the corresponding elements of x</em>. On the other hand, <code>floor()</code> takes a single numeric argument x and returns a numeric vector containing the <em>largest integers not greater than the corresponding elements of x</em>.</li>
+</ul>
+<pre class="r"><code># Number of payments
+n &lt;- floor(term / period)
+# Pre-allocate pension container
+pension &lt;- vector(mode = &quot;double&quot;, length = n)
+# Object size
+lobstr::obj_size(pension)
+1,008 B
+# Use seq_along
+seq_along(pension)
+  [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18
+ [19]  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36
+ [37]  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53  54
+ [55]  55  56  57  58  59  60  61  62  63  64  65  66  67  68  69  70  71  72
+ [73]  73  74  75  76  77  78  79  80  81  82  83  84  85  86  87  88  89  90
+ [91]  91  92  93  94  95  96  97  98  99 100 101 102 103 104 105 106 107 108
+[109] 109 110 111 112 113 114 115 116 117 118 119 120
+# For loop (compounded monthly)
+for (i in seq_along(pension)) {
+  pension[[i + 1]] &lt;- pension[[i]] * (1 + r * period) + payments
+}
+# New object size
+lobstr::obj_size(pension)
+1,016 B</code></pre>
+<ul>
+<li>Graph the output</li>
+</ul>
+<pre class="r"><code># Time
+time &lt;- (0:n) * period
+# Plot
+ggplot(data = tibble(time, pension), mapping = aes(x = time, y = pension)) +
+  geom_point(color = &quot;orange&quot;) +
+  labs(
+    title = &quot;Forecast of Pension Value&quot;,
+    x = &quot;Time (years)&quot;, y = &quot;Pension Value ($)&quot;
+  ) +
+  theme(
+    panel.background = element_rect(fill = &quot;grey97&quot;),
+    panel.grid = element_blank()
+  )</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-12-1.png" width="576" style="display: block; margin: auto;" /></p>
+<hr />
+</div>
+<div id="duration-of-a-fixed-payment-loan-under-monthly-compounding-interest-while-loop" class="section level2">
+<h2>Duration of a fixed-payment loan under monthly compounding interest (while loop)</h2>
+<ul>
+<li>Inputs</li>
+</ul>
+<pre class="r"><code># Annual interest rate
+r &lt;- 0.11
+# Time between repayments (in years)
+period &lt;- 1 / 12
+# Initial principal
+initial_principal &lt;- 1000
+# Fixed payment amount
+payments &lt;- 12</code></pre>
+<ul>
+<li>Calculations</li>
+</ul>
+<pre class="r"><code># Initialize variables
+time &lt;- 0
+principal &lt;- initial_principal
+# While loop
+while (principal &gt; 0) {
+  # Time (in years)
+  time &lt;- time + period
+  # Principal payments
+  principal &lt;- principal * (1 + r * period) - payments
+}</code></pre>
+<ul>
+<li>Output</li>
+</ul>
+<pre class="r"><code>cat(&quot;Fixed-payment loan will be repaid in&quot;, time, &quot;years\n&quot;)
+Fixed-payment loan will be repaid in 13.25 years</code></pre>
+<hr />
+</div>
+<div id="piece-wise-function-loop-and-vectorization" class="section level2">
+<h2>Piece-wise function (Loop and vectorization)</h2>
+Consider the function <span class="math inline">\(y=f(x)\)</span> defined by
+<ul>
+<li>Implement the function using for loop:</li>
+</ul>
+<pre class="r"><code># Define x
+x_vals &lt;- seq.int(from = -2, to = 2, by = 0.1)
+# Initialize sequence
+seq &lt;- seq_along(x_vals)
+# Pre-allocate container for y values
+y_vals &lt;- vector(mode = &quot;double&quot;, length = length(x_vals))
+# For loop
+for (i in seq) {
+
+  # Set x values
+  x &lt;- x_vals[[i]]
+
+  if (x &lt;= 0) {
+    y &lt;- -x^3
+  } else if (x &gt; 0 &amp; x &lt;= 1) {
+    y &lt;- x^2
+  } else if (x &gt; 1) {
+    y &lt;- sqrt(x)
+  }
+
+  # Compute y values and store in the container vector
+  y_vals[[i]] &lt;- y
+}
+# Plot the function
+ggplot(data = tibble(x_vals, y_vals)) +
+  geom_line(mapping = aes(x = x_vals, y = y_vals), color = &quot;blue&quot;) +
+  labs(
+    title = &quot;Piecewise Function&quot;,
+    x = &quot;x&quot;, y = &quot;y&quot;
+  ) +
+  theme(
+    panel.background = element_rect(fill = &quot;grey97&quot;),
+    panel.grid = element_blank()
+  )</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;" /></p>
+<ul>
+<li>Implement the function using <code>case_when()</code> (Note that the function is <span class="math inline">\(-x^3\)</span> when <span class="math inline">\(x \leq 0\)</span>; hence the negative sign in front of x)</li>
+</ul>
+<pre class="r"><code># Vectorization
+y_vals_vectorized &lt;- case_when(
+  x_vals &lt;= 0 ~ -x_vals^3,
+  x_vals &gt; 0 &amp; x_vals &lt;= 1 ~ x_vals^2,
+  x_vals &gt; 1 ~ sqrt(x_vals)
+)
+y_vals_vectorized
+ [1] 8.000000 6.859000 5.832000 4.913000 4.096000 3.375000 2.744000 2.197000
+ [9] 1.728000 1.331000 1.000000 0.729000 0.512000 0.343000 0.216000 0.125000
+[17] 0.064000 0.027000 0.008000 0.001000 0.000000 0.010000 0.040000 0.090000
+[25] 0.160000 0.250000 0.360000 0.490000 0.640000 0.810000 1.000000 1.048809
+[33] 1.095445 1.140175 1.183216 1.224745 1.264911 1.303840 1.341641 1.378405
+[41] 1.414214</code></pre>
+<hr />
+</div>
+<div id="sequence-for-loop-and-while-loop" class="section level2">
+<h2>Sequence (for loop and while loop)</h2>
+<ul>
+<li>Let <span class="math inline">\(h(x, n)=1+x+x^{2}+\cdots+x^{n}=\sum_{i=0}^{n} x^{i}\)</span>. Let us implement this sum of a geometric sequence using a for loop:</li>
+</ul>
+<pre class="r"><code># Function
+sum_of_sequence_for_loop &lt;- function(x, n) {
+
+  # Initialize sequence
+  seq &lt;- 0:n
+  # Pre-allocate container
+  terms &lt;- vector(mode = &quot;double&quot;, length = (n + 1))
+  # Loop
+  for (i in seq) {
+    terms[[i + 1]] &lt;- x^i
+  }
+
+  # Sum
+  sum(terms)
+}
+# Test
+sum_of_sequence_for_loop(x = 0.3, n = 55)
+[1] 1.428571
+sum_of_sequence_for_loop(x = 6.6, n = 8)
+[1] 4243336
+sum_of_sequence_for_loop(x = 1, n = 8)
+[1] 9</code></pre>
+<ul>
+<li>Using a while loop:</li>
+</ul>
+<pre class="r"><code># Function
+sum_of_sequence_while_loop &lt;- function(x, n) {
+
+  # Initialize i
+  i &lt;- 0
+  # Pre-allocate container
+  terms &lt;- vector(mode = &quot;double&quot;, length = (n + 1))
+  # Loop
+  while (i &lt;= n) {
+    terms[[i + 1]] &lt;- x^i
+    i &lt;- i + 1
+  }
+
+  # Sum
+  sum(terms)
+}
+# Test
+sum_of_sequence_while_loop(x = 0.3, n = 55)
+[1] 1.428571
+sum_of_sequence_while_loop(x = 6.6, n = 8)
+[1] 4243336
+sum_of_sequence_while_loop(x = 1, n = 46)
+[1] 47</code></pre>
+<ul>
+<li>Implement using parallel processing— vectorization</li>
+</ul>
+<pre class="r"><code># Function
+sum_of_sequence_vectorized &lt;- function(x, n) {
+
+  # Create vector of x
+  vector_of_x &lt;- rep(x = x, times = n + 1)
+
+  # Create vector of exponents
+  vector_of_exponents &lt;- seq.int(from = 0, to = n, by = 1)
+
+  # Create vector of terms in the sequence
+  vector_of_terms &lt;- vector_of_x^vector_of_exponents
+
+  # Find the sum
+  sum(vector_of_terms)
+}
+# Test
+sum_of_sequence_vectorized(x = 0.3, n = 55)
+[1] 1.428571
+sum_of_sequence_vectorized(x = 6.6, n = 8)
+[1] 4243336
+sum_of_sequence_vectorized(x = 1, n = 46)
+[1] 47</code></pre>
+<hr />
+</div>
+<div id="geometric-and-harmonic-means-for-loop-and-vectorization" class="section level2">
+<h2>Geometric and Harmonic Means (for loop and vectorization)</h2>
+<p>The geometric mean of a vector is defined as follows:</p>
+<p><span class="math display">\[\begin{align*}
+\left(\prod_{i=1}^{n} x_{i}\right)^{\frac{1}{n}}=\sqrt[n]{x_{1} x_{2} \cdots x_{n}}
+\end{align*}\]</span></p>
+<ul>
+<li>Geometric mean (for loop)</li>
+</ul>
+<pre class="r"><code>geometric_for_loop &lt;- function(x) {
+
+  # Length of vector
+  n &lt;- length(x)
+
+  # Warning
+  if (is.numeric(x) == FALSE) {
+    rlang::abort(&quot;Vector is of the wrong type; input must be numeric&quot;)
+  } else if (n &lt; 2) {
+    rlang::abort(&quot;Input vector must contain more than 1 element&quot;)
+  }
+
+  # Initialize first term (as.double() ensures no integer overflow)
+  x_val &lt;- as.double(x[[1]])
+  # Iterate over the sequence 1:(n - 1)
+  # The algorithm involves multiplying the current element i by the next (i + 1) element in x
+  # Setting (n - 1) as the last item safeguards against out-of-bounds subsetting of &quot;x&quot;
+  seq &lt;- 1:(n - 1)
+  # Iterate
+  for (i in seq) {
+    x_val &lt;- x_val * x[[i + 1]]
+  }
+
+
+  # Geometric mean
+  (x_val)^(1 / n)
+}
+# Test
+# Create a random vector
+x &lt;- sample(x = 1:45, size = 200, replace = TRUE)
+# A function from the psych package
+psych::geometric.mean(x)
+[1] 17.45846
+# Our custom function
+geometric_for_loop(x)
+[1] 17.45846</code></pre>
+<ul>
+<li>Geometric mean (vectorization)</li>
+</ul>
+<pre class="r"><code>geometric_vectorization &lt;- function(x) {
+
+  # Length of vector
+  n &lt;- length(x)
+
+  # Warning
+  if (is.numeric(x) == FALSE) {
+    rlang::abort(&quot;Vector is of the wrong type; input must be numeric&quot;)
+  } else if (n &lt; 2) {
+    rlang::abort(&quot;Input vector must contain more than 1 element&quot;)
+  }
+
+  # Product of vector elements
+  # The function prod() is primitive
+  prod &lt;- prod(x)
+  # Geometric mean
+  prod^(1 / n)
+}
+# Test
+geometric_vectorization(x)
+[1] 17.45846</code></pre>
+<ul>
+<li>Harmonic mean (for loop)</li>
+</ul>
+<pre class="r"><code>harmonic_for_loop &lt;- function(x) {
+
+  # Length of vector
+  n &lt;- length(x)
+
+  # Warning
+  if (is.numeric(x) == FALSE) {
+    rlang::abort(&quot;Vector is of the wrong type; input must be numeric&quot;)
+  } else if (n &lt; 2) {
+    rlang::abort(&quot;Input vector must contain more than 1 element&quot;)
+  }
+
+  # Initialize x value
+  x_val &lt;- as.double(1 / x[[1]])
+  # Create sequence
+  seq &lt;- 1:(n - 1)
+  # Iterate
+  for (i in seq) {
+    x_val &lt;- x_val + (1 / x[[i + 1]])
+  }
+
+  # Harmonic mean
+  n / x_val
+}
+# Test
+# A function from the psych package
+psych::harmonic.mean(x)
+[1] 10.30153
+# Our custom function
+harmonic_for_loop(x)
+[1] 10.30153</code></pre>
+<ul>
+<li>Harmonic mean (vectorization)</li>
+</ul>
+<pre class="r"><code>harmonic_vectorization &lt;- function(x) {
+
+  # Length of vector
+  n &lt;- length(x)
+
+  # Warning
+  if (is.numeric(x) == FALSE) {
+    rlang::abort(&quot;Vector is of the wrong type; input must be numeric&quot;)
+  } else if (n &lt; 2) {
+    rlang::abort(&quot;Input vector must contain more than 1 element&quot;)
+  }
+
+  # Find element-wise reciprocals
+  x_reciprical &lt;- 1 / x
+  # Sum the reciprocals
+  sum &lt;- sum(x_reciprical)
+  # Harmonic mean
+  n / sum
+}
+# Test
+harmonic_vectorization(x)
+[1] 10.30153</code></pre>
+<hr />
+</div>
+<div id="find-the-sum-of-every-nth-element-of-a-vector" class="section level2">
+<h2>Find the Sum of Every nth Element of a Vector</h2>
+<ul>
+<li>Using for loop</li>
+</ul>
+<pre class="r"><code># Function
+every_nth_element_for_loop &lt;- function(x, n) {
+
+  # Define the nth term
+  n &lt;- n
+  # Initialize sequence
+  seq &lt;- seq_along(x)
+  # Initialize counter
+  counter &lt;- 0
+  # Pre-allocate container
+  new_x &lt;- vector(mode = &quot;double&quot;, length = length(x))
+  # Loop
+  for (i in seq) {
+
+    # Count the term
+    counter &lt;- counter + 1
+
+    # If counter gets to n, copy that term to the container
+    if (counter == n) {
+      new_x[[i]] &lt;- x[[i]]
+
+      # Reinitialize counter to zero
+      counter &lt;- 0
+    }
+  }
+
+  # Sum
+  new_x
+}
+# Test vector
+x &lt;- sample(x = 1:203, size = 100, replace = TRUE)
+x
+  [1] 125 190   9 125 120  64 135 203  13 167  26 112   5 110  22  53 150 172
+ [19]  90  51 157 142 114  11   2  38  10 153  99  13  66  43  79  23  47 148
+ [37] 169 134 108  53 118  26 183  73  19 108  80  79 190  66  41 180  39  75
+ [55] 108  19 186  71 110  28  30  90 103 189 115 136  27  35 173  46  45 177
+ [73]  82 202 152  65 108   6  92 140 126  33 173  78  69 147  53  25 119 186
+ [91]   6 122 182 139  22  86 191 155  67  63
+# A vector that contains every thirteenth element of a vector
+every_nth_element_for_loop(x = x, n = 13)
+  [1]   0   0   0   0   0   0   0   0   0   0   0   0   5   0   0   0   0   0
+ [19]   0   0   0   0   0   0   0  38   0   0   0   0   0   0   0   0   0   0
+ [37]   0   0 108   0   0   0   0   0   0   0   0   0   0   0   0 180   0   0
+ [55]   0   0   0   0   0   0   0   0   0   0 115   0   0   0   0   0   0   0
+ [73]   0   0   0   0   0   6   0   0   0   0   0   0   0   0   0   0   0   0
+ [91]   6   0   0   0   0   0   0   0   0   0
+# Find sum
+sum(every_nth_element_for_loop(x = x, n = 13))
+[1] 458</code></pre>
+<ul>
+<li>Using while loop</li>
+</ul>
+<pre class="r"><code># Function
+every_nth_element_while_loop &lt;- function(x, n) {
+
+  # Length of vector
+  length &lt;- length(x)
+  # Initial value
+  value &lt;- 0
+  # Initialize counter
+  counter &lt;- n
+  # Loop
+  # Use modulo to ensure that, whenver the counter gets to the nth element, the logical evaluates to true
+  while (counter %% n == 0) {
+    
+    # Extract the element from x using the index &quot;counter&quot;
+    # This counter is every nth element in the vector or the logical above wouldn&#39;t have evaluated to true
+    # Alter the value by add the nth term
+    value &lt;- value + x[[counter]]
+
+    # Increase the counter by n
+    # Now the logical above will again evaluate to true
+    counter &lt;- counter + n
+
+    # Exit condition
+    if (counter &gt; length) {
+      break
+    }
+  }
+
+  # Sum
+  value
+}
+# Test (This result should corroborate with that of the function above)
+every_nth_element_while_loop(x = x, n = 13)
+[1] 458</code></pre>
+<ul>
+<li>Using subsetting and <code>seq()</code></li>
+</ul>
+<pre class="r"><code># Function
+every_nth_element_subsetting &lt;- function(x, n) {
+
+  # Define the nth term
+  n &lt;- n
+  # Create a sequence of indices for subsetting
+  seq &lt;- seq.int(from = n, to = length(x), by = n)
+  # Sum
+  sum(x[seq])
+}
+# Test
+every_nth_element_subsetting(x = x, n = 13)
+[1] 458</code></pre>
+<hr />
+</div>
+<div id="chart-the-flow" class="section level2">
+<h2>Chart the flow</h2>
+<p>Charting the flow of the following program is a good way to see how for loops work in R. We will write out the program line by line so as to understand what it is doing <em>exactly</em>.</p>
+<pre class="r"><code>x &lt;- 3 # line 1
+for (i in 1:3) { # line 2
+  show(x) # line 3
+  if (x[[i]] %% 2 == 0) { # line 4
+    x[[i + 1]] &lt;- x[[i]] / 2 # line 5
+  } else { # line 6
+    x[[i + 1]] &lt;- 3 * x[[i]] + 1 # line 7
+  } # line 8
+} # line 9
+[1] 3
+[1]  3 10
+[1]  3 10  5
+show(x) # line 10
+[1]  3 10  5 16</code></pre>
+<ul>
+<li>line 1: Set x equal to 3, which is a double vector of length 1.</li>
+<li>line 2: Set i to 1.</li>
+<li>line 3: Show x to the screen.</li>
+<li>line 4: Take the first element of x and divide by 2; by default, r returns the dividend if the divisor is larger than the dividend (i.e. 2 &gt; 1 and so 1 %% 2 is 1).
+Therefore, (x[[i]] %% 2 == 0) evaluates to FALSE. Proceed to line 7.</li>
+<li>line 7: Carry out the sub-assignment by setting the second element of x to 10.</li>
+<li>line 8: End of else action.</li>
+<li>line 9: End of for loop and return to line 2.</li>
+<li>line 2: Set i to 2.</li>
+<li>line 3: Show x, which is now a length-2 vector <span class="math inline">\(\langle3,10\rangle\)</span>.</li>
+<li>line 4: The expression (x[[2]] %% 2 == 0) evaluates to TRUE, since 10 divided by 2 is 5 remainder 0. Proceed to line 5.</li>
+<li>line 5: Sub-assign the third element in x as 5; x[[2]] is 10 and 10 divided by 2 is 5.</li>
+<li>line 6: End of if statement and return to line 2.</li>
+<li>line 2: Set i to 3.</li>
+<li>line 3: Show x, which is now a length-3 vector <span class="math inline">\(\langle3,10,5\rangle\)</span>.</li>
+<li>line 4: (x[[3]] %% 2 == 0) evaluates to FALSE since x[[3]] is 5 and 5 %% 2 is 2 remainder 1. Proceed to line 7</li>
+<li>line 7: Sub-assign the fourth element of x to 16 since <span class="math inline">\((3\times5)+ 1=16\)</span>.</li>
+<li>line 8: End of else action.</li>
+<li>line 9: End of for loop. The sequence is exhausted. Proceed to line 10.</li>
+<li>line 10: Show x, which is now a length-4 vector <span class="math inline">\(\langle3,10,5,16\rangle\)</span>.</li>
+</ul>
+<hr />
+</div>
+<div id="the-lotka-volterra-model-for-a-predator-prey-system" class="section level2">
+<h2>The Lotka-Volterra Model for a predator-prey system</h2>
+<p>We suppose that <span class="math inline">\(x(t)\)</span> is the number of prey animals at the start of a year <span class="math inline">\(t\)</span> (rabbits) and <span class="math inline">\(y(t)\)</span> is the number of predators (foxes), then the Lotka-Volterra model is:
+<span class="math display">\[\begin{align*}
+x(t+1) &amp;=x(t)+b_{r} \cdot x(t)-d_{r} \cdot x(t) \cdot y(t) \\
+y(t+1) &amp;=y(t)+b_{f} \cdot d_{r} \cdot x(t) \cdot y(t)-d_{f} \cdot y(t)
+\end{align*}\]</span></p>
+<p>where the parameters are defined by:</p>
+<ul>
+<li><span class="math inline">\(b_{r}\)</span> is the natural birth rate of rabbits in the absence of predation;</li>
+<li><span class="math inline">\(d_{r}\)</span> is the death rate per encounter of rabbits due to predation;</li>
+<li><span class="math inline">\(d_{f}\)</span> is the natural death rate of foxes in the absence of food (rabbits);</li>
+<li><span class="math inline">\(b_{f}\)</span> is the efficiency of turning predated rabbits into foxes.</li>
+</ul>
+<pre class="r"><code># Growth rate of rabbits
+br &lt;- 0.04
+# Death rate of rabbits due to predation
+dr &lt;- 0.0005
+# Death rate of foxes in the absence of of food
+df &lt;- 0.2
+# Efficiency of turning predated rabbits into foxes
+bf &lt;- 0.1
+# Initial predator/prey populations
+x &lt;- 4200
+y &lt;- 100
+# Model output
+while (x &gt; 3900) { # line 1
+  cat(&quot;x =&quot;, x, &quot; y =&quot;, y, &quot;\n&quot;) # line 2
+  x.new &lt;- (1 + br) * x - dr * x * y # line 3
+  y.new &lt;- (1 - df) * y + bf * dr * x * y # line 4
+  x &lt;- x.new # line 5
+  y &lt;- y.new # line 6
+} # line 7
+x = 4200  y = 100 
+x = 4158  y = 101 
+x = 4114.341  y = 101.7979 
+x = 4069.499  y = 102.3799 
+x = 4023.962  y = 102.7356 
+x = 3978.218  y = 102.8587 
+x = 3932.749  y = 102.7467 </code></pre>
+<ul>
+<li>line 1: The initial population of rabbits is <span class="math inline">\(x = 4000\)</span>. Therefore <span class="math inline">\((x &gt; 3900)\)</span> evaluates to TRUE. Proceed to line 2.</li>
+<li>line 2: Concatenate and print the populations of predator and prey at state one. The “dash n” in <code>cat</code> means start a new line, ensuring that the printed output are printed lines by line successively instead of just one line.</li>
+<li>line 3: Compute the new population of rabbits and bind that object value to the name x.new.</li>
+<li>line 4: Compute the new population foxes and bind that object value to the name y.new.</li>
+<li>line 5: Bind x.new to x.</li>
+<li>line 6: Bind y.new to y.</li>
+<li>line 7: End of while loop. Return to line 1.</li>
+<li>line 1: If (x &gt; 3900) still evaluates to TRUE, repeat as above for state two, three, and so on. If not, end of program.</li>
+</ul>
+<hr />
+</div>
+<div id="find-the-minimum-of-a-vector" class="section level2">
+<h2>Find the Minimum of a Vector</h2>
+<pre class="r"><code>find_min_max &lt;- function(x, summary_stat) {
+
+  # Find minimum or maximum
+  if (summary_stat == &quot;min&quot;) {
+
+    # Initialize minimum value
+    x_min &lt;- x[[1]]
+    # Loop
+    for (i in 2:length(x)) {
+      if (x_min &gt; x[[i]]) {
+        x_min &lt;- x[[i]]
+      }
+    }
+    # Output
+    x_min
+  } else if (summary_stat == &quot;max&quot;) {
+
+    # Initialize minimum value
+    x_max &lt;- x[[1]]
+    # Loop
+    for (i in 2:length(x)) {
+      if (x_max &lt; x[[i]]) {
+        x_max &lt;- x[[i]]
+      }
+    }
+    # Output
+    x_max
+  } else {
+
+    # Warning
+    rlang::abort(message = &quot;summary_stat must either be min or max&quot;)
+  }
+}</code></pre>
+<p>The function above uses if statements and for loops; we may need to benchmark for performance.</p>
+<pre class="r"><code># Test vector
+x &lt;- sample(x = 20:1923, size = 1000, replace = FALSE)
+# Find min and max
+find_min_max(x, summary_stat = &quot;min&quot;)
+[1] 22
+find_min_max(x, summary_stat = &quot;max&quot;)
+[1] 1922
+# Confirm using base R functions
+min(x)
+[1] 22
+max(x)
+[1] 1922</code></pre>
+</div>

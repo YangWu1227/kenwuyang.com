@@ -1,0 +1,50 @@
+---
+bio: 
+education:
+  courses:
+  - course: Bachelor of Arts in Economics, Minor in Statistics
+    institution: Kenyon College
+    year: 2021
+  - course: Highschool
+    institution: The Hotchkiss School
+    year: 2017
+  - course: Middle School
+    institution: Indian Mountain School
+    year: 2014
+email: "yangwu2020@gmail.com"
+highlight_name: false
+
+interests:
+- Data Science / Statistics
+- Computational Finance
+- Advocacy Work
+- Mathematical Economics
+- Literature
+
+organizations:
+- name: Kenyon College
+  url: https://www.kenyon.edu/
+- role: Former Student
+social:
+- display:
+    header: true
+  icon: instagram
+  icon_pack: fab
+  label: Follow me on Instgram
+  link: https://www.instagram.com/kennywu12/
+- icon: github
+  icon_pack: fab
+  link: https://github.com/YangWu1227/
+- icon: stackoverflow
+  icon_pack: ai
+  link: https://stackoverflow.com/users/12923148/yang-wu/
+- icon: linkedin
+  icon_pack: fab
+  link: https://www.linkedin.com/in/yangwu1227/
+superuser: true
+title: Yang (Ken) Wu
+---
+
+I am a recent graduate of Kenyon College, where I majored in Economics and minored in Statistics. I am passionate about applied statistics and data science and wishes to explore a career in industries and fields that derive value from quantitative analysis and research. I am a curious individual who is always open to learning new things. I have strong desire to bring value to others and be helpful in every situation I am in.  
+
+{{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/Yang_Wu_Resume_Updated_2021.pdf" "newtab" >}}resumé{{< /staticref >}}.

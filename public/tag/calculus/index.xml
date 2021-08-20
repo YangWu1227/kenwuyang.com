@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Calculus | Yang (Ken) Wu</title>
+    <link>https://academic-demo.netlify.app/tag/calculus/</link>
+      <atom:link href="https://academic-demo.netlify.app/tag/calculus/index.xml" rel="self" type="application/rss+xml" />
+    <description>Calculus</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Yang Wu</copyright><lastBuildDate>Sat, 14 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://academic-demo.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>Calculus</title>
+      <link>https://academic-demo.netlify.app/tag/calculus/</link>
+    </image>
+    
+    <item>
+      <title>Braess&#39; Paradox in City Planning</title>
+      <link>https://academic-demo.netlify.app/project/braess-paradox-in-city-planning/</link>
+      <pubDate>Sat, 14 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>https://academic-demo.netlify.app/project/braess-paradox-in-city-planning/</guid>
+      <description>&lt;p&gt;       This paper was written for my undergraduate &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-mathematics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Calculus III&lt;/a&gt; class. The project was an instance where I applied the standard techniques of optimization from my multivariable calculus course to analyze a semi-realistic phenomenon&amp;mdash; Braess&#39; Paradox.&lt;/p&gt;
+&lt;p&gt;       Braess’ Paradox is a counterintuitive phenomenon, in which the removal of an edge in a congested network actually results in improved flow. In the 1968 paper “Uber ein Paradoxon aus der Verkehrsplanung” [Braess, 1968] or in English, “On a paradox of traffic planning” [Braess, 2005], Dietrich Braess proposed a mathematical framework for detecting this paradox in a network. When Braess’ paper appeared in 1968, the application of mathematics to traffic planning was an relatively untapped vein of inquiry. Today, the framework continues to be analyzed by researchers and used by transportation specialists in the design of traffic networks. The key techniques that are relevant in this project are as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Lagrange multipliers&lt;/li&gt;
+&lt;li&gt;Partial derivatives&lt;/li&gt;
+&lt;li&gt;Critical points and the second derivative test for surfaces&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The project outline is designed by &lt;a href=&#34;https://monks.frontrange.edu/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Kenneth M Monks&lt;/a&gt;, and the assignment can be found &lt;a href=&#34;https://academic-demo.netlify.app/project/Braess%27%20Paradox/Assignment.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. My finished paper can be retrieved &lt;a href=&#34;https://academic-demo.netlify.app/project/Braess%27%20Paradox/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Measles Epidemic: the SIR model</title>
+      <link>https://academic-demo.netlify.app/project/measles-epidemic-the-sir-model/</link>
+      <pubDate>Thu, 19 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>https://academic-demo.netlify.app/project/measles-epidemic-the-sir-model/</guid>
+      <description>&lt;p&gt;       This report was written for my undergraduate &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-mathematics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Calculus II&lt;/a&gt; class. The mock-scenario involves a measles outbreak on an isolated island with 50,000 inhabitants. To help monitor the situation, I employed a naive epidemiological model to provide estimations for the rate of transmission under various conditions.&lt;/p&gt;
+&lt;p&gt;       I implemented the model &lt;em&gt;naively&lt;/em&gt; by making three simplifying, but not necessarily implausible assumptions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;No mortality rate&lt;/li&gt;
+&lt;li&gt;Permanent immunity once recovered&lt;/li&gt;
+&lt;li&gt;Short time horizon in which there is no need to consider immigration and emigration&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Other diseases may require a more complex model. The finished paper can be found &lt;a href=&#34;https://academic-demo.netlify.app/project/SIR%20model/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

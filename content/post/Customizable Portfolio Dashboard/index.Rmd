@@ -1,0 +1,20 @@
+---
+title: "Customizable Portfolio Dashboard"
+summary: 'An interative portfolio dashboard using a shiny application'
+author: "Ken Wu"
+date: 2021-06-17T21:13:14-05:00
+runtime: shiny
+categories: ["R"]
+tags: ["Flexdashboard", "Shiny Application", "Portfolio Analytics", "Finance"]
+featuredImage: "featured.jpg"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+For a better experience, please see this [application](https://kenyangwu1227.shinyapps.io/Yang-Wu-Customizable-Portfolio-Dashboard/) on the shiny server. 
+
+<iframe height="1000" width="100%" frameborder = "no" src=" https://kenyangwu1227.shinyapps.io/Yang-Wu-Customizable-Portfolio-Dashboard/"> </iframe>
+
+

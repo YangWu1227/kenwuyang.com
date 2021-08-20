@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Portfolio Analytics | Yang (Ken) Wu</title>
+    <link>https://academic-demo.netlify.app/tag/portfolio-analytics/</link>
+      <atom:link href="https://academic-demo.netlify.app/tag/portfolio-analytics/index.xml" rel="self" type="application/rss+xml" />
+    <description>Portfolio Analytics</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Yang Wu</copyright><lastBuildDate>Thu, 17 Jun 2021 21:13:14 -0500</lastBuildDate>
+    <image>
+      <url>https://academic-demo.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>Portfolio Analytics</title>
+      <link>https://academic-demo.netlify.app/tag/portfolio-analytics/</link>
+    </image>
+    
+    <item>
+      <title>Customizable Portfolio Dashboard</title>
+      <link>https://academic-demo.netlify.app/post/customizable-portfolio-dashboard/</link>
+      <pubDate>Thu, 17 Jun 2021 21:13:14 -0500</pubDate>
+      <guid>https://academic-demo.netlify.app/post/customizable-portfolio-dashboard/</guid>
+      <description>
+&lt;script src=&#34;https://academic-demo.netlify.app/post/customizable-portfolio-dashboard/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;For a better experience, please see this &lt;a href=&#34;https://kenyangwu1227.shinyapps.io/Yang-Wu-Customizable-Portfolio-Dashboard/&#34;&gt;application&lt;/a&gt; on the shiny server.&lt;/p&gt;
+&lt;iframe height=&#34;1000&#34; width=&#34;100%&#34; frameborder=&#34;no&#34; src=&#34; https://kenyangwu1227.shinyapps.io/Yang-Wu-Customizable-Portfolio-Dashboard/&#34;&gt;
+&lt;/iframe&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

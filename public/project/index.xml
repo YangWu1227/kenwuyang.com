@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects | Yang (Ken) Wu</title>
+    <link>https://academic-demo.netlify.app/project/</link>
+      <atom:link href="https://academic-demo.netlify.app/project/index.xml" rel="self" type="application/rss+xml" />
+    <description>Projects</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Yang Wu</copyright><lastBuildDate>Sat, 01 May 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://academic-demo.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
+      <title>Projects</title>
+      <link>https://academic-demo.netlify.app/project/</link>
+    </image>
+    
+    <item>
+      <title>Modeling Prostate-Specific Antigen Levels in Cancer Patients</title>
+      <link>https://academic-demo.netlify.app/project/modeling-prostate-specific-antigen-levels/</link>
+      <pubDate>Sat, 01 May 2021 00:00:00 +0000</pubDate>
+      <guid>https://academic-demo.netlify.app/project/modeling-prostate-specific-antigen-levels/</guid>
+      <description>&lt;p&gt;       This scenario-based project was given to us as an assignment in my &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-statistics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;linear regression model class&lt;/a&gt;.
+A university medical center had data on several variables of interest relating to prostate cancer patients. The general assignment was to develop a model that uses the variables (or an
+appropriate subset thereof) in the data set provided to us in order to describe and predict the main variable of interest&amp;mdash; prostate-specific antigen levels. There were needs for analysis in the following areas:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Univariate analysis of the variables of interests in the data set.&lt;/li&gt;
+&lt;li&gt;Thorough assessment of how well the multiple regression model fits the data and provide justifications for why a model is selected over another.&lt;/li&gt;
+&lt;li&gt;Provide interval estimates for important model coefficients, and interpret them. Need a
+family confidence of 95%.&lt;/li&gt;
+&lt;li&gt;Perform appropriate diagnostics such as residual analysis, assumptions validation, etc.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The finished report can be found &lt;a href=&#34;https://academic-demo.netlify.app/project/Modeling%20Prostate-Specific%20Antigen%20Levels/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;; for those interested, here&amp;rsquo;s the &lt;a href=&#34;https://academic-demo.netlify.app/project/Modeling%20Prostate-Specific%20Antigen%20Levels/yang_wu_prostate_data.csv&#34; target=&#34;_blank&#34;&gt;data&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Modeling Lumber Volume From Tree Diameter</title>
+      <link>https://academic-demo.netlify.app/project/modeling-lumber-volume-from-tree-diameter/</link>
+      <pubDate>Mon, 19 Apr 2021 00:00:00 +0000</pubDate>
+      <guid>https://academic-demo.netlify.app/project/modeling-lumber-volume-from-tree-diameter/</guid>
+      <description>&lt;p&gt;       This scenario-based project was given to us as an assignment in my &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-statistics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;linear regression model class&lt;/a&gt;. A production planning supervisor for a lumber company has hired us to help with developing a predictive model. The lumber company wishes to use the diameter of a tree to predict the volume of lumber obtained from the tree after processing. A successful model will help the planning supervisor schedule tree-cutting and mill processing. There were needs for analysis in the following areas:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Develop a mathematical model, or two, to predict lumber volume from tree diameters.&lt;/li&gt;
+&lt;li&gt;Assess how well the model(s) fits the data. Perform appropriate diagnostics such as residual analysis, assumptions validation, etc.&lt;/li&gt;
+&lt;li&gt;Provide some useful confidence intervals to help aid the decision-making process.&lt;/li&gt;
+&lt;li&gt;Provide a rough gauge of average production for small, medium, and large trees. Use confidence intervals.&lt;/li&gt;
+&lt;li&gt;Estimate the total lumber volume of a single pallet of sixteen trees.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;       The finished report can be found &lt;a href=&#34;https://academic-demo.netlify.app/project/Modeling%20Lumber%20Volume/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;; for those interested, here&amp;rsquo;s the &lt;a href=&#34;https://academic-demo.netlify.app/project/Modeling%20Lumber%20Volume/yang_wu_lumber_data.csv&#34; target=&#34;_blank&#34;&gt;data&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Gender Pay Gap in Professional Sports</title>
+      <link>https://academic-demo.netlify.app/project/pay-in-the-wnba/</link>
+      <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>
+      <guid>https://academic-demo.netlify.app/project/pay-in-the-wnba/</guid>
+      <description>&lt;p&gt;“To put it really simple: If you don’t respect women’s basketball, you’re a joke. You’re a joke, man.”&lt;/p&gt;
+&lt;p&gt;                               — Isiah Thomas, Former NBA All-Star&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;“WNBA Players Should Stop Complaining. If Anything, They’re Overpaid”&lt;/p&gt;
+&lt;p&gt;           — Tho Bishop, Assistant Editor for the Mises Wire&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt;       The quotes above seem to embody the sentiments that typify the social discourse surrounding the issue of equity of pay in the WNBA. A major drawback in today’s discussions pertaining to the issue of fair pay is that it is often scrutinized as a political issue. &lt;em&gt;It is&lt;/em&gt;. But framing the issue as entirely political omits the fact that it is also economic.&lt;/p&gt;
+&lt;p&gt;       While the arms of normative economics wrestle with the question of fairness, positive economics is concerned with the description, quantification and explanation of economic issues. This paper adds to the current discourse regarding fair pay by examining the talent market of the Women’s National Basketball Association as a case study. Framing the issue of equitable compensation as a study of economic efficiency, I focus my analysis primarily on entertaining the “what is” question. Is there an inefficiency in the labor market for the WNBA players in terms of player pay?&lt;/p&gt;
+&lt;p&gt;       The finished paper can be found &lt;a href=&#34;https://academic-demo.netlify.app/project/Pay%20in%20the%20WNBA/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. And, for those interested, here&amp;rsquo;s the &lt;a href=&#34;https://academic-demo.netlify.app/project/Pay%20in%20the%20WNBA/yang_wu_WNBA_data.xlsx&#34; target=&#34;_blank&#34;&gt;data&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Braess&#39; Paradox in City Planning</title>
+      <link>https://academic-demo.netlify.app/project/braess-paradox-in-city-planning/</link>
+      <pubDate>Sat, 14 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>https://academic-demo.netlify.app/project/braess-paradox-in-city-planning/</guid>
+      <description>&lt;p&gt;       This paper was written for my undergraduate &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-mathematics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Calculus III&lt;/a&gt; class. The project was an instance where I applied the standard techniques of optimization from my multivariable calculus course to analyze a semi-realistic phenomenon&amp;mdash; Braess&#39; Paradox.&lt;/p&gt;
+&lt;p&gt;       Braess’ Paradox is a counterintuitive phenomenon, in which the removal of an edge in a congested network actually results in improved flow. In the 1968 paper “Uber ein Paradoxon aus der Verkehrsplanung” [Braess, 1968] or in English, “On a paradox of traffic planning” [Braess, 2005], Dietrich Braess proposed a mathematical framework for detecting this paradox in a network. When Braess’ paper appeared in 1968, the application of mathematics to traffic planning was an relatively untapped vein of inquiry. Today, the framework continues to be analyzed by researchers and used by transportation specialists in the design of traffic networks. The key techniques that are relevant in this project are as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Lagrange multipliers&lt;/li&gt;
+&lt;li&gt;Partial derivatives&lt;/li&gt;
+&lt;li&gt;Critical points and the second derivative test for surfaces&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The project outline is designed by &lt;a href=&#34;https://monks.frontrange.edu/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Kenneth M Monks&lt;/a&gt;, and the assignment can be found &lt;a href=&#34;https://academic-demo.netlify.app/project/Braess%27%20Paradox/Assignment.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. My finished paper can be retrieved &lt;a href=&#34;https://academic-demo.netlify.app/project/Braess%27%20Paradox/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Measles Epidemic: the SIR model</title>
+      <link>https://academic-demo.netlify.app/project/measles-epidemic-the-sir-model/</link>
+      <pubDate>Thu, 19 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>https://academic-demo.netlify.app/project/measles-epidemic-the-sir-model/</guid>
+      <description>&lt;p&gt;       This report was written for my undergraduate &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-mathematics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Calculus II&lt;/a&gt; class. The mock-scenario involves a measles outbreak on an isolated island with 50,000 inhabitants. To help monitor the situation, I employed a naive epidemiological model to provide estimations for the rate of transmission under various conditions.&lt;/p&gt;
+&lt;p&gt;       I implemented the model &lt;em&gt;naively&lt;/em&gt; by making three simplifying, but not necessarily implausible assumptions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;No mortality rate&lt;/li&gt;
+&lt;li&gt;Permanent immunity once recovered&lt;/li&gt;
+&lt;li&gt;Short time horizon in which there is no need to consider immigration and emigration&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Other diseases may require a more complex model. The finished paper can be found &lt;a href=&#34;https://academic-demo.netlify.app/project/SIR%20model/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,1471 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.3.0 for Hugo" />
+  
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Yang (Ken) Wu" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Visualization asset returns using in the tidyverse and in xts" />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://academic-demo.netlify.app/post/visualization-asset-returns/" />
+
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+  
+  
+    <meta name="theme-color" content="#707070" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous" media="print" onload="this.media='all'">
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" integrity="sha512-1xoFisiGdy9nvho8EgXuXvnpR5GAMSjFwp40gSRE3NwdUdIMIKuPa7bqoUhLD0O/5tPNhteAsE5XyyMi5reQVA==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.ac7c0ed2b158b87562a0b9c331d7a57e.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://academic-demo.netlify.app/post/visualization-asset-returns/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image" />
+  
+  <meta property="og:site_name" content="Yang (Ken) Wu" />
+  <meta property="og:url" content="https://academic-demo.netlify.app/post/visualization-asset-returns/" />
+  <meta property="og:title" content="Visualizing Asset Returns | Yang (Ken) Wu" />
+  <meta property="og:description" content="Visualization asset returns using in the tidyverse and in xts" /><meta property="og:image" content="https://academic-demo.netlify.app/post/visualization-asset-returns/featured.jpg" />
+    <meta property="twitter:image" content="https://academic-demo.netlify.app/post/visualization-asset-returns/featured.jpg" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2021-05-01T21:13:14-05:00"
+      />
+    
+    <meta property="article:modified_time" content="2021-05-01T21:13:14-05:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://academic-demo.netlify.app/post/visualization-asset-returns/"
+  },
+  "headline": "Visualizing Asset Returns",
+  
+  "image": [
+    "https://academic-demo.netlify.app/post/visualization-asset-returns/featured.jpg"
+  ],
+  
+  "datePublished": "2021-05-01T21:13:14-05:00",
+  "dateModified": "2021-05-01T21:13:14-05:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Yang (Ken) Wu"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Yang (Ken) Wu",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://academic-demo.netlify.app/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_3.png"
+    }
+  },
+  "description": "Visualization asset returns using in the tidyverse and in xts"
+}
+</script>
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>Visualizing Asset Returns | Yang (Ken) Wu</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="9528e87d8937211439bb07bc99c8e353" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.8988fb2a4bba758785868cfcb5244555.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Yang (Ken) Wu</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Yang (Ken) Wu</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+          
+          <li class="nav-item d-none d-lg-inline-flex">
+            <a class="nav-link" href="https://www.instagram.com/kennywu12/" data-toggle="tooltip" data-placement="bottom" title="Follow me on Instgram" target="_blank" rel="noopener" aria-label="Follow me on Instgram">
+              <i class="fab fa-instagram" aria-hidden="true"></i>
+            </a>
+          </li>
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Visualizing Asset Returns</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Saturday, 01 May 2021
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    7 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/r/">R</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 480px;">
+  <div style="position: relative">
+    <img src="/post/visualization-asset-returns/featured_hu2054813349309fa008845e580e8fe8d0_296898_720x0_resize_q75_lanczos.jpg" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/header-attrs/header-attrs.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/htmlwidgets/htmlwidgets.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/jquery/jquery.min.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/proj4js/proj4.js"></script>
+<link href="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/css/motion.css" rel="stylesheet" />
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/highcharts.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/highcharts-3d.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/highcharts-more.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/stock.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/map.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/annotations.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/data.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/drilldown.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/item-series.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/offline-exporting.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/overlapping-datalabels.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/exporting.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/export-data.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/funnel.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/heatmap.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/treemap.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/sankey.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/dependency-wheel.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/organization.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/solid-gauge.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/streamgraph.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/sunburst.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/vector.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/wordcloud.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/xrange.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/tilemap.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/venn.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/gantt.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/timeline.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/parallel-coordinates.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/bullet.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/coloraxis.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/dumbbell.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/lollipop.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/series-label.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/plugins/motion.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/custom/reset.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highcharts/modules/boost.js"></script>
+<script src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/highchart-binding/highchart.js"></script>
+
+
+<div id="visualization-asset-returns-in-xts" class="section level2">
+<h2>Visualization Asset returns in xts</h2>
+<p>In this post, we will explore some visualizations of asset returns. Similar to the previous post, we import our data from Yahoo Finance. The five assets under examination are Exchange Traded Funds, which are funds that can be traded on an exchange like a stock. Exchange-traded funds are a type of investment fund that offers the best attributes of two popular assets: they have the diversification benefits of mutual funds and the ease with which stocks are traded.</p>
+<pre class="r"><code># Create a vector of ticker symbols
+symbols &lt;- c(&quot;SPY&quot;, &quot;EFA&quot;, &quot;DIA&quot;, &quot;QQQ&quot;, &quot;AGG&quot;)
+# Load data from 2012 to today
+prices &lt;- quantmod::getSymbols(
+  Symbols = symbols,
+  src = &quot;yahoo&quot;,
+  from = &quot;2012-12-31&quot;,
+  to = &quot;2021-7-31&quot;,
+  auto.assign = TRUE,
+  warnings = FALSE
+) %&gt;%
+  # The map function takes an anonymous function and will return a list of five
+  # The Ad() function extracts the adjusted price series for each ETF
+  purrr::map(.f = ~ quantmod::Ad(get(x = .x))) %&gt;%
+  # Use reduce() to merge the elements of .x consecutively
+  purrr::reduce(.f = merge) %&gt;%
+  # Use a replacement function to set column names as ticker symbols
+  # This function is in prefix form
+  # It is equivalent to colnames(x = prices) &lt;- value
+  `colnames&lt;-`(value = symbols)
+# Remove all objects but price series and ticker symbol vector
+rm(list = setdiff(x = ls(), y = c(&quot;prices&quot;, &quot;symbols&quot;)))</code></pre>
+<hr />
+<p>Since we will not be aggregating asset returns to compute portfolio returns, we choose log returns, i.e., the continuously compounded rate of returns, over the simple returns. Continuously compounded rate of returns should be used in statistical analysis (and visualizations) because unlike simple returns they are not positively biased. In addition, we opt to convert daily prices to monthly returns by finding the relative change of prices between the last day of each month. We could have easily chosen to use the first day of each month, and the values of the monthly returns will be different.</p>
+<pre class="r"><code># Keep only the last price reading of each month
+asset_returns_xts &lt;- xts::to.monthly(
+  x = prices,
+  drop.time = TRUE,
+  indexAt = &quot;lastof&quot;,
+  OHLC = FALSE
+) %&gt;%
+  # Compute log returns
+  PerformanceAnalytics::Return.calculate(method = &quot;log&quot;) %&gt;%
+  # Drop the first row since we lose one observation in 12/31/2012
+  stats::na.omit()</code></pre>
+<div id="monthly-log-returns-highcharts" class="section level3">
+<h3>Monthly log returns highcharts</h3>
+<p>The <code>highcharter</code> package <a href="https://cran.r-project.org/web/packages/highcharter/highcharter.pdf">vignette</a> is a wrapper for the “Highcharts” Library, which has an amazing visualization infrastructure for time series and financial data. The <code>highcharter</code> package houses functions that accept xts objects (R’s time series object class) as arguments, making it seamless to move from time series data to visualizations. The plot below displays the line chart for a subset of the ETF’s. We could have easily plotted all five ETF’s on the same line chart, but it would be harder for our eyes to compare, contrast, and identify patterns.</p>
+<pre class="r"><code># Crate Highstock widget
+highchart(type = &quot;stock&quot;) %&gt;%
+  # Add chart main title
+  hc_title(text = &quot;Monthly Log Returns for SPY, QQQ, DIA&quot;) %&gt;%
+  # Add returns series to highchart objects
+  # We use &quot;symbols&quot; to reference series since we may need to add/remove ETF&#39;s in the future
+  # Use matrix sub-setting and character indexing to select returns by column
+  hc_add_series(
+    data = asset_returns_xts[, symbols[[1]]],
+    name = symbols[[1]]
+  ) %&gt;%
+  hc_add_series(
+    data = asset_returns_xts[, symbols[[4]]],
+    name = symbols[[4]]
+  ) %&gt;%
+  hc_add_series(
+    data = asset_returns_xts[, symbols[[3]]],
+    name = symbols[[3]]
+  ) %&gt;%
+  # Add theme to highchart object
+  # More thems to be found in the vignette
+  hc_add_theme(hc_thm = hc_theme_darkunica()) %&gt;%
+  # Navigator
+  hc_navigator(enabled = TRUE) %&gt;%
+  # Scrollbar
+  hc_scrollbar(enabled = TRUE) %&gt;%
+  # Exporting
+  hc_exporting(enabled = TRUE) %&gt;%
+  # Add legend
+  hc_legend(enabled = TRUE)</code></pre>
+<div id="htmlwidget-1" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Monthly Log Returns for SPY, QQQ, DIA"},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":true},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"series":[{"data":[[1359590400000,0.0499233466432898],[1362009600000,0.0126775104319128],[1364688000000,0.0372685734336766],[1367280000000,0.0190299062497603],[1369958400000,0.0233353228660746],[1372550400000,-0.0134341694332187],[1375228800000,0.0503862865179743],[1377907200000,-0.0304517976812679],[1380499200000,0.0311561408779237],[1383177600000,0.0452665117871476],[1385769600000,0.0292070051871898],[1388448000000,0.0255960942383329],[1391126400000,-0.0358845614392527],[1393545600000,0.0445103712169796],[1396224000000,0.00826119350359722],[1398816000000,0.00692758585894637],[1401494400000,0.0229410515663675],[1404086400000,0.02043474771975],[1406764800000,-0.0135286635627399],[1409443200000,0.038704692485843],[1412035200000,-0.0138921272524977],[1414713600000,0.023277637904787],[1417305600000,0.0271014700700949],[1419984000000,-0.00253977623295665],[1422662400000,-0.0300771387632395],[1425081600000,0.0546819228454059],[1427760000000,-0.0158302454985746],[1430352000000,0.00978572442222436],[1433030400000,0.0127741780656789],[1435622400000,-0.0205212211005801],[1438300800000,0.0223380683706793],[1440979200000,-0.0628867276215219],[1443571200000,-0.0258471796090438],[1446249600000,0.0816351274884557],[1448841600000,0.00364844721425062],[1451520000000,-0.0174337008486649],[1454198400000,-0.0510687267890155],[1456704000000,-0.000826243349865585],[1459382400000,0.0651003872753586],[1461974400000,0.00393321982231765],[1464652800000,0.0168685320630537],[1467244800000,0.00346980909663497],[1469923200000,0.035822119477972],[1472601600000,0.0011967404237998],[1475193600000,5.79940593956607e-05],[1477872000000,-0.0174890256661397],[1480464000000,0.0361761148260431],[1483142400000,0.0200687973570872],[1485820800000,0.0177365706792747],[1488240000000,0.0385394241704402],[1490918400000,0.0012490899621298],[1493510400000,0.00987730260218278],[1496188800000,0.0140141552053921],[1498780800000,0.00635464467355096],[1501459200000,0.0203459256045182],[1504137600000,0.00291339092918719],[1506729600000,0.0199490672185201],[1509408000000,0.0232907732050771],[1512000000000,0.0301080477801552],[1514678400000,0.012054988607086],[1517356800000,0.054828191042982],[1519776000000,-0.0370378632932287],[1522454400000,-0.0277931559276139],[1525046400000,0.00515480445635852],[1527724800000,0.0240184874649945],[1530316800000,0.00573429309994733],[1532995200000,0.0363767236187185],[1535673600000,0.0314210679966198],[1538265600000,0.00592785780421767],[1540944000000,-0.0716080395150334],[1543536000000,0.018379340633337],[1546214400000,-0.092168374661469],[1548892800000,0.0770218572860824],[1551312000000,0.0319011120674153],[1553990400000,0.0179388847032236],[1556582400000,0.0400400732620989],[1559260800000,-0.0658952581667807],[1561852800000,0.0672719538458582],[1564531200000,0.0150064584504026],[1567209600000,-0.0168854274267698],[1569801600000,0.0192710562117329],[1572480000000,0.0218641095606467],[1575072000000,0.0355583330012728],[1577750400000,0.0286413077692318],[1580428800000,-0.000403740527964658],[1582934400000,-0.0824752160150535],[1585612800000,-0.133384333854893],[1588204800000,0.119544622149029],[1590883200000,0.0465450833321528],[1593475200000,0.0175789950021947],[1596153600000,0.0572231052200518],[1598832000000,0.0674686788709353],[1601424000000,-0.0381626517371307],[1604102400000,-0.0252496234845445],[1606694400000,0.103257531772769],[1609372800000,0.0363784716358726],[1612051200000,-0.0102426519497101],[1614470400000,0.027425910353716],[1617148800000,0.0443989173287811],[1619740800000,0.0515581721899112],[1622419200000,0.00654459063278168],[1625011200000,0.02217965999602],[1627689600000,0.0241192713736327]],"name":"SPY"},{"data":[[1359590400000,0.026365119649868],[1362009600000,0.00343342967656302],[1364688000000,0.0297991850145607],[1367280000000,0.0250567768792225],[1369958400000,0.0351496956299195],[1372550400000,-0.0242435272755586],[1375228800000,0.0612265550431381],[1377907200000,-0.00396696807842911],[1380499200000,0.0471908115392212],[1383177600000,0.048379324152843],[1385769600000,0.034895349159938],[1388448000000,0.028851173101784],[1391126400000,-0.019400525022073],[1393545600000,0.0502407225884154],[1396224000000,-0.027715952557239],[1398816000000,-0.00319923466269501],[1401494400000,0.0438796089742466],[1404086400000,0.030760232126525],[1406764800000,0.011750283013181],[1409443200000,0.0488804761960155],[1412035200000,-0.00759521402334862],[1414713600000,0.0260768340076156],[1417305600000,0.0444603015370468],[1419984000000,-0.0226610157753457],[1422662400000,-0.0210432755985925],[1425081600000,0.0697180993287629],[1427760000000,-0.0238725878348109],[1430352000000,0.0190410272070922],[1433030400000,0.0222354780493283],[1435622400000,-0.0251546071667388],[1438300800000,0.0445694250814173],[1440979200000,-0.0706850139818105],[1443571200000,-0.0223202542022127],[1446249600000,0.10768691966144],[1448841600000,0.00606980891714759],[1451520000000,-0.0160761629281296],[1454198400000,-0.0716080447879532],[1456704000000,-0.0157773363837386],[1459382400000,0.066280126593913],[1461974400000,-0.0323869145437534],[1464652800000,0.0427721872183593],[1467244800000,-0.0230434267351844],[1469923200000,0.0690673683570937],[1472601600000,0.0104459256321308],[1475193600000,0.0218939429791343],[1477872000000,-0.0146793590603638],[1480464000000,0.00434980702234711],[1483142400000,0.0112587525412797],[1485820800000,0.050123627991554],[1488240000000,0.0428204490541644],[1490918400000,0.0200665733045957],[1493510400000,0.0269042792230421],[1496188800000,0.0382333358215758],[1498780800000,-0.0234523596099621],[1501459200000,0.0398099822320912],[1504137600000,0.020523899825962],[1506729600000,-0.00295692200337072],[1509408000000,0.0450346003607187],[1512000000000,0.0195255956640272],[1514678400000,0.0060132375308406],[1517356800000,0.083946249728057],[1519776000000,-0.013012137421871],[1522454400000,-0.0416435836788489],[1525046400000,0.00504554074309915],[1527724800000,0.0551783942394168],[1530316800000,0.0113855542443497],[1532995200000,0.0275799625290842],[1535673600000,0.0561977855738025],[1538265600000,-0.00282042223997703],[1540944000000,-0.089877785733858],[1543536000000,-0.0026533402629747],[1546214400000,-0.0905893403391795],[1548892800000,0.0862765077844578],[1551312000000,0.0294733023227982],[1553990400000,0.0384951350458493],[1556582400000,0.0535339364077432],[1559260800000,-0.0858321909909261],[1561852800000,0.0731578584772237],[1564531200000,0.0230797528494735],[1567209600000,-0.019178147210952],[1569801600000,0.00913694834698919],[1572480000000,0.0428685183131261],[1575072000000,0.0398879019583713],[1577750400000,0.0381274970012333],[1580428800000,0.0299319088308145],[1582934400000,-0.062486489871926],[1585612800000,-0.0756489326968417],[1588204800000,0.13953355577893],[1590883200000,0.0639216688038049],[1593475200000,0.0609696926231438],[1596153600000,0.0708920413090075],[1598832000000,0.103861841467478],[1601424000000,-0.0595229290872696],[1604102400000,-0.030922446407831],[1606694400000,0.106391855655347],[1609372800000,0.0478605782810515],[1612051200000,0.00261023959950091],[1614470400000,-0.00133606127254815],[1617148800000,0.0170220548588684],[1619740800000,0.0574177254240089],[1622419200000,-0.0120849253861897],[1625011200000,0.0607387801063579],[1627689600000,0.0282077505959411]],"name":"QQQ"},{"data":[[1359590400000,0.0593020144118155],[1362009600000,0.0159761628967265],[1364688000000,0.0373773879702428],[1367280000000,0.0193813592420788],[1369958400000,0.0234121277379344],[1372550400000,-0.0149581045319929],[1375228800000,0.0427979352531489],[1377907200000,-0.0436563580304021],[1380499200000,0.0230277245038302],[1383177600000,0.0291232396505636],[1385769600000,0.0362483566435818],[1388448000000,0.0315694230905335],[1391126400000,-0.0533264798456399],[1393545600000,0.0419212652686696],[1396224000000,0.00918433596772328],[1398816000000,0.00814472962342272],[1401494400000,0.0114681347251455],[1404086400000,0.00766352041195262],[1406764800000,-0.0145336830649576],[1409443200000,0.0350332175302839],[1412035200000,-0.00235583309182186],[1414713600000,0.0196793525684456],[1417305600000,0.0289863556806216],[1419984000000,0.000920410608618916],[1422662400000,-0.0359615253945123],[1425081600000,0.0579785165589417],[1427760000000,-0.0183919432762538],[1430352000000,0.0040249896011515],[1433030400000,0.012983990618145],[1435622400000,-0.0214558971529106],[1438300800000,0.00582914664968293],[1440979200000,-0.0640680098124342],[1443571200000,-0.0136517966982375],[1446249600000,0.0823153856425254],[1448841600000,0.00741459248549159],[1451520000000,-0.0161176723823768],[1454198400000,-0.0563521373178206],[1456704000000,0.00731637032720123],[1459382400000,0.0705564668873011],[1461974400000,0.00609028613147533],[1464652800000,0.00384685636560711],[1467244800000,0.0095733442677215],[1469923200000,0.0289862252010691],[1472601600000,0.00249446288963551],[1475193600000,-0.00438234428346096],[1477872000000,-0.00785557482060728],[1480464000000,0.0577492427576631],[1483142400000,0.0336007206655244],[1485820800000,0.0052731531558381],[1488240000000,0.0500790157395397],[1490918400000,-0.00596652151414467],[1493510400000,0.0140766202370273],[1496188800000,0.00733317246749987],[1498780800000,0.0171558040737612],[1501459200000,0.0263750206701294],[1504137600000,0.00617410473432667],[1506729600000,0.0214610282995178],[1509408000000,0.0436869679990046],[1512000000000,0.0410591136999905],[1514678400000,0.020809977605464],[1517356800000,0.0558330968052028],[1519776000000,-0.0413867418012952],[1522454400000,-0.0339800593347315],[1525046400000,0.00111506100730541],[1527724800000,0.0136878161753096],[1530316800000,-0.00446245903779996],[1532995200000,0.0473224917924275],[1535673600000,0.0242054620553009],[1538265600000,0.0194050783172699],[1540944000000,-0.0506421988417722],[1543536000000,0.0194281964485645],[1546214400000,-0.0886701197244362],[1548892800000,0.0707582061360101],[1551312000000,0.0387071558586847],[1553990400000,0.00153938795859965],[1556582400000,0.0259747815675286],[1559260800000,-0.0659033366876596],[1561852800000,0.0709957286320906],[1564531200000,0.0108123852519935],[1567209600000,-0.0138513598831489],[1569801600000,0.0213253120496422],[1572480000000,0.00545815736373356],[1575072000000,0.0398275543570268],[1577750400000,0.0177125809338685],[1580428800000,-0.0089737603030402],[1582934400000,-0.101108776547094],[1585612800000,-0.146420227251152],[1588204800000,0.104397770485524],[1590883200000,0.0464620252410217],[1593475200000,0.0168646471799452],[1596153600000,0.0256075065638566],[1598832000000,0.0748616515827694],[1601424000000,-0.0217501084050404],[1604102400000,-0.0454541455113651],[1606694400000,0.114705910836436],[1609372800000,0.03238603198756],[1612051200000,-0.0193368803425464],[1614470400000,0.0335540729995829],[1617148800000,0.0668807675976479],[1619740800000,0.0265141437006795],[1622419200000,0.0216352883924493],[1625011200000,-0.000541428981630787],[1627689600000,0.0136385341289351]],"name":"DIA"}],"navigator":{"enabled":true},"scrollbar":{"enabled":true},"legend":{"enabled":true}},"theme":{"colors":["#2b908f","#90ee7e","#f45b5b","#7798BF","#aaeeee","#ff0066","#eeaaee","#55BF3B"],"chart":{"backgroundColor":{"linearGradient":{"x1":0,"y1":0,"x2":1,"y2":1},"stops":[[0,"#2a2a2b"],[1,"#3e3e40"]]},"style":{"fontFamily":"Unica One, sans-serif"},"plotBorderColor":"#606063"},"title":{"style":{"color":"#E0E0E3","textTransform":"uppercase","fontSize":"20px"}},"subtitle":{"style":{"color":"#E0E0E3","textTransform":"uppercase"}},"xAxis":{"gridLineColor":"#707073","labels":{"style":{"color":"#E0E0E3"}},"lineColor":"#707073","minorGridLineColor":"#505053","tickColor":"#707073","title":{"style":{"color":"#A0A0A3"}}},"yAxis":{"gridLineColor":"#707073","labels":{"style":{"color":"#E0E0E3"}},"lineColor":"#707073","minorGridLineColor":"#505053","tickColor":"#707073","tickWidth":1,"title":{"style":{"color":"#A0A0A3"}}},"tooltip":{"backgroundColor":"rgba(0, 0, 0, 0.85)","style":{"color":"#F0F0F0"}},"plotOptions":{"series":{"dataLabels":{"color":"#B0B0B3"},"marker":{"lineColor":"#333"}},"boxplot":{"fillColor":"#505053"},"candlestick":{"lineColor":"white"},"errorbar":{"color":"white"}},"legend":{"itemStyle":{"color":"#E0E0E3"},"itemHoverStyle":{"color":"#FFF"},"itemHiddenStyle":{"color":"#606063"}},"credits":{"style":{"color":"#666"}},"labels":{"style":{"color":"#707073"}},"drilldown":{"activeAxisLabelStyle":{"color":"#F0F0F3"},"activeDataLabelStyle":{"color":"#F0F0F3"}},"navigation":{"buttonOptions":{"symbolStroke":"#DDDDDD","theme":{"fill":"#505053"}}},"rangeSelector":{"buttonTheme":{"fill":"#505053","stroke":"#000000","style":{"color":"#CCC"},"states":{"hover":{"fill":"#707073","stroke":"#000000","style":{"color":"white"}},"select":{"fill":"#000003","stroke":"#000000","style":{"color":"white"}}}},"inputBoxBorderColor":"#505053","inputStyle":{"backgroundColor":"#333","color":"silver"},"labelStyle":{"color":"silver"}},"navigator":{"handles":{"backgroundColor":"#666","borderColor":"#AAA"},"outlineColor":"#CCC","maskFill":"rgba(255,255,255,0.1)","series":{"color":"#7798BF","lineColor":"#A6C7ED"},"xAxis":{"gridLineColor":"#505053"}},"scrollbar":{"barBackgroundColor":"#808083","barBorderColor":"#808083","buttonArrowColor":"#CCC","buttonBackgroundColor":"#606063","buttonBorderColor":"#606063","rifleColor":"#FFF","trackBackgroundColor":"#404043","trackBorderColor":"#404043"},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#C0C0C0","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"stock","fonts":"Unica+One","debug":false},"evals":[],"jsHooks":[]}</script>
+<ul>
+<li><p>The navigator is a small series below the main series, displaying a view of the entire data set. It provides tools to zoom in and out on parts of the data as well as panning across the dataset</p></li>
+<li><p>The scrollbar is a means of panning over the X axis of a stock chart. Scrollbars can also be applied to other types of axes.</p></li>
+</ul>
+<hr />
+</div>
+<div id="monthly-log-returns-histograms" class="section level3">
+<h3>Monthly log returns Histograms</h3>
+<p>Create a function that returns a univariate histogram given a series of returns. The function will also take several other arguments— an xts object of returns, a vector of ticker symbols, a symbol index, and a color for plotting. Internally, the function creates a list of histogram components: counts, density, bin breaks, etc. Then, the function <code>hchart()</code> is called on the histogram list object to plot the univariate histogram; this is the final output of the function.</p>
+<pre class="r"><code>hc_hist_fun &lt;- function(xts_obj, tickers, symbol_index, color) {
+
+  # Check for invalid input
+  if (!is.xts(xts_obj) || !rlang::is_character(color) || !rlang::is_character(tickers)) {
+    rlang::abort(
+      message = &quot;Invalid input type for xts_object, tickers, and/or color arguments&quot;
+    )
+  }
+
+  # Create histogram list object with 6 elements
+  hc_hist &lt;- graphics::hist(xts_obj[, tickers[[symbol_index]]],
+    breaks = &quot;Freedman-Diaconis&quot;,
+    plot = FALSE
+  )
+
+  # Call hchart on the histogram list object
+  hchart(object = hc_hist, color = color) %&gt;%
+    hc_title(
+      text =
+        paste(tickers[[symbol_index]], &quot;Log Returns Distribution&quot;, sep = &quot; &quot;)
+    ) %&gt;%
+    hc_add_theme(hc_thm = hc_theme_flat()) %&gt;%
+    hc_exporting(enabled = TRUE) %&gt;%
+    hc_legend(enabled = FALSE)
+}</code></pre>
+<hr />
+<p>Now, we utilize the functional programming tool from <code>purrr</code> to interactively apply the function above to each of the univariate returns series.</p>
+<pre class="r"><code># Map the histogram functionto each of the returns series
+list_of_histogram &lt;- purrr::map(
+  .x = 1:5,
+  .f = ~ hc_hist_fun(
+    xts_obj = asset_returns_xts,
+    tickers = symbols,
+    symbol_index = .x,
+    color = &quot;cornflowerblue&quot;
+  )
+)
+list_of_histogram[[1]]</code></pre>
+<div id="htmlwidget-2" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"hc_opts":{"chart":{"reflow":true,"zoomType":"x"},"title":{"text":"SPY Log Returns Distribution"},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":true},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"tooltip":{"formatter":"function() { return  this.point.name + '<br/>' + this.y; }"},"series":[{"data":[{"x":-0.13,"y":1,"name":"(-0.14, -0.12]"},{"x":-0.11,"y":0,"name":"(-0.12, -0.1]"},{"x":-0.09,"y":2,"name":"(-0.1, -0.08]"},{"x":-0.07,"y":3,"name":"(-0.08, -0.06]"},{"x":-0.05,"y":1,"name":"(-0.06, -0.04]"},{"x":-0.03,"y":9,"name":"(-0.04, -0.02]"},{"x":-0.01,"y":11,"name":"(-0.02, -6.93889390390723e-18]"},{"x":0.01,"y":29,"name":"(-6.93889390390723e-18, 0.02]"},{"x":0.03,"y":29,"name":"(0.02, 0.04]"},{"x":0.05,"y":11,"name":"(0.04, 0.06]"},{"x":0.07,"y":4,"name":"(0.06, 0.08]"},{"x":0.09,"y":1,"name":"(0.08, 0.1]"},{"x":0.11,"y":2,"name":"(0.1, 0.12]"}],"type":"column","pointRange":0.02,"groupPadding":0,"pointPadding":0,"borderWidth":0,"color":"cornflowerblue"}],"legend":{"enabled":false}},"theme":{"colors":["#f1c40f","#2ecc71","#9b59b6","#e74c3c","#34495e","#3498db","#1abc9c","#f39c12","#d35400"],"chart":{"backgroundColor":"#ECF0F1"},"xAxis":{"gridLineDashStyle":"Dash","gridLineWidth":1,"gridLineColor":"#BDC3C7","lineColor":"#BDC3C7","minorGridLineColor":"#BDC3C7","tickColor":"#BDC3C7","tickWidth":1},"yAxis":{"gridLineDashStyle":"Dash","gridLineColor":"#BDC3C7","lineColor":"#BDC3C7","minorGridLineColor":"#BDC3C7","tickColor":"#BDC3C7","tickWidth":1},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#34495e","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":["hc_opts.tooltip.formatter"],"jsHooks":[]}</script>
+list_of_histogram[[2]]
+<div id="htmlwidget-3" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3">{"x":{"hc_opts":{"chart":{"reflow":true,"zoomType":"x"},"title":{"text":"EFA Log Returns Distribution"},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":true},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"tooltip":{"formatter":"function() { return  this.point.name + '<br/>' + this.y; }"},"series":[{"data":[{"x":-0.15,"y":1,"name":"(-0.16, -0.14]"},{"x":-0.13,"y":0,"name":"(-0.14, -0.12]"},{"x":-0.11,"y":0,"name":"(-0.12, -0.1]"},{"x":-0.09,"y":2,"name":"(-0.1, -0.08]"},{"x":-0.07,"y":1,"name":"(-0.08, -0.06]"},{"x":-0.05,"y":7,"name":"(-0.06, -0.04]"},{"x":-0.03,"y":13,"name":"(-0.04, -0.02]"},{"x":-0.01,"y":16,"name":"(-0.02, 0]"},{"x":0.01,"y":23,"name":"(2.77555756156289e-17, 0.02]"},{"x":0.03,"y":25,"name":"(0.02, 0.04]"},{"x":0.05,"y":9,"name":"(0.04, 0.06]"},{"x":0.07,"y":5,"name":"(0.06, 0.08]"},{"x":0.0900000000000001,"y":0,"name":"(0.0800000000000001, 0.1]"},{"x":0.11,"y":0,"name":"(0.1, 0.12]"},{"x":0.13,"y":1,"name":"(0.12, 0.14]"}],"type":"column","pointRange":0.02,"groupPadding":0,"pointPadding":0,"borderWidth":0,"color":"cornflowerblue"}],"legend":{"enabled":false}},"theme":{"colors":["#f1c40f","#2ecc71","#9b59b6","#e74c3c","#34495e","#3498db","#1abc9c","#f39c12","#d35400"],"chart":{"backgroundColor":"#ECF0F1"},"xAxis":{"gridLineDashStyle":"Dash","gridLineWidth":1,"gridLineColor":"#BDC3C7","lineColor":"#BDC3C7","minorGridLineColor":"#BDC3C7","tickColor":"#BDC3C7","tickWidth":1},"yAxis":{"gridLineDashStyle":"Dash","gridLineColor":"#BDC3C7","lineColor":"#BDC3C7","minorGridLineColor":"#BDC3C7","tickColor":"#BDC3C7","tickWidth":1},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#34495e","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":["hc_opts.tooltip.formatter"],"jsHooks":[]}</script>
+list_of_histogram[[3]]
+<div id="htmlwidget-4" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4">{"x":{"hc_opts":{"chart":{"reflow":true,"zoomType":"x"},"title":{"text":"DIA Log Returns Distribution"},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":true},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"tooltip":{"formatter":"function() { return  this.point.name + '<br/>' + this.y; }"},"series":[{"data":[{"x":-0.15,"y":1,"name":"(-0.16, -0.14]"},{"x":-0.13,"y":0,"name":"(-0.14, -0.12]"},{"x":-0.11,"y":1,"name":"(-0.12, -0.1]"},{"x":-0.09,"y":1,"name":"(-0.1, -0.08]"},{"x":-0.07,"y":2,"name":"(-0.08, -0.06]"},{"x":-0.05,"y":6,"name":"(-0.06, -0.04]"},{"x":-0.03,"y":4,"name":"(-0.04, -0.02]"},{"x":-0.01,"y":14,"name":"(-0.02, 0]"},{"x":0.01,"y":32,"name":"(0, 0.02]"},{"x":0.03,"y":23,"name":"(0.02, 0.04]"},{"x":0.05,"y":11,"name":"(0.04, 0.06]"},{"x":0.07,"y":5,"name":"(0.06, 0.08]"},{"x":0.09,"y":1,"name":"(0.08, 0.1]"},{"x":0.11,"y":2,"name":"(0.1, 0.12]"}],"type":"column","pointRange":0.02,"groupPadding":0,"pointPadding":0,"borderWidth":0,"color":"cornflowerblue"}],"legend":{"enabled":false}},"theme":{"colors":["#f1c40f","#2ecc71","#9b59b6","#e74c3c","#34495e","#3498db","#1abc9c","#f39c12","#d35400"],"chart":{"backgroundColor":"#ECF0F1"},"xAxis":{"gridLineDashStyle":"Dash","gridLineWidth":1,"gridLineColor":"#BDC3C7","lineColor":"#BDC3C7","minorGridLineColor":"#BDC3C7","tickColor":"#BDC3C7","tickWidth":1},"yAxis":{"gridLineDashStyle":"Dash","gridLineColor":"#BDC3C7","lineColor":"#BDC3C7","minorGridLineColor":"#BDC3C7","tickColor":"#BDC3C7","tickWidth":1},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#34495e","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":["hc_opts.tooltip.formatter"],"jsHooks":[]}</script>
+list_of_histogram[[4]]
+<div id="htmlwidget-5" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5">{"x":{"hc_opts":{"chart":{"reflow":true,"zoomType":"x"},"title":{"text":"QQQ Log Returns Distribution"},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":true},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"tooltip":{"formatter":"function() { return  this.point.name + '<br/>' + this.y; }"},"series":[{"data":[{"x":-0.09,"y":3,"name":"(-0.1, -0.08]"},{"x":-0.07,"y":4,"name":"(-0.08, -0.06]"},{"x":-0.05,"y":2,"name":"(-0.06, -0.04]"},{"x":-0.03,"y":11,"name":"(-0.04, -0.02]"},{"x":-0.01,"y":14,"name":"(-0.02, 0]"},{"x":0.01,"y":14,"name":"(-6.93889390390723e-18, 0.02]"},{"x":0.03,"y":23,"name":"(0.02, 0.04]"},{"x":0.05,"y":17,"name":"(0.04, 0.06]"},{"x":0.07,"y":9,"name":"(0.06, 0.08]"},{"x":0.09,"y":2,"name":"(0.08, 0.1]"},{"x":0.11,"y":3,"name":"(0.1, 0.12]"},{"x":0.13,"y":1,"name":"(0.12, 0.14]"}],"type":"column","pointRange":0.02,"groupPadding":0,"pointPadding":0,"borderWidth":0,"color":"cornflowerblue"}],"legend":{"enabled":false}},"theme":{"colors":["#f1c40f","#2ecc71","#9b59b6","#e74c3c","#34495e","#3498db","#1abc9c","#f39c12","#d35400"],"chart":{"backgroundColor":"#ECF0F1"},"xAxis":{"gridLineDashStyle":"Dash","gridLineWidth":1,"gridLineColor":"#BDC3C7","lineColor":"#BDC3C7","minorGridLineColor":"#BDC3C7","tickColor":"#BDC3C7","tickWidth":1},"yAxis":{"gridLineDashStyle":"Dash","gridLineColor":"#BDC3C7","lineColor":"#BDC3C7","minorGridLineColor":"#BDC3C7","tickColor":"#BDC3C7","tickWidth":1},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#34495e","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":["hc_opts.tooltip.formatter"],"jsHooks":[]}</script>
+list_of_histogram[[5]]
+<div id="htmlwidget-6" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6">{"x":{"hc_opts":{"chart":{"reflow":true,"zoomType":"x"},"title":{"text":"AGG Log Returns Distribution"},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":true},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"}},"tooltip":{"formatter":"function() { return  this.point.name + '<br/>' + this.y; }"},"series":[{"data":[{"x":-0.0275,"y":1,"name":"(-0.03, -0.025]"},{"x":-0.0225,"y":1,"name":"(-0.025, -0.02]"},{"x":-0.0175,"y":2,"name":"(-0.02, -0.015]"},{"x":-0.0125,"y":4,"name":"(-0.015, -0.01]"},{"x":-0.0075,"y":15,"name":"(-0.01, -0.005]"},{"x":-0.0025,"y":19,"name":"(-0.005, 1.73472347597681e-18]"},{"x":0.0025,"y":19,"name":"(1.73472347597681e-18, 0.005]"},{"x":0.0075,"y":23,"name":"(0.005, 0.01]"},{"x":0.0125,"y":9,"name":"(0.01, 0.015]"},{"x":0.0175,"y":6,"name":"(0.015, 0.02]"},{"x":0.0225,"y":3,"name":"(0.02, 0.025]"},{"x":0.0275,"y":1,"name":"(0.025, 0.03]"}],"type":"column","pointRange":0.005,"groupPadding":0,"pointPadding":0,"borderWidth":0,"color":"cornflowerblue"}],"legend":{"enabled":false}},"theme":{"colors":["#f1c40f","#2ecc71","#9b59b6","#e74c3c","#34495e","#3498db","#1abc9c","#f39c12","#d35400"],"chart":{"backgroundColor":"#ECF0F1"},"xAxis":{"gridLineDashStyle":"Dash","gridLineWidth":1,"gridLineColor":"#BDC3C7","lineColor":"#BDC3C7","minorGridLineColor":"#BDC3C7","tickColor":"#BDC3C7","tickWidth":1},"yAxis":{"gridLineDashStyle":"Dash","gridLineColor":"#BDC3C7","lineColor":"#BDC3C7","minorGridLineColor":"#BDC3C7","tickColor":"#BDC3C7","tickWidth":1},"legendBackgroundColor":"rgba(0, 0, 0, 0.5)","background2":"#505053","dataLabelsColor":"#B0B0B3","textColor":"#34495e","contrastTextColor":"#F0F0F3","maskColor":"rgba(255,255,255,0.3)"},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":["hc_opts.tooltip.formatter"],"jsHooks":[]}</script>
+<hr />
+</div>
+</div>
+<div id="visualizations-in-the-tidyvserse" class="section level2">
+<h2>Visualizations in the tidyvserse</h2>
+<p>Similarly, we can plot our asset returns using <code>ggplot2</code>, which implements the layered grammar of graphics approach. For efficiency, we will convert the xts object into the <em>long tidy</em> format that the tidyverse functions are designed to work well with. For another method of data importation, please see my other posts.</p>
+<hr />
+<p>Here’s the histogram; notice that we can overlay the histograms on top of each other or show them in separate panels. I recommend using the panel approach for studying the shapes of the univariate distributions, and employ the overlaying histograms for making comparisons between these distributions.</p>
+<div id="histogram" class="section level3">
+<h3>Histogram</h3>
+<pre class="r"><code># Compute Freedman-Diaconis bin numbers
+bins_fd &lt;- function(vec) {
+  diff(range(vec)) / (2 * IQR(vec) / length(vec)^(1 / 3))
+}
+# Histogram
+ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
+  geom_histogram(
+    alpha = 0.5,
+    mapping = aes(fill = asset),
+    bins = bins_fd(asset_returns_dplyr[[&quot;returns&quot;]])
+  ) +
+  ggtitle(&quot;Distributions of Monthly Log Returns&quot;) +
+  theme(
+    panel.background = element_rect(fill = &quot;grey97&quot;),
+    panel.grid = element_blank(),
+  )</code></pre>
+<p><img src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Histogram with panels
+ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
+  geom_histogram(
+    alpha = 0.5,
+    mapping = aes(fill = asset),
+    bins = bins_fd(asset_returns_dplyr[[&quot;returns&quot;]])
+  ) +
+  facet_wrap(~asset) +
+  ggtitle(&quot;Distributions of Monthly Log Returns&quot;) +
+  theme(
+    panel.background = element_rect(fill = &quot;grey97&quot;),
+    panel.grid = element_blank(),
+  )</code></pre>
+<p><img src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-7-2.png" width="672" style="display: block; margin: auto;" /></p>
+<hr />
+</div>
+<div id="densty" class="section level3">
+<h3>Densty</h3>
+<pre class="r"><code># Density plot
+ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
+  geom_density(mapping = aes(color = asset)) +
+  ggtitle(&quot;Distributions of Monthly Log Returns&quot;) +
+  theme(
+    panel.background = element_rect(fill = &quot;grey97&quot;),
+    panel.grid = element_blank(),
+  )</code></pre>
+<p><img src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Density plot with panels
+ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
+  geom_density(mapping = aes(color = asset)) +
+  geom_histogram(
+    alpha = 0.5,
+    mapping = aes(fill = asset),
+    bins = bins_fd(asset_returns_dplyr[[&quot;returns&quot;]])
+  ) +
+  facet_wrap(~asset) +
+  ggtitle(&quot;Distributions of Monthly Log Returns&quot;) +
+  theme(
+    panel.background = element_rect(fill = &quot;grey97&quot;),
+    panel.grid = element_blank(),
+  )</code></pre>
+<p><img src="https://academic-demo.netlify.app/post/visualization-asset-returns/index_files/figure-html/unnamed-chunk-8-2.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/asset-returns/">Asset Returns</a>
+  
+  <a class="badge badge-light" href="/tag/data-visualization/">Data Visualization</a>
+  
+  <a class="badge badge-light" href="/tag/finance/">Finance</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://academic-demo.netlify.app/post/visualization-asset-returns/&amp;text=Visualizing%20Asset%20Returns" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://academic-demo.netlify.app/post/visualization-asset-returns/&amp;t=Visualizing%20Asset%20Returns" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Visualizing%20Asset%20Returns&amp;body=https://academic-demo.netlify.app/post/visualization-asset-returns/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://academic-demo.netlify.app/post/visualization-asset-returns/&amp;title=Visualizing%20Asset%20Returns" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=Visualizing%20Asset%20Returns%20https://academic-demo.netlify.app/post/visualization-asset-returns/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://academic-demo.netlify.app/post/visualization-asset-returns/&amp;title=Visualizing%20Asset%20Returns" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://academic-demo.netlify.app/"><img class="avatar mr-3 avatar-circle" src="/author/yang-ken-wu/avatar_hu5209c67c5d796189810bebc1ea7397e2_2226757_270x270_fill_q75_lanczos_center.jpg" alt="Yang (Ken) Wu"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://academic-demo.netlify.app/">Yang (Ken) Wu</a></h5>
+      
+      
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.instagram.com/kennywu12/" target="_blank" rel="noopener">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/YangWu1227/" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://stackoverflow.com/users/12923148/yang-wu/" target="_blank" rel="noopener">
+        <i class="ai ai-stackoverflow"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/yangwu1227/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/portfolio-optimization-continued/">Portfolio Optimization Dashboard</a></li>
+      
+      <li><a href="/post/customizable-portfolio-dashboard/">Customizable Portfolio Dashboard</a></li>
+      
+      <li><a href="/post/portfolio-returns-and-optimization/">Portfolio Optimization &amp; Returns</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+  
+
+
+
+  
+
+  
+
+  
+  <p class="powered-by">
+    © 2021 Yang Wu
+  </p>
+  
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a> — the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/python.min.js" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/latex.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js" integrity="sha512-SeiQaaDh73yrb56sTW/RgVdi/mMqNeM2oBwubFHagc5BkixSpP1fvqF47mKzPGWYSSy4RwbBunrJBQ4Co8fRWA==" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+      
+      <script id="search-hit-fuse-template" type="text/x-template">
+        <div class="search-hit" id="summary-{{key}}">
+          <div class="search-hit-content">
+            <div class="search-hit-name">
+              <a href="{{relpermalink}}">{{title}}</a>
+              <div class="article-metadata search-hit-type">{{type}}</div>
+              <p class="search-hit-description">{{snippet}}</p>
+            </div>
+          </div>
+        </div>
+      </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    <script src="/js/bootstrap.bundle.min.6aed84840afc03ab4d5750157f69c120.js"></script>
+
+    
+    
+      
+      
+      
+      
+      
+      
+      
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    <script src="/en/js/wowchemy.min.d68ecd57c0ec1f1f61d65fd568f1c3a0.js"></script>
+
+    
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+
+</body>
+</html>

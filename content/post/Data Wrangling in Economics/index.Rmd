@@ -1,0 +1,181 @@
+---
+title: "Data Wrangling with Economics Data"
+summary: 'Some data wrangling techniques in the Tidyverse'
+author: "Ken Wu"
+date: 2020-05-04T21:13:14-05:00
+categories: ["R"]
+tags: ["Tidyverse", "Economics", "Data Wrangling", "Relational Database"]
+featuredImage: "featured.jpg"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(comment = NA)
+knitr::opts_chunk$set(collapse = TRUE)
+library(lobstr)
+library(lubridate)
+library(tidyverse)
+```
+
+\tableofcontents
+
+## Data Wrangling
+
+In this activity, I would like to experiment with some data wrangling techniques. I would be using the Penn World Table version 9.1 (PWT 9.1) and the Cross National Time Series (CNTS) data set to practice these techniques.
+
+## Data Importation
+```{r}
+pwt91 <- read_csv("pwt91.csv")
+```
+
+The first thing we would do is to coerce the data frame into a tibble (in my case, it is already a tibble but sometimes it may not be so it's good to be safe):
+```{r}
+pwt91 <- pwt91 %>% as_tibble()
+pwt91
+```
+
+## Wrangling
+
+We first need to "mutate" some variables. The total employment numbers do not offer as much context as the employment–population ratios; we create a new variable by dividing total employment by population. Next, we "select" the variables that are of interest to us. Suppose we wish to keep the following variables: countrycode, country name, year, employment–population ratios. 
+```{r}
+pwt91 <- pwt91 %>%
+  mutate(emp_pop_ratio = emp / pop) %>%
+  select(countrycode, country, year, emp_pop_ratio)
+pwt91
+```
+
+Let's do some simple counting to get a good sense of our data:
+```{r}
+# Number of countries
+cat(length(unique(pwt91$country)))
+# Number of years covered in this data set
+cat(length(unique(pwt91$year)))
+# Make sure that country and countrycode are consistent
+cat(length(unique(pwt91$countrycode)))
+# First and last year
+cat(min(pwt91$year))
+cat(max(pwt91$year))
+```
+
+Notice that there are lots of NA's, i.e., for some combination of country and year, there are no data. More succinctly put, the further back we go in time, the more we observe missing values for countries. Also, I expect that some countries would have more missing values than others. Before we trim the sample down, we want to examine the number missing values by year and by country to see if this is indeed the widespread trend:
+```{r}
+pwt91 %>%
+  group_by(year) %>%
+  count(is.na(emp_pop_ratio))
+```
+
+After examining the table above, I find that the count confirms my thinking. True indicates the count for missing values, and False indicates the opposite. The first two decades over this period of 68 years (1950-2017) have many coutries with missing values, i.e. > 100 countries in our sample of 182 have missing values. As we go into the 1990's, the number of countries with missing values drastically decreases, i.e., $\leq$ 10 countires have missing values.
+
+```{r}
+pwt91 %>%
+  group_by(country) %>%
+  count(is.na(emp_pop_ratio))
+```
+
+OECD members such as the US, UK, Australia, Canada, France, Finland, Germany, etc., have no missing values over this period. Sub-Saharan African countries, in particular, have relatively more missing values. Then, some Latin American countries have even more missing values. This is to be expected with socio-economic data; we confirm that the sample introduces much bias. Deleting missing observations can result in biased parameters and estimates and reduce the statistical power of the analysis. However, in this case, I would be using listwise deletion, where all observations that have missing values are deleted. This implies that, if I were to continue with my analysis, it would only be done on countries that have a complete set of data. While there may be better ways to handle biased samples, for this activity, I would simply use the year 1990 as a cutt off since a reasonable number of countries would have values from 1990 to 2017:
+```{r}
+pwt91 <- pwt91 %>%
+  filter(year >= 1990) %>%
+  na.exclude()
+```
+
+We count the number of rows for each country to see which coutries do not have all 28 years (1990-2017); we drop those countires: 
+```{r}
+pwt91 <- pwt91 %>%
+  group_by(countrycode) %>%
+  filter(n() == 28)
+```
+
+Let's check:
+```{r}
+pwt91 %>%
+  group_by(countrycode) %>%
+  count()
+# Number of countries
+cat(length(unique(pwt91$countrycode)))
+```
+
+As can be seen, all remaining countries have values for the 28-year period; we have a sample of 169 countries:
+```{r}
+pwt91
+```
+
+
+## Merging Data Sets
+
+Suppose after we completed our analysis, we found another data set containing some other relevant variables. We would like to "join" the two data sets by a common variable. In my case, that common variable is "countrycode." We start by loading in the second data set, which I've converted to a .csv file for convenience:
+```{r, include = FALSE}
+cnts19 <- read_csv("2019CNTS.csv", skip = 1)
+```
+```{r}
+as_tibble(cnts19)
+```
+
+First we need to make sure that the "key" variables share the same names across these two data sets. Then, we "select" the variables of interest to us. Domestic8 is the number of anti-government demonstrations, which, according to the CNTS user manual, includes labor strikes and demonstrations.
+```{r}
+cnts19 <- cnts19 %>%
+  rename(countrycode = Wbcode) %>%
+  select(countrycode, year, domestic8)
+```
+
+We would want to use left_join(), because it preserves the original observations even when there isn’t a match. Notice that setting the argument (by = NULL) makes sure that R uses all variables that appear in both data sets for merging, this is the so-called **natural join**.
+```{r}
+new_data <- pwt91 %>%
+  left_join(cnts19, by = NULL) %>%
+  na.exclude()
+new_data
+```
+
+Let's check:
+```{r}
+new_data %>%
+  group_by(countrycode) %>%
+  count()
+```
+
+According to the table above, after merging, we now have some countries with missing values for the domestic8 variable. Since this exercise is about data wrangling techniques and not about data analysis, we will continute to trim the sample further for the sake of practicing, excluding countries that have missing values. We need to keep in mind that, as far as analysis is concerned, too much deletion of data would lead to biases, 100$\%$. Just how much bias are we able to tolerate is a whole new topic of discussion. For now, we will proceed:
+```{r}
+new_data <- new_data %>%
+  group_by(countrycode) %>%
+  filter(n() == 28)
+```
+
+Now, let's check:
+```{r}
+new_data %>%
+  group_by(countrycode) %>%
+  count()
+```
+
+We have ensured that all remaining countries have values for all varaibles:
+```{r}
+# Number of countries
+cat(length(unique(new_data$countrycode)))
+new_data
+```
+
+Here's glimpse at which country had the single most yearly anti-government demonstrations over this 28-year period
+```{r}
+new_data %>%
+  arrange(desc(domestic8))
+```
+
+## Nested Data
+
+Lastly, we may also present our new merged data as a nested data frame, a new structure. The nested data frame has one row per group (per countrycode/country in my case). The third column, data, is a list of data frames:
+```{r}
+nested_data <- new_data %>%
+  group_by(countrycode, country) %>%
+  nest()
+nested_data
+```
+If we look at the first element of "data," we see that it contains all the data for that country (in my case, Angola):
+```{r}
+nested_data$data[[1]]
+```
+Presenting data in this new structure can be helpful, especially when dealing with cross-sectional data.
+
+## Conlusion
+
+We began with a sample of 182 countries, which we trimmed down to 139. Judging by numbers only, the deletion process could have been worse. However, we must take note that, when it comes to missing values, the data are not missing completely at random (MCAR). This is especially true for cross-national socio-economic data, where sampling quality reflects inequalities that are rather hard to capture and deal with. Beyond this activity, it would be interesting to explore ways of handling missing data as well as new imputation methods that have been developed over the years. 
