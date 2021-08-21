@@ -9,9 +9,6 @@ featuredImage: "featured.jpg"
 ---
 
 <script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
-<script src="{{< blogdown/postref >}}index_files/htmlwidgets/htmlwidgets.js"></script>
-<script src="{{< blogdown/postref >}}index_files/pymjs/pym.v1.js"></script>
-<script src="{{< blogdown/postref >}}index_files/widgetframe-binding/widgetframe.js"></script>
 
 
 <div id="visualization-asset-returns-in-xts" class="section level2">
@@ -85,11 +82,9 @@ highchart(type = &quot;stock&quot;) %&gt;%
   hc_exporting(enabled = TRUE) %&gt;%
   # Add legend
   hc_legend(enabled = TRUE) %&gt;% 
-  # Wrap the high charter object in an iframe
-  # We only do so to properly display this plot object properly in blogdown
-  frameWidget(height = &quot;625%&quot;)</code></pre>
-<div id="htmlwidget-1" style="width:100%;height:625%;" class="widgetframe html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1">{"x":{"url":"index_files/figure-html//widgets/widget_unnamed-chunk-3.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+  htmlwidgets::saveWidget(file = &quot;figure.html&quot;, selfcontained = TRUE)</code></pre>
+<iframe height="550" width="100%" src="figure.html">
+</iframe>
 <ul>
 <li><p>The navigator is a small series below the main series, displaying a view of the entire data set. It provides tools to zoom in and out on parts of the data as well as panning across the dataset.</p></li>
 <li><p>The scrollbar is a means of panning over the X axis of a stock chart. Scrollbars can also be applied to other types of axes.</p></li>
@@ -137,16 +132,16 @@ list_of_histogram &lt;- purrr::map(
     color = &quot;cornflowerblue&quot;
   )
 )</code></pre>
-<div id="htmlwidget-2" style="width:100%;height:625%;" class="widgetframe html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2">{"x":{"url":"index_files/figure-html//widgets/widget_unnamed-chunk-6.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
-<div id="htmlwidget-3" style="width:100%;height:625%;" class="widgetframe html-widget"></div>
-<script type="application/json" data-for="htmlwidget-3">{"x":{"url":"index_files/figure-html//widgets/widget_unnamed-chunk-7.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
-<div id="htmlwidget-4" style="width:100%;height:625%;" class="widgetframe html-widget"></div>
-<script type="application/json" data-for="htmlwidget-4">{"x":{"url":"index_files/figure-html//widgets/widget_unnamed-chunk-8.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
-<div id="htmlwidget-5" style="width:100%;height:625%;" class="widgetframe html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5">{"x":{"url":"index_files/figure-html//widgets/widget_unnamed-chunk-9.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
-<div id="htmlwidget-6" style="width:100%;height:625%;" class="widgetframe html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6">{"x":{"url":"index_files/figure-html//widgets/widget_unnamed-chunk-10.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<iframe height="550" width="100%" src="histogram1.html">
+</iframe>
+<iframe height="550" width="100%" src="histogram2.html">
+</iframe>
+<iframe height="550" width="100%" src="histogram3.html">
+</iframe>
+<iframe height="550" width="100%" src="histogram4.html">
+</iframe>
+<iframe height="550" width="100%" src="histogram5.html">
+</iframe>
 <p>       As can be seen, most of our assets are negatively skewed, indicating that there were a few <em>really bad months</em>. For the iShares Core US Aggregate Bond ETF (AGG), most months have returns that may be statistically indistinguishable from zero. From a sheer numbers perspective, investors who wish to maximize gains may consider such an asset undesirable. However, other performance factors such as risk, diversifier effect, and time horizon are important. The iShares Core US Aggregate Bond ETF seeks to track the investment results of an index composed of the total U.S. investment-grade bond market. And we expect bonds to produce lower returns for investors because they are also considered less volatile than stocks.</p>
 <p>The Invesco QQQ Trust Series 1 ETF (QQQ) stands out as a strong performing asset. Out of 103 months, about <span class="math inline">\(22%\)</span> of its monthly returns fall between <span class="math inline">\(2\%\)</span> and <span class="math inline">\(4\%\)</span>. Hover over the histograms to see the counts and break points of the returns distribution.</p>
 <hr />
@@ -214,7 +209,7 @@ ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
     panel.background = element_rect(fill = &quot;grey97&quot;),
     panel.grid = element_blank(),
   )</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Histogram with panels
 ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
   geom_histogram(
@@ -228,7 +223,7 @@ ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
     panel.background = element_rect(fill = &quot;grey97&quot;),
     panel.grid = element_blank(),
   )</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-12-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-2.png" width="672" style="display: block; margin: auto;" /></p>
 <hr />
 </div>
 <div id="densty" class="section level3">
@@ -242,7 +237,7 @@ ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
     panel.background = element_rect(fill = &quot;grey97&quot;),
     panel.grid = element_blank(),
   )</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># Density plot with panels
 ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
   geom_density(mapping = aes(color = asset)) +
@@ -257,7 +252,7 @@ ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
     panel.background = element_rect(fill = &quot;grey97&quot;),
     panel.grid = element_blank(),
   )</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-13-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-9-2.png" width="672" style="display: block; margin: auto;" /></p>
 <p>       The smoothed densities can be useful for estimating the probabilities of returns, or an infinitesimal interval of returns, to be mathematically precise. Take caution when interpreting these kernel densities as it is important to understand that <strong>the heights of the curve (the y-axis) do not represent probabilities.</strong> The y-axis in a density plot is the probability density function for the kernel density estimation. To convert to an actual probability, we need to find the area under the curve for a specific interval of returns. It is generally difficult to estimate probabilities from densities and we will have to tackle this problem in another post.</p>
 </div>
 </div>

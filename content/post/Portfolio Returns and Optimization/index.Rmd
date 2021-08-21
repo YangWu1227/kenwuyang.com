@@ -30,11 +30,15 @@ library(tidyquant)
 options(digits = 7)
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In this post, we will explore some finance topics---- portfolio allocation and portfolio returns. We want to focus on implementing portfolio theory in R. We will be using functions from several R packages--- `xts`, `tidyquant`, `tidyverse`. For more readings on the theory, I recommend [Essentials of Investments](https://www.amazon.com/ISE-Essentials-Investments-Zvi-Bodie/dp/1260288390/) and [Practical Portfolio Performance Measurement and Attribution](https://www.amazon.com/Practical-Portfolio-Performance-Measurement-Attribution/dp/0470059281/).
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In this post, we will explore some finance topics---- portfolio optimization and computing portfolio returns. My goal is to apply what I've learned in portfolio theory using R as the main tool of analysis. There are many advantages to using a GUI like MS Excel, but R has an amazing data analysis work flow--- a sort of one-stop solution from initial data importation to data wrangling and transformation to computations and analysis and then finally to visualizing and reporting results. We will be using functions from several R packages--- `xts`, `PerformanceAnalytics`, `PortfolioAnalytics`, `tidyquant`, `tidyverse`. In particular, the `tidyquant` [package](https://cran.r-project.org/web/packages/tidyquant/index.html) is a recent development that has markedly enriched R's financial analytics infrastructure, enhancing its usability in finance. While I cover some theory in this post, my main focus will be on the implementation of these topics in R.        
 
-## Optimal Weights for the five-asset portfolio (Minimum Variance)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For more readings on the theory, I recommend [Essentials of Investments](https://www.amazon.com/ISE-Essentials-Investments-Zvi-Bodie/dp/1260288390/) and [Practical Portfolio Performance Measurement and Attribution](https://www.amazon.com/Practical-Portfolio-Performance-Measurement-Attribution/dp/0470059281/). To learn more about analyzing financial data in R, there is [Reproducible Finance with R](http://www.reproduciblefinance.com/), which is a very practical book with an emphasis on application.    
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We employ Markowitz's Mean-Variance model as the framework for computing optimal weights, essentially treating this as an "unconstrained" problem. The objective of this optimization problem is one of minimization:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; With that being said, let us get financial! 
+
+## Optimal Weights for a five-asset portfolio (Minimum Variance)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We will employ Markowitz's Mean-Variance model as the framework for computing optimal weights, essentially treating the task as an "unconstrained" optimization problem. The objective of this optimization problem is one of minimization:
 
 \begin{align*}
 \text{Minimize}\hspace{2mm}(\sigma^{2}=\vec{W}^{T}\sum\vec{W}))
@@ -48,35 +52,43 @@ where
 
 * where $\varepsilon_{i}=0.05 \hspace{3mm} \delta_{i}=0.6$ are the lower and upper bounds for the weights $W_{i}$
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The minimization problem is a quadratic problem with linear constraints, since the variance formula is a quadratic function and the constraints are linear functions; this type of problem is well suited to be solved using a quadratic programming solver. The `PortfolioAnalytics` package uses `ROI.plugin.quadprog`, a plug-in for the "R" Optimization Infrastructure, to solve the problem. The solver can be specified with the optimize_method argument in `optimize.portfolio()`. If optimize_method = "ROI" is specified, a default solver will be selected based on the optimization problem. The `glpk` solver is the default solver for LP and MILP optimization problems. The
-`quadprog` solver is the default solver for QP optimization problems. 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The minimization problem is a quadratic problem with linear constraints, since the variance formula is a quadratic function and the constraints are linear functions; this type of problem is well suited to be solved using a quadratic programming solver. The `PortfolioAnalytics` package uses `ROI.plugin.quadprog`, a plug-in for the "R" Optimization Infrastructure, to solve the problem. The solver can be specified with the optimize_method argument in `optimize.portfolio()`. If optimize_method = "ROI" is specified, a default solver will be selected based on the optimization problem. The `glpk` solver is the default solver for LP and MILP optimization problems. The `quadprog` solver is the default solver for QP optimization problems. 
 
 ---
 
 ### Implementation in R
 
-```{r, include=FALSE}
+For this task, we will import our data from Yahoo Finance. The five assets under examination are Exchange Traded Funds, which are funds that can be traded on an exchange like a stock. Exchange-traded funds are a type of investment fund that offers the best attributes of two popular assets: they have the diversification benefits of mutual funds and the ease with which stocks are traded. However, before we import any data, we must answer the following question: In what form do we want our data to be? Since we are in the world of finance, times series is the most common type of data. R has the `xts` package to handle data that are indexed in time order. Our task, therefore, reduces to the following:
+
+* Import daily prices from Yahoo Finance
+
+* Convert daily prices to monthly return
+
+* Because we will be aggregating monthly returns to form a portfolio, we will need to compute the simple returns
+
+```{r}
 # Create a vector of ticker symbols
 symbols <- c("SPY", "EFA", "IJS", "EEM", "AGG")
 # Load data from 2012 to today
+# Specify the "to = " argument to specify an end date
 prices <- quantmod::getSymbols(
   Symbols = symbols,
   src = "yahoo",
   from = "2012-12-31",
-  to = "2021-7-31",
   auto.assign = TRUE,
   warnings = FALSE
 ) %>%
   # The map function takes an anonymous function and will return a list of five
+  # The function Ad() extracts the daily adjusted price series
   purrr::map(.f = ~ quantmod::Ad(get(x = .x))) %>%
-  # Use reduce() to merge the elements of .x consecutively
-  #
+  # Use reduce() to merge the elements of .x interactively
   purrr::reduce(.f = merge) %>%
-  # Use a replacement function to set column names as ticker symbols
+  # Use a replacement function to set column names to ticker symbols
   # This function is in prefix form
   # It is equivalent to colnames(x = prices) <- value
   `colnames<-`(value = symbols)
 # Keep only the last reading of each month
+# We could have chosen to keep only the first reading of each month
 asset_returns_xts <- xts::to.monthly(
   x = prices,
   drop.time = TRUE,
@@ -88,8 +100,8 @@ asset_returns_xts <- xts::to.monthly(
   PerformanceAnalytics::Return.calculate(method = "discrete") %>%
   # Drop the first row since we lose 12/31/2012
   stats::na.omit()
-# Keep only the xts returns and prices series
-rm(list = ls(!asset_returns_xts))
+# Keep only the xts returns, ticker symbols, and the prices series
+rm(list = setdiff(x = ls(), y = c("symbols", "prices", "asset_returns_xts")))
 ```
 
 * Create Portfolio object
@@ -97,7 +109,7 @@ rm(list = ls(!asset_returns_xts))
 ```{r}
 # Examine the monthly simple returns for our five ETF's
 head(x = asset_returns_xts, 5)
-# Create Portfolio object which is a R list object
+# Create Portfolio object which is essentially a list object
 min_var_portfolio <- PortfolioAnalytics::portfolio.spec(assets = symbols)
 typeof(min_var_portfolio)
 ```
@@ -105,7 +117,7 @@ typeof(min_var_portfolio)
 * Add constraints to the portfolio object
 
 ```{r}
-# Add the full investment constraint that specifies the weights must sum to 1
+# Add the full investment constraint that specifies that the weights must sum to 1
 min_var_portfolio <- PortfolioAnalytics::add.constraint(
   portfolio = min_var_portfolio,
   type = "full_investment"
@@ -154,7 +166,7 @@ global_min_portfolio
 
 ## Optimal Weights for the five-asset portfolio (Maximum Expected Return)
 
-The objective may also be one of maximization:
+Now that we found the global minimum variance portfolio, we may be interested in finding the miximal expected return portfolio. The objective is one of maximization:
 
 \begin{align*}
 \text{Maximize}\hspace{2mm}(\vec{\mu}^{T}\vec{W})
@@ -165,7 +177,7 @@ $$
 \sum_{i=1}^{N} W_{i}=1 \quad \text { and } \hspace{3mm} \varepsilon_{i} \leq W_{i} \leq \delta_{i}
 $$
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The optimization in this case is a linear programming problem, since the portfolio expected return formula is a linear function. This is best tackled using a linear programming solver. The package `PortfolioAnalytics` uses the ROI package with the `glpk plugin`, the GNU Linear Programming toolkit of R's Optimization Infrastructure.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The optimization problem in this case is a linear programming problem, since the portfolio expected return formula is a linear function. This is best tackled using a linear programming solver. The package `PortfolioAnalytics` uses the ROI package with the `glpk plugin`, the GNU Linear Programming toolkit of R's Optimization Infrastructure.
 
 ---
 
@@ -226,6 +238,8 @@ global_max_portfolio
 
 ## Building a portfolio
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We have found two sets of optimal weights that yield portfolios that offer the lowest possible risk and the high possible expected return given two basic constraints. Our next task is to aggregate the monthly returns of the individual ETF's to find the monthly returns of our five-asset portfolio.  
+
 ```{r}
 # Set optimal weights
 weights <- pluck(.x = global_max_portfolio, "weights")
@@ -239,10 +253,12 @@ tibble(weights, symbols) %>%
 The portfolio return in month, $t$, is given by:
 
 \begin{align*}
-r_{\text{portfolio,t}}=\sum_{i=1}^{5}W_{i}r^{cc}_{i,t}
+r_{\text{portfolio,t}}=\sum_{i=1}^{5}W_{i}r_{i,t}
 \end{align*}
 
 ### Monthly portfolio returns by hand
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We can compute portfolio monthly returns using a brute force method:
 
 ```{r}
 # Compute by hand
@@ -262,7 +278,7 @@ head(portfolio_returns_by_hand, 5)
 
 ### Monthly portfolio returns in xts
 
-Note that re-balancing the weights every month is unrealistic; in reality, we could choose annual overbalancing. For this case study, however, we will re-balance monthly to be consistent with our brute force computation.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Another way to compute portfolio monthly returns is to use functions from the `PerformanceAnalytics` package, which works well with `xts` objects. We also adopt an investment strategy known as rebalancing. The rebalancing of investments is the action of keeping the portfolio weights consistent with the optimal weights. Note that rebalancing the weights every month is unrealistic; the convention is to rebalance quaterly or annually. For this example, however, we will rebalance monthly to be consistent with our brute force computation.  
 
 ```{r}
 # Compute monthly portfolio returns
@@ -286,6 +302,8 @@ head(portfolio_returns_xts_rebalanced_monthly, 5)
 
 ### Monthly portfolio returns in the tidyverse
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The `tidyverse` is a collection of R packages designed with the same underlying philosophy, grammar, and data structures. Simply put, the "tidy" data structure that works well with tidyverse functions is one where every row is an observation and every column is a variable. If we re-examine the `xts` object called "asset_returns_xts", we see that every column is a returns series for a particular asset. This is inconsistent with the tidyverse data structure, and so we must convert the xts object to a tidy format for our computations. Ideally, we would like to have one column called "asset" that specifies the names of the ETF instead of having five individual columns of returns data. This idea will become clearer once we convert our xts object to a tibble.
+
 ```{r, include=FALSE}
 # Convert from xts object to tibble
 asset_returns_long <- xts::to.monthly(
@@ -299,8 +317,8 @@ asset_returns_long <- xts::to.monthly(
   # Coerce to tibble
   dplyr::as_tibble() %>%
   # Create a key column "asset" that contains the column names, i.e. ticker symbols
-  # Create a value column that contains all the cells associated with each column
-  # We convert to long format since it is easier to compute the returns using lag()
+  # Create a value column that contains all the returns associated with each column
+  # We convert to long format since it is easier to compute the returns using the lag() function
   tidyr::pivot_longer(
     cols = 1:5,
     names_to = "asset",
@@ -309,7 +327,6 @@ asset_returns_long <- xts::to.monthly(
   # Group by ticker symbol
   dplyr::group_by(asset) %>%
   # Compute simple returns manually
-  # Log returns are time-additive but not portfolio additive
   dplyr::mutate(
     "returns" = (
       (returns - dplyr::lag(x = returns)) / (dplyr::lag(x = returns))
@@ -319,8 +336,16 @@ asset_returns_long <- xts::to.monthly(
   na.omit()
 ```
 
+Now, examine the "tidy" data structure and compare it to the xts object created earlier:
+
 ```{r}
-# User vectorize if else statements to assign weights according to the asset column
+FSA::headtail(asset_returns_long, n = 5)
+```
+
+Since our returns data is in a "tidy" format, computing portfolio monthly returns is very a straight forward. For those who are familiar with SQL, we are essentially using the CASE statement here.
+
+```{r}
+# Use vectorized if else statements to assign weights according to the asset column
 potfolio_returns_dplyr_byhand <- asset_returns_long %>%
   group_by(asset) %>%
   mutate(
@@ -337,10 +362,10 @@ potfolio_returns_dplyr_byhand <- asset_returns_long %>%
   # We need to group by date so that the aggregate sum() function is carried out by month
   # For each date, the original series has 5 weighted returns, one for each ETF
   # The results should be 1 portfolio return (the sum of the 5 weighted returns) for each month
-  group_by(date) %>%
+  dplyr::group_by(date) %>%
   # Compute monthly portfolio returns
   dplyr::summarize(Monthly_portfolio_returns = sum(weighted_returns))
-# Examine
+# Examine the data
 head(potfolio_returns_dplyr_byhand, 5)
 ```
 
@@ -350,10 +375,12 @@ head(potfolio_returns_dplyr_byhand, 5)
 
 ### Monthly portfolio returns in tidyquant 
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The `tidyquant` package gives us two ways to compute the portfolio monthly returns.
+
 **\underline{Method 1}**
 
 ```{r}
-# Use tibble from the tidyverse but function from tidyquant
+# Use function from the tidyquant
 portfolio_returns_tq_rebalanced_monthly_method_1 <- asset_returns_long %>%
   tidyquant::tq_portfolio(
     assets_col = asset,
@@ -366,85 +393,91 @@ portfolio_returns_tq_rebalanced_monthly_method_1 <- asset_returns_long %>%
 head(portfolio_returns_tq_rebalanced_monthly_method_1, 5)
 ```
 
-* The function `check_weights(weights)` from the `LDATS` package checks that the vector of document weights is numeric and positive and inform the user if the average weight isn't 1.
-
 * The function `tq_portfolio(data, assets_col, returns_col, weights = NULL, col_rename = NULL, ...)` aggregates a group of returns by asset into portfolio returns.
   
 ---
 
 **\underline{Method 2}**
 
-An alternative way to load data is to using `tidquant` wrapper function, which automatically coerces the returns into a long tidy format:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; An alternative way to load data is to use the `tidyquant` wrapper function, which automatically coerces the returns into a long tidy format:
 
 ```{r}
 # Load data
 asset_returns_tq <- tidyquant::tq_get(
   x = symbols,
   get = "stock.prices",
-  from = "2012-12-31",
-  to = "2021-7-31",
+  from = "2012-12-31"
 ) %>%
   # The asset column is named symbol by default (see body(tidyquant::tq_get))
   dplyr::group_by(symbol) %>%
+  # Select adjusted daily prices
   tidyquant::tq_transmute(
     select = adjusted,
     col_rename = "returns",
     # This function is from quantmod
     mutate_fun = periodReturn,
-    # These are argument are passed along to the mutate function quantmod::periodReturn
+    # These arguments are passed along to the mutate function quantmod::periodReturn
     period = "monthly",
+    # Simple returns
     type = "arithmetic",
+    # Do not return leading period data
     leading = FALSE,
     # This argument is passed along to xts::to.period, which is wrapped by quantmod::periodReturn
+    # We use the last reading of each month to find percentage changes
     indexAt = "lastof"
-  ) %>% 
-  dplyr::rename(asset = symbol) %>% 
+  ) %>%
+  dplyr::rename(asset = symbol) %>%
   na.omit()
 ```
 
-* The function `tq_get(x, get = "stock.prices", complete_cases = TRUE, ...)` gets data in tibble format. The most important argument is perhaps the dot-dot-dot, since these are the argument passed to the underlying functions that `tq_get()` uses. There could be multiple layers of wrapper functions and so read the documentations carefully.
+* The function `tq_get(x, get = "stock.prices", complete_cases = TRUE, ...)` gets data in tibble format. The most important argument is perhaps the dot-dot-dot, since these are the arguments passed to the underlying functions from the other pacakges that `tq_get()` uses. There could be multiple layers of wrapper functions, and so it is best practice to read the documentations carefully.
 
-A possibly more useful method of aggregating asset returns to portfolio returns then is to use a tibble of symbols and weights that are mapped to the portfolio:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A possibly more useful method of aggregating asset returns to portfolio returns is then to *map a tibble of ticker symbols and weights to the tibble of ticker symbols and monthly returns*:
 
 ```{r}
 # Create a tibble of weights
 weights_tibble <- tibble(
-    asset = symbols,
-    weights = weights
+  asset = symbols,
+  weights = weights
 )
+head(weights_tibble, 5)
 # Map the weights to the returns column using the asset column as the identifier
-portfolio_returns_tq_rebalanced_monthly_method_2 <- asset_returns_tq %>% 
-tidyquant::tq_portfolio(
-  assets_col = asset,
-  returns_col = returns,
-  weights = weights_tibble,
-  col_rename = "Monthly_portfolio_returns",
-  rebalance_on = "months"
-)
+portfolio_returns_tq_rebalanced_monthly_method_2 <- asset_returns_tq %>%
+  tidyquant::tq_portfolio(
+    assets_col = asset,
+    returns_col = returns,
+    weights = weights_tibble,
+    col_rename = "Monthly_portfolio_returns",
+    rebalance_on = "months"
+  )
+head(portfolio_returns_tq_rebalanced_monthly_method_2, 5)
 ```
 
 ---
 
 ### Compare and Contrast these four methods
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We have covered a variety of different methods for aggregating asset monthly returns to portfolio monthly returns. As a sanity check, we want to ensure that these methods yield consistent results:
+
 ```{r}
-four_computational_methods <- potfolio_returns_dplyr_byhand %>%
+potfolio_returns_dplyr_byhand %>%
   # Rename the column
   rename(tidyverse_method = Monthly_portfolio_returns) %>%
   # Create three new columns that contain results for other methods
   dplyr::mutate(
-    equation_byhand = zoo::coredata(x = portfolio_returns_by_hand),
-    tq_method_1 = portfolio_returns_tq_rebalanced_monthly_method_1[["Monthly_portfolio_returns"]],
-    tq_method_2 = portfolio_returns_tq_rebalanced_monthly_method_2[["Monthly_portfolio_returns"]],
-    xts_method = zoo::coredata(portfolio_returns_xts_rebalanced_monthly)
+    "equation_byhand" = zoo::coredata(x = portfolio_returns_by_hand),
+    "tq_method_1" = portfolio_returns_tq_rebalanced_monthly_method_1[["Monthly_portfolio_returns"]],
+    "tq_method_2" = portfolio_returns_tq_rebalanced_monthly_method_2[["Monthly_portfolio_returns"]],
+    "xts_method" = zoo::coredata(portfolio_returns_xts_rebalanced_monthly)
   ) %>%
-  purrr::modify_if(.p = is.numeric, .f = ~ round(x = .x, digits = 7))
-# Examine
-head(four_computational_methods, 10)
+  purrr::modify_if(.p = is.numeric, .f = ~ round(x = .x, digits = 7)) %>%
+  dplyr::select(-date) %>%
+  # Examine
+  head(10)
 ```
 
 * The function `coredata(x, ...)` is a generic function for extracting the core data contained in, a (more complex) object and replacing it. The replacement function is `coredata<-`.
 
-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; As can be seen, the results are all consistent. *Sigh of relief*. For the upcoming posts, I also plan on tackling other topics in portfolio theory. I am also looking to build off of what I've covered in this post. So, to my future self, stay tuned.
 
   

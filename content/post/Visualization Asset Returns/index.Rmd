@@ -111,10 +111,10 @@ highchart(type = "stock") %>%
   hc_exporting(enabled = TRUE) %>%
   # Add legend
   hc_legend(enabled = TRUE) %>% 
-  # Wrap the high charter object in an iframe
-  # We only do so to properly display this plot object properly in blogdown
-  frameWidget(height = "625%")
+  htmlwidgets::saveWidget(file = "figure.html", selfcontained = TRUE)
 ```
+
+<iframe height = 550 width = 100% src = "figure.html"></iframe>
 
 * The navigator is a small series below the main series, displaying a view of the entire data set. It provides tools to zoom in and out on parts of the data as well as panning across the dataset.
 
@@ -173,25 +173,20 @@ list_of_histogram <- purrr::map(
 )
 ```
 
-```{r, echo=FALSE}
-list_of_histogram[[1]] %>% frameWidget(height = "625%")
+```{r, include=FALSE}
+# Save the html widgets
+list_of_histogram[[1]] %>% htmlwidgets::saveWidget(file = "histogram1.html", selfcontained = TRUE)
+list_of_histogram[[2]] %>% htmlwidgets::saveWidget(file = "histogram2.html", selfcontained = TRUE)
+list_of_histogram[[3]] %>% htmlwidgets::saveWidget(file = "histogram3.html", selfcontained = TRUE)
+list_of_histogram[[4]] %>% htmlwidgets::saveWidget(file = "histogram4.html", selfcontained = TRUE)
+list_of_histogram[[5]] %>% htmlwidgets::saveWidget(file = "histogram5.html", selfcontained = TRUE)
 ```
 
-```{r, echo=FALSE}
-list_of_histogram[[2]] %>% frameWidget(height = "625%")
-```
-
-```{r, echo=FALSE}
-list_of_histogram[[3]] %>% frameWidget(height = "625%")
-```
-
-```{r, echo=FALSE}
-list_of_histogram[[4]] %>% frameWidget(height = "625%")
-```
-
-```{r, echo=FALSE}
-list_of_histogram[[5]] %>% frameWidget(height = "625%")
-```
+<iframe height = 550 width = 100% src = "histogram1.html"></iframe>
+<iframe height = 550 width = 100% src = "histogram2.html"></iframe>
+<iframe height = 550 width = 100% src = "histogram3.html"></iframe>
+<iframe height = 550 width = 100% src = "histogram4.html"></iframe>
+<iframe height = 550 width = 100% src = "histogram5.html"></iframe>
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; As can be seen, most of our assets are negatively skewed, indicating that there were a few *really bad months*. For the iShares Core US Aggregate Bond ETF (AGG), most months have returns that may be statistically indistinguishable from zero. From a sheer numbers perspective, investors who wish to maximize gains may consider such an asset undesirable. However, other performance factors such as risk, diversifier effect, and time horizon are important. The iShares Core US Aggregate Bond ETF seeks to track the investment results of an index composed of the total U.S. investment-grade bond market. And we expect bonds to produce lower returns for investors because they are also considered less volatile than stocks. 
 
@@ -242,7 +237,7 @@ head(asset_returns_dplyr, 5)
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Here are the histograms. Notice that we can either overlay the histograms on top of each other or show them in separate panels. I recommend using the panel approach for studying the shapes (spread, central tendency, skewness, tailed-ness, etc.) of the univariate distributions, and employ the overlaying histograms for making comparisons between these distributions.
 
-```{r, fig.height= 7, fig.width=7}
+```{r, fig.height= 5, fig.width=7}
 # Compute Freedman-Diaconis bin numbers
 bins_fd <- function(vec) {
   diff(range(vec)) / (2 * IQR(vec) / length(vec)^(1 / 3))
@@ -280,7 +275,7 @@ ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We could also plot the probability density functions of these historical returns. Take a look at the y-axis of these plots and compare them to those of the histograms. This is an important distinction between these otherwise similar visualizations.
 
-```{r, fig.height= 7, fig.width=7}
+```{r, fig.height= 5, fig.width=7}
 # Density plot
 ggplot(data = asset_returns_dplyr, mapping = aes(x = returns)) +
   geom_density(mapping = aes(color = asset)) +
