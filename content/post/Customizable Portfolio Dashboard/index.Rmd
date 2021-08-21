@@ -1,6 +1,6 @@
 ---
 title: "Customizable Portfolio Dashboard"
-summary: 'An interative portfolio dashboard using a shiny application'
+summary: 'An interative portfolio dashboard powered by shiny'
 author: "Ken Wu"
 date: 2021-06-17T21:13:14-05:00
 runtime: shiny
@@ -11,10 +11,28 @@ featuredImage: "featured.jpg"
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+library(shiny)
+library(widgetframe)
 ```
 
-For a better experience, please see this [application](https://kenyangwu1227.shinyapps.io/Yang-Wu-Customizable-Portfolio-Dashboard/) on the shiny server. 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Shiny is a framework for creating web applications using R code. It's server uses reactive programming, which allows for an interactive approach to communicating data analysis results. Shiny allows *you*, the users of the web applications, to interact with the data and the analyses, which the creator has put together in the back-end. 
 
-<iframe height="1000" width="100%" frameborder = "no" src=" https://kenyangwu1227.shinyapps.io/Yang-Wu-Customizable-Portfolio-Dashboard/"> </iframe>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In this application, I will create a customizable portfolio dashboard that will empower you to accomplish the following:
+
+* Construct a portfolio by selecting assets and weights
+
+* Specify the investment horizon by selecting a start and an end date 
+
+* Specify portfolio strategies--- rebalancing frequency, risk-free rate, benchmark, etc.
+
+* Compute measures of risk and return and other portfolio performance metrics
+
+* Visualize measures of risk and return and other portfolio performance metrics 
+
+The idea of creating such a user-friendly portfolio dashboard is taken from [Reproducible Finance with R](http://www.reproduciblefinance.com/). I strongly recommend this book to those of you who may be interested in finance and are passionate about R like I am.  
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If you prefer, you could also see this [application](https://kenyangwu1227.shinyapps.io/Yang-Wu-Customizable-Portfolio-Dashboard/) on the shiny server. 
+
+<iframe height = "1500" width = "100%" frameborder = "no" src=" https://kenyangwu1227.shinyapps.io/Yang-Wu-Customizable-Portfolio-Dashboard/"> </iframe>
 
 

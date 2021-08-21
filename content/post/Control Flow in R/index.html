@@ -13,13 +13,11 @@ featuredImage: "featured.jpg"
 
 <div id="control-flow" class="section level2">
 <h2>Control Flow</h2>
-<p>Loops are an important programming concept, allowing programmers to execute blocks of code repeatedly, usually with varying options. This post will cover the three types of loops— for, while, and repeat. We will then solve some problems using loops to demonstrate the power of iteration in programming. Whenever possible, we attempt to solve problems using different methods, including different types of loops as well as parallel processing. Many of R’s functions are vectorized, meaning that the function will operate on all elements of a vector without needing to loop through and act on each element one at a time. We leverage this unique feature of R to show that many problems that seem to involve loops can actually be solved differently in R, although the resulting programs may be harder to intuit.</p>
+<p>       Loops are an important programming concept, allowing programmers to execute blocks of code repeatedly, usually with varying options. This post will cover three types of loops— for, while, and repeat. We will then solve some problems using loops to demonstrate the power of iteration in programming. Whenever possible, we will attempt to solve problems using different methods, including different types of loops and parallel processing. Many of R’s functions are vectorized, meaning that the function will operate on all elements of a vector without needing to loop through and act on each element one at a time. We leverage this unique feature of R to show that many problems that seem to involve loops can actually be solved differently in R, although the programs may be harder to intuit.</p>
 </div>
 <div id="for-loop" class="section level2">
 <h2>for loop</h2>
-<pre class="r"><code># Import image
-knitr::include_graphics(&quot;for loop.png&quot;)</code></pre>
-<p><img src="for%20loop.png" width="60%" height="60%" style="display: block; margin: auto;" /></p>
+<p><img src="for%20loop.png" width="70%" height="70%" style="display: block; margin: auto;" /></p>
 <p>Basic syntax:</p>
 <pre class="r"><code>for (item in vector) perform_action</code></pre>
 <p>For each item in vector, perform_action is called once; updating the value of item each time. There are two ways to terminate a for loop early:</p>
@@ -47,7 +45,7 @@ knitr::include_graphics(&quot;for loop.png&quot;)</code></pre>
 <div id="common-pitfalls" class="section level2">
 <h2>Common pitfalls</h2>
 <ol style="list-style-type: decimal">
-<li>Use <code>seq_along(x)</code> as the vector in <code>for()</code> since it always returns a value the same length as x, even when x is a length zero vector:</li>
+<li>Use <code>seq_along(x)</code> to generate the sequence in <code>for()</code> since it always returns a value the same length as x, even when x is a length zero vector:</li>
 </ol>
 <pre class="r"><code># Declare variables
 means &lt;- c()
@@ -71,9 +69,7 @@ for (i in seq_along(xs)) {
 </div>
 <div id="while-loop" class="section level2">
 <h2>while loop</h2>
-<pre class="r"><code># Import image
-knitr::include_graphics(&quot;while loop.png&quot;)</code></pre>
-<p><img src="while%20loop.png" width="60%" height="60%" style="display: block; margin: auto;" /></p>
+<p><img src="while%20loop.png" width="70%" height="70%" style="display: block; margin: auto;" /></p>
 <p>Basic syntax:</p>
 <pre class="r"><code>while (condition) {
   expression_1
@@ -84,9 +80,7 @@ knitr::include_graphics(&quot;while loop.png&quot;)</code></pre>
 </div>
 <div id="repeat-loop" class="section level2">
 <h2>repeat loop</h2>
-<pre class="r"><code># Import image
-knitr::include_graphics(&quot;repeat loop.png&quot;)</code></pre>
-<p><img src="repeat%20loop.png" width="60%" height="60%" style="display: block; margin: auto;" /></p>
+<p><img src="repeat%20loop.png" width="70%" height="70%" style="display: block; margin: auto;" /></p>
 <p>Basic syntax:</p>
 <pre class="r"><code>repeat{
   expression_1
@@ -370,10 +364,10 @@ sum_of_sequence_vectorized(x = 1, n = 46)
 x &lt;- sample(x = 1:45, size = 200, replace = TRUE)
 # A function from the psych package
 psych::geometric.mean(x)
-[1] 17.45846
+[1] 16.56282
 # Our custom function
 geometric_for_loop(x)
-[1] 17.45846</code></pre>
+[1] 16.56282</code></pre>
 <ul>
 <li>Geometric mean (vectorization)</li>
 </ul>
@@ -397,7 +391,7 @@ geometric_for_loop(x)
 }
 # Test
 geometric_vectorization(x)
-[1] 17.45846</code></pre>
+[1] 16.56282</code></pre>
 <ul>
 <li>Harmonic mean (for loop)</li>
 </ul>
@@ -428,10 +422,10 @@ geometric_vectorization(x)
 # Test
 # A function from the psych package
 psych::harmonic.mean(x)
-[1] 10.30153
+[1] 8.775604
 # Our custom function
 harmonic_for_loop(x)
-[1] 10.30153</code></pre>
+[1] 8.775604</code></pre>
 <ul>
 <li>Harmonic mean (vectorization)</li>
 </ul>
@@ -456,7 +450,7 @@ harmonic_for_loop(x)
 }
 # Test
 harmonic_vectorization(x)
-[1] 10.30153</code></pre>
+[1] 8.775604</code></pre>
 <hr />
 </div>
 <div id="find-the-sum-of-every-nth-element-of-a-vector" class="section level2">
@@ -496,23 +490,23 @@ every_nth_element_for_loop &lt;- function(x, n) {
 # Test vector
 x &lt;- sample(x = 1:203, size = 100, replace = TRUE)
 x
-  [1] 125 190   9 125 120  64 135 203  13 167  26 112   5 110  22  53 150 172
- [19]  90  51 157 142 114  11   2  38  10 153  99  13  66  43  79  23  47 148
- [37] 169 134 108  53 118  26 183  73  19 108  80  79 190  66  41 180  39  75
- [55] 108  19 186  71 110  28  30  90 103 189 115 136  27  35 173  46  45 177
- [73]  82 202 152  65 108   6  92 140 126  33 173  78  69 147  53  25 119 186
- [91]   6 122 182 139  22  86 191 155  67  63
+  [1] 183 134 192  61  15 117  61  97 103 133  94 201  10 178 172 117 104 152
+ [19] 184 157  41  40  41  50 195 125 139 118 164 101 154 131   8 155 100 123
+ [37]   3 153  77 149  62  56 142  12  29  43  44 169  76 101 146  22  84  92
+ [55] 178 196 187  83 114  47 193 191 199  55 146 142 201  16 190 167 111  40
+ [73]  92  17 193  60 203 170 114 144 192 131 149 106 106 130 165  76 115  56
+ [91]  93  11 105  94 108 109 111 149  37  26
 # A vector that contains every thirteenth element of a vector
 every_nth_element_for_loop(x = x, n = 13)
-  [1]   0   0   0   0   0   0   0   0   0   0   0   0   5   0   0   0   0   0
- [19]   0   0   0   0   0   0   0  38   0   0   0   0   0   0   0   0   0   0
- [37]   0   0 108   0   0   0   0   0   0   0   0   0   0   0   0 180   0   0
- [55]   0   0   0   0   0   0   0   0   0   0 115   0   0   0   0   0   0   0
- [73]   0   0   0   0   0   6   0   0   0   0   0   0   0   0   0   0   0   0
- [91]   6   0   0   0   0   0   0   0   0   0
+  [1]   0   0   0   0   0   0   0   0   0   0   0   0  10   0   0   0   0   0
+ [19]   0   0   0   0   0   0   0 125   0   0   0   0   0   0   0   0   0   0
+ [37]   0   0  77   0   0   0   0   0   0   0   0   0   0   0   0  22   0   0
+ [55]   0   0   0   0   0   0   0   0   0   0 146   0   0   0   0   0   0   0
+ [73]   0   0   0   0   0 170   0   0   0   0   0   0   0   0   0   0   0   0
+ [91]  93   0   0   0   0   0   0   0   0   0
 # Find sum
 sum(every_nth_element_for_loop(x = x, n = 13))
-[1] 458</code></pre>
+[1] 643</code></pre>
 <ul>
 <li>Using while loop</li>
 </ul>
@@ -549,7 +543,7 @@ every_nth_element_while_loop &lt;- function(x, n) {
 }
 # Test (This result should corroborate with that of the function above)
 every_nth_element_while_loop(x = x, n = 13)
-[1] 458</code></pre>
+[1] 643</code></pre>
 <ul>
 <li>Using subsetting and <code>seq()</code></li>
 </ul>
@@ -565,7 +559,7 @@ every_nth_element_subsetting &lt;- function(x, n) {
 }
 # Test
 every_nth_element_subsetting(x = x, n = 13)
-[1] 458</code></pre>
+[1] 643</code></pre>
 <hr />
 </div>
 <div id="chart-the-flow" class="section level2">
@@ -701,12 +695,12 @@ x = 3932.749  y = 102.7467 </code></pre>
 x &lt;- sample(x = 20:1923, size = 1000, replace = FALSE)
 # Find min and max
 find_min_max(x, summary_stat = &quot;min&quot;)
-[1] 22
+[1] 20
 find_min_max(x, summary_stat = &quot;max&quot;)
-[1] 1922
+[1] 1923
 # Confirm using base R functions
 min(x)
-[1] 22
+[1] 20
 max(x)
-[1] 1922</code></pre>
+[1] 1923</code></pre>
 </div>

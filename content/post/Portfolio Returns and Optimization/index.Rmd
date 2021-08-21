@@ -30,11 +30,11 @@ library(tidyquant)
 options(digits = 7)
 ```
 
-\tableofcontents
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In this post, we will explore some finance topics---- portfolio allocation and portfolio returns. We want to focus on implementing portfolio theory in R. We will be using functions from several R packages--- `xts`, `tidyquant`, `tidyverse`. For more readings on the theory, I recommend [Essentials of Investments](https://www.amazon.com/ISE-Essentials-Investments-Zvi-Bodie/dp/1260288390/) and [Practical Portfolio Performance Measurement and Attribution](https://www.amazon.com/Practical-Portfolio-Performance-Measurement-Attribution/dp/0470059281/).
 
 ## Optimal Weights for the five-asset portfolio (Minimum Variance)
 
-We employ Markowitz's Mean-Variance model as the framework for computing optimal weights, essentially treating this as an "unconstrained" problem. The objective of this optimization problem is one of minimization:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We employ Markowitz's Mean-Variance model as the framework for computing optimal weights, essentially treating this as an "unconstrained" problem. The objective of this optimization problem is one of minimization:
 
 \begin{align*}
 \text{Minimize}\hspace{2mm}(\sigma^{2}=\vec{W}^{T}\sum\vec{W}))
@@ -48,7 +48,7 @@ where
 
 * where $\varepsilon_{i}=0.05 \hspace{3mm} \delta_{i}=0.6$ are the lower and upper bounds for the weights $W_{i}$
 
-The minimization problem is a quadratic problem with linear constraints, since the variance formula is a quadratic function and the constraints are linear functions; this type of problem is well suited to be solved using a quadratic programming solver. The `PortfolioAnalytics` package uses `ROI.plugin.quadprog`, a plug-in for the "R" Optimization Infrastructure, to solve the problem. The solver can be specified with the optimize_method argument in `optimize.portfolio()`. If optimize_method = "ROI" is specified, a default solver will be selected based on the optimization problem. The `glpk` solver is the default solver for LP and MILP optimization problems. The
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The minimization problem is a quadratic problem with linear constraints, since the variance formula is a quadratic function and the constraints are linear functions; this type of problem is well suited to be solved using a quadratic programming solver. The `PortfolioAnalytics` package uses `ROI.plugin.quadprog`, a plug-in for the "R" Optimization Infrastructure, to solve the problem. The solver can be specified with the optimize_method argument in `optimize.portfolio()`. If optimize_method = "ROI" is specified, a default solver will be selected based on the optimization problem. The `glpk` solver is the default solver for LP and MILP optimization problems. The
 `quadprog` solver is the default solver for QP optimization problems. 
 
 ---
@@ -165,7 +165,7 @@ $$
 \sum_{i=1}^{N} W_{i}=1 \quad \text { and } \hspace{3mm} \varepsilon_{i} \leq W_{i} \leq \delta_{i}
 $$
 
-The optimization in this case is a linear programming problem, since the portfolio expected return formula is a linear function. This is best tackled using a linear programming solver. The package `PortfolioAnalytics` uses the ROI package with the `glpk plugin`, the GNU Linear Programming toolkit of R's Optimization Infrastructure.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The optimization in this case is a linear programming problem, since the portfolio expected return formula is a linear function. This is best tackled using a linear programming solver. The package `PortfolioAnalytics` uses the ROI package with the `glpk plugin`, the GNU Linear Programming toolkit of R's Optimization Infrastructure.
 
 ---
 
@@ -282,22 +282,6 @@ head(portfolio_returns_xts_rebalanced_monthly, 5)
 
 * The function `Return.portfolio(R, weights = NULL, wealth.index = FALSE, contribution = FALSE, geometric = TRUE, rebalance_on = c(NA, "years", "quarters", "months", "weeks", "days"), value = 1, verbose = FALSE, ...)` calculates the returns of a portfolio with the same periodicity of the returns data.
   
-  + R is an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns.
-  
-  + weights is a time series or single-row matrix/vector containing asset weights, as decimal percentages, treated as beginning of period weights.
-  
-  + wealth.index is a logical indicating whether to return a wealth index. The default is FALSE.
-  
-  + if contribution is TRUE, add the weighted return contributed by the asset in a given period.    The default is FALSE.
-  
-  + geometric utilize geometric chaining (TRUE) or simple/arithmetic (FALSE) to aggregate returns. The default is TRUE.
-  
-  + rebalance_on defaults to "none"; alternatively "daily" "weekly" "monthly" "annual" to specify calendar-period rebalancing supported by endpoints. Ignored if weights is an xts object that specifies the rebalancing dates.
-  
-  + values is the beginning-of-period total portfolio value. This is used for calculating position value.
-  
-  + if verbose is TRUE, return a list of intermediary calculations.
-  
 ---
 
 ### Monthly portfolio returns in the tidyverse
@@ -385,18 +369,6 @@ head(portfolio_returns_tq_rebalanced_monthly_method_1, 5)
 * The function `check_weights(weights)` from the `LDATS` package checks that the vector of document weights is numeric and positive and inform the user if the average weight isn't 1.
 
 * The function `tq_portfolio(data, assets_col, returns_col, weights = NULL, col_rename = NULL, ...)` aggregates a group of returns by asset into portfolio returns.
-
-  + data should be a tibble (tidy data frame) of returns in tidy format (i.e long format).
-  
-  + assets_col is the column with assets (securities)
-  
-  + returns_col is the column with returns
-  
-  + weights argument take the optional parameter for the asset weights, which can be passed as a numeric vector the length of the number of assets or a two column tibble with asset names in first column and weights in second column.
-  
-  + col_rename takes a string or character vector containing names that can be used to quickly rename columns.
-  
-  + ... are additional parameters passed to `PerformanceAnalytics::Returns.portfolio`
   
 ---
 
@@ -432,7 +404,7 @@ asset_returns_tq <- tidyquant::tq_get(
 
 * The function `tq_get(x, get = "stock.prices", complete_cases = TRUE, ...)` gets data in tibble format. The most important argument is perhaps the dot-dot-dot, since these are the argument passed to the underlying functions that `tq_get()` uses. There could be multiple layers of wrapper functions and so read the documentations carefully.
 
-A possibly more useful method of aggregating asset returns to potfolio returns then is to use a tibble of symbols and weights that are mapped to the portfolio:
+A possibly more useful method of aggregating asset returns to portfolio returns then is to use a tibble of symbols and weights that are mapped to the portfolio:
 
 ```{r}
 # Create a tibble of weights
