@@ -16,7 +16,7 @@ summary: 'Visualizing the Central Limit Theorem in R and a simulation study of t
 authors: []
 featured: no
 image:
-  caption: ''
+  caption: '<a href="https://commons.wikimedia.org/wiki/File:Central_Limit_Theorem.png">Daniel Resende</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons'
   focal_point: ''
   preview_only: no
 projects: []

@@ -14,7 +14,7 @@ summary: 'This post shows some useful applications of subsetting in R'
 authors: []
 featured: no
 image:
-  caption: ''
+  caption: 'Image by <a href="https://pixabay.com/users/clker-free-vector-images-3736/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=41217">Clker-Free-Vector-Images</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=41217">Pixabay</a>'
   focal_point: ''
   preview_only: no
 projects: []
@@ -91,29 +91,29 @@ df
 # Select the rows in the order they appear in the random vector created by sample()
 df[sample(x = nrow(df)), ]
   x y z
+5 2 1 e
+4 1 2 d
 1 1 5 a
 3 3 3 c
-4 1 2 d
-5 2 1 e
 2 2 4 b
 # Select three random rows in the order they appear in the random vector
 df[sample(x = nrow(df), size = 3), ]
   x y z
-5 2 1 e
-2 2 4 b
+3 3 3 c
 4 1 2 d
+1 1 5 a
 # Select 8 bootstrap replicates
 # Notice that replace = TRUE, which indicates that some rows will be selected more than once
 df[sample(x = nrow(df), size = 8, replace = TRUE), ]
     x y z
-3   3 3 c
 4   1 2 d
-3.1 3 3 c
-2   2 4 b
 4.1 1 2 d
 4.2 1 2 d
+1   1 5 a
+3   3 3 c
 5   2 1 e
-4.3 1 2 d</code></pre>
+4.3 1 2 d
+4.4 1 2 d</code></pre>
 <p>In this example, we utilize the <code>sample()</code> function to generate a random index vector, which we then use to subset the data frame. We can easily automate this bootstrapping process by writing our own function:</p>
 <pre class="r"><code># Bootstrap data frame
 boots_df &lt;- function(df, n, replicate) {
@@ -149,21 +149,21 @@ boots_df &lt;- function(df, n, replicate) {
 <pre class="r"><code>str(boots_df(df = df, n = 4, replicate = 8))
 List of 4
  $ :&#39;data.frame&#39;:   8 obs. of  3 variables:
-  ..$ x: num [1:8] 2 1 1 1 1 1 1 3
-  ..$ y: int [1:8] 1 2 5 2 2 2 5 3
-  ..$ z: chr [1:8] &quot;e&quot; &quot;d&quot; &quot;a&quot; &quot;d&quot; ...
+  ..$ x: num [1:8] 1 2 1 2 3 2 1 1
+  ..$ y: int [1:8] 5 4 2 1 3 4 5 2
+  ..$ z: chr [1:8] &quot;a&quot; &quot;b&quot; &quot;d&quot; &quot;e&quot; ...
  $ :&#39;data.frame&#39;:   8 obs. of  3 variables:
-  ..$ x: num [1:8] 1 1 3 2 2 1 1 3
-  ..$ y: int [1:8] 5 2 3 4 1 2 2 3
-  ..$ z: chr [1:8] &quot;a&quot; &quot;d&quot; &quot;c&quot; &quot;b&quot; ...
+  ..$ x: num [1:8] 2 3 1 1 2 1 1 3
+  ..$ y: int [1:8] 4 3 5 5 4 5 2 3
+  ..$ z: chr [1:8] &quot;b&quot; &quot;c&quot; &quot;a&quot; &quot;a&quot; ...
  $ :&#39;data.frame&#39;:   8 obs. of  3 variables:
-  ..$ x: num [1:8] 1 1 1 3 1 3 2 2
-  ..$ y: int [1:8] 5 2 2 3 2 3 1 1
-  ..$ z: chr [1:8] &quot;a&quot; &quot;d&quot; &quot;d&quot; &quot;c&quot; ...
+  ..$ x: num [1:8] 2 2 1 2 1 1 2 3
+  ..$ y: int [1:8] 4 1 5 1 2 2 4 3
+  ..$ z: chr [1:8] &quot;b&quot; &quot;e&quot; &quot;a&quot; &quot;e&quot; ...
  $ :&#39;data.frame&#39;:   8 obs. of  3 variables:
-  ..$ x: num [1:8] 2 2 1 3 3 3 3 1
-  ..$ y: int [1:8] 4 1 5 3 3 3 3 2
-  ..$ z: chr [1:8] &quot;b&quot; &quot;e&quot; &quot;a&quot; &quot;c&quot; ...</code></pre>
+  ..$ x: num [1:8] 3 2 2 1 1 1 2 1
+  ..$ y: int [1:8] 3 1 1 2 2 2 4 5
+  ..$ z: chr [1:8] &quot;c&quot; &quot;e&quot; &quot;e&quot; &quot;d&quot; ...</code></pre>
 <p>As can be seen, we have a list of 4 data frames each with 8 rows of bootstrapped replicates. This function can be easily scaled to generate more bootstrap samples and more replicates per sample.</p>
 <hr />
 </div>

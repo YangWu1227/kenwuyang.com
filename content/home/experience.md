@@ -33,7 +33,7 @@ experience:
         Responsibilities include:
         
         * Work with a team of data scientists on the design and development of a database on cases on the Department of Justice's "China Initiative." 
-        * Provide database quality control and responsible for the portion of data collection tasks that cannot be automated.
+        * Provide database quality control and responsible for data collection tasks that require human supervision.
         * Organize and create an initial "China Initiative" [data fact sheet](https://docs.google.com/document/d/1Jp9YzanF8mKftf3njD4N1W7B2SDHiP7U53TUKxUdjNc/edit) using press releases from the Department of Justice's website.
         * Create [visualizations](https://public.tableau.com/app/profile/yang.wu3139/viz/AAJCPressReleaseFactSheet/CrosstabTextTable) of the press release data using Tableau.
         * Policy research on the [NIH/NSF](https://docs.google.com/document/d/1ogwBGNxbciZjY6jpahR9JO-HvEyaRthl5ZvZz_NnQAw/edit#heading=h.s9rmfggyfz7e)'s involvement with the China initiative.

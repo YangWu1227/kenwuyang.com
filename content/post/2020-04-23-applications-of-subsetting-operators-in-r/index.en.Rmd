@@ -14,7 +14,7 @@ summary: 'This post shows some useful applications of subsetting in R'
 authors: []
 featured: no
 image:
-  caption: ''
+  caption: 'Image by <a href="https://pixabay.com/users/clker-free-vector-images-3736/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=41217">Clker-Free-Vector-Images</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=41217">Pixabay</a>'
   focal_point: ''
   preview_only: no
 projects: []
