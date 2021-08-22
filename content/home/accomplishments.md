@@ -6,6 +6,9 @@ widget: accomplishments
 # This file represents a page section.
 headless: true
 
+# Activate this widget? true/false
+active: true
+
 # Order that this section appears on the page.
 weight: 50
 
@@ -41,7 +44,7 @@ item:
   url: ""
 - certificate_url: https://www.datacamp.com/statement-of-accomplishment/course/54741079f4b7125adab387d1fc222ff8a420642a
   date_end: ""
-  date_start: "2020-06-08"
+  date_start: "2021-06-08"
   description: ""
   organization: DataCamp
   organization_url: https://www.datacamp.com

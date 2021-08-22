@@ -1,0 +1,52 @@
+---
+title: Customizable Portfolio Dashboard
+author: Yang Wu
+date: '2021-06-17'
+slug: customizable-portfolio-dashboard
+categories:
+  - R
+tags:
+  - Finance
+  - Flexdashboard
+  - Shiny Application
+  - Portfolio Analytics
+subtitle: ''
+summary: 'An interative portfolio dashboard powered by shiny'
+authors: []
+featured: no
+image:
+  caption: 'Photo by Nick Chong on Unsplash'
+  focal_point: ''
+  preview_only: no
+projects: []
+output:
+  blogdown::html_page:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(shiny)
+library(widgetframe)
+```
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Shiny is a framework for creating web applications using R code. It's server uses reactive programming, which allows for an interactive approach to communicating data analysis results. Shiny allows *you*, the users of the web applications, to interact with the data and the analyses, which the creator has put together in the back-end. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In this application, I will create a customizable portfolio dashboard that empowers you to accomplish the following:
+
+* Construct a portfolio by selecting assets and weights
+
+* Specify the investment horizon by selecting a start and an end date 
+
+* Specify portfolio strategies--- rebalancing frequency, risk-free rate, benchmark, etc.
+
+* Compute measures of risk and return and other portfolio performance metrics
+
+* Visualize measures of risk and return and other portfolio performance metrics 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The idea of creating such a user-friendly portfolio dashboard is taken from [Reproducible Finance with R](http://www.reproduciblefinance.com/). I strongly recommend this book to those of you who may be interested in finance and are passionate about R like I am.  
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If you prefer, you could also see this [application](https://kenyangwu1227.shinyapps.io/Yang-Wu-Customizable-Portfolio-Dashboard/) hosted on the shiny server, which has a better layout in my opinion. Please press the control panel on the top left corner to see the other tabs.
+
+<iframe height = "1500" width = "100%" frameborder = "no" src=" https://kenyangwu1227.shinyapps.io/Yang-Wu-Customizable-Portfolio-Dashboard/"> </iframe>
+

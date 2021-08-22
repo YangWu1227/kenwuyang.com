@@ -27,5 +27,5 @@ projects: []
 * Permanent immunity once recovered
 * Short time horizon in which there is no need to consider immigration and emigration
 
-Other diseases may require a more complex model. The finished paper can be found {{< staticref "project/SIR model/Yang_Wu_Writing_Sample.pdf" "newtab" >}}here{{< /staticref >}}.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Other diseases may certainly require a more complex model. In the case of a simulated measles epidemic, however, the differential equations model employed in this paper may be sufficient. The finished paper can be accessed {{< staticref "project/SIR model/Yang_Wu_Writing_Sample.pdf" "newtab" >}}here{{< /staticref >}}.
 

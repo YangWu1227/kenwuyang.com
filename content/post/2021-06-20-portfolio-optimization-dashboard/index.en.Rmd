@@ -1,0 +1,24 @@
+---
+title: Portfolio Optimization Dashboard
+author: Yang Wu
+date: '2021-06-20'
+slug: portfolio-optimization-dashboard
+categories:
+  - R
+tags:
+  - Portfolio Optimization
+  - Finance
+subtitle: ''
+summary: 'A portfolio optimization dashboard continued...'
+authors: []
+featured: no
+image:
+  caption: 'Photo by Ibrahim Rifath on Unsplash'
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In the previous [post](https://www.kenwuyang.com/post/customizable-portfolio-dashboard/), we created a customizable portfolio dashboard via shiny. In that application, the weights of the portfolio are taken as given, and we focus more on the various types of visualizations and performance metrics. In this post, we create a portfolio optimization dashboard, which seeks to find the optimal set of weights, subject to some constraints, that yields a set of optimal portfolios. We will introduce some portfolio theory and implement the theoretical framework in R using packages such as `PortfolioAnalytics`, `PerformanceAnalytics`, and `tidyquant`. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For more readings on the theory, I recommend [Essentials of Investments](https://www.amazon.com/ISE-Essentials-Investments-Zvi-Bodie/dp/1260288390/) and [Practical Portfolio Performance Measurement and Attribution](https://www.amazon.com/Practical-Portfolio-Performance-Measurement-Attribution/dp/0470059281/). For implementing these theories in R, I suggest reading the documentations for the aforementioned R packages; in addition, Matt Duncho from [Business Science University](https://university.business-science.io/) (he is also the co-author of the `tidyquant` package) provides some very useful [vignettes](https://cran.r-project.org/web/packages/tidyquant/index.html) on the `tidyquant` package. Many of my posts are inspired by his incredibly practical learning labs and vignettes. Finally, the dashboard can be found [here](https://rpubs.com/yangwu1227/personal_project).

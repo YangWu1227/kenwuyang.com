@@ -6,6 +6,9 @@ widget: featurette
 # This file represents a page section.
 headless: true
 
+# Activate this widget? true/false
+active: true
+
 # Order that this section appears on the page.
 weight: 30
 
@@ -16,7 +19,7 @@ subtitle:
 # - Add/remove as many `feature` blocks below as you like.
 # - For available icons, see: https://wowchemy.com/docs/page-builder/#icons
 feature:
-- description: 90%
+- description: 80%
   icon: r-project
   icon_pack: fab
   name: R
@@ -28,11 +31,11 @@ feature:
   icon: chart-bar
   icon_pack: fas
   name: Tableau
-- description: 20%
+- description: 30%
   icon: python
   icon_pack: fab
   name: Python
-- description: 90%
+- description: 80%
   icon: chart-line
   icon_pack: fas
   name: Statistics

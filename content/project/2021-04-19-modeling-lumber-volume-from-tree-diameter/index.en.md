@@ -18,7 +18,7 @@ image:
 projects: []
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This scenario-based project was given to us as an assignment in my [linear regression model class](https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-statistics/). A production planning supervisor for a lumber company has hired us to help with developing a predictive model. The lumber company wishes to use the diameter of a tree to predict the volume of lumber obtained from the tree after processing. A successful model will help the planning supervisor schedule tree-cutting and mill processing. There were needs for analysis in the following areas: 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This scenario-based project was given to us as an assignment in my [linear regression model](https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-statistics/) class. A production planning supervisor for a lumber company has hired me to help with developing a predictive model. The lumber company wishes to use the diameter of a tree to predict the volume of lumber obtained from the tree after processing. A successful model will help the planning supervisor schedule tree-cutting and mill processing. There were needs for analysis in the following areas: 
 
 1. Develop a mathematical model, or two, to predict lumber volume from tree diameters.
 2. Assess how well the model(s) fits the data. Perform appropriate diagnostics such as residual analysis, assumptions validation, etc.

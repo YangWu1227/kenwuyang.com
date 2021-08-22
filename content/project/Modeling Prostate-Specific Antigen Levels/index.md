@@ -13,7 +13,7 @@ image:
   preview_only: no
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This scenario-based project was given to us as an assignment in my [linear regression model class](https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-statistics/). 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This scenario-based project was given to us as an assignment in my [linear regression model](https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-statistics/) class. 
 A university medical center had data on several variables of interest relating to prostate cancer patients. The general assignment was to develop a model that uses the variables (or an
 appropriate subset thereof) in the data set provided to us in order to describe and predict the main variable of interest--- prostate-specific antigen levels. There were needs for analysis in the following areas: 
 

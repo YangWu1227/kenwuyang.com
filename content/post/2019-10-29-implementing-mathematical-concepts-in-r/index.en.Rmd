@@ -1,0 +1,170 @@
+---
+title: Implementing Mathematical Concepts in R
+author: Yang Wu
+date: '2019-10-29'
+slug: implementing-mathematical-concepts-in-r
+categories:
+  - R
+tags:
+  - Mathematics
+  - R Programming
+subtitle: ''
+summary: 'Some interesting implementations of mathematical concepts in R'
+authors: []
+featured: no
+image:
+  caption: 'Photo by JESHOOTS.COM on Unsplash'
+  focal_point: ''
+  preview_only: no
+projects: []
+output:
+  blogdown::html_page:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+In my first post, we will be implementing some interesting mathematical objects in R. 
+
+Why? Why not? It's a good way to practice solving problems in R.
+
+## The Binomial Theorem
+
+\begin{align*}
+    (x+y)^n=\sum_{k=0}^{n}\binom{n}{k}x^{k}y^{n-k}
+\end{align*}
+
+Expanding:
+
+\begin{align*}
+    (x+y)^n=\binom{n}{0}x^{0}y^{n-0}+\binom{n}{1}x^{1}y^{n-1}+\binom{n}{2}x^{2}y^{n-2}+... \\ +\binom{n}{n-1}x^{n-1}y^{n-(n-1)}+\binom{n}{n}x^{n}y^{n-n}
+\end{align*}
+
+In R, we can tackle the implementation of the Binomial Theorem in three parts:
+
+* the binomial coefficient 
+* raising the real number $x$ to the vector of powers $k$
+* raising the real number $y$ to the vector of powers $n-k$
+
+```{r}
+binomial_theorem <- function(x, y, n) {
+
+  # Create a sequence from k = 0 to k = n
+  seq_k_n <- seq.int(from = 0, to = n, by = 1)
+
+
+  # Pre-allocate container for storing coefficients
+  binom_coeffs <- vector(mode = "double", length = n + 1)
+  # Binomial coefficients
+  binom_coeffs <- purrr::map_dbl(.x = seq_k_n, .f = choose, n = n)
+
+
+  # Pre-allocate container for storing the x's
+  vector_of_x <- vector(mode = "double", length = n + 1)
+  # Raise x to the power of y
+  vector_of_x <- x^(seq_k_n)
+
+
+  # Pre-allocate container for storing the y's
+  vector_of_y <- vector(mode = "double", length = n + 1)
+  # Raise y to the power of n-k
+  vector_of_y <- y^(n - (seq_k_n))
+
+
+  # Product of the two vectors and their coefficients
+  prod <- binom_coeffs * vector_of_x * vector_of_y
+
+  # Summation operator
+  result <- sum(prod)
+  result
+}
+```
+
+---
+
+Let's see it in action:
+
+```{r}
+# Test
+x <- 924
+y <- 23
+n <- 39
+# Compute by hand
+(x + y)^n
+# Compute using custom function
+binomial_theorem(x = x, y = y, n = n)
+```
+
+As can be seen, the results are exactly the same.
+
+---
+
+## Pascal's Triangle
+
+Directly related to the Binomial coefficient is Pascal's triangle, whose entries in each row are usually staggered relative to the numbers in the adjacent rows.
+
+```{r, out.height="50%", out.width="50%", echo=FALSE}
+# Import image
+knitr::include_graphics("Pascal's Triangle.png")
+```
+
+To implement Pascal's triangle, we will use a for loop. Our goal is to write a program that finds the next row of Pascal's triangle, given the previous rows.
+
+```{r}
+# Finding the (n + 1)th row of a Pascal's triangle given n rows that precede it
+pascal_triangle_n_plus_1 <- function(x) {
+  if (!is.list(x)) {
+    rlang::abort(message = "The input object must a be a list containing the rows of Pascal's Triangle.")
+  }
+
+  # Set n equal to depth of the input list "x", that is, the number of elements in x, where each represents a row
+  n <- length(x)
+  # Extract the last element (the nth row) from the input list "x" and store it as a new variable x_n
+  # Use [[ to extract the value rather than a sub-list
+  x_n <- x[[n]]
+  # Repeat the integer "1" (n + 1) times
+  # Note that the (n + 1)th  row has (n + 1) elements beginning and ending with 1
+  x_n_plus_1 <- rep(x = 1, times = n + 1)
+
+  # Loop to add all adjacent pairs in the nth row to obtain the (n + 1)th row
+  # Start with the second element and end with second to last element of each row
+  # This is because the first and last numbers in any given row are always 1
+  if (n > 1) {
+    # This is the prefix form of for loop
+    `for`(
+      var = i,
+      seq = 2:n,
+      action = x_n_plus_1[[i]] <- x_n[[i - 1]] + x_n[[i]]
+    )
+  }
+
+  # Append the (n + 1)th row to the list object
+  base::append(x, values = list(x_n_plus_1))
+}
+```
+
+---
+
+Let's see it in action:
+
+```{r}
+# Create a Pascal's Triangle with 4 rows
+x <- list(c(1), c(1, 1), c(1, 2, 1), c(1, 3, 3, 1))
+# Row 5
+x <- pascal_triangle_n_plus_1(x = x)
+x[[5]]
+# Row 6
+x <- pascal_triangle_n_plus_1(x = x)
+x[[6]]
+# We know that these row entries can be computed are the binomial coefficients 5 choose 0 thru 5 choose 5
+purrr::map2_dbl(
+  .x = rep(x = 5, times = 6),
+  .y = seq.int(from = 0, to = 5, by = 1),
+  .f = choose
+)
+```
+
+That's it for my first post! I'll update this post to include more interesting topics for my future self and perhaps others who may stumble across this. Peace!
