@@ -14,9 +14,14 @@
   <p class="powered-by">
     {{ with site.Copyright }}{{ replace . "{year}" now.Year | markdownify}} &middot; {{ end }}
 
-    Powered by <a href="https://github.com/YangWu1227/kenwuyang.com" target="_blank" rel="noopener"><i class="fas fa-code-branch"></i></a><a href="https://github.com/rstudio/blogdown" target="_blank" rel="noopener"></a>, the&ensp;<a href="https://cran.r-project.org/" target="_blank" rel="noopener"><i class="fab fa-r-project"></i> </a><a href="https://github.com/rstudio/blogdown" target="_blank" rel="noopener">blogdown</a> package, and 
-    <a href="https://wowchemy.com/" target="_blank" rel="noopener">Wowchemy</a> for
-    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+    Powered by <a href="https://github.com/YangWu1227/kenwuyang.com" target="_blank" rel="noopener"><i class="fab fa-github"></i></a><a href="https://github.com/rstudio/blogdown" target="_blank" rel="noopener"></a>, 
+    
+    the&ensp;<a href="https://cran.r-project.org/" target="_blank" rel="noopener"><i class="fab fa-r-project"></i> </a><a href="https://github.com/rstudio/blogdown" target="_blank" rel="noopener">blogdown</a> package, 
+    
+    and <a href="https://wowchemy.com/" target="_blank" rel="noopener">Wowchemy</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a> 
+    
+    &middot; Deployment via <a href="https://www.netlify.com/" target="_blank" rel="noopener">Netlify</a>
 
     {{ if not (in (slice "docs" "updates") .Type) }}
     <span class="float-right" aria-hidden="true">

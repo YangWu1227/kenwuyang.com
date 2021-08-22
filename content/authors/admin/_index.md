@@ -45,6 +45,6 @@ superuser: true
 title: Yang (Ken) Wu
 ---
 
-Hello! Welcome to my personal site! I am a recent graduate of Kenyon College, where I majored in Economics and minored in Statistics. I am passionate about applied statistics and data science and wishes to explore a career in industries and fields that derive value from quantitative analysis and research. I am a curious individual who is always open to learning new things. I have strong desire to bring value to others and be helpful in every situation I am in.  
+Hello! Welcome to my personal site! I am a recent graduate of Kenyon College, where I majored in Economics and minored in Statistics. I am passionate about applied statistics and data science and wishes to explore a career in industries and fields that derive value from quantitative analysis and research. I am a curious individual who is always open to learning new things. I have strong desire to bring value to others and be helpful in every situation I am in. 
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/Yang_Wu_Resume_Updated_2021.pdf" "newtab" >}}resumé{{< /staticref >}}.
