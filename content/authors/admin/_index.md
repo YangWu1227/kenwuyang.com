@@ -2,7 +2,7 @@
 bio: 
 education:
   courses:
-  - course: Bachelor of Arts in Economics, Minor in Statistics
+  - course: Bachelor of Arts in Economics, Minor in Statistics cum laude
     institution: Kenyon College
     year: 2021
   - course: Highschool
