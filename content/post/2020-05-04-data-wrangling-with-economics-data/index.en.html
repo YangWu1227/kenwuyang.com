@@ -51,7 +51,7 @@ dbl (44): year, rgdpe, rgdpo, pop, emp, avh, hc, ccon, cda, cgdpe, cgdpo, cn...
 </div>
 <div id="wrangling" class="section level2">
 <h2>Wrangling</h2>
-<p>       We first need to “mutate” some variables. The total employment numbers do not offer as much context as the employment–population ratios; we create a new variable by dividing total employment by population. Next, we “select” the variables that are of interest to us. Suppose we wish to keep the following variables: countrycode, country name, year, employment–population ratios:</p>
+<p>       We first need to “mutate” some variables. The total employment numbers do not offer as much context as the employment–population ratios; we create a new variable by dividing total employment by population. Next, we “select” the variables that are of interest to us. Suppose we wish to keep the following variables: country-code, country name, year, employment–population ratios:</p>
 <pre class="r"><code>pwt91 &lt;- pwt91 %&gt;%
   mutate(emp_pop_ratio = emp / pop) %&gt;%
   select(countrycode, country, year, emp_pop_ratio)
@@ -77,7 +77,7 @@ cat(length(unique(pwt91$country)))
 # Number of years covered in this data set
 cat(length(unique(pwt91$year)))
 68
-# Make sure that country and countrycode are consistent
+# Make sure that country and country-code are consistent
 cat(length(unique(pwt91$countrycode)))
 182
 # First and last year
@@ -123,7 +123,7 @@ cat(max(pwt91$year))
  9 Antigua and Barbuda FALSE                      9
 10 Antigua and Barbuda TRUE                      59
 # … with 302 more rows</code></pre>
-<p>       OECD members such as the US, UK, Australia, Canada, France, Finland, Germany, etc., have no missing values over this period. Sub-Saharan African countries, in particular, have relatively more missing values. Then, some Latin American countries have even more missing values. This is to be expected with socio-economic data; we confirm that the sampling quality introduces some region bias. Deleting missing observations can result in biased parameters and estimates and reduce the statistical power of the analyses. However, in this case, I would be using listwise deletion, where all observations that have missing values are deleted. This means that, if I were to continue on with my analysis, the models would only be trained on data from countries that have a more complete set of data. While there may be better ways to handle biased samples, for this activity, I would simply use the year 1990 as a cut off since a reasonable number of countries would have values from 1990 to 2017:</p>
+<p>       OECD members such as the US, UK, Australia, Canada, France, Finland, Germany, etc., have no missing values over this period. Sub-Saharan African countries, in particular, have relatively more missing values. Then, some Latin American countries have even more missing values. This is to be expected with socio-economic data; we confirm that the sampling quality introduces some region bias. Deleting missing observations can result in biased parameters and estimates and reduce the statistical power of the analyses. However, in this case, I would be using list-wise deletion, where all observations that have missing values are deleted. This means that, if I were to continue on with my analysis, the models would only be trained on data from countries that have a more complete set of data. While there may be better ways to handle biased samples, for this activity, I would simply use the year 1990 as a cut off since a reasonable number of countries would have values from 1990 to 2017:</p>
 <pre class="r"><code>pwt91 &lt;- pwt91 %&gt;%
   filter(year &gt;= 1990) %&gt;%
   na.exclude()</code></pre>
@@ -173,7 +173,7 @@ cat(length(unique(pwt91$countrycode)))
 </div>
 <div id="merging-data-sets" class="section level2">
 <h2>Merging Data Sets</h2>
-<p>       Suppose after we completed our analysis, we found another data set containing some other relevant variables. We would like to “join” the two data sets by a common variable. In my case, that common variable is “countrycode.” We start by loading in the second data set, which I’ve converted to a .csv file for convenience:</p>
+<p>       Suppose after we completed our analysis, we found another data set containing some other relevant variables. We would like to “join” the two data sets by a common variable. In my case, that common variable is “country-code.” We start by loading in the second data set, which I’ve converted to a .csv file for convenience:</p>
 <p>       First we need to make sure that the “key” variables share the same names across these two data sets. Then, we “select” the variables of interest to us. The <code>Domestic8</code> variable is the number of anti-government demonstrations, which, according to the <a href="https://www.cntsdata.com/">CNTS</a> user manual, includes labor strikes and demonstrations.</p>
 <pre class="r"><code>cnts19 &lt;- cnts19 %&gt;%
   rename(countrycode = Wbcode) %&gt;%
@@ -282,7 +282,7 @@ new_data
 </div>
 <div id="nested-data" class="section level2">
 <h2>Nested Data</h2>
-<p>       Lastly, we may also present our new merged data as a nested data frame, a new structure. The nested data frame has one row per group (per countrycode/country in my case). The third column, data, is a list of data frames:</p>
+<p>       Lastly, we may also present our new merged data as a nested data frame, a new structure. The nested data frame has one row per group (per country-code/country in my case). The third column, data, is a list of data frames:</p>
 <pre class="r"><code>nested_data &lt;- new_data %&gt;%
   group_by(countrycode, country) %&gt;%
   nest()
@@ -302,7 +302,15 @@ nested_data
  9 BEN         Benin                &lt;tibble [28 × 3]&gt;
 10 BFA         Burkina Faso         &lt;tibble [28 × 3]&gt;
 # … with 129 more rows</code></pre>
-<p>If we look at the first element of “data,” we see that it contains all the data for that country (in my case, Angola):</p>
+<p>Let us examine the structure of the object:</p>
+<pre class="r"><code>glimpse(nested_data)
+Rows: 139
+Columns: 3
+Groups: countrycode, country [139]
+$ countrycode &lt;chr&gt; &quot;AGO&quot;, &quot;ALB&quot;, &quot;ARE&quot;, &quot;ARG&quot;, &quot;AUS&quot;, &quot;AUT&quot;, &quot;BDI&quot;, &quot;BEL&quot;, &quot;B…
+$ country     &lt;chr&gt; &quot;Angola&quot;, &quot;Albania&quot;, &quot;United Arab Emirates&quot;, &quot;Argentina&quot;, …
+$ data        &lt;list&gt; [&lt;tbl_df[28 x 3]&gt;], [&lt;tbl_df[28 x 3]&gt;], [&lt;tbl_df[28 x 3]&gt;…</code></pre>
+<p>The row numbers make sense, since we have indeed a sample of 139 countries. If we look at the first element of “data,” we see that it contains all the data for that country (in my case, Angola):</p>
 <pre class="r"><code>nested_data$data[[1]]
 # A tibble: 28 × 3
     year emp_pop_ratio domestic8
@@ -318,9 +326,25 @@ nested_data
  9  1998         0.437         0
 10  1999         0.437         0
 # … with 18 more rows</code></pre>
-<p>Presenting data in this new structure can be helpful, especially when dealing with cross-sectional data.</p>
+<p>The fifth element:</p>
+<pre class="r"><code>nested_data$data[[5]]
+# A tibble: 28 × 3
+    year emp_pop_ratio domestic8
+   &lt;dbl&gt;         &lt;dbl&gt;     &lt;dbl&gt;
+ 1  1990         0.463         0
+ 2  1991         0.446         0
+ 3  1992         0.439         0
+ 4  1993         0.436         0
+ 5  1994         0.445         0
+ 6  1995         0.457         0
+ 7  1996         0.457         1
+ 8  1997         0.456         0
+ 9  1998         0.459         0
+10  1999         0.462         0
+# … with 18 more rows</code></pre>
+<p>       In other words, there is one data frame per country. Presenting data in this new structure can be helpful, especially when dealing with cross-sectional data where observational units are numerous and we often need to conduct transformations and fit models using only subsets of the entire data set.</p>
 </div>
 <div id="is-data-deletion-best-practice" class="section level2">
 <h2>Is data deletion best practice?</h2>
-<p>       We began with a sample of 182 countries, which we trimmed down to 139. Judging by numbers only, the deletion process could have been worse. However, we must take note that, when it comes to missing values, the data are not missing completely at random (MCAR). This is especially true for cross-national, socio-economic data, where sampling quality reflects inequalities that are rather hard to capture and deal with. Beyond this activity, it would be interesting to explore ways of handling missing data as well as new imputation methods that have been developed over the years.</p>
+<p>       At the end of the post, it may be worth writing about data deletion. We began with a sample of 182 countries, which we trimmed down to 139. Judging by numbers only, the deletion process could have been worse. However, we must take note that, when it comes to missing values, the data are not missing completely at random (MCAR). This is especially true for cross-national, socio-economic data, where sampling quality reflects inequalities that are rather hard to capture and deal with. Beyond this activity, it would be interesting to explore ways of handling missing data as well as new imputation methods that have been developed over the years.</p>
 </div>

@@ -32,12 +32,13 @@ experience:
     description: |2-
         Responsibilities include:
         
-        * Work with a team of data scientists on the design and development of a database on cases on the Department of Justice's "China Initiative." 
+        * Work with a team of data scientists on the design and development of a database on cases related to the profiling and prosecution of Asian American researchers and scientists.  
         * Provide database quality control and responsible for data collection tasks that require human supervision.
-        * Organize and create an initial "China Initiative" [data fact sheet](https://docs.google.com/document/d/1Jp9YzanF8mKftf3njD4N1W7B2SDHiP7U53TUKxUdjNc/edit) using press releases from the Department of Justice's website.
+        * Organize and create [fact sheets](https://docs.google.com/document/d/1Jp9YzanF8mKftf3njD4N1W7B2SDHiP7U53TUKxUdjNc/edit) using press releases from the Department of Justice's website.
+        * Design and create [facts sheets](https://drive.google.com/file/d/1VHPP0K7TkmXcZzHFugHQXDQeOkdTqLBe/view?usp=sharing) about Asian Americans demographics using the census data.
         * Create [visualizations](https://public.tableau.com/app/profile/yang.wu3139/viz/AAJCPressReleaseFactSheet/CrosstabTextTable) of the press release data using Tableau.
-        * Policy research on the [NIH/NSF](https://docs.google.com/document/d/1ogwBGNxbciZjY6jpahR9JO-HvEyaRthl5ZvZz_NnQAw/edit#heading=h.s9rmfggyfz7e)'s involvement with the China initiative.
-        * Create case summaries for cases under the "China Initiative."
+        * Policy research on the [NIH/NSF](https://docs.google.com/document/d/1ogwBGNxbciZjY6jpahR9JO-HvEyaRthl5ZvZz_NnQAw/edit#heading=h.s9rmfggyfz7e)'s involvement with the racial-profiling of Asian American researchers and scientists.
+        
          
         
         

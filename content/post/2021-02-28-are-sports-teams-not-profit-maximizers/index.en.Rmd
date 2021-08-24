@@ -30,7 +30,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; I recently read a sports economics [paper](https://www.researchgate.net/publication/254552079_Can_We_Find_It_at_the_Concessions_Understanding_Price_Elasticity_in_Professional_Sports) by Anthony Krautmann from DePaul University and David Berri from Southern Utah University, in which they aim to show that it is theoretically plausible for profit-maximizing team owners to price tickets in the inelastic portion of the linear demand curve. Simply put, these economists argue that the teams' approach is to explore the *complementarity* between revenues associated with attendance and those from selling concessions. 
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Okay, the arguments seemed plausible, but I needed put on my thinking hat and review what I had learned in my Microeconomic theory class (that was almost two years ago). What does it mean when producers (sports teams in this case) choose to price their goods (seats to the sporting events) in the inelastic region of the demand curve? I figured that a diagram will perhaps stimulate my hippocampus, thereby activating my memory recognition skills.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Okay, the arguments seemed plausible, but I needed put on my thinking hat and review what I had learned in my Microeconomic theory class (that was almost two years ago). What does it mean when producers (sports teams in this case) choose to price their goods (seats to the sporting events) in the inelastic region of the demand curve? I figured that a diagram will perhaps stimulate my hippo-campus, thereby activating my memory recognition skills.  
 
 ```{r, out.height="60%", out.width="60%"}
 # Import image

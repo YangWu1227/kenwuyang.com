@@ -2,15 +2,12 @@
 bio: 
 education:
   courses:
-  - course: Bachelor of Arts in Economics, Minor in Statistics cum laude
+  - course: Bachelor of Arts in Economics, Minor in Statistics, cum laude
     institution: Kenyon College
     year: 2021
   - course: Highschool
     institution: The Hotchkiss School
     year: 2017
-  - course: Middle School
-    institution: Indian Mountain School
-    year: 2014
 email: "yangwu2020@gmail.com"
 highlight_name: false
 

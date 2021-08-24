@@ -130,7 +130,7 @@ As can be seen, we have a list of 4 data frames each with 8 rows of bootstrapped
 
 ## Ordering (integer subsetting)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  The function `order()` takes a vector as its input and returns an integer vector describing how to order the subsetted vector. The values in the returned integer vector are "pull" indices; that is, each order(x)[i] tells the position that each x[i] is in the unordered vector. 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  The function `order()` takes a vector as its input and returns an integer vector describing how to order the subsetted vector. The values in the returned integer vector are "pull" indices; that is, each order(x)[i] tells the position that each x[i] is in the "un-ordered" vector. 
 
 * Example 1
 
@@ -151,7 +151,7 @@ To break ties, you can supply additional variables to order(). You can also chan
 * Example 2
 
 ```{r}
-# Create unordered vector
+# Create "un-ordered" vector
 set.seed(7)
 y <- sample(x = 1:8, replace = TRUE)
 y
@@ -196,7 +196,7 @@ The function `arrange()` orders the rows of a data frame by the values of select
 
 ## Expanding aggregated counts (integer subsetting)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; First, we need to be familar with the function `rep(x = x, times = y)`, which repeats x[i] y[i] times. Let's see it in action:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; First, we need to be familiar with the function `rep(x = x, times = y)`, which repeats x[i] y[i] times. Let's see it in action:
 
 ```{r}
 # Repeat each x[i] y[i] times
@@ -207,7 +207,7 @@ rep(x = c(2, 3, 4), times = 3)
 rep(x = c(2, 3, 4), each = 3)
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sometimes you get a data frame where identical rows have been collapsed into one and a count column "n" has been added. rep() and integer subsetting make it easy to "uncollapse", because we can take advantage of `rep()`s vectorization. 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sometimes you get a data frame where identical rows have been collapsed into one and a count column "n" has been added. rep() and integer subsetting make it easy to ""un-collapse"", because we can take advantage of `rep()`s vectorization. 
 
 ```{r}
 # Create a data frame
@@ -375,7 +375,7 @@ x1 & !y1
 setdiff(x2, y2)
 ```
 
-* The function `xor()` indicates elementwise exclusive OR. 
+* The function `xor()` indicates element-wise exclusive OR. 
 
 ```{r, out.height="40%", out.width="40%"}
 # Import image
@@ -498,4 +498,4 @@ as_tibble(order_columns(data = iris))
 as_tibble(order_columns(data = USArrests))
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; That is it with R's subsetting operators. Combined with other data wrangling tools from the `tidyverse` packages, R's subsetting operattions can be powerful as far as data analysis tasks are concerned. Next up in R programming, I will write about the the `tidyverse`'s functional programming tool--- `purrr`--- which I have been using here and there in many of my posts. Having an understanding of R `functionals` have helped me tremendously in my day-to-day use of R, and so I look forward to documenting my learning process via a post.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; That is it with R's subsetting operators. Combined with other data wrangling tools from the `tidyverse` packages, R's subsetting operations can be powerful as far as data analysis tasks are concerned. Next up in R programming, I will write about the the `tidyverse`'s functional programming tool--- `purrr`--- which I have been using here and there in many of my posts. Having an understanding of R `functionals` have helped me tremendously in my day-to-day use of R, and so I look forward to documenting my learning process via a post.

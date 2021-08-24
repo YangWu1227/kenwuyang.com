@@ -112,15 +112,15 @@ highchart(type = &quot;stock&quot;) %&gt;%
   hc_legend(enabled = TRUE)</code></pre>
 <p><img src="Line_chart.png" width="100%" height="100%" style="display: block; margin: auto;" /></p>
 <ul>
-<li><p>The navigator is a small series below the main series, displaying a view of the entire data set. It provides tools to zoom in and out on parts of the data as well as panning across the dataset.</p></li>
-<li><p>The scrollbar is a means of panning over the X axis of a stock chart. Scrollbars can also be applied to other types of axes.</p></li>
+<li><p>The navigator is a small series below the main series, displaying a view of the entire data set. It provides tools to zoom in and out on parts of the data as well as panning across the data-set.</p></li>
+<li><p>The scroll-bar is a means of panning over the X axis of a stock chart. Scroll-bars can also be applied to other types of axes.</p></li>
 </ul>
 <p><strong>Note:</strong> <code>Highcharter</code> plots are highly interactive; that is, an user can hover over the line chart to interact with it. However, due to internal conflicts with <code>blogdown</code> themes, this <code>Highcharter</code> plot cannot be rendered dynamically. Please navigate to this <a href="https://rpubs.com/yangwu1227/interactive_plots">link</a> to view the interactive version of this line chart.</p>
 <hr />
 </div>
 <div id="monthly-log-returns-histograms" class="section level3">
 <h3>Monthly log returns Histograms</h3>
-<p>       Create a function that returns a univariate histogram given a series of returns. The function will also take several other arguments— an xts object of returns, a vector of ticker symbols, a symbol index, and a color for plotting. Internally, the function creates a list of histogram components: counts, density, bin breaks, etc. Then, the function <code>hchart()</code> is called on the histogram list object to plot the univariate histogram; this is the final output of the function.</p>
+<p>       Create a function that returns a uni-variate histogram given a series of returns. The function will also take several other arguments— an xts object of returns, a vector of ticker symbols, a symbol index, and a color for plotting. Internally, the function creates a list of histogram components: counts, density, bin breaks, etc. Then, the function <code>hchart()</code> is called on the histogram list object to plot the uni-variate histogram; this is the final output of the function.</p>
 <pre class="r"><code>hc_hist_fun &lt;- function(xts_obj, tickers, symbol_index, color) {
 
   # Check for invalid input
@@ -147,7 +147,7 @@ highchart(type = &quot;stock&quot;) %&gt;%
     hc_legend(enabled = FALSE)
 }</code></pre>
 <hr />
-<p>Now, we utilize the functional programming tool from <code>purrr</code> to apply the function above to each of the five univariate returns series.</p>
+<p>Now, we utilize the functional programming tool from <code>purrr</code> to apply the function above to each of the five uni-variate returns series.</p>
 <pre class="r"><code># Map the histogram function to each of the returns series
 list_of_histogram &lt;- purrr::map(
   .x = 1:5,
@@ -200,7 +200,7 @@ list_of_histogram &lt;- purrr::map(
   ) %&gt;%
   # Remove NA_double_ readings for 12/31/2021
   na.omit()
-# See the retults
+# See the results
 head(asset_returns_dplyr, 5)
 # A tibble: 5 × 3
 # Groups:   asset [5]
@@ -214,7 +214,7 @@ head(asset_returns_dplyr, 5)
 <hr />
 <div id="histogram" class="section level3">
 <h3>Histogram</h3>
-<p>       Here are the histograms. Notice that we can either overlay the histograms on top of each other or show them in separate panels. I recommend using the panel approach for studying the shapes (spread, central tendency, skewness, tailed-ness, etc.) of the univariate distributions, and employ the overlaying histograms for making comparisons between these distributions.</p>
+<p>       Here are the histograms. Notice that we can either overlay the histograms on top of each other or show them in separate panels. I recommend using the panel approach for studying the shapes (spread, central tendency, skewness, tailed-ness, etc.) of the uni-variate distributions, and employ the overlaying histograms for making comparisons between these distributions.</p>
 <pre class="r"><code># Compute Freedman-Diaconis bin numbers
 bins_fd &lt;- function(vec) {
   diff(range(vec)) / (2 * IQR(vec) / length(vec)^(1 / 3))

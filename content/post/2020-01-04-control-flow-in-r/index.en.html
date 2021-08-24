@@ -406,10 +406,10 @@ sum_of_sequence_vectorized(x = 1, n = 46)
 x &lt;- sample(x = 1:45, size = 200, replace = TRUE)
 # A function from the psych package
 psych::geometric.mean(x)
-[1] 17.67337
+[1] 19.21856
 # Our custom function
 geometric_for_loop(x)
-[1] 17.67337</code></pre>
+[1] 19.21856</code></pre>
 <ul>
 <li>Geometric mean (vectorization)</li>
 </ul>
@@ -433,7 +433,7 @@ geometric_for_loop(x)
 }
 # Test
 geometric_vectorization(x)
-[1] 17.67337</code></pre>
+[1] 19.21856</code></pre>
 <ul>
 <li>Harmonic mean (for loop)</li>
 </ul>
@@ -464,10 +464,10 @@ geometric_vectorization(x)
 # Test
 # A function from the psych package
 psych::harmonic.mean(x)
-[1] 9.990463
+[1] 11.95251
 # Our custom function
 harmonic_for_loop(x)
-[1] 9.990463</code></pre>
+[1] 11.95251</code></pre>
 <ul>
 <li>Harmonic mean (vectorization)</li>
 </ul>
@@ -492,7 +492,7 @@ harmonic_for_loop(x)
 }
 # Test
 harmonic_vectorization(x)
-[1] 9.990463</code></pre>
+[1] 11.95251</code></pre>
 <hr />
 </div>
 <div id="find-the-sum-of-every-nth-element-of-a-vector" class="section level2">
@@ -532,23 +532,23 @@ every_nth_element_for_loop &lt;- function(x, n) {
 # Test vector
 x &lt;- sample(x = 1:203, size = 100, replace = TRUE)
 x
-  [1] 202  76 195 146  89  87 189  97 156 139 190 144  36 174 196  63  66 119
- [19] 115  58 180   3 105  30 162 144 126 122  35 135  28 149 105  75  64  97
- [37] 163  52 199  43 150  16 158 161 106 113   4 182 179  21 182 185 158 162
- [55]  97  35 100 125 157 147  19  82 113 112  72  61 176  91  50  10 157 186
- [73]  66  20   2 115   1 195   8 177  54  57  88  61  96  24 111 122   4  91
- [91]  69 159 172 169  49  67  18  65  69  82
+  [1]  94  35  18 118 195 109 157 133 108  40 169   3 179  96 163 151 203 193
+ [19] 201  91 152 191  99 185 171   4   6  48  48 117  31 186 145 117 194 127
+ [37]  24  75  83 102  30 180  98 105 158 201  58  36 161  97  78 108  57 132
+ [55]  38 136 183  79 170 164  63  96 122  52  21  59  54 106  27 100 173 120
+ [73] 114   3  39  69  54 170 129  91 144 146  30  44 130  72   4  46  47  54
+ [91]  52   5 190  82 192 158  59  49  15 166
 # A vector that contains every thirteenth element of a vector
 every_nth_element_for_loop(x = x, n = 13)
-  [1]   0   0   0   0   0   0   0   0   0   0   0   0  36   0   0   0   0   0
- [19]   0   0   0   0   0   0   0 144   0   0   0   0   0   0   0   0   0   0
- [37]   0   0 199   0   0   0   0   0   0   0   0   0   0   0   0 185   0   0
- [55]   0   0   0   0   0   0   0   0   0   0  72   0   0   0   0   0   0   0
- [73]   0   0   0   0   0 195   0   0   0   0   0   0   0   0   0   0   0   0
- [91]  69   0   0   0   0   0   0   0   0   0
+  [1]   0   0   0   0   0   0   0   0   0   0   0   0 179   0   0   0   0   0
+ [19]   0   0   0   0   0   0   0   4   0   0   0   0   0   0   0   0   0   0
+ [37]   0   0  83   0   0   0   0   0   0   0   0   0   0   0   0 108   0   0
+ [55]   0   0   0   0   0   0   0   0   0   0  21   0   0   0   0   0   0   0
+ [73]   0   0   0   0   0 170   0   0   0   0   0   0   0   0   0   0   0   0
+ [91]  52   0   0   0   0   0   0   0   0   0
 # Find sum
 sum(every_nth_element_for_loop(x = x, n = 13))
-[1] 900</code></pre>
+[1] 617</code></pre>
 <ul>
 <li>Using while loop</li>
 </ul>
@@ -585,7 +585,7 @@ every_nth_element_while_loop &lt;- function(x, n) {
 }
 # Test (This result should corroborate with that of the function above)
 every_nth_element_while_loop(x = x, n = 13)
-[1] 900</code></pre>
+[1] 617</code></pre>
 <ul>
 <li>Using subsetting and <code>seq()</code></li>
 </ul>
@@ -601,12 +601,12 @@ every_nth_element_subsetting &lt;- function(x, n) {
 }
 # Test
 every_nth_element_subsetting(x = x, n = 13)
-[1] 900</code></pre>
+[1] 617</code></pre>
 <hr />
 </div>
 <div id="chart-the-flow-of-a-simple-program" class="section level2">
 <h2>Chart the flow of a simple program</h2>
-<p>Charting the flow of the following program is a good way to see how for loops work in R. We will write out the program line by line so as to understand what it is doing <em>exactly</em>.</p>
+<p>       Charting the flow of the following program is a good way to see how for loops work in R. We will write out the program line by line so as to understand what it is doing <em>exactly</em>.</p>
 <pre class="r"><code>x &lt;- 3 # line 1
 for (i in 1:3) { # line 2
   show(x) # line 3
@@ -647,7 +647,7 @@ Therefore, (x[[i]] %% 2 == 0) evaluates to FALSE. Proceed to line 7.</li>
 </div>
 <div id="the-lotka-volterra-model-for-a-predator-prey-system" class="section level2">
 <h2>The Lotka-Volterra Model for a predator-prey system</h2>
-<p>We suppose that <span class="math inline">\(x(t)\)</span> is the number of prey animals at the start of a year <span class="math inline">\(t\)</span> (rabbits) and <span class="math inline">\(y(t)\)</span> is the number of predators (foxes), then the Lotka-Volterra model is:
+<p>       We suppose that <span class="math inline">\(x(t)\)</span> is the number of prey animals at the start of a year <span class="math inline">\(t\)</span> (rabbits) and <span class="math inline">\(y(t)\)</span> is the number of predators (foxes), then the Lotka-Volterra model is:
 <span class="math display">\[\begin{align*}
 x(t+1) &amp;=x(t)+b_{r} \cdot x(t)-d_{r} \cdot x(t) \cdot y(t) \\
 y(t+1) &amp;=y(t)+b_{f} \cdot d_{r} \cdot x(t) \cdot y(t)-d_{f} \cdot y(t)
@@ -739,11 +739,11 @@ x &lt;- sample(x = 20:1923, size = 1000, replace = FALSE)
 find_min_max(x, summary_stat = &quot;min&quot;)
 [1] 20
 find_min_max(x, summary_stat = &quot;max&quot;)
-[1] 1920
+[1] 1918
 # Confirm using base R functions
 min(x)
 [1] 20
 max(x)
-[1] 1920</code></pre>
-<p>That is it!</p>
+[1] 1918</code></pre>
+<p>       That is it for control flows in R! I am looking forward to writing more python related posts also to add some different flavors of programming to the content on this website. Stay tuned!</p>
 </div>

@@ -14,4 +14,4 @@ title: Privacy Policy
 
 I AM NOT RESPONSIBLE FOR THE INFORMATION COLLECTION, USE, DISCLOSURE OR OTHER PRIVACY PRACTICES OF GOOGLE. 
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To learn more, see Google's [privacy policy](https://policies.google.com/privacy?hl=en-US).
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To learn more, please see Google's [privacy policy](https://policies.google.com/privacy?hl=en-US).

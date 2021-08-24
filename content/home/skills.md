@@ -19,28 +19,22 @@ subtitle:
 # - Add/remove as many `feature` blocks below as you like.
 # - For available icons, see: https://wowchemy.com/docs/page-builder/#icons
 feature:
-- description: 80%
-  icon: r-project
+- icon: r-project
   icon_pack: fab
   name: R
-- description: 50%
-  icon: database
+- icon: database
   icon_pack: fas
   name: MySQL
-- description: 50%
-  icon: chart-bar
+- icon: chart-bar
   icon_pack: fas
   name: Tableau
-- description: 30%
-  icon: python
+- icon: python
   icon_pack: fab
   name: Python
-- description: 80%
-  icon: chart-line
+- icon: chart-line
   icon_pack: fas
   name: Statistics
-- description: 80%
-  icon: hand-holding-usd
+- icon: hand-holding-usd
   icon_pack: fas
   name: Finance/ Economics
 
