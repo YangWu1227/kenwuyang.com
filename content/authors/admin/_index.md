@@ -14,8 +14,8 @@ highlight_name: false
 interests:
 - Data Science / Statistics
 - Computational Finance
-- Advocacy Work
 - Mathematical Economics
+- Advocacy Work
 - Literature
 
 organizations:
@@ -42,6 +42,6 @@ superuser: true
 title: Yang (Ken) Wu
 ---
 
-Hello! Welcome to my personal site! I am a recent graduate of Kenyon College, where I majored in Economics and minored in Statistics. I am passionate about applied statistics, programming, and data science and wish to explore a career in industries and fields that derive value from quantitative analysis and research. I am a curious individual who is always seeking to learning new things. This stems from my strong desire to bring value to others and be helpful in every situation I am in. 
+Hello! Welcome to my personal site! I am a recent graduate of Kenyon College, where I majored in Economics and minored in Statistics. I am passionate about economics, applied statistics, programming, and data science and wish to explore a career in industries and fields that derive value from quantitative analysis and research. I am a curious individual who is always seeking to learning new things. This stems from my strong desire to bring value to others and be helpful in every situation I am in. 
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/Yang_Wu_Resume.pdf" "newtab" >}}resumé{{< /staticref >}}.
