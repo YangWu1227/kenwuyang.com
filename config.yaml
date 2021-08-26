@@ -76,8 +76,19 @@ related:
       weight: 70
 frontmatter:
   date:
-  - :filename
-  - :default
+  - date
+  - publishDate
+  - lastmod
+  expiryDate:
+  - expiryDate
+  lastmod:
+  - :git
+  - lastmod
+  - date
+  - publishDate
+  publishDate:
+  - publishDate
+  - date
 privacy:
   googleAnalytics:
     anonymizeIP: true
