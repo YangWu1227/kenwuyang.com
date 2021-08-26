@@ -76,16 +76,16 @@ related:
       weight: 70
 frontmatter:
   date:
-  - date
   - publishDate
+  - date
   - lastmod
   expiryDate:
   - expiryDate
   lastmod:
-  - :git
-  - lastmod
-  - date
   - publishDate
+  - date
+  - lastmod
+  - :git
   publishDate:
   - publishDate
   - date
