@@ -37,7 +37,7 @@ experience:
         * Organize and create [fact sheets](https://docs.google.com/document/d/1Jp9YzanF8mKftf3njD4N1W7B2SDHiP7U53TUKxUdjNc/edit) using press releases from the Department of Justice's website.
         * Design and create [reports](https://drive.google.com/file/d/1NrroLK-WcZQZYkoX5APcORQsaBuCbOYp/view?usp=sharing) on Asian Americans demographics using the census data.
         * Create [visualizations](https://public.tableau.com/app/profile/yang.wu3139/viz/AAJCPressReleaseFactSheet/CrosstabTextTable) of the press release data using Tableau.
-        * Policy research on the [NIH/NSF](https://docs.google.com/document/d/1ogwBGNxbciZjY6jpahR9JO-HvEyaRthl5ZvZz_NnQAw/edit#heading=h.s9rmfggyfz7e)'s involvement with the racial-profiling of Asian American researchers and scientists.
+        * Policy research on the [NIH/NSF](https://docs.google.com/document/d/1ogwBGNxbciZjY6jpahR9JO-HvEyaRthl5ZvZz_NnQAw/edit#heading=h.s9rmfggyfz7e)'s involvement with the racial profiling of Asian American researchers and scientists.
         
          
         
