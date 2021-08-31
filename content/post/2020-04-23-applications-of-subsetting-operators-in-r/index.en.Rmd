@@ -26,7 +26,6 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(warning = FALSE)
-knitr::opts_chunk$set(collapse = TRUE)
 knitr::opts_chunk$set(comment = NA)
 knitr::opts_chunk$set(message = FALSE)
 knitr::opts_chunk$set(fig.width = 5, fig.height = 3, fig.align = "center")
@@ -34,7 +33,7 @@ library(tidyverse)
 library(rlang)
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In this post, we will cover some useful applications of R's subsetting operations. The content of this post is taken from [Advance R](https://adv-r.hadley.nz/). This book is aimed at helping R users improve their programming skills beyond day-to-day data analysis. To better understand the content of this post, I recommend reading chapter 4 of Hadley's book beforehand. Or, if you are already familiar with R's subsetting operators, jump right in.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In this post, we will cover some useful applications of R's subsetting operations. The content of this post is gleaned from [Advance R](https://adv-r.hadley.nz/). This book is aimed at helping R users improve their programming skills beyond day-to-day data analysis. To better understand the content of this post, I recommend reading chapter 4 of Hadley's book beforehand. Or, if you are already familiar with R's subsetting operators, jump right in.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; I wanted to document some of the content from Hadley's book with my added commentary to help my future self as well as others who may accidentally stumble across this post. I believe that many of these examples can be extended and employed in a variety of settings, and so my goal here is to turn this post into a resource not just for myself but perhaps others in their daily use of R. With that being said, let's get started.
 

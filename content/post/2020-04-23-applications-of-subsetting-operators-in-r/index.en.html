@@ -40,7 +40,7 @@ output:
 </ul>
 </div>
 
-<p>       In this post, we will cover some useful applications of R’s subsetting operations. The content of this post is taken from <a href="https://adv-r.hadley.nz/">Advance R</a>. This book is aimed at helping R users improve their programming skills beyond day-to-day data analysis. To better understand the content of this post, I recommend reading chapter 4 of Hadley’s book beforehand. Or, if you are already familiar with R’s subsetting operators, jump right in.</p>
+<p>       In this post, we will cover some useful applications of R’s subsetting operations. The content of this post is gleaned from <a href="https://adv-r.hadley.nz/">Advance R</a>. This book is aimed at helping R users improve their programming skills beyond day-to-day data analysis. To better understand the content of this post, I recommend reading chapter 4 of Hadley’s book beforehand. Or, if you are already familiar with R’s subsetting operators, jump right in.</p>
 <p>       I wanted to document some of the content from Hadley’s book with my added commentary to help my future self as well as others who may accidentally stumble across this post. I believe that many of these examples can be extended and employed in a variety of settings, and so my goal here is to turn this post into a resource not just for myself but perhaps others in their daily use of R. With that being said, let’s get started.</p>
 <div id="matching-and-merging-by-hand-integer-subsetting" class="section level2">
 <h2>Matching and merging by hand (integer subsetting)</h2>
@@ -53,20 +53,20 @@ info &lt;- data.frame(
   desc = c(&quot;Excellent&quot;, &quot;Good&quot;, &quot;Poor&quot;),
   fail = c(F, F, T)
 )
-info
-  grade      desc  fail
+info</code></pre>
+<pre><code>  grade      desc  fail
 1     3 Excellent FALSE
 2     2      Good FALSE
-3     1      Poor  TRUE
-# Match the grades to the &quot;grade&quot; column in the info table
+3     1      Poor  TRUE</code></pre>
+<pre class="r"><code># Match the grades to the &quot;grade&quot; column in the info table
 # This is a vector indices we would later use to subset the info table
 id &lt;- match(x = grades, table = info[[&quot;grade&quot;]])
-id
-[1] 3 2 2 1 3
-# Subset the info table as a matrix
+id</code></pre>
+<pre><code>[1] 3 2 2 1 3</code></pre>
+<pre class="r"><code># Subset the info table as a matrix
 # Select rows according to the order in which they appear in the index vector
-info[id, ]
-    grade      desc  fail
+info[id, ]</code></pre>
+<pre><code>    grade      desc  fail
 3       1      Poor  TRUE
 2       2      Good FALSE
 2.1     2      Good FALSE
@@ -80,40 +80,40 @@ info[id, ]
 <p>       If we would like to randomly sample or bootstrap a vector or a data frame, we can use <code>sample()</code> to generate a random index vector. A shortcut of the <code>sample()</code> function: If the argument x has length 1, is a numeric vector (in the sense of <code>is.numeric()</code>), and is &gt;= 1, then sampling via <code>sample()</code> will only return random vales from the sequence 1 to x.</p>
 <pre class="r"><code># Create data frame
 df &lt;- data.frame(x = c(1, 2, 3, 1, 2), y = 5:1, z = letters[1:5])
-df
-  x y z
+df</code></pre>
+<pre><code>  x y z
 1 1 5 a
 2 2 4 b
 3 3 3 c
 4 1 2 d
-5 2 1 e
-# Randomly reorder the rows
+5 2 1 e</code></pre>
+<pre class="r"><code># Randomly reorder the rows
 # Select the rows in the order they appear in the random vector created by sample()
-df[sample(x = nrow(df)), ]
-  x y z
-3 3 3 c
+df[sample(x = nrow(df)), ]</code></pre>
+<pre><code>  x y z
+2 2 4 b
 1 1 5 a
 5 2 1 e
 4 1 2 d
-2 2 4 b
-# Select three random rows in the order they appear in the random vector
-df[sample(x = nrow(df), size = 3), ]
-  x y z
-2 2 4 b
-5 2 1 e
-3 3 3 c
-# Select 8 bootstrap replicates
+3 3 3 c</code></pre>
+<pre class="r"><code># Select three random rows in the order they appear in the random vector
+df[sample(x = nrow(df), size = 3), ]</code></pre>
+<pre><code>  x y z
+1 1 5 a
+4 1 2 d
+2 2 4 b</code></pre>
+<pre class="r"><code># Select 8 bootstrap replicates
 # Notice that replace = TRUE, which indicates that some rows will be selected more than once
-df[sample(x = nrow(df), size = 8, replace = TRUE), ]
-    x y z
+df[sample(x = nrow(df), size = 8, replace = TRUE), ]</code></pre>
+<pre><code>    x y z
+3   3 3 c
 5   2 1 e
 1   1 5 a
-5.1 2 1 e
-3   3 3 c
-4   1 2 d
-2   2 4 b
 3.1 3 3 c
-4.1 1 2 d</code></pre>
+3.2 3 3 c
+2   2 4 b
+1.1 1 5 a
+5.1 2 1 e</code></pre>
 <p>In this example, we utilize the <code>sample()</code> function to generate a random index vector, which we then use to subset the data frame. We can easily automate this bootstrapping process by writing our own function:</p>
 <pre class="r"><code># Bootstrap data frame
 boots_df &lt;- function(df, n, replicate) {
@@ -146,24 +146,24 @@ boots_df &lt;- function(df, n, replicate) {
 <li><p>n = 4</p></li>
 <li><p>replicate = 8</p></li>
 </ul>
-<pre class="r"><code>str(boots_df(df = df, n = 4, replicate = 8))
-List of 4
+<pre class="r"><code>str(boots_df(df = df, n = 4, replicate = 8))</code></pre>
+<pre><code>List of 4
  $ :&#39;data.frame&#39;:   8 obs. of  3 variables:
-  ..$ x: num [1:8] 3 1 1 1 1 2 1 1
-  ..$ y: int [1:8] 3 5 2 2 2 1 5 5
-  ..$ z: chr [1:8] &quot;c&quot; &quot;a&quot; &quot;d&quot; &quot;d&quot; ...
+  ..$ x: num [1:8] 1 1 2 3 1 3 3 1
+  ..$ y: int [1:8] 5 2 4 3 2 3 3 2
+  ..$ z: chr [1:8] &quot;a&quot; &quot;d&quot; &quot;b&quot; &quot;c&quot; ...
  $ :&#39;data.frame&#39;:   8 obs. of  3 variables:
-  ..$ x: num [1:8] 3 1 1 1 1 3 3 1
-  ..$ y: int [1:8] 3 5 5 2 2 3 3 5
-  ..$ z: chr [1:8] &quot;c&quot; &quot;a&quot; &quot;a&quot; &quot;d&quot; ...
+  ..$ x: num [1:8] 2 1 2 3 1 1 1 2
+  ..$ y: int [1:8] 4 5 1 3 2 5 5 4
+  ..$ z: chr [1:8] &quot;b&quot; &quot;a&quot; &quot;e&quot; &quot;c&quot; ...
  $ :&#39;data.frame&#39;:   8 obs. of  3 variables:
-  ..$ x: num [1:8] 3 2 3 1 1 3 1 2
-  ..$ y: int [1:8] 3 4 3 2 5 3 5 1
-  ..$ z: chr [1:8] &quot;c&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...
+  ..$ x: num [1:8] 3 1 1 1 1 3 2 2
+  ..$ y: int [1:8] 3 2 5 5 5 3 1 4
+  ..$ z: chr [1:8] &quot;c&quot; &quot;d&quot; &quot;a&quot; &quot;a&quot; ...
  $ :&#39;data.frame&#39;:   8 obs. of  3 variables:
-  ..$ x: num [1:8] 2 1 1 3 1 2 2 3
-  ..$ y: int [1:8] 1 5 2 3 2 1 4 3
-  ..$ z: chr [1:8] &quot;e&quot; &quot;a&quot; &quot;d&quot; &quot;c&quot; ...</code></pre>
+  ..$ x: num [1:8] 2 1 1 2 3 2 2 1
+  ..$ y: int [1:8] 4 2 2 4 3 1 4 2
+  ..$ z: chr [1:8] &quot;b&quot; &quot;d&quot; &quot;d&quot; &quot;b&quot; ...</code></pre>
 <p>As can be seen, we have a list of 4 data frames each with 8 rows of bootstrapped replicates. This function can be easily scaled to generate more bootstrap samples and more replicates per sample.</p>
 <hr />
 </div>
@@ -175,14 +175,14 @@ List of 4
 </ul>
 <pre class="r"><code># Create a character vector that is out of order
 x &lt;- c(&quot;b&quot;, &quot;c&quot;, &quot;a&quot;)
-x
-[1] &quot;b&quot; &quot;c&quot; &quot;a&quot;
-# Find the position of each alphabet in &quot;x&quot; and order them
-order(x)
-[1] 3 1 2
-# Now select the elements from &quot;x&quot; in the order in which they appear in order(x)
-x[order(x)]
-[1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
+x</code></pre>
+<pre><code>[1] &quot;b&quot; &quot;c&quot; &quot;a&quot;</code></pre>
+<pre class="r"><code># Find the position of each alphabet in &quot;x&quot; and order them
+order(x)</code></pre>
+<pre><code>[1] 3 1 2</code></pre>
+<pre class="r"><code># Now select the elements from &quot;x&quot; in the order in which they appear in order(x)
+x[order(x)]</code></pre>
+<pre><code>[1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
 <p>To break ties, you can supply additional variables to order(). You can also change the order from ascending to descending by using decreasing = TRUE. By default, any missing values will be put at the end of the vector; however, you can remove them with na.last = NA or put them at the front with na.last = FALSE.</p>
 <hr />
 <ul>
@@ -191,43 +191,43 @@ x[order(x)]
 <pre class="r"><code># Create &quot;un-ordered&quot; vector
 set.seed(7)
 y &lt;- sample(x = 1:8, replace = TRUE)
-y
-[1] 2 3 7 4 7 2 7 2
-# Find the position of each number in &quot;x&quot; and order them
-order(y)
-[1] 1 6 8 2 4 3 5 7
-# According to order(y)
+y</code></pre>
+<pre><code>[1] 2 3 7 4 7 2 7 2</code></pre>
+<pre class="r"><code># Find the position of each number in &quot;x&quot; and order them
+order(y)</code></pre>
+<pre><code>[1] 1 6 8 2 4 3 5 7</code></pre>
+<pre class="r"><code># According to order(y)
 # Select the elements from y in this order:
-y[order(y)]
-[1] 2 2 2 3 4 7 7 7</code></pre>
+y[order(y)]</code></pre>
+<pre><code>[1] 2 2 2 3 4 7 7 7</code></pre>
 <hr />
 <p>For two or more dimensional objects, <code>order()</code> and integer subsetting makes it easy to order either the rows or columns of an object:</p>
 <pre class="r"><code># Randomly reorder the rows
 # Select columns 3, 2, and 1 in that order
 df2 &lt;- df[sample(x = 1:nrow(df)), 3:1]
-df2
-  z y x
+df2</code></pre>
+<pre><code>  z y x
 3 c 3 3
 4 d 2 1
 2 b 4 2
 1 a 5 1
-5 e 1 2
-# Order the values in column &quot;x&quot;
-order(df2[[&quot;x&quot;]])
-[1] 2 4 3 5 1
-# Order the rows by column x in ascension
+5 e 1 2</code></pre>
+<pre class="r"><code># Order the values in column &quot;x&quot;
+order(df2[[&quot;x&quot;]])</code></pre>
+<pre><code>[1] 2 4 3 5 1</code></pre>
+<pre class="r"><code># Order the rows by column x in ascension
 # Select the rows based on the positions in order()
 # Now the &quot;x&quot; column is ascending
-df2[order(df2[[&quot;x&quot;]]), ]
-  z y x
+df2[order(df2[[&quot;x&quot;]]), ]</code></pre>
+<pre><code>  z y x
 4 d 2 1
 1 a 5 1
 2 b 4 2
 5 e 1 2
-3 c 3 3
-# Order the columns based on the alphabetical order of their names
-df2[, order(names(df2))]
-  x y z
+3 c 3 3</code></pre>
+<pre class="r"><code># Order the columns based on the alphabetical order of their names
+df2[, order(names(df2))]</code></pre>
+<pre><code>  x y z
 3 3 3 c
 4 1 2 d
 2 2 4 b
@@ -237,8 +237,8 @@ df2[, order(names(df2))]
 <pre class="r"><code># Using arrange() to order based on the &quot;x&quot; column
 # The default order of arrangement is ascending
 # This is equivalent to SQL&#39;s ORDER BY
-arrange(.data = df2, df2[[&quot;x&quot;]])
-  z y x
+arrange(.data = df2, df2[[&quot;x&quot;]])</code></pre>
+<pre><code>  z y x
 1 d 2 1
 2 a 5 1
 3 b 4 2
@@ -251,30 +251,30 @@ arrange(.data = df2, df2[[&quot;x&quot;]])
 <h2>Expanding aggregated counts (integer subsetting)</h2>
 <p>       First, we need to be familiar with the function <code>rep(x = x, times = y)</code>, which repeats x[i] y[i] times. Let’s see it in action:</p>
 <pre class="r"><code># Repeat each x[i] y[i] times
-rep(x = c(2, 3, 4), times = c(2, 6, 5))
- [1] 2 2 3 3 3 3 3 3 4 4 4 4 4
-# Repeat the vector object x 3 times
-rep(x = c(2, 3, 4), times = 3)
-[1] 2 3 4 2 3 4 2 3 4
-# Repeat each x[i] 3 times
-rep(x = c(2, 3, 4), each = 3)
-[1] 2 2 2 3 3 3 4 4 4</code></pre>
+rep(x = c(2, 3, 4), times = c(2, 6, 5))</code></pre>
+<pre><code> [1] 2 2 3 3 3 3 3 3 4 4 4 4 4</code></pre>
+<pre class="r"><code># Repeat the vector object x 3 times
+rep(x = c(2, 3, 4), times = 3)</code></pre>
+<pre><code>[1] 2 3 4 2 3 4 2 3 4</code></pre>
+<pre class="r"><code># Repeat each x[i] 3 times
+rep(x = c(2, 3, 4), each = 3)</code></pre>
+<pre><code>[1] 2 2 2 3 3 3 4 4 4</code></pre>
 <p>       Sometimes you get a data frame where identical rows have been collapsed into one and a count column “n” has been added. rep() and integer subsetting make it easy to "“un-collapse”", because we can take advantage of <code>rep()</code>s vectorization.</p>
 <pre class="r"><code># Create a data frame
 df &lt;- data.frame(x = c(2, 4, 1), y = c(9, 11, 6), n = c(3, 5, 1))
-df
-  x  y n
+df</code></pre>
+<pre><code>  x  y n
 1 2  9 3
 2 4 11 5
-3 1  6 1
-# The first row has count = 3, so repeat it 3 times
+3 1  6 1</code></pre>
+<pre class="r"><code># The first row has count = 3, so repeat it 3 times
 # The second row has count = 5, so repeat it 5 times
 # The third row has count = 1, so do not repeat
-rep(x = 1:nrow(df), times = df$n)
-[1] 1 1 1 2 2 2 2 2 3
-# Select the rows in the order they appear in the rep() function
-df[rep(x = 1:nrow(df), times = df$n), ]
-    x  y n
+rep(x = 1:nrow(df), times = df$n)</code></pre>
+<pre><code>[1] 1 1 1 2 2 2 2 2 3</code></pre>
+<pre class="r"><code># Select the rows in the order they appear in the rep() function
+df[rep(x = 1:nrow(df), times = df$n), ]</code></pre>
+<pre><code>    x  y n
 1   2  9 3
 1.1 2  9 3
 1.2 2  9 3
@@ -291,35 +291,35 @@ df[rep(x = 1:nrow(df), times = df$n), ]
 <p>There are two ways to remove columns from a data frame. You can set individual columns to NULL:</p>
 <pre class="r"><code># Data frame
 df &lt;- data.frame(x = 1:3, y = 3:1, z = letters[1:3])
-df
-  x y z
+df</code></pre>
+<pre><code>  x y z
 1 1 3 a
 2 2 2 b
-3 3 1 c
-# Remove column z
+3 3 1 c</code></pre>
+<pre class="r"><code># Remove column z
 df$z &lt;- NULL</code></pre>
 <p>Or you can subset to return only the columns you want:</p>
 <pre class="r"><code># Data frame
 df &lt;- data.frame(x = 1:3, y = 3:1, z = letters[1:3])
 # Keep only columns x and y
-df[c(&quot;x&quot;, &quot;y&quot;)]
-  x y
+df[c(&quot;x&quot;, &quot;y&quot;)]</code></pre>
+<pre><code>  x y
 1 1 3
 2 2 2
 3 3 1</code></pre>
 <p>If you only know the columns you don’t want, use set operations to work out which columns to keep. For instance, the function <code>setdiff(x, y, ...)</code>— x is the full set and y is a subset x. The function <code>setdiff()</code> returns the difference between x and y; that is, it returns those elements that are <em>not in the subset y</em> but <em>in the full set “x”</em>.</p>
 <pre class="r"><code># Full set
-names(df)
-[1] &quot;x&quot; &quot;y&quot; &quot;z&quot;
-# Exclude x
-setdiff(x = names(df), y = &quot;x&quot;)
-[1] &quot;y&quot; &quot;z&quot;
-# Exclude x and z
-setdiff(x = names(df), y = c(&quot;x&quot;, &quot;z&quot;))
-[1] &quot;y&quot;
-# Select every column except for z
-df[setdiff(names(df), &quot;z&quot;)]
-  x y
+names(df)</code></pre>
+<pre><code>[1] &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
+<pre class="r"><code># Exclude x
+setdiff(x = names(df), y = &quot;x&quot;)</code></pre>
+<pre><code>[1] &quot;y&quot; &quot;z&quot;</code></pre>
+<pre class="r"><code># Exclude x and z
+setdiff(x = names(df), y = c(&quot;x&quot;, &quot;z&quot;))</code></pre>
+<pre><code>[1] &quot;y&quot;</code></pre>
+<pre class="r"><code># Select every column except for z
+df[setdiff(names(df), &quot;z&quot;)]</code></pre>
+<pre><code>  x y
 1 1 3
 2 2 2
 3 3 1</code></pre>
@@ -348,10 +348,10 @@ x &lt;- sample(x = 1:10, replace = FALSE) &lt; 4
 names(x) &lt;- letters[1:10]
 # Convert Boolean representation to an integer representation
 # Easy to see the positions of the first and last TRUE&#39;s
-which(x)
-b d g 
-2 4 7 
-# A function that reverses which()
+which(x)</code></pre>
+<pre><code>b d g 
+2 4 7 </code></pre>
+<pre class="r"><code># A function that reverses which()
 unwhich &lt;- function(x, n) {
   # Create a vector of all FALSE with length equal to x
   out &lt;- rep_len(x = FALSE, length.out = n)
@@ -363,8 +363,8 @@ unwhich &lt;- function(x, n) {
   out
 }
 # Reverse x from integer to Boolean
-unwhich(x = x, n = 10)
- [1] FALSE  TRUE FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE</code></pre>
+unwhich(x = x, n = 10)</code></pre>
+<pre><code> [1] FALSE  TRUE FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE</code></pre>
 <p>Read the documentation to learn more about <code>which()</code>.</p>
 <hr />
 </div>
@@ -375,57 +375,57 @@ unwhich(x = x, n = 10)
 <li>Logical vector 1</li>
 </ul>
 <pre class="r"><code># Example 1
-1:10 %% 2
- [1] 1 0 1 0 1 0 1 0 1 0
-# Logical 1
+1:10 %% 2</code></pre>
+<pre><code> [1] 1 0 1 0 1 0 1 0 1 0</code></pre>
+<pre class="r"><code># Logical 1
 x1 &lt;- 1:10 %% 2 == 0
-x1
- [1] FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE
-# Integer equivalent
+x1</code></pre>
+<pre><code> [1] FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE</code></pre>
+<pre class="r"><code># Integer equivalent
 x2 &lt;- which(x = x1)
-x2
-[1]  2  4  6  8 10</code></pre>
+x2</code></pre>
+<pre><code>[1]  2  4  6  8 10</code></pre>
 <ul>
 <li>Logical vector 2</li>
 </ul>
 <pre class="r"><code># Logical 2
 y1 &lt;- 1:10 %% 5 == 0
-y1
- [1] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
-# Integer equivalent
+y1</code></pre>
+<pre><code> [1] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE</code></pre>
+<pre class="r"><code># Integer equivalent
 y2 &lt;- which(x = y1)
-y2
-[1]  5 10</code></pre>
+y2</code></pre>
+<pre><code>[1]  5 10</code></pre>
 <ul>
 <li>Intersection of “x” and “y”. For the logical vectors, we wish to find the indices where both x[i] and y[i] are TRUE; for the integer vectors, we wish to find the indices where the values x[i] and y[i] are equal.</li>
 </ul>
 <pre class="r"><code># X &amp; Y &lt;-&gt; intersect(x, y)
 # Logical
-x1 &amp; y1
- [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE
-# Integer
-intersect(x2, y2)
-[1] 10</code></pre>
+x1 &amp; y1</code></pre>
+<pre><code> [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE</code></pre>
+<pre class="r"><code># Integer
+intersect(x2, y2)</code></pre>
+<pre><code>[1] 10</code></pre>
 <ul>
 <li>Union of “x” and “y”. For the logical vectors, we wish to find the indices where either x[i] or y[i] or both are TRUE; for the integer vectors, we wish to find all values in x and y.</li>
 </ul>
 <pre class="r"><code># X | Y &lt;-&gt; union(x, y)
 # Logical
-x1 | y1
- [1] FALSE  TRUE FALSE  TRUE  TRUE  TRUE FALSE  TRUE FALSE  TRUE
-# Integer
-union(x2, y2)
-[1]  2  4  6  8 10  5</code></pre>
+x1 | y1</code></pre>
+<pre><code> [1] FALSE  TRUE FALSE  TRUE  TRUE  TRUE FALSE  TRUE FALSE  TRUE</code></pre>
+<pre class="r"><code># Integer
+union(x2, y2)</code></pre>
+<pre><code>[1]  2  4  6  8 10  5</code></pre>
 <ul>
 <li>Set difference. For the logical, we wish to find values that are <em>in x1 but not in y1</em>.</li>
 </ul>
 <pre class="r"><code># X &amp; !Y &lt;-&gt; setdiff(x, y)
 # Logical
-x1 &amp; !y1
- [1] FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE FALSE
-# Integer
-setdiff(x2, y2)
-[1] 2 4 6 8</code></pre>
+x1 &amp; !y1</code></pre>
+<pre><code> [1] FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE  TRUE FALSE FALSE</code></pre>
+<pre class="r"><code># Integer
+setdiff(x2, y2)</code></pre>
+<pre><code>[1] 2 4 6 8</code></pre>
 <ul>
 <li>The function <code>xor()</code> indicates element-wise exclusive OR.</li>
 </ul>
@@ -434,11 +434,11 @@ knitr::include_graphics(&quot;Exclusive Or.png&quot;)</code></pre>
 <p><img src="Exclusive%20Or.png" width="40%" height="40%" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># xor(X, Y) &lt;-&gt; setdiff(union(x, y), intersect(x, y))
 # Logical
-xor(x1, y1)
- [1] FALSE  TRUE FALSE  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE
-# Integer
-setdiff(union(x2, y2), intersect(x2, y2))
-[1] 2 4 6 8 5</code></pre>
+xor(x1, y1)</code></pre>
+<pre><code> [1] FALSE  TRUE FALSE  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE</code></pre>
+<pre class="r"><code># Integer
+setdiff(union(x2, y2), intersect(x2, y2))</code></pre>
+<pre><code>[1] 2 4 6 8 5</code></pre>
 <hr />
 </div>
 <div id="rondomly-permute-a-data-frame-a-technique-often-used-in-random-forests" class="section level2">
@@ -447,8 +447,8 @@ setdiff(union(x2, y2), intersect(x2, y2))
 mtcars[
   sample(x = 1:nrow(mtcars), replace = FALSE),
   colnames(mtcars)[sample(x = 1:length(colnames(mtcars)))]
-]
-                     qsec cyl  hp    wt  disp am  mpg carb gear vs drat
+]</code></pre>
+<pre><code>                     qsec cyl  hp    wt  disp am  mpg carb gear vs drat
 Datsun 710          18.61   4  93 2.320 108.0  1 22.8    1    4  1 3.85
 Merc 450SL          17.60   8 180 3.730 275.8  0 17.3    3    3  0 3.07
 Toyota Corona       20.01   4  97 2.465 120.1  0 21.5    1    3  1 3.70
@@ -480,11 +480,11 @@ Hornet 4 Drive      19.44   6 110 3.215 258.0  0 21.4    1    3  1 3.08
 AMC Javelin         17.30   8 150 3.435 304.0  0 15.2    2    3  0 3.15
 Ford Pantera L      14.50   8 264 3.170 351.0  1 15.8    4    5  0 4.22
 Fiat X1-9           18.90   4  66 1.935  79.0  1 27.3    1    4  1 4.08
-Toyota Corolla      19.90   4  65 1.835  71.1  1 33.9    1    4  1 4.22
-# Second way using ncol() instead of colnames()
+Toyota Corolla      19.90   4  65 1.835  71.1  1 33.9    1    4  1 4.22</code></pre>
+<pre class="r"><code># Second way using ncol() instead of colnames()
 # Integer subsetting instead of character
-mtcars[sample(x = nrow(mtcars)), sample(x = ncol(mtcars))]
-                       wt gear vs  qsec  mpg am  hp cyl carb  disp drat
+mtcars[sample(x = nrow(mtcars)), sample(x = ncol(mtcars))]</code></pre>
+<pre><code>                       wt gear vs  qsec  mpg am  hp cyl carb  disp drat
 Merc 450SE          4.070    3  0 17.40 16.4  0 180   8    3 275.8 3.07
 AMC Javelin         3.435    3  0 17.30 15.2  0 150   8    2 304.0 3.15
 Lotus Europa        1.513    5  1 16.90 30.4  1 113   4    2  95.1 3.77
@@ -533,8 +533,8 @@ select_m_rows &lt;- function(data, m) {
   data[sample(x = 1:nrow(data), size = m), , drop = FALSE]
 }</code></pre>
 <p>Let’s see it in action using the iris data set:</p>
-<pre class="r"><code>select_m_rows(data = iris, m = 10)
-    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+<pre class="r"><code>select_m_rows(data = iris, m = 10)</code></pre>
+<pre><code>    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
 149          6.2         3.4          5.4         2.3  virginica
 87           6.7         3.1          4.7         1.5 versicolor
 116          6.4         3.2          5.3         2.3  virginica
@@ -568,8 +568,8 @@ select_m_rows_extended &lt;- function(data, m) {
   ]
 }</code></pre>
 <p>Let’s see it in action using the mtcars data set:</p>
-<pre class="r"><code>select_m_rows_extended(data = mtcars, m = 10)
-               mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+<pre class="r"><code>select_m_rows_extended(data = mtcars, m = 10)</code></pre>
+<pre><code>               mpg cyl  disp  hp drat    wt  qsec vs am gear carb
 Mazda RX4     21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
 Merc 450SLC   15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
 Porsche 914-2 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
@@ -590,8 +590,8 @@ start &lt;- sample(x = 1:(nrow(mtcars) - m + 1), size = 1)
 # The ending row must be m rows from the starting row
 end &lt;- start + m - 1
 # Select the consecutive rows between random starting row
-mtcars[start:end, , drop = FALSE]
-                   mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+mtcars[start:end, , drop = FALSE]</code></pre>
+<pre><code>                   mpg cyl  disp  hp drat    wt  qsec vs am gear carb
 Hornet 4 Drive    21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
 Hornet Sportabout 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
 Valiant           18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
@@ -615,8 +615,8 @@ order_columns &lt;- function(data) {
   data[, order(x = names(data))]
 }
 # Test
-as_tibble(order_columns(data = mtcars))
-# A tibble: 32 × 11
+as_tibble(order_columns(data = mtcars))</code></pre>
+<pre><code># A tibble: 32 × 11
       am  carb   cyl  disp  drat  gear    hp   mpg  qsec    vs    wt
    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
  1     1     4     6  160   3.9      4   110  21    16.5     0  2.62
@@ -629,9 +629,9 @@ as_tibble(order_columns(data = mtcars))
  8     0     2     4  147.  3.69     4    62  24.4  20       1  3.19
  9     0     2     4  141.  3.92     4    95  22.8  22.9     1  3.15
 10     0     4     6  168.  3.92     4   123  19.2  18.3     1  3.44
-# … with 22 more rows
-as_tibble(order_columns(data = iris))
-# A tibble: 150 × 5
+# … with 22 more rows</code></pre>
+<pre class="r"><code>as_tibble(order_columns(data = iris))</code></pre>
+<pre><code># A tibble: 150 × 5
    Petal.Length Petal.Width Sepal.Length Sepal.Width Species
           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
  1          1.4         0.2          5.1         3.5 setosa 
@@ -644,9 +644,9 @@ as_tibble(order_columns(data = iris))
  8          1.5         0.2          5           3.4 setosa 
  9          1.4         0.2          4.4         2.9 setosa 
 10          1.5         0.1          4.9         3.1 setosa 
-# … with 140 more rows
-as_tibble(order_columns(data = USArrests))
-# A tibble: 50 × 4
+# … with 140 more rows</code></pre>
+<pre class="r"><code>as_tibble(order_columns(data = USArrests))</code></pre>
+<pre><code># A tibble: 50 × 4
    Assault Murder  Rape UrbanPop
      &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;    &lt;int&gt;
  1     236   13.2  21.2       58

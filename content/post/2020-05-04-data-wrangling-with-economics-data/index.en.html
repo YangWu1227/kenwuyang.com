@@ -39,13 +39,13 @@ output:
 <p>       In this post, I would like to experiment with some data wrangling techniques. I would be using the <a href="https://www.rug.nl/ggdc/productivity/pwt/?lang=en">Penn World Table</a> version 9.1 (PWT 9.1) and the <a href="https://www.cntsdata.com/">Cross National Time Series</a> (CNTS) data set to practice these techniques.</p>
 <div id="data-importation" class="section level2">
 <h2>Data Importation</h2>
-<pre class="r"><code>pwt91 &lt;- read_csv(&quot;pwt91.csv&quot;)
-Rows: 12376 Columns: 52
-── Column specification ────────────────────────────────────────────────────────
+<pre class="r"><code>pwt91 &lt;- read_csv(&quot;pwt91.csv&quot;)</code></pre>
+<pre><code>Rows: 12376 Columns: 52</code></pre>
+<pre><code>── Column specification ────────────────────────────────────────────────────────
 Delimiter: &quot;,&quot;
 chr  (8): countrycode, country, currency_unit, i_cig, i_xm, i_xr, i_outlier,...
-dbl (44): year, rgdpe, rgdpo, pop, emp, avh, hc, ccon, cda, cgdpe, cgdpo, cn...
-
+dbl (44): year, rgdpe, rgdpo, pop, emp, avh, hc, ccon, cda, cgdpe, cgdpo, cn...</code></pre>
+<pre><code>
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
@@ -55,8 +55,8 @@ dbl (44): year, rgdpe, rgdpo, pop, emp, avh, hc, ccon, cda, cgdpe, cgdpo, cn...
 <pre class="r"><code>pwt91 &lt;- pwt91 %&gt;%
   mutate(emp_pop_ratio = emp / pop) %&gt;%
   select(countrycode, country, year, emp_pop_ratio)
-pwt91
-# A tibble: 12,376 × 4
+pwt91</code></pre>
+<pre><code># A tibble: 12,376 × 4
    countrycode country  year emp_pop_ratio
    &lt;chr&gt;       &lt;chr&gt;   &lt;dbl&gt;         &lt;dbl&gt;
  1 ABW         Aruba    1950            NA
@@ -72,24 +72,24 @@ pwt91
 # … with 12,366 more rows</code></pre>
 <p>Let’s do some simple counting to get a good sense of our data:</p>
 <pre class="r"><code># Number of countries
-cat(length(unique(pwt91$country)))
-182
-# Number of years covered in this data set
-cat(length(unique(pwt91$year)))
-68
-# Make sure that country and country-code are consistent
-cat(length(unique(pwt91$countrycode)))
-182
-# First and last year
-cat(min(pwt91$year))
-1950
-cat(max(pwt91$year))
-2017</code></pre>
+cat(length(unique(pwt91$country)))</code></pre>
+<pre><code>182</code></pre>
+<pre class="r"><code># Number of years covered in this data set
+cat(length(unique(pwt91$year)))</code></pre>
+<pre><code>68</code></pre>
+<pre class="r"><code># Make sure that country and country-code are consistent
+cat(length(unique(pwt91$countrycode)))</code></pre>
+<pre><code>182</code></pre>
+<pre class="r"><code># First and last year
+cat(min(pwt91$year))</code></pre>
+<pre><code>1950</code></pre>
+<pre class="r"><code>cat(max(pwt91$year))</code></pre>
+<pre><code>2017</code></pre>
 <p>       Notice that there are lots of NA’s, i.e., for some combination of country and year, there are no data. More succinctly put, the further back we go in time, the more we observe missing values for countries. Also, I expect that some countries would have more missing values than others. Before we trim the sample down, we want to examine the number missing values by year and by country to see if this is indeed a widespread trend:</p>
 <pre class="r"><code>pwt91 %&gt;%
   group_by(year) %&gt;%
-  count(is.na(emp_pop_ratio))
-# A tibble: 136 × 3
+  count(is.na(emp_pop_ratio))</code></pre>
+<pre><code># A tibble: 136 × 3
 # Groups:   year [68]
     year `is.na(emp_pop_ratio)`     n
    &lt;dbl&gt; &lt;lgl&gt;                  &lt;int&gt;
@@ -107,8 +107,8 @@ cat(max(pwt91$year))
 <p>       After examining the table above, I find that the count confirms my thinking. <code>True</code> indicates the count for missing values, and <code>False</code> indicates the opposite. The first two decades over this period of 68 years (1950-2017) have many countries with missing values— more than 100 countries in our sample of 182 have missing values. As we go into the 1990’s, the number of countries with missing values drastically decreases— less than 10 countries have missing values.</p>
 <pre class="r"><code>pwt91 %&gt;%
   group_by(country) %&gt;%
-  count(is.na(emp_pop_ratio))
-# A tibble: 312 × 3
+  count(is.na(emp_pop_ratio))</code></pre>
+<pre><code># A tibble: 312 × 3
 # Groups:   country [182]
    country             `is.na(emp_pop_ratio)`     n
    &lt;chr&gt;               &lt;lgl&gt;                  &lt;int&gt;
@@ -134,8 +134,8 @@ cat(max(pwt91$year))
 <p>Let’s have a sanity check to make sure we are on track:</p>
 <pre class="r"><code>pwt91 %&gt;%
   group_by(countrycode) %&gt;%
-  count()
-# A tibble: 169 × 2
+  count()</code></pre>
+<pre><code># A tibble: 169 × 2
 # Groups:   countrycode [169]
    countrycode     n
    &lt;chr&gt;       &lt;int&gt;
@@ -149,13 +149,13 @@ cat(max(pwt91$year))
  8 AZE            28
  9 BDI            28
 10 BEL            28
-# … with 159 more rows
-# Number of countries
-cat(length(unique(pwt91$countrycode)))
-169</code></pre>
+# … with 159 more rows</code></pre>
+<pre class="r"><code># Number of countries
+cat(length(unique(pwt91$countrycode)))</code></pre>
+<pre><code>169</code></pre>
 <p>As can be seen, all remaining countries have values for the 28-year period; we now have a sample of 169 countries:</p>
-<pre class="r"><code>pwt91
-# A tibble: 4,732 × 4
+<pre class="r"><code>pwt91</code></pre>
+<pre><code># A tibble: 4,732 × 4
 # Groups:   countrycode [169]
    countrycode country  year emp_pop_ratio
    &lt;chr&gt;       &lt;chr&gt;   &lt;dbl&gt;         &lt;dbl&gt;
@@ -181,10 +181,10 @@ cat(length(unique(pwt91$countrycode)))
 <p>       We would want to use <code>left_join()</code>, because it preserves the original observations even when there isn’t a match. Notice that setting the argument (by = NULL) makes sure that R uses all variables that appear in both data sets for merging, this is the so-called <strong>natural join</strong>.</p>
 <pre class="r"><code>new_data &lt;- pwt91 %&gt;%
   left_join(cnts19, by = NULL) %&gt;%
-  na.exclude()
-Joining, by = c(&quot;countrycode&quot;, &quot;year&quot;)
-new_data
-# A tibble: 4,455 × 5
+  na.exclude()</code></pre>
+<pre><code>Joining, by = c(&quot;countrycode&quot;, &quot;year&quot;)</code></pre>
+<pre class="r"><code>new_data</code></pre>
+<pre><code># A tibble: 4,455 × 5
 # Groups:   countrycode [162]
    countrycode country  year emp_pop_ratio domestic8
    &lt;chr&gt;       &lt;chr&gt;   &lt;dbl&gt;         &lt;dbl&gt;     &lt;dbl&gt;
@@ -202,8 +202,8 @@ new_data
 <p>Let’s check:</p>
 <pre class="r"><code>new_data %&gt;%
   group_by(countrycode) %&gt;%
-  count()
-# A tibble: 162 × 2
+  count()</code></pre>
+<pre><code># A tibble: 162 × 2
 # Groups:   countrycode [162]
    countrycode     n
    &lt;chr&gt;       &lt;int&gt;
@@ -225,8 +225,8 @@ new_data
 <p>Now, let’s check:</p>
 <pre class="r"><code>new_data %&gt;%
   group_by(countrycode) %&gt;%
-  count()
-# A tibble: 139 × 2
+  count()</code></pre>
+<pre><code># A tibble: 139 × 2
 # Groups:   countrycode [139]
    countrycode     n
    &lt;chr&gt;       &lt;int&gt;
@@ -243,10 +243,10 @@ new_data
 # … with 129 more rows</code></pre>
 <p>We have ensured that all remaining countries have values for all variables:</p>
 <pre class="r"><code># Number of countries
-cat(length(unique(new_data$countrycode)))
-139
-new_data
-# A tibble: 3,892 × 5
+cat(length(unique(new_data$countrycode)))</code></pre>
+<pre><code>139</code></pre>
+<pre class="r"><code>new_data</code></pre>
+<pre><code># A tibble: 3,892 × 5
 # Groups:   countrycode [139]
    countrycode country  year emp_pop_ratio domestic8
    &lt;chr&gt;       &lt;chr&gt;   &lt;dbl&gt;         &lt;dbl&gt;     &lt;dbl&gt;
@@ -263,8 +263,8 @@ new_data
 # … with 3,882 more rows</code></pre>
 <p>Here’s glimpse at which country had the single most yearly anti-government demonstrations over this 28-year period:</p>
 <pre class="r"><code>new_data %&gt;%
-  arrange(desc(domestic8))
-# A tibble: 3,892 × 5
+  arrange(desc(domestic8))</code></pre>
+<pre><code># A tibble: 3,892 × 5
 # Groups:   countrycode [139]
    countrycode country               year emp_pop_ratio domestic8
    &lt;chr&gt;       &lt;chr&gt;                &lt;dbl&gt;         &lt;dbl&gt;     &lt;dbl&gt;
@@ -286,8 +286,8 @@ new_data
 <pre class="r"><code>nested_data &lt;- new_data %&gt;%
   group_by(countrycode, country) %&gt;%
   nest()
-nested_data
-# A tibble: 139 × 3
+nested_data</code></pre>
+<pre><code># A tibble: 139 × 3
 # Groups:   countrycode, country [139]
    countrycode country              data             
    &lt;chr&gt;       &lt;chr&gt;                &lt;list&gt;           
@@ -303,16 +303,16 @@ nested_data
 10 BFA         Burkina Faso         &lt;tibble [28 × 3]&gt;
 # … with 129 more rows</code></pre>
 <p>Let us examine the structure of the object:</p>
-<pre class="r"><code>glimpse(nested_data)
-Rows: 139
+<pre class="r"><code>glimpse(nested_data)</code></pre>
+<pre><code>Rows: 139
 Columns: 3
 Groups: countrycode, country [139]
 $ countrycode &lt;chr&gt; &quot;AGO&quot;, &quot;ALB&quot;, &quot;ARE&quot;, &quot;ARG&quot;, &quot;AUS&quot;, &quot;AUT&quot;, &quot;BDI&quot;, &quot;BEL&quot;, &quot;B…
 $ country     &lt;chr&gt; &quot;Angola&quot;, &quot;Albania&quot;, &quot;United Arab Emirates&quot;, &quot;Argentina&quot;, …
 $ data        &lt;list&gt; [&lt;tbl_df[28 x 3]&gt;], [&lt;tbl_df[28 x 3]&gt;], [&lt;tbl_df[28 x 3]&gt;…</code></pre>
 <p>The row numbers make sense, since we have indeed a sample of 139 countries. If we look at the first element of “data,” we see that it contains all the data for that country (in my case, Angola):</p>
-<pre class="r"><code>nested_data$data[[1]]
-# A tibble: 28 × 3
+<pre class="r"><code>nested_data$data[[1]]</code></pre>
+<pre><code># A tibble: 28 × 3
     year emp_pop_ratio domestic8
    &lt;dbl&gt;         &lt;dbl&gt;     &lt;dbl&gt;
  1  1990         0.454         0
@@ -327,8 +327,8 @@ $ data        &lt;list&gt; [&lt;tbl_df[28 x 3]&gt;], [&lt;tbl_df[28 x 3]&gt;], [
 10  1999         0.437         0
 # … with 18 more rows</code></pre>
 <p>The fifth element:</p>
-<pre class="r"><code>nested_data$data[[5]]
-# A tibble: 28 × 3
+<pre class="r"><code>nested_data$data[[5]]</code></pre>
+<pre><code># A tibble: 28 × 3
     year emp_pop_ratio domestic8
    &lt;dbl&gt;         &lt;dbl&gt;     &lt;dbl&gt;
  1  1990         0.463         0
