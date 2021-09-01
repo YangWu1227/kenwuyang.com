@@ -18,5 +18,5 @@ projects: []
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This was a simulation project for my [statistical simulation](https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-statistics/) class. For better resolution, please enter full-screen (cmd + shift + f). For speaker notes, please press "S" on the keyboard while viewing the slides. 
 
-<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRLKjvxafrOkd1P16bRDnQ8WrCNHgBFqHxbvNShrldeFKyUt7ouZrQMpXnhksVViyYTwzX1uQ2mdtjP/embed?start=false&loop=false&delayms=3000" frameborder="0" width="800" height="600" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRLKjvxafrOkd1P16bRDnQ8WrCNHgBFqHxbvNShrldeFKyUt7ouZrQMpXnhksVViyYTwzX1uQ2mdtjP/embed?start=false&loop=false&delayms=3000" frameborder="0" width="750" height="600" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
