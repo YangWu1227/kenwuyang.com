@@ -7,6 +7,7 @@ categories:
   - R
 tags:
   - Finance
+  - Portfolio Analytics
   - Data Visualization
 subtitle: ''
 summary: 'Visualization asset returns using in the tidyverse and in xts'
