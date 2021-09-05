@@ -67,8 +67,8 @@ asset_returns_tq %&gt;%
     .f = PerformanceAnalytics::skewness,
     method = &quot;moment&quot;
   )</code></pre>
-<pre><code>        SPY         EFA         DIA         QQQ         AGG 
--0.70113216 -0.52131366 -0.75571694 -0.23513475 -0.06656715 </code></pre>
+<pre><code>       SPY        EFA        DIA        QQQ        AGG 
+-0.7011322 -0.5213137 -0.7557169 -0.2351347 -0.0665614 </code></pre>
 <p><strong>Excess Kurtosis</strong></p>
 <pre class="r"><code># Excess Kurtosis
 asset_returns_tq %&gt;%
@@ -79,7 +79,7 @@ asset_returns_tq %&gt;%
     method = &quot;excess&quot;
   )</code></pre>
 <pre><code>      SPY       EFA       DIA       QQQ       AGG 
-2.1505474 2.1227652 2.3110488 0.3138191 0.3451324 </code></pre>
+2.1505474 2.1227652 2.3110488 0.3138191 0.3451339 </code></pre>
 <hr />
 <p>       In addition, take a look at the results for a test of normality:</p>
 <table class="table table-striped table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
@@ -120,7 +120,7 @@ AGG
 0.129
 </td>
 <td style="text-align:center;">
-0.6994
+0.6993
 </td>
 </tr>
 </tbody>
@@ -212,5 +212,5 @@ ecdf_DIA(v = 0)</code></pre>
 <h2>Some words of caution</h2>
 <p>       Viola! We now have a method, though an imperfect one, for estimating probabilities of asset returns. The empirical approach is not without its limitations. For instance, it is usually the case that a large amount of data is needed to accurately estimate a distribution nonparametrically, especially a continuous one. In this post, we employ of sample of 103 monthly returns from 2012 to 2021. For better accuracy, we could certainly switch to weekly or even daily frequency. The availability of historical data also ensures that we can expand our sample easily.</p>
 <p>       Still, some questions remain as we often need to make assumptions in order to interpolate between observed values of returns (What if we have yearly, weekly, or even daily frequencies?) and extrapolate outside the observed data range (What about the probabilities of returns intervals that are beyond the minimum and maximum values of our sample?). In addition, the reliability and convergence rate of the empirical approach in multivariate analyses decrease as data become more scattered in higher dimensions. Fortunately, in the context of asset returns, we often find ourselves in the case of univariate analysis.</p>
-<p>       In short, there is no perfect approach to estimating probabilities of asset returns. And, in reality, the focus is often placed on analyzing portfolio returns. To this end, there are are many alternative ways to quantify uncertainty outside of simple probabilities— value-at-risk, expected shortfalls, downside deviation, etc. In this post, we have demonstrated that perhaps no approach is ever completely <em>correct</em> but we must always try our best to do what we can to bring value. Fortunately, there is a variety of topics to cover in those avenues and we will certainly tackle them in future posts. Be on the look-out!</p>
+<p>       In short, there is no perfect approach to estimating probabilities of asset returns. And, in reality, the focus is often placed on analyzing portfolio returns. To this end, there are are many alternative ways to quantify uncertainty outside of simple probabilities— value-at-risk, expected shortfalls, downside deviation, etc. In this post, we have demonstrated that perhaps no approach is ever completely <em>correct</em> but we must always try our best to do what we can to bring value. Fortunately, there is a variety of topics to cover in those avenues and we will certainly tackle them in future posts.</p>
 </div>

@@ -29,7 +29,7 @@ output:
 <ul>
 <li><a href="#diagrams">Diagrams</a></li>
 </ul></li>
-<li><a href="#execution-environment-of-a-child-function">Execution environment of a child function</a>
+<li><a href="#execution-environment-of-a-manufactured-function">Execution environment of a manufactured function</a>
 <ul>
 <li><a href="#diagram">Diagram</a></li>
 </ul></li>
@@ -44,7 +44,7 @@ output:
 <blockquote>
 <p>The enclosing environment of the manufactured function is an execution environment of the function factory — Hadley Wickham</p>
 </blockquote>
-<p>         We can understand this better using an example. Suppose we have a function factory called <code>power</code>, which returns children functions that raise their input arguments to different powers, contingent on the <code>exp</code> argument supplied to the factory function:</p>
+<p>         We can understand this better using an example. Suppose we have a function factory called <code>power</code>, which returns manufactured functions that raise their input arguments to different powers, contingent on the <code>exp</code> argument supplied to the factory function:</p>
 <pre class="r"><code>power &lt;- function(exp) {
   
   # Force the evaluation of &quot;exp&quot;
@@ -70,23 +70,23 @@ cube &lt;- power(exp = 3)</code></pre>
 <pre><code>function(x) {
     x ^ exp
   }
-&lt;environment: 0x7ff8b26214c0&gt;</code></pre>
+&lt;environment: 0x7fba89bbb8c0&gt;</code></pre>
 <pre class="r"><code>cube</code></pre>
 <pre><code>function(x) {
     x ^ exp
   }
-&lt;bytecode: 0x7ff8b3289c20&gt;
-&lt;environment: 0x7ff8b0cfcf30&gt;</code></pre>
+&lt;bytecode: 0x7fba89f77820&gt;
+&lt;environment: 0x7fba89c44730&gt;</code></pre>
 <p>         It turns out that the most important difference between these functions is that they have different enclosing or function environments (see the different environment addresses in the output above). The enclosing environments control how these functions scope for values of <code>exp</code>. Each time a function is executed in R, a new <strong>execution</strong> environment is created to host its execution. The first time we executed <code>power</code> to create <code>square</code>, an environment is created. Then, another execution environment of <code>power</code> is created when we generated <code>cube</code>. These two execution environments are the <strong>enclosing environments</strong> of <code>square</code> and <code>cube</code>. The <code>rlang</code> package contains functions that provide more insights into these relationships:</p>
 <pre class="r"><code># Examine the environments associated with the function square
 rlang::env_print(env = square)</code></pre>
-<pre><code>&lt;environment: 0x7ff8b26214c0&gt;
+<pre><code>&lt;environment: 0x7fba89bbb8c0&gt;
 parent: &lt;environment: global&gt;
 bindings:
  * exp: &lt;dbl&gt;</code></pre>
 <pre class="r"><code># Examine the environments associated with the function cube
 rlang::env_print(env = cube)</code></pre>
-<pre><code>&lt;environment: 0x7ff8b0cfcf30&gt;
+<pre><code>&lt;environment: 0x7fba89c44730&gt;
 parent: &lt;environment: global&gt;
 bindings:
  * exp: &lt;dbl&gt;</code></pre>
@@ -101,7 +101,7 @@ rlang::fn_env(fn = cube)[[&quot;exp&quot;]]</code></pre>
 <hr />
 <div id="diagrams" class="section level2">
 <h2>Diagrams</h2>
-<p>         These relationships between a function factory and its children functions can be analyzed diagrammatically. The components of the diagram below are:</p>
+<p>         These relationships between a function factory and its manufactured functions can be analyzed diagrammatically. The components of the diagram below are:</p>
 <ul>
 <li><p>The boat-like structures are the functions, i.e. <code>power</code>, <code>square</code>, and <code>cube</code>.</p></li>
 <li><p>The global environment is represented by the rectangular shape labeled “R_GlobalEnv.”</p></li>
@@ -128,8 +128,8 @@ Figure 1: Diagram from <a href="https://adv-r.hadley.nz/function-factories.html"
 <hr />
 </div>
 </div>
-<div id="execution-environment-of-a-child-function" class="section level1">
-<h1>Execution environment of a child function</h1>
+<div id="execution-environment-of-a-manufactured-function" class="section level1">
+<h1>Execution environment of a manufactured function</h1>
 <p>         What happens when we execute <code>square</code> and <code>cube</code>? The answer is— same as before. Each time a function is called, an environment is created to host its execution. The parent of this execution environment is the enclosing or function environment of the function, which is determined by where it is created. Therefore, calling <code>square</code> and <code>cube</code> individually generates execution environments of their own. And the parents of these execution environments are the enclosing or function environments of <code>square</code> and <code>cube</code>, respectively. For instance, let us look at <code>square</code>. We can explicitly return the execution environment of <code>square</code> by using the <code>current_env()</code> function from the <code>rlang</code> package:</p>
 <pre class="r"><code># New power function factory
 power &lt;- function(exp) {
@@ -139,7 +139,7 @@ power &lt;- function(exp) {
   
   function(x) {
     x ^ exp
-    # We explicitly force the return of the execution environment of any child function
+    # We explicitly force the return of the execution environment of any manufactured function
     rlang::current_env()
   }
 }
@@ -150,20 +150,20 @@ square &lt;- power(exp = 2)</code></pre>
 square(x = 10) %&gt;% 
   # Execution and its parent environment
   rlang::env_print()</code></pre>
-<pre><code>&lt;environment: 0x7ff8b1a11d48&gt;
-parent: &lt;environment: 0x7ff8b2483390&gt;
+<pre><code>&lt;environment: 0x7fba89d7f548&gt;
+parent: &lt;environment: 0x7fba883dd390&gt;
 bindings:
  * x: &lt;dbl&gt;</code></pre>
 <p>         In the output above, the <strong>first line</strong> represents the address of the execution environment of <code>square</code>. The <strong>last line</strong> shows that there is a binding from the name “x” to a double vector object (“dbl” is short for double), which is the argument that we supplied to the function <code>square</code>, <span class="math inline">\(x=10\)</span>. The <strong>second line</strong> of the output above is of the utmost importance and it should make sense— it is the enclosing environment of <code>square</code>. How can we be sure? Well, we can manually check the enclosing environment of <code>square</code>:</p>
 <pre class="r"><code>rlang::env_print(env = square)</code></pre>
-<pre><code>&lt;environment: 0x7ff8b2483390&gt;
+<pre><code>&lt;environment: 0x7fba883dd390&gt;
 parent: &lt;environment: global&gt;
 bindings:
  * exp: &lt;dbl&gt;</code></pre>
-<p>         As can be seen, the first line of the output above indeed matches with the second line of the output from earlier. We now have a proof of the relationship between the execution environment and the enclosing environment of a child function. And, it is no different than the those of any other functions.</p>
+<p>         As can be seen, the first line of the output above indeed matches with the second line of the output from earlier. We now have a proof of the relationship between the execution environment and the enclosing environment of a manufactured function. And, it is no different than the those of any other functions.</p>
 <div id="diagram" class="section level2">
 <h2>Diagram</h2>
-<p>         But can we expound on the execution environment of a child function more? Perhaps we can see the relationships more clearly via a diagram:</p>
+<p>         But can we expound on the execution environment of a manufactured function more? Perhaps we can see the relationships more clearly via a diagram:</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-11"></span>
 <img src="square.png" alt="Diagram from [Advance R](https://adv-r.hadley.nz/function-factories.html)" width="413" />
 <p class="caption">
@@ -172,10 +172,10 @@ Figure 2: Diagram from <a href="https://adv-r.hadley.nz/function-factories.html"
 </div>
 <p>The relationships in the diagram can be summarized as follows:</p>
 <ul>
-<li><p>The boat-like structure represents <code>square</code> (clearly, the name <code>square</code> is bound to this function object via the black arrow). The function also binds its enclosing environment, which is the grey box containing a binding to <code>exp</code>. Recall, that this is also the one of the execution environments of <code>power</code>. However, in this diagram, we are zooming in to get a more focused view on the child function <code>square</code>.</p></li>
+<li><p>The boat-like structure represents <code>square</code> (clearly, the name <code>square</code> is bound to this function object via the black arrow). The function also binds its enclosing environment, which is the grey box containing a binding to <code>exp</code>. Recall, that this is also the one of the execution environments of <code>power</code>. However, in this diagram, we are zooming in to get a more focused view on the manufactured function <code>square</code>.</p></li>
 <li><p>What we have proved in the section above is precisely the relationship between the grey box on top of <code>square</code> and the grey box to the right of <code>square</code>. The grey box on top is indeed the execution environment of <code>square</code> (with the blue arrow pointing to the function object), and the grey box to the right is its enclosing environment. When <code>square</code> is executed, it scopes for the value of “x” in the execution environment, <span class="math inline">\(x=10\)</span>, and the value of <code>exp</code> in its enclosing environment, which is 2.</p></li>
 </ul>
 <hr />
-<p>         And, this is what makes a function factory special. The behavior of any child function is powered by the execution environment of the factory function, which is different each time the factory function is used to created a child function. With this core idea under our belt, we will be able to produce some elegant solutions when it comes to creating formatter functions for graphs or statistical functions used to transform, sample, or estimate data. We will tackle all of these in the next post. Stay tuned!</p>
+<p>         And, this is what makes a function factory special. The behavior of any manufactured function is powered by the execution environment of the factory function, which is different each time the factory function is used to created a manufactured function. With this core idea under our belt, we will be able to produce some elegant solutions when it comes to creating formatter functions for graphs or statistical functions used to transform, sample, or estimate data. We will tackle all of these in the next post. Stay tuned!</p>
 </div>
 </div>
