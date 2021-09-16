@@ -44,4 +44,4 @@ title: 武阳
 
 我和大家一样，在为自己的理想奋斗着。但我更希望努力向目标迈进的同时，能够有能力给予他人帮助，就像我也时常获得他人的帮助一样。无论在工作、学习或是生活中，我热爱的事总能让我充满动力。从17年对编程产生浓厚的兴趣，再到19年建立英文网站以来，一直希望建立一个分享我所思所感的中文平台。
 
-{{< icon name="download" pack="fas" >}} 我的 {{< staticref "uploads/Yang_Wu_Resume.pdf" "newtab" >}}中文简历{{< /staticref >}}.
+{{< icon name="download" pack="fas" >}} 我的 {{< staticref "uploads/Yang_Ken_Wu_Resume.pdf" "newtab" >}}中文简历{{< /staticref >}}.
