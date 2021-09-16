@@ -1,5 +1,5 @@
 ---
-title: Function Factories (Part I)
+title: Function Factories in R (Part I)
 author: Yang Wu
 date: '2021-08-30'
 slug: function-factories-part-i

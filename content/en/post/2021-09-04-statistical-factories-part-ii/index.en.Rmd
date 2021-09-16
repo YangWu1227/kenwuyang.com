@@ -1,5 +1,5 @@
 ---
-title: Statistical Factories (Part II)
+title: Statistical Factories in R (Part II)
 author: Yang Wu
 date: '2021-09-04'
 slug: statistical-factories-part-ii
@@ -10,7 +10,7 @@ tags:
   - Statistics
   - R Programming
 subtitle: ''
-summary: 'Application of function factories in statistics'
+summary: 'Application of R function factories in statistics'
 authors: []
 featured: no
 image:

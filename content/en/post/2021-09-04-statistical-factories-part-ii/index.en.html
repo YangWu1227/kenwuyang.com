@@ -1,5 +1,5 @@
 ---
-title: Statistical Factories (Part II)
+title: Statistical Factories in R (Part II)
 author: Yang Wu
 date: '2021-09-04'
 slug: statistical-factories-part-ii
@@ -10,7 +10,7 @@ tags:
   - Statistics
   - R Programming
 subtitle: ''
-summary: 'Application of function factories in statistics'
+summary: 'Application of R function factories in statistics'
 authors: []
 featured: no
 image:
@@ -154,7 +154,7 @@ lm(y ~ x, data = data) %&gt;%
   summary() %&gt;%
   purrr::pluck(.x = ., &quot;coefficients&quot;) %&gt;%
   `[`(4)</code></pre>
-<pre><code>[1] 0.1024223</code></pre>
+<pre><code>[1] 0.09828928</code></pre>
 <p>Next, we create a function factory, and it takes as input a given data frame and a variable from which the bootstrap sample is to be generated. Ultimately, the function factory will return a manufactured function:</p>
 <pre class="r"><code>bootstrap_factory &lt;- function(df, var) {
 
@@ -198,7 +198,7 @@ vector_of_betas &lt;- list_of_data_frames %&gt;%
     panel.grid = element_blank()
   )</code></pre>
 <p><img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-10-1.png" width="576" style="display: block; margin: auto;" /></p>
-<p>And the standard deviation of this sampling distribution is 0.104582. Does this confirm our standard error calculation from earlier or refute it?</p>
+<p>And the standard deviation of this sampling distribution is 0.095925. Does this confirm our standard error calculation from earlier or refute it?</p>
 <hr />
 </div>
 </div>
@@ -243,10 +243,10 @@ model &lt;- lm(y ~ x, data = data) %&gt;%
 # Least squares estimators
 purrr::pluck(.x = model, &quot;coefficients&quot;) %&gt;%
   `[`(c(1, 2))</code></pre>
-<pre><code>[1] 46.019957348  0.009638513</code></pre>
+<pre><code>[1] 45.34230635 -0.01160914</code></pre>
 <pre class="r"><code># Sigma
 purrr::pluck(.x = model, &quot;sigma&quot;)</code></pre>
-<pre><code>[1] 6.178417</code></pre>
+<pre><code>[1] 7.75527</code></pre>
 <p>Next, create the function factory:</p>
 <pre class="r"><code>likelihood_factory &lt;- function(x, y) {
 
@@ -275,10 +275,10 @@ bbmle::mle2(minuslogl = likelihood_factory(data$x, data$y), start = list(beta0 =
     beta1 = 0, sigma = 50))
 
 Coefficients:
-       beta0        beta1        sigma 
-46.019892467  0.009639046  6.137073156 
+     beta0      beta1      sigma 
+45.3423018 -0.0116091  7.7033944 
 
-Log-likelihood: -484.99 </code></pre>
+Log-likelihood: -519.09 </code></pre>
 <p>How do the maximum likelihood estimators compare to those of the least squares method? (Hint: For normal data, they should be consistent with each other.)</p>
 <hr />
 <p>       And that is all for this post. We have covered three interesting applications of function factories in statistics. Among all of R’s functional programming tool-kits, function factories are perhaps the least utilized features as far as data science is concerned. This is likely because functional factories tend to have more of a mathematical or statistical flavor to them. However, as we have seen in this post and <a href="https://www.kenwuyang.com/post/function-factory-estimating-probabilities-of-returns/">others</a>, there is a class of problems, particular in mathematical statistics, to which function factories could offer elegant solutions in R. Therefore, having them in our R toolkit may certainly reap some long term benefits, allowing us to solve a variety of problems beyond those that are typically encountered in data analysis.</p>

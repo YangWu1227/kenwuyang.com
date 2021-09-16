@@ -1,5 +1,5 @@
 ---
-title: Function Factories (Part I)
+title: Function Factories in R (Part I)
 author: Yang Wu
 date: '2021-08-30'
 slug: function-factories-part-i
@@ -70,23 +70,23 @@ cube &lt;- power(exp = 3)</code></pre>
 <pre><code>function(x) {
     x ^ exp
   }
-&lt;environment: 0x7fe9173f2d58&gt;</code></pre>
+&lt;environment: 0x7f9d7adaa130&gt;</code></pre>
 <pre class="r"><code>cube</code></pre>
 <pre><code>function(x) {
     x ^ exp
   }
-&lt;bytecode: 0x7fe91657df80&gt;
-&lt;environment: 0x7fe913140e70&gt;</code></pre>
+&lt;bytecode: 0x7f9d7a7d9d18&gt;
+&lt;environment: 0x7f9d7a6c1670&gt;</code></pre>
 <p>         It turns out that the most important difference between these functions is that they have different enclosing or function environments (see the different environment addresses in the output above). The enclosing environments control how these functions scope for values of <code>exp</code>. Each time a function is executed in R, a new <strong>execution</strong> environment is created to host its execution. The first time we executed <code>power</code> to create <code>square</code>, an environment is created. Then, another execution environment of <code>power</code> is created when we generated <code>cube</code>. These two execution environments are the <strong>enclosing environments</strong> of <code>square</code> and <code>cube</code>. The <code>rlang</code> package contains functions that provide more insights into these relationships:</p>
 <pre class="r"><code># Examine the environments associated with the function square
 rlang::env_print(env = square)</code></pre>
-<pre><code>&lt;environment: 0x7fe9173f2d58&gt;
+<pre><code>&lt;environment: 0x7f9d7adaa130&gt;
 parent: &lt;environment: global&gt;
 bindings:
  * exp: &lt;dbl&gt;</code></pre>
 <pre class="r"><code># Examine the environments associated with the function cube
 rlang::env_print(env = cube)</code></pre>
-<pre><code>&lt;environment: 0x7fe913140e70&gt;
+<pre><code>&lt;environment: 0x7f9d7a6c1670&gt;
 parent: &lt;environment: global&gt;
 bindings:
  * exp: &lt;dbl&gt;</code></pre>
@@ -150,13 +150,13 @@ square &lt;- power(exp = 2)</code></pre>
 square(x = 10) %&gt;% 
   # Execution and its parent environment
   rlang::env_print()</code></pre>
-<pre><code>&lt;environment: 0x7fe9156eff38&gt;
-parent: &lt;environment: 0x7fe9173e1190&gt;
+<pre><code>&lt;environment: 0x7f9d7a734e58&gt;
+parent: &lt;environment: 0x7f9d7ad78fb0&gt;
 bindings:
  * x: &lt;dbl&gt;</code></pre>
 <p>         In the output above, the <strong>first line</strong> represents the address of the execution environment of <code>square</code>. The <strong>last line</strong> shows that there is a binding from the name “x” to a double vector object (“dbl” is short for double), which is the argument that we supplied to the function <code>square</code>, <span class="math inline">\(x=10\)</span>. The <strong>second line</strong> of the output above is of the utmost importance and it should make sense— it is the enclosing environment of <code>square</code>. How can we be sure? Well, we can manually check the enclosing environment of <code>square</code>:</p>
 <pre class="r"><code>rlang::env_print(env = square)</code></pre>
-<pre><code>&lt;environment: 0x7fe9173e1190&gt;
+<pre><code>&lt;environment: 0x7f9d7ad78fb0&gt;
 parent: &lt;environment: global&gt;
 bindings:
  * exp: &lt;dbl&gt;</code></pre>
