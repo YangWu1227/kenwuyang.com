@@ -34,9 +34,10 @@ library(tidyverse)
 ```
 
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In this post, I would like to experiment with some data wrangling techniques. I would be using the [Penn World Table](https://www.rug.nl/ggdc/productivity/pwt/?lang=en) version 9.1 (PWT 9.1) and the [Cross National Time Series](https://www.cntsdata.com/) (CNTS) data set to practice these techniques.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In this post, I experiment with some data wrangling techniques. I would be using the [Penn World Table](https://www.rug.nl/ggdc/productivity/pwt/?lang=en) version 9.1 (PWT 9.1) and the [Cross National Time Series](https://www.cntsdata.com/) (CNTS) data set to practice these techniques.
 
 ## Data Importation
+
 ```{r}
 pwt91 <- read_csv("pwt91.csv")
 ```

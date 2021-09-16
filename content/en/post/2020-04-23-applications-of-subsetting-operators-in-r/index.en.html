@@ -40,7 +40,7 @@ output:
 </ul>
 </div>
 
-<p>       In this post, we will cover some useful applications of R’s subsetting operations. The content of this post is gleaned from <a href="https://adv-r.hadley.nz/">Advance R</a>. This book is aimed at helping R users improve their programming skills beyond day-to-day data analysis. To better understand the content of this post, I recommend reading chapter 4 of Hadley’s book beforehand. Or, if you are already familiar with R’s subsetting operators, jump right in.</p>
+<p>       In this post, we will cover some useful applications of R’s subsetting operations. The content of this post is gleaned from Hadley Wickham’s <a href="https://adv-r.hadley.nz/">Advance R</a>. This book is aimed at helping R users improve their programming skills beyond day-to-day data analysis. To better understand the content of this post, I recommend reading chapter 4 of Hadley’s book beforehand. Or, if you are already familiar with R’s subsetting operators, jump right in.</p>
 <p>       I wanted to document some of the content from Hadley’s book with my added commentary to help my future self as well as others who may accidentally stumble across this post. I believe that many of these examples can be extended and employed in a variety of settings, and so my goal here is to turn this post into a resource not just for myself but perhaps others in their daily use of R. With that being said, let’s get started.</p>
 <div id="matching-and-merging-by-hand-integer-subsetting" class="section level2">
 <h2>Matching and merging by hand (integer subsetting)</h2>
@@ -91,29 +91,29 @@ df</code></pre>
 # Select the rows in the order they appear in the random vector created by sample()
 df[sample(x = nrow(df)), ]</code></pre>
 <pre><code>  x y z
-2 2 4 b
-4 1 2 d
 5 2 1 e
+4 1 2 d
 1 1 5 a
-3 3 3 c</code></pre>
+3 3 3 c
+2 2 4 b</code></pre>
 <pre class="r"><code># Select three random rows in the order they appear in the random vector
 df[sample(x = nrow(df), size = 3), ]</code></pre>
 <pre><code>  x y z
-3 3 3 c
-1 1 5 a
-5 2 1 e</code></pre>
+2 2 4 b
+5 2 1 e
+1 1 5 a</code></pre>
 <pre class="r"><code># Select 8 bootstrap replicates
 # Notice that replace = TRUE, which indicates that some rows will be selected more than once
 df[sample(x = nrow(df), size = 8, replace = TRUE), ]</code></pre>
 <pre><code>    x y z
-4   1 2 d
-1   1 5 a
-3   3 3 c
 2   2 4 b
-1.1 1 5 a
+5   2 1 e
+4   1 2 d
+4.1 1 2 d
+1   1 5 a
+5.1 2 1 e
 2.1 2 4 b
-1.2 1 5 a
-3.1 3 3 c</code></pre>
+4.2 1 2 d</code></pre>
 <p>In this example, we utilize the <code>sample()</code> function to generate a random index vector, which we then use to subset the data frame. We can easily automate this bootstrapping process by writing our own function:</p>
 <pre class="r"><code># Bootstrap data frame
 boots_df &lt;- function(df, n, replicate) {
@@ -149,21 +149,21 @@ boots_df &lt;- function(df, n, replicate) {
 <pre class="r"><code>str(boots_df(df = df, n = 4, replicate = 8))</code></pre>
 <pre><code>List of 4
  $ :&#39;data.frame&#39;:   8 obs. of  3 variables:
-  ..$ x: num [1:8] 1 2 1 2 2 2 2 2
-  ..$ y: int [1:8] 5 4 2 1 4 1 1 4
-  ..$ z: chr [1:8] &quot;a&quot; &quot;b&quot; &quot;d&quot; &quot;e&quot; ...
+  ..$ x: num [1:8] 3 1 2 1 3 2 3 2
+  ..$ y: int [1:8] 3 5 4 2 3 4 3 4
+  ..$ z: chr [1:8] &quot;c&quot; &quot;a&quot; &quot;b&quot; &quot;d&quot; ...
  $ :&#39;data.frame&#39;:   8 obs. of  3 variables:
-  ..$ x: num [1:8] 2 3 1 1 1 1 2 3
-  ..$ y: int [1:8] 1 3 2 5 5 2 4 3
-  ..$ z: chr [1:8] &quot;e&quot; &quot;c&quot; &quot;d&quot; &quot;a&quot; ...
+  ..$ x: num [1:8] 3 3 1 3 1 1 3 3
+  ..$ y: int [1:8] 3 3 5 3 5 5 3 3
+  ..$ z: chr [1:8] &quot;c&quot; &quot;c&quot; &quot;a&quot; &quot;c&quot; ...
  $ :&#39;data.frame&#39;:   8 obs. of  3 variables:
-  ..$ x: num [1:8] 2 1 2 1 1 1 1 1
-  ..$ y: int [1:8] 1 5 4 5 5 2 2 2
-  ..$ z: chr [1:8] &quot;e&quot; &quot;a&quot; &quot;b&quot; &quot;a&quot; ...
+  ..$ x: num [1:8] 1 1 2 3 2 3 1 1
+  ..$ y: int [1:8] 2 2 4 3 4 3 5 2
+  ..$ z: chr [1:8] &quot;d&quot; &quot;d&quot; &quot;b&quot; &quot;c&quot; ...
  $ :&#39;data.frame&#39;:   8 obs. of  3 variables:
-  ..$ x: num [1:8] 1 1 2 1 1 3 2 3
-  ..$ y: int [1:8] 2 2 4 5 2 3 4 3
-  ..$ z: chr [1:8] &quot;d&quot; &quot;d&quot; &quot;b&quot; &quot;a&quot; ...</code></pre>
+  ..$ x: num [1:8] 2 2 2 3 1 1 3 1
+  ..$ y: int [1:8] 4 4 1 3 5 2 3 5
+  ..$ z: chr [1:8] &quot;b&quot; &quot;b&quot; &quot;e&quot; &quot;c&quot; ...</code></pre>
 <p>As can be seen, we have a list of 4 data frames each with 8 rows of bootstrapped replicates. This function can be easily scaled to generate more bootstrap samples and more replicates per sample.</p>
 <hr />
 </div>

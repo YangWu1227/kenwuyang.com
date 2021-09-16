@@ -1,5 +1,5 @@
 ---
-title: Customizable Portfolio Dashboard Using R Shiny
+title: Creating A Customizable Portfolio Dashboard Using R Shiny
 author: Yang Wu
 date: '2021-06-17'
 slug: customizable-portfolio-dashboard
@@ -30,7 +30,7 @@ library(shiny)
 library(widgetframe)
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Shiny is a framework for creating web applications using R code. It's server uses reactive programming, which allows for an interactive approach to communicating data analysis results. Shiny allows *you*, the users of the web applications, to interact with the data and the analyses, which the creator has put together in the back-end. 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Shiny is a framework for creating web applications using R code. It's server uses reactive programming, which allows for an interactive approach to communicating data analysis results. Shiny allows *you*, the users of the web applications, to interact with the data, analysis, and results, which the creator has put together in the back-end. 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In this application, I will create a customizable portfolio dashboard that empowers you to accomplish the following:
 

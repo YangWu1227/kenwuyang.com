@@ -29,7 +29,7 @@ library(tidyverse)
 
 In my first post, we will be implementing some interesting mathematical objects in R. 
 
-Why? Why not? It's a good way to practice solving problems in R.
+Why? Why not? I believe it's a good way to practice solving problems in R.
 
 ## The Binomial Theorem
 

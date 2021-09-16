@@ -1,5 +1,5 @@
 ---
-title: Control Flow in R
+title: Control Flow and Vectorization in R
 author: Yang Wu
 date: '2020-01-04'
 slug: control-flow-in-r
@@ -48,7 +48,7 @@ output:
 
 <div id="control-flow" class="section level2">
 <h2>Control Flow</h2>
-<p>       Loops are an important programming concept, allowing programmers to execute blocks of code repeatedly, usually with varying options. This post will cover three types of loops— for, while, and repeat. We will then solve some problems using loops to demonstrate the power of iteration in programming. Whenever possible, we will attempt to solve problems using different methods, including different types of loops and parallel processing. Many of R’s functions are vectorized, meaning that the function will operate on all elements of a vector without needing to loop through and act on each element one at a time. We will leverage this unique feature of R to show that many problems that seem to involve loops can actually be solved differently in R, although the programs may be harder to intuit.</p>
+<p>       Loops are an important programming concept, enabling programmers to execute blocks of code repeatedly, usually with varying options. This post will cover three types of loops— for, while, and repeat. We will then solve some problems using loops to demonstrate the power of iteration in programming. Whenever possible, we will attempt to solve problems using different methods, including different types of loops and parallel processing. Many of R’s functions are vectorized, meaning that the function will operate on all elements of a vector without needing to loop through and act on each element one at a time. We will leverage this unique feature of R to show that many problems that seem to involve loops can actually be solved differently in R, although the programs may be harder to intuit.</p>
 <p>       For more readings on control flows in R, I suggest starting with Hadley Wickham’s <a href="https://adv-r.hadley.nz/">Advance R</a> and <a href="https://www.amazon.com/Introduction-Scientific-Programming-Simulation-Chapman/dp/1466569999">Introduction to Scientific Programming and Simulation Using R</a>.</p>
 <div id="for-loop" class="section level3">
 <h3>for loop</h3>
@@ -406,10 +406,10 @@ sum_of_sequence_vectorized(x = 0.3, n = 55)</code></pre>
 x &lt;- sample(x = 1:45, size = 200, replace = TRUE)
 # A function from the psych package
 psych::geometric.mean(x)</code></pre>
-<pre><code>[1] 16.91047</code></pre>
+<pre><code>[1] 19.10415</code></pre>
 <pre class="r"><code># Our custom function
 geometric_for_loop(x)</code></pre>
-<pre><code>[1] 16.91047</code></pre>
+<pre><code>[1] 19.10415</code></pre>
 <ul>
 <li>Geometric mean (vectorization)</li>
 </ul>
@@ -433,7 +433,7 @@ geometric_for_loop(x)</code></pre>
 }
 # Test
 geometric_vectorization(x)</code></pre>
-<pre><code>[1] 16.91047</code></pre>
+<pre><code>[1] 19.10415</code></pre>
 <ul>
 <li>Harmonic mean (for loop)</li>
 </ul>
@@ -464,10 +464,10 @@ geometric_vectorization(x)</code></pre>
 # Test
 # A function from the psych package
 psych::harmonic.mean(x)</code></pre>
-<pre><code>[1] 8.746189</code></pre>
+<pre><code>[1] 12.33392</code></pre>
 <pre class="r"><code># Our custom function
 harmonic_for_loop(x)</code></pre>
-<pre><code>[1] 8.746189</code></pre>
+<pre><code>[1] 12.33392</code></pre>
 <ul>
 <li>Harmonic mean (vectorization)</li>
 </ul>
@@ -492,7 +492,7 @@ harmonic_for_loop(x)</code></pre>
 }
 # Test
 harmonic_vectorization(x)</code></pre>
-<pre><code>[1] 8.746189</code></pre>
+<pre><code>[1] 12.33392</code></pre>
 <hr />
 </div>
 <div id="find-the-sum-of-every-nth-element-of-a-vector" class="section level2">
@@ -532,23 +532,23 @@ every_nth_element_for_loop &lt;- function(x, n) {
 # Test vector
 x &lt;- sample(x = 1:203, size = 100, replace = TRUE)
 x</code></pre>
-<pre><code>  [1]  79  40  31  29 178 201 104 167 162  35 151  44 203  86 130 160 172 117
- [19]  45  55  22 191  55 112 203 203 156  24  95 196   1 162 163 163 175  74
- [37] 147   3 189 178 129 163  27 169 145  91  16 143  65  66 186 191  71  38
- [55]  33 126 105 137  55 111 151 158  66  25 154 110  82 103 136 113  46 194
- [73]  43 129  41  31 172   4  76  32 157 180  35 132 116 148 155   6  27 135
- [91] 136 197  14   7   6  21 196 200 173 114</code></pre>
+<pre><code>  [1]  34 190 201 193 127 176  56 134 137  27  36  22  24  96 129  63  50 146
+ [19] 119 203  63  34  17   5 147  89  79  49  79  14 198  31 131 146 165  50
+ [37] 129  44  64 123  59  37  63  82  86  40  47  59 100  41  31  66 122  82
+ [55]  90 203  81  56  43 136  60 179  88  69   4  49 162 111 146  61  58  69
+ [73] 127  88 161  31 198  14  77   9  91 158  19 156  19 107  12  67 171  61
+ [91] 113  38 129  77 151  36 157 139  45  56</code></pre>
 <pre class="r"><code># A vector that contains every thirteenth element of a vector
 every_nth_element_for_loop(x = x, n = 13)</code></pre>
-<pre><code>  [1]   0   0   0   0   0   0   0   0   0   0   0   0 203   0   0   0   0   0
- [19]   0   0   0   0   0   0   0 203   0   0   0   0   0   0   0   0   0   0
- [37]   0   0 189   0   0   0   0   0   0   0   0   0   0   0   0 191   0   0
- [55]   0   0   0   0   0   0   0   0   0   0 154   0   0   0   0   0   0   0
- [73]   0   0   0   0   0   4   0   0   0   0   0   0   0   0   0   0   0   0
- [91] 136   0   0   0   0   0   0   0   0   0</code></pre>
+<pre><code>  [1]   0   0   0   0   0   0   0   0   0   0   0   0  24   0   0   0   0   0
+ [19]   0   0   0   0   0   0   0  89   0   0   0   0   0   0   0   0   0   0
+ [37]   0   0  64   0   0   0   0   0   0   0   0   0   0   0   0  66   0   0
+ [55]   0   0   0   0   0   0   0   0   0   0   4   0   0   0   0   0   0   0
+ [73]   0   0   0   0   0  14   0   0   0   0   0   0   0   0   0   0   0   0
+ [91] 113   0   0   0   0   0   0   0   0   0</code></pre>
 <pre class="r"><code># Find sum
 sum(every_nth_element_for_loop(x = x, n = 13))</code></pre>
-<pre><code>[1] 1080</code></pre>
+<pre><code>[1] 374</code></pre>
 <ul>
 <li>Using while loop</li>
 </ul>
@@ -585,7 +585,7 @@ every_nth_element_while_loop &lt;- function(x, n) {
 }
 # Test (This result should corroborate with that of the function above)
 every_nth_element_while_loop(x = x, n = 13)</code></pre>
-<pre><code>[1] 1080</code></pre>
+<pre><code>[1] 374</code></pre>
 <ul>
 <li>Using subsetting and <code>seq()</code></li>
 </ul>
@@ -601,7 +601,7 @@ every_nth_element_subsetting &lt;- function(x, n) {
 }
 # Test
 every_nth_element_subsetting(x = x, n = 13)</code></pre>
-<pre><code>[1] 1080</code></pre>
+<pre><code>[1] 374</code></pre>
 <hr />
 </div>
 <div id="chart-the-flow-of-a-simple-program" class="section level2">
@@ -737,13 +737,13 @@ x = 3932.749  y = 102.7467 </code></pre>
 x &lt;- sample(x = 20:1923, size = 1000, replace = FALSE)
 # Find min and max
 find_min_max(x, summary_stat = &quot;min&quot;)</code></pre>
-<pre><code>[1] 20</code></pre>
+<pre><code>[1] 29</code></pre>
 <pre class="r"><code>find_min_max(x, summary_stat = &quot;max&quot;)</code></pre>
-<pre><code>[1] 1923</code></pre>
+<pre><code>[1] 1918</code></pre>
 <pre class="r"><code># Confirm using base R functions
 min(x)</code></pre>
-<pre><code>[1] 20</code></pre>
+<pre><code>[1] 29</code></pre>
 <pre class="r"><code>max(x)</code></pre>
-<pre><code>[1] 1923</code></pre>
+<pre><code>[1] 1918</code></pre>
 <p>       That is it for control flows in R! Hopefully, this was helpful.</p>
 </div>

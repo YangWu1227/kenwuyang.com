@@ -1,5 +1,5 @@
 ---
-title: Portfolio Optimization and Returns
+title: Portfolio Optimization and Returns in R
 author: Yang Wu
 date: '2020-12-01'
 slug: portfolio-optimization-and-returns
@@ -47,7 +47,7 @@ output:
 </div>
 
 <p>       In this post, we will explore some finance topics— portfolio optimization and computing portfolio returns. My goal is to apply what I’ve learned in portfolio theory using R as the main tool of analysis. There are many advantages to using a GUI like MS Excel, but R has an amazing data analysis work flow— a sort of one-stop solution from initial data importation to data wrangling and transformation to computations and analysis and then finally to visualizing and reporting results. We will be using functions from several R packages— <code>xts</code>, <code>PerformanceAnalytics</code>, <code>PortfolioAnalytics</code>, <code>tidyquant</code>, <code>tidyverse</code>. In particular, the <code>tidyquant</code> <a href="https://cran.r-project.org/web/packages/tidyquant/index.html">package</a> is a recent development that has markedly enriched R’s financial analytics infrastructure, enhancing its usability in finance. While I cover some theory in this post, my main focus will be on the implementation of these topics in R.</p>
-<p>       For more readings on the theory, I recommend <a href="https://www.amazon.com/ISE-Essentials-Investments-Zvi-Bodie/dp/1260288390/">Essentials of Investments</a> and <a href="https://www.amazon.com/Practical-Portfolio-Performance-Measurement-Attribution/dp/0470059281/">Practical Portfolio Performance Measurement and Attribution</a>. To learn more about analyzing financial data in R, there is <a href="http://www.reproduciblefinance.com/">Reproducible Finance with R</a>, which is a very practical book with an emphasis on application.</p>
+<p>       For more readings on the theory, I recommend <a href="https://www.amazon.com/ISE-Essentials-Investments-Zvi-Bodie/dp/1260288390/">Essentials of Investments</a> and <a href="https://www.amazon.com/Practical-Portfolio-Performance-Measurement-Attribution/dp/0470059281/">Practical Portfolio Performance Measurement and Attribution</a>. To learn more about analyzing financial data in R, there is <a href="http://www.reproduciblefinance.com/">Reproducible Finance with R</a>, which is a very practical book with a strong emphasis on application.</p>
 <p>       With that being said, let us get financial!</p>
 <div id="optimal-weights-for-a-five-asset-portfolio-minimum-variance" class="section level2">
 <h2>Optimal Weights for a five-asset portfolio (Minimum Variance)</h2>
@@ -192,8 +192,8 @@ PortfolioAnalytics::optimize.portfolio(R = asset_returns_xts,
     trace = TRUE)
 
 Optimal Weights:
-   SPY    EFA    IJS    EEM    AGG 
-0.2179 0.0821 0.0500 0.0500 0.6000 
+  SPY   EFA   IJS   EEM   AGG 
+0.217 0.083 0.050 0.050 0.600 
 
 Objective Measure:
 StdDev 
@@ -272,8 +272,8 @@ Optimal Weights:
 0.60 0.05 0.25 0.05 0.05 
 
 Objective Measure:
-  mean 
-0.0116 </code></pre>
+   mean 
+0.01151 </code></pre>
 <hr />
 </div>
 </div>
@@ -363,11 +363,11 @@ head(portfolio_returns_xts_rebalanced_monthly, 5)</code></pre>
 3   2013-01-31   IJS  0.053516334
 4   2013-01-31   EEM -0.002930946
 5   2013-01-31   AGG -0.006211514
-521 2021-09-30   SPY -0.000221470
-522 2021-09-30   EFA  0.018477158
-523 2021-09-30   IJS -0.009739944
-524 2021-09-30   EEM  0.019461935
-525 2021-09-30   AGG -0.003045887</code></pre>
+521 2021-09-30   SPY -0.008149511
+522 2021-09-30   EFA  0.013144817
+523 2021-09-30   IJS -0.027466641
+524 2021-09-30   EEM -0.004388475
+525 2021-09-30   AGG  0.002390136</code></pre>
 <p>Since our returns data is in a “tidy” format, computing portfolio monthly returns is very a straight forward. For those who are familiar with SQL, we are essentially using the CASE statement here.</p>
 <pre class="r"><code># Use vectorized if else statements to assign weights according to the asset column
 potfolio_returns_dplyr_byhand &lt;- asset_returns_long %&gt;%

@@ -43,7 +43,7 @@ library(plotly)
 
 ## Central Limit Theorem
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The central limit theorem, crudely speaking, states that--- if there is a distribution with expected value given by the mean $\mu$ and finite variance $\sigma^2$ and we take *sufficiently* large random samples from this distribution with replacement, then the distribution of the sample means will be *approximately* normally distributed. This will hold true regardless of whether the source or "parent" distribution is normal, conditional on the fact that the sample size is sufficiently large (say, n > 30). Below we demonstrate two characteristics of the CLT:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The central limit theorem, crudely speaking, states that--- if there is a distribution with expected value given by the mean $\mu$ and finite variance $\sigma^2$ and we take *sufficiently* large random samples from this distribution with replacement, then the distribution of the sample means will be *approximately* normally distributed. This will hold true regardless of whether the source or "parent" distribution is normal, conditional on the fact that the sample size is sufficiently large (say, n > 30). In this post, we demonstrate two characteristics of the CLT:
 
 1. The mean of the distribution of sample means, $\mu_{\bar{x}}$ should converge towards the mean of the "parent population," the population from which the random samples are drawn, as $n \to \infty$.
 

@@ -1,5 +1,5 @@
 ---
-title: Visualizing Asset Returns
+title: Visualizing Asset Returns in R Using ggplot2 and highcharter
 author: Yang Wu
 date: '2021-05-01'
 slug: visualizing-asset-returns
@@ -10,7 +10,7 @@ tags:
   - Portfolio Analytics
   - Data Visualization
 subtitle: ''
-summary: 'Visualization asset returns using in the tidyverse and in xts'
+summary: 'Visualization asset returns in the tidyverse and in xts'
 authors: []
 featured: no
 image:
@@ -42,7 +42,7 @@ output:
 
 <div id="visualization-asset-returns-in-xts" class="section level2">
 <h2>Visualization Asset returns in xts</h2>
-<p>       In this post, we will explore some visualizations of asset returns. Similar to the previous <a href="https://www.kenwuyang.com/post/portfolio-returns-and-optimization/">post</a>, we import our data from Yahoo Finance. The five assets under examination are Exchange Traded Funds, which are funds that can be traded on an exchange like a stock. Exchange-traded funds are a type of investment fund that offers the best attributes of two popular assets: they have the diversification benefits of mutual funds and the ease with which stocks are traded. We will take a sample of daily prices from 2012-12-31 to 2021-7-31, converting them to monthly returns. This leaves us with a sample of 103 monthly returns. If you are interested in exploring a different sample, you could expand or shorten the time horizon upon importing the data. The visualization methods in this post are agnostic to the underlying data; the interpretation of these plots, however, will be different.</p>
+<p>       In this post, we will explore some visualizations of asset returns. Similar to the previous <a href="https://www.kenwuyang.com/en/post/portfolio-optimization-and-returns/">post</a>, we import our data from Yahoo Finance. The five assets under examination are Exchange Traded Funds, which are funds that can be traded on an exchange like a stock. Exchange-traded funds are a type of investment fund that offers the best attributes of two popular assets: they have the diversification benefits of mutual funds and the ease with which stocks are traded. We will take a sample of daily prices from 2012-12-31 to 2021-7-31, converting them to monthly returns. This leaves us with a sample of 103 monthly returns. If you are interested in exploring a different sample, you could expand or shorten the time horizon upon importing the data. The visualization methods in this post are agnostic to the underlying data; the interpretation of these plots, however, will be different.</p>
 <pre class="r"><code># Create a vector of ticker symbols
 symbols &lt;- c(&quot;SPY&quot;, &quot;EFA&quot;, &quot;DIA&quot;, &quot;QQQ&quot;, &quot;AGG&quot;)
 # Load data from 2012 to today
@@ -172,7 +172,7 @@ list_of_histogram &lt;- purrr::map(
 </div>
 <div id="visualizations-in-the-tidyvserse" class="section level2">
 <h2>Visualizations in the tidyvserse</h2>
-<p>       Similarly, we could plot our asset returns using <code>ggplot2</code>, which implements the layered grammar of graphics approach. For efficiency, we will convert the xts object into the <em>long tidy</em> format that the tidyverse functions are designed to work well with. For another method of data importation that automatically converts the data into a <em>tidy</em> format, please see this <a href="https://www.kenwuyang.com/post/portfolio-returns-and-optimization/">post</a>.</p>
+<p>       Similarly, we could plot our asset returns using <code>ggplot2</code>, which implements the layered grammar of graphics approach. For efficiency, we will convert the xts object into the <em>long tidy</em> format that the tidyverse functions are designed to work well with. For another method of data importation that automatically converts the data into a <em>tidy</em> format, please see this <a href="https://www.kenwuyang.com/en/post/portfolio-optimization-and-returns/">post</a>.</p>
 <pre class="r"><code>asset_returns_dplyr &lt;- xts::to.monthly(
   x = prices,
   drop.time = TRUE,

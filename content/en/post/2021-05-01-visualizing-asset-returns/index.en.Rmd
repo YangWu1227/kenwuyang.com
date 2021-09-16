@@ -10,7 +10,7 @@ tags:
   - Portfolio Analytics
   - Data Visualization
 subtitle: ''
-summary: 'Visualization asset returns using in the tidyverse and in xts'
+summary: 'Visualization asset returns in the tidyverse and in xts'
 authors: []
 featured: no
 image:
@@ -225,7 +225,7 @@ The Invesco QQQ Trust Series 1 ETF (QQQ) stands out as a strong performing asset
 
 ## Visualizations in the tidyvserse
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Similarly, we could plot our asset returns using `ggplot2`, which implements the layered grammar of graphics approach. For efficiency, we will convert the xts object into the *long tidy* format that the tidyverse functions are designed to work well with. For another method of data importation that automatically converts the data into a *tidy* format, please see this [post](https://www.kenwuyang.com/post/portfolio-returns-and-optimization/).
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Similarly, we could plot our asset returns using `ggplot2`, which implements the layered grammar of graphics approach. For efficiency, we will convert the xts object into the *long tidy* format that the tidyverse functions are designed to work well with. For another method of data importation that automatically converts the data into a *tidy* format, please see this [post](https://www.kenwuyang.com/en/post/portfolio-optimization-and-returns/).
 
 ```{r}
 asset_returns_dplyr <- xts::to.monthly(
