@@ -34,7 +34,7 @@ library(bbmle)
 options(digits = 7)
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In my [post on function factories](https://www.kenwuyang.com/post/function-factories-part-i/), we discussed the R data structure that powers function factories--- environments. Now, we will focus on some applications of function factories in statistics. Again, the content of this post is inspired by [Advance R](https://adv-r.hadley.nz/); those who may be interested in learning more could turn to Hadley's book for more information. Here we go!
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In my [post on function factories](https://www.kenwuyang.com/en/post/function-factories-part-i/), we discussed the R data structure that powers function factories--- environments. Now, we will focus on some applications of function factories in statistics. Again, the content of this post is inspired by [Advance R](https://adv-r.hadley.nz/); those who may be interested in learning more could turn to Hadley's book for more information. Here we go!
 
 ---
 

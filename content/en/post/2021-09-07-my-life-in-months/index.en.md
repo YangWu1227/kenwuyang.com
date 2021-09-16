@@ -1,5 +1,5 @@
 ---
-title: My Life In Months
+title: Visualizing My Life In Months 
 author: Yang Wu
 date: '2021-09-07'
 slug: my-life-in-months

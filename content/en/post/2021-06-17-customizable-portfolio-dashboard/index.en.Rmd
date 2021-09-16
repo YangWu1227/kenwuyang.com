@@ -1,5 +1,5 @@
 ---
-title: Customizable Portfolio Dashboard
+title: Customizable Portfolio Dashboard Using R Shiny
 author: Yang Wu
 date: '2021-06-17'
 slug: customizable-portfolio-dashboard

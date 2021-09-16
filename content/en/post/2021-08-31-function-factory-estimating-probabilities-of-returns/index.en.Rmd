@@ -41,13 +41,13 @@ library(kableExtra)
 options(digits = 7)
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In a previous [post](https://www.kenwuyang.com/post/visualizing-asset-returns/), we covered some techniques for visualizing financial data--- specifically, asset returns--- using various types of visualization and R graphics libraries. We explored line charts, histograms, and density plots, which are all very useful ways to visualize asset returns. Nevertheless, we were left with a question--- *how could one estimate the probabilities of these returns?* We are interested in this question since stakeholders may need more information than what visualizations could provide. Simply put, stakeholders may need us to provide some ways to ascertain uncertainty, as difficult as this may seem, and we must answer the call.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In a previous [post](https://www.kenwuyang.com/en/post/visualizing-asset-returns/), we covered some techniques for visualizing financial data--- specifically, asset returns--- using various types of visualization and R graphics libraries. We explored line charts, histograms, and density plots, which are all very useful ways to visualize asset returns. Nevertheless, we were left with a question--- *how could one estimate the probabilities of these returns?* We are interested in this question since stakeholders may need more information than what visualizations could provide. Simply put, stakeholders may need us to provide some ways to ascertain uncertainty, as difficult as this may seem, and we must answer the call.
 
 ---
 
 ## The problem
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The last time we examined financial data, we focused on a class of assets called the Exchange Traded Funds. We took a sample of daily prices from 2012-12-31 to 2021-7-31 and converted them to monthly log returns. This ultimately left us with a sample of 103 monthly log returns. The last section of my [post](https://www.kenwuyang.com/post/visualizing-asset-returns/) on asset visualization ended with this following visualization:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The last time we examined financial data, we focused on a class of assets called the Exchange Traded Funds. We took a sample of daily prices from 2012-12-31 to 2021-7-31 and converted them to monthly log returns. This ultimately left us with a sample of 103 monthly log returns. The last section of my [post](https://www.kenwuyang.com/en/post/visualizing-asset-returns/) on asset visualization ended with this following visualization:
 
 ```{r, out.height="100%", out.width="100%", echo=FALSE}
 # Import image

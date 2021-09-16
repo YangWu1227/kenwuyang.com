@@ -1,5 +1,5 @@
 ---
-title: Portfolio Optimization and Returns
+title: Portfolio Optimization and Returns in R
 author: Yang Wu
 date: '2020-12-01'
 slug: portfolio-optimization-and-returns

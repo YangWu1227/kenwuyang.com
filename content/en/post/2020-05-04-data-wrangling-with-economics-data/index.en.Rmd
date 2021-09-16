@@ -1,5 +1,5 @@
 ---
-title: Data Wrangling with Economics Data
+title: Data Wrangling with Economics Data in R
 author: Yang Wu
 date: '2020-05-04'
 slug: data-wrangling-with-economics-data

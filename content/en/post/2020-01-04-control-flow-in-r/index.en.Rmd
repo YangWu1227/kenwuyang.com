@@ -1,5 +1,5 @@
 ---
-title: Control Flow in R
+title: Control Flow and Vectorization in R
 author: Yang Wu
 date: '2020-01-04'
 slug: control-flow-in-r

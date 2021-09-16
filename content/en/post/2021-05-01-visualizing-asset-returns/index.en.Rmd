@@ -1,5 +1,5 @@
 ---
-title: Visualizing Asset Returns
+title: Visualizing Asset Returns in R Using ggplot2 and highcharter
 author: Yang Wu
 date: '2021-05-01'
 slug: visualizing-asset-returns
@@ -45,7 +45,7 @@ options(digits = 7)
 
 ## Visualization Asset returns in xts
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In this post, we will explore some visualizations of asset returns. Similar to the previous [post](https://www.kenwuyang.com/post/portfolio-returns-and-optimization/), we import our data from Yahoo Finance. The five assets under examination are Exchange Traded Funds, which are funds that can be traded on an exchange like a stock. Exchange-traded funds are a type of investment fund that offers the best attributes of two popular assets: they have the diversification benefits of mutual funds and the ease with which stocks are traded. We will take a sample of daily prices from 2012-12-31 to 2021-7-31, converting them to monthly returns. This leaves us with a sample of 103 monthly returns. If you are interested in exploring a different sample, you could expand or shorten the time horizon upon importing the data. The visualization methods in this post are agnostic to the underlying data; the interpretation of these plots, however, will be different. 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In this post, we will explore some visualizations of asset returns. Similar to the previous [post](https://www.kenwuyang.com/en/post/portfolio-optimization-and-returns/), we import our data from Yahoo Finance. The five assets under examination are Exchange Traded Funds, which are funds that can be traded on an exchange like a stock. Exchange-traded funds are a type of investment fund that offers the best attributes of two popular assets: they have the diversification benefits of mutual funds and the ease with which stocks are traded. We will take a sample of daily prices from 2012-12-31 to 2021-7-31, converting them to monthly returns. This leaves us with a sample of 103 monthly returns. If you are interested in exploring a different sample, you could expand or shorten the time horizon upon importing the data. The visualization methods in this post are agnostic to the underlying data; the interpretation of these plots, however, will be different. 
 
 ```{r}
 # Create a vector of ticker symbols
