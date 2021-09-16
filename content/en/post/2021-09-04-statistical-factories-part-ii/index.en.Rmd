@@ -103,7 +103,7 @@ ggplot(data = tibble::tibble("new_y" = box_cox_5(y)), mapping = aes(x = new_y)) 
   )
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This is by no means the *optimal* transformation, but it allows us to see the significant change to the distribution of our data. An added benefit to using the function factory is that we can visually explore how different values of $\lambda$ transform our data. This can be carried out with the help of `ggplot2::stat_function`:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This is by no means the *optimal* transformation, but it allows us to see the significant change to the distribution of our data. An added benefit of using the function factory is that we can visually explore how different values of $\lambda$ transform our data. This can be carried out with the help of `ggplot2::stat_function`:
 
 ```{r}
 box_cox_plot_function <- function(lambda) {
