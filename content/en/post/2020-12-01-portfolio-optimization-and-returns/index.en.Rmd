@@ -180,7 +180,7 @@ global_min_portfolio
 
 ## Optimal Weights for the five-asset portfolio (Maximum Expected Return)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Now that we found the global minimum variance portfolio, we may be interested in finding the miximal expected return portfolio. The objective is one of maximization:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Now that we found the global minimum variance portfolio, we may be interested in finding the maximal expected return portfolio. The objective is one of maximization:
 
 \begin{align*}
 \text{Maximize}\hspace{2mm}(\vec{\mu}^{T}\vec{W})
@@ -292,7 +292,7 @@ head(portfolio_returns_by_hand, 5)
 
 ### Monthly portfolio returns in xts
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Another way to compute portfolio monthly returns is to use functions from the `PerformanceAnalytics` package, which works well with `xts` objects. We also adopt an investment strategy known as rebalancing. The rebalancing of investments is the action of keeping the portfolio weights consistent with the optimal weights. Note that rebalancing the weights every month is unrealistic; the convention is to rebalance quaterly or annually. For this example, however, we will rebalance monthly to be consistent with our brute force computation.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Another way to compute portfolio monthly returns is to use functions from the `PerformanceAnalytics` package, which works well with `xts` objects. We also adopt monthly re-balancing as a strategy. The re-balancing of investments is the action of keeping the portfolio weights consistent with the optimal weights. Note that re-balancing the weights every month may be unrealistic; in reality, the convention is often to re-balance quarterly or annually. For this example, however, we will re-balance monthly to be consistent with our brute force computation.  
 
 ```{r}
 # Compute monthly portfolio returns
@@ -316,7 +316,7 @@ head(portfolio_returns_xts_rebalanced_monthly, 5)
 
 ### Monthly portfolio returns in the tidyverse
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The `tidyverse` is a collection of R packages designed with the same underlying philosophy, grammar, and data structures. Simply put, the "tidy" data structure that works well with tidyverse functions is one where every row is an observation and every column is a variable. If we re-examine the `xts` object called "asset_returns_xts", we see that every column is a returns series for a particular asset. This is inconsistent with the tidyverse data structure, and so we must convert the xts object to a tidy format for our computations. Ideally, we would like to have one column called "asset" that specifies the names of the ETF instead of having five individual columns of returns data. This idea will become clearer once we convert our xts object to a tibble.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The `tidyverse` is a collection of R packages designed with the same underlying philosophy, grammar, and data structures. Simply put, the "tidy" data structure that works well with tidyverse functions is one where every row is an observation and every column is a variable. If we re-examine the `xts` object called "asset_returns_xts," we see that every column is a returns series for a particular asset. This is inconsistent with the tidyverse data structure, and so we must convert the xts object to a tidy format for our computations. Ideally, we would like to have one column called "asset" that specifies the names of the ETF instead of having five individual columns of returns data. This idea will become clearer once we convert our xts object to a tibble.
 
 ```{r, include=FALSE}
 # Convert from xts object to tibble
@@ -444,7 +444,7 @@ asset_returns_tq <- tidyquant::tq_get(
   na.omit()
 ```
 
-* The function `tq_get(x, get = "stock.prices", complete_cases = TRUE, ...)` gets data in tibble format. The most important argument is perhaps the dot-dot-dot, since these are the arguments passed to the underlying functions from the other pacakges that `tq_get()` uses. There could be multiple layers of wrapper functions, and so it is best practice to read the documentations carefully.
+* The function `tq_get(x, get = "stock.prices", complete_cases = TRUE, ...)` gets data in tibble format. The most important argument is perhaps the dot-dot-dot, since these are the arguments passed to the underlying functions from the other packages that `tq_get()` uses. There could be multiple layers of wrapper functions, and so it is best practice to read the documentations carefully.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A possibly more useful method of aggregating asset returns to portfolio returns is then to *map a tibble of ticker symbols and weights to the tibble of ticker symbols and monthly returns*:
 

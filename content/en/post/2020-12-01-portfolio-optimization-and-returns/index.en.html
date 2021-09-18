@@ -193,17 +193,17 @@ PortfolioAnalytics::optimize.portfolio(R = asset_returns_xts,
 
 Optimal Weights:
   SPY   EFA   IJS   EEM   AGG 
-0.217 0.083 0.050 0.050 0.600 
+0.213 0.087 0.050 0.050 0.600 
 
 Objective Measure:
-StdDev 
-0.0164 </code></pre>
+ StdDev 
+0.01644 </code></pre>
 <hr />
 </div>
 </div>
 <div id="optimal-weights-for-the-five-asset-portfolio-maximum-expected-return" class="section level2">
 <h2>Optimal Weights for the five-asset portfolio (Maximum Expected Return)</h2>
-<p>       Now that we found the global minimum variance portfolio, we may be interested in finding the miximal expected return portfolio. The objective is one of maximization:</p>
+<p>       Now that we found the global minimum variance portfolio, we may be interested in finding the maximal expected return portfolio. The objective is one of maximization:</p>
 <p><span class="math display">\[\begin{align*}
 \text{Maximize}\hspace{2mm}(\vec{\mu}^{T}\vec{W})
 \end{align*}\]</span></p>
@@ -272,8 +272,8 @@ Optimal Weights:
 0.60 0.05 0.25 0.05 0.05 
 
 Objective Measure:
-   mean 
-0.01151 </code></pre>
+  mean 
+0.0114 </code></pre>
 <hr />
 </div>
 </div>
@@ -327,7 +327,7 @@ head(portfolio_returns_by_hand, 5)</code></pre>
 </div>
 <div id="monthly-portfolio-returns-in-xts" class="section level3">
 <h3>Monthly portfolio returns in xts</h3>
-<p>       Another way to compute portfolio monthly returns is to use functions from the <code>PerformanceAnalytics</code> package, which works well with <code>xts</code> objects. We also adopt an investment strategy known as rebalancing. The rebalancing of investments is the action of keeping the portfolio weights consistent with the optimal weights. Note that rebalancing the weights every month is unrealistic; the convention is to rebalance quaterly or annually. For this example, however, we will rebalance monthly to be consistent with our brute force computation.</p>
+<p>       Another way to compute portfolio monthly returns is to use functions from the <code>PerformanceAnalytics</code> package, which works well with <code>xts</code> objects. We also adopt monthly re-balancing as a strategy. The re-balancing of investments is the action of keeping the portfolio weights consistent with the optimal weights. Note that re-balancing the weights every month may be unrealistic; in reality, the convention is often to re-balance quarterly or annually. For this example, however, we will re-balance monthly to be consistent with our brute force computation.</p>
 <pre class="r"><code># Compute monthly portfolio returns
 portfolio_returns_xts_rebalanced_monthly &lt;-
   PerformanceAnalytics::Return.portfolio(
@@ -354,20 +354,20 @@ head(portfolio_returns_xts_rebalanced_monthly, 5)</code></pre>
 </div>
 <div id="monthly-portfolio-returns-in-the-tidyverse" class="section level3">
 <h3>Monthly portfolio returns in the tidyverse</h3>
-<p>       The <code>tidyverse</code> is a collection of R packages designed with the same underlying philosophy, grammar, and data structures. Simply put, the “tidy” data structure that works well with tidyverse functions is one where every row is an observation and every column is a variable. If we re-examine the <code>xts</code> object called “asset_returns_xts”, we see that every column is a returns series for a particular asset. This is inconsistent with the tidyverse data structure, and so we must convert the xts object to a tidy format for our computations. Ideally, we would like to have one column called “asset” that specifies the names of the ETF instead of having five individual columns of returns data. This idea will become clearer once we convert our xts object to a tibble.</p>
+<p>       The <code>tidyverse</code> is a collection of R packages designed with the same underlying philosophy, grammar, and data structures. Simply put, the “tidy” data structure that works well with tidyverse functions is one where every row is an observation and every column is a variable. If we re-examine the <code>xts</code> object called “asset_returns_xts,” we see that every column is a returns series for a particular asset. This is inconsistent with the tidyverse data structure, and so we must convert the xts object to a tidy format for our computations. Ideally, we would like to have one column called “asset” that specifies the names of the ETF instead of having five individual columns of returns data. This idea will become clearer once we convert our xts object to a tibble.</p>
 <p>Now, examine the “tidy” data structure and compare it to the xts object created earlier:</p>
 <pre class="r"><code>FSA::headtail(asset_returns_long, n = 5)</code></pre>
-<pre><code>          date asset      returns
-1   2013-01-31   SPY  0.051190516
-2   2013-01-31   EFA  0.037284657
-3   2013-01-31   IJS  0.053516334
-4   2013-01-31   EEM -0.002930946
-5   2013-01-31   AGG -0.006211514
-521 2021-09-30   SPY -0.008149511
-522 2021-09-30   EFA  0.013144817
-523 2021-09-30   IJS -0.027466641
-524 2021-09-30   EEM -0.004388475
-525 2021-09-30   AGG  0.002390136</code></pre>
+<pre><code>          date asset       returns
+1   2013-01-31   SPY  0.0511905160
+2   2013-01-31   EFA  0.0372846569
+3   2013-01-31   IJS  0.0535163338
+4   2013-01-31   EEM -0.0029309465
+5   2013-01-31   AGG -0.0062115144
+521 2021-09-30   SPY -0.0224997875
+522 2021-09-30   EFA -0.0017360987
+523 2021-09-30   IJS -0.0316548170
+524 2021-09-30   EEM -0.0198435604
+525 2021-09-30   AGG -0.0001984158</code></pre>
 <p>Since our returns data is in a “tidy” format, computing portfolio monthly returns is very a straight forward. For those who are familiar with SQL, we are essentially using the CASE statement here.</p>
 <pre class="r"><code># Use vectorized if else statements to assign weights according to the asset column
 potfolio_returns_dplyr_byhand &lt;- asset_returns_long %&gt;%
@@ -460,7 +460,7 @@ asset_returns_tq &lt;- tidyquant::tq_get(
   dplyr::rename(asset = symbol) %&gt;%
   na.omit()</code></pre>
 <ul>
-<li>The function <code>tq_get(x, get = "stock.prices", complete_cases = TRUE, ...)</code> gets data in tibble format. The most important argument is perhaps the dot-dot-dot, since these are the arguments passed to the underlying functions from the other pacakges that <code>tq_get()</code> uses. There could be multiple layers of wrapper functions, and so it is best practice to read the documentations carefully.</li>
+<li>The function <code>tq_get(x, get = "stock.prices", complete_cases = TRUE, ...)</code> gets data in tibble format. The most important argument is perhaps the dot-dot-dot, since these are the arguments passed to the underlying functions from the other packages that <code>tq_get()</code> uses. There could be multiple layers of wrapper functions, and so it is best practice to read the documentations carefully.</li>
 </ul>
 <p>       A possibly more useful method of aggregating asset returns to portfolio returns is then to <em>map a tibble of ticker symbols and weights to the tibble of ticker symbols and monthly returns</em>:</p>
 <pre class="r"><code># Create a tibble of weights

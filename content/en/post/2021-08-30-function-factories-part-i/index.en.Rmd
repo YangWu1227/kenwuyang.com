@@ -111,9 +111,9 @@ rlang::fn_env(fn = cube)[["exp"]]
 
 * The global environment is represented by the rectangular shape labeled "R_GlobalEnv."
 
-* The execution environments of `power` or, equivalently, the enclosing environments of `square` and `cube` are symbolized by the grey boxes each of which has a binding to `exp`. 
+* The execution environments of `power` or, equivalently, the enclosing environments of `square` and `cube` are symbolized by the grey boxes each of which has a binding from the name `exp` to a double vector object. 
 
-* The black arrows indicate **bindings** either from names to objects--- be it a function object like `power` or a vector object like 2--- or from a function object to its enclosing environment--- whether it is when `power` binds its enclosing global environment or when `square` and `cube` bind to their respective enclosing environments.
+* The black arrows indicate **bindings** either from names to objects--- be it a function object like `power` or a vector object like 2--- or from a function object to its enclosing environment--- be it when `power` binds its enclosing global environment or when `square` and `cube` bind their respective enclosing environments.
 
 * The blue arrows indicate relationships between environments and their parent environments. The blue arrow always goes in a one-way direction from the child environment to the parent environment.
 
@@ -131,7 +131,7 @@ From the diagram, the relationships can be summarized as follows:
 
   - The two execution environments are bound by the function objects `square` and `cube`, which is why there are black arrows pointing from their structures to the grey boxes in the diagram above. 
   
-  - The two execution environments each has its own binding to `exp` as indicated by the black arrows pointing from the grey boxes to the values 2 and 3. 
+  - The two execution environments each has its own binding from the name `exp` to the double vector objects; this is indicated by the black arrows pointing from the grey boxes to the values 2 and 3. 
   
 ---
 
@@ -171,7 +171,7 @@ square(x = 10) %>%
 rlang::env_print(env = square)
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; As can be seen, the first line of the output above indeed matches with the second line of the output from earlier. We now have a proof of the relationship between the execution environment and the enclosing environment of a manufactured function. And, it is no different than the those of any other functions.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; As can be seen, the first line of the output above indeed matches with the second line of the output from earlier. We now have a proof of the relationship between the execution environment and the enclosing environment of a manufactured function. And, it is no different than the relationships between environments of any other functions.
 
 ## Diagram
 
@@ -183,13 +183,13 @@ knitr::include_graphics(path = "square.png")
 
 The relationships in the diagram can be summarized as follows: 
 
-* The boat-like structure represents `square` (clearly, the name `square` is bound to this function object via the black arrow). The function also binds its enclosing environment, which is the grey box containing a binding to `exp`. Recall, that this is also the one of the execution environments of `power`. However, in this diagram, we are zooming in to get a more focused view on the manufactured function `square`.  
+* The boat-like structure represents `square` (clearly, the name `square` is bound to this function object via the black arrow). The function also binds its enclosing environment, which is the grey box containing a binding `exp`. Recall that this environment was also the one of the execution environments of `power`. However, in this diagram, we are zooming in to get a more focused view on the manufactured function `square`.  
 
 * What we have proved in the section above is precisely the relationship between the grey box on top of `square` and the grey box to the right of `square`. The grey box on top is indeed the execution environment of `square` (with the blue arrow pointing to the function object), and the grey box to the right is its enclosing environment. When `square` is executed, it scopes for the value of "x" in the execution environment, $x=10$, and the value of `exp` in its enclosing environment, which is 2.
 
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; And, this is what makes a function factory special. The behavior of any manufactured function is powered by the execution environment of the factory function, which is different each time the factory function is used to created a manufactured function. With this core idea under our belt, we will be able to produce some elegant solutions when it comes to creating formatter functions for graphs or statistical functions used to transform, sample, or estimate data. We will tackle all of these in the next few posts. 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; And, this is what makes a function factory special. The behavior of any manufactured function is powered by the execution environment of the factory function, which is different each time the factory function is used to create a manufactured function. With this core idea under our belt, we will be able to produce some elegant solutions when it comes to creating formatter functions for graphs or statistical functions used to transform, sample, or estimate data. We will tackle all of these in the next few posts. 
 
 
 
