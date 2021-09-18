@@ -183,7 +183,7 @@ knitr::include_graphics(path = "square.png")
 
 The relationships in the diagram can be summarized as follows: 
 
-* The boat-like structure represents `square` (clearly, the name `square` is bound to this function object via the black arrow). The function also binds its enclosing environment, which is the grey box containing a binding `exp`. Recall that this environment was also the one of the execution environments of `power`. However, in this diagram, we are zooming in to get a more focused view on the manufactured function `square`.  
+* The boat-like structure represents `square` (clearly, the name `square` is bound to this function object via the black arrow). The function also binds its enclosing environment, which is the grey box containing a binding `exp`. Recall that this environment was also one of the execution environments of `power`. However, in this diagram, we are zooming in to get a more focused view on the manufactured function `square`.  
 
 * What we have proved in the section above is precisely the relationship between the grey box on top of `square` and the grey box to the right of `square`. The grey box on top is indeed the execution environment of `square` (with the blue arrow pointing to the function object), and the grey box to the right is its enclosing environment. When `square` is executed, it scopes for the value of "x" in the execution environment, $x=10$, and the value of `exp` in its enclosing environment, which is 2.
 

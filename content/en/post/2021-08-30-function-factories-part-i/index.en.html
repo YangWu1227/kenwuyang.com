@@ -70,23 +70,23 @@ cube &lt;- power(exp = 3)</code></pre>
 <pre><code>function(x) {
     x ^ exp
   }
-&lt;environment: 0x7fe760e16148&gt;</code></pre>
+&lt;environment: 0x7f87b76e7148&gt;</code></pre>
 <pre class="r"><code>cube</code></pre>
 <pre><code>function(x) {
     x ^ exp
   }
-&lt;bytecode: 0x7fe7600b29e0&gt;
-&lt;environment: 0x7fe764bc8050&gt;</code></pre>
+&lt;bytecode: 0x7f87bb1e03e0&gt;
+&lt;environment: 0x7f87b7e6d450&gt;</code></pre>
 <p>         It turns out that the most important difference between these functions is that they have different enclosing or function environments (see the different environment addresses in the output above). The enclosing environments control how these functions scope for values of <code>exp</code>. Each time a function is executed in R, a new <strong>execution</strong> environment is created to host its execution. The first time we executed <code>power</code> to create <code>square</code>, an environment is created. Then, another execution environment of <code>power</code> is created when we generated <code>cube</code>. These two execution environments are the <strong>enclosing environments</strong> of <code>square</code> and <code>cube</code>. The <code>rlang</code> package contains functions that provide more insights into these relationships:</p>
 <pre class="r"><code># Examine the environments associated with the function square
 rlang::env_print(env = square)</code></pre>
-<pre><code>&lt;environment: 0x7fe760e16148&gt;
+<pre><code>&lt;environment: 0x7f87b76e7148&gt;
 parent: &lt;environment: global&gt;
 bindings:
  * exp: &lt;dbl&gt;</code></pre>
 <pre class="r"><code># Examine the environments associated with the function cube
 rlang::env_print(env = cube)</code></pre>
-<pre><code>&lt;environment: 0x7fe764bc8050&gt;
+<pre><code>&lt;environment: 0x7f87b7e6d450&gt;
 parent: &lt;environment: global&gt;
 bindings:
  * exp: &lt;dbl&gt;</code></pre>
@@ -150,13 +150,13 @@ square &lt;- power(exp = 2)</code></pre>
 square(x = 10) %&gt;% 
   # Execution and its parent environment
   rlang::env_print()</code></pre>
-<pre><code>&lt;environment: 0x7fe763cce330&gt;
-parent: &lt;environment: 0x7fe765013e38&gt;
+<pre><code>&lt;environment: 0x7f87bb130f30&gt;
+parent: &lt;environment: 0x7f87ba13e038&gt;
 bindings:
  * x: &lt;dbl&gt;</code></pre>
 <p>         In the output above, the <strong>first line</strong> represents the address of the execution environment of <code>square</code>. The <strong>last line</strong> shows that there is a binding from the name “x” to a double vector object (“dbl” is short for double), which is the argument that we supplied to the function <code>square</code>, <span class="math inline">\(x=10\)</span>. The <strong>second line</strong> of the output above is of the utmost importance and it should make sense— it is the enclosing environment of <code>square</code>. How can we be sure? Well, we can manually check the enclosing environment of <code>square</code>:</p>
 <pre class="r"><code>rlang::env_print(env = square)</code></pre>
-<pre><code>&lt;environment: 0x7fe765013e38&gt;
+<pre><code>&lt;environment: 0x7f87ba13e038&gt;
 parent: &lt;environment: global&gt;
 bindings:
  * exp: &lt;dbl&gt;</code></pre>
@@ -172,7 +172,7 @@ Figure 2: Diagram from <a href="https://adv-r.hadley.nz/function-factories.html"
 </div>
 <p>The relationships in the diagram can be summarized as follows:</p>
 <ul>
-<li><p>The boat-like structure represents <code>square</code> (clearly, the name <code>square</code> is bound to this function object via the black arrow). The function also binds its enclosing environment, which is the grey box containing a binding <code>exp</code>. Recall that this environment was also the one of the execution environments of <code>power</code>. However, in this diagram, we are zooming in to get a more focused view on the manufactured function <code>square</code>.</p></li>
+<li><p>The boat-like structure represents <code>square</code> (clearly, the name <code>square</code> is bound to this function object via the black arrow). The function also binds its enclosing environment, which is the grey box containing a binding <code>exp</code>. Recall that this environment was also one of the execution environments of <code>power</code>. However, in this diagram, we are zooming in to get a more focused view on the manufactured function <code>square</code>.</p></li>
 <li><p>What we have proved in the section above is precisely the relationship between the grey box on top of <code>square</code> and the grey box to the right of <code>square</code>. The grey box on top is indeed the execution environment of <code>square</code> (with the blue arrow pointing to the function object), and the grey box to the right is its enclosing environment. When <code>square</code> is executed, it scopes for the value of “x” in the execution environment, <span class="math inline">\(x=10\)</span>, and the value of <code>exp</code> in its enclosing environment, which is 2.</p></li>
 </ul>
 <hr />
