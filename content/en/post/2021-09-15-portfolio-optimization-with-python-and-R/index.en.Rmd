@@ -70,7 +70,7 @@ import scipy.interpolate as sci
 
 ## Data
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For our sample, we select 12 different assets for the analysis with exposure to all of the GICS sectors— energy, materials, industrials, utilities, healthcare, financials, consumer discretionary, consumer staples, information technology, communication services, and real estate. The start date is 2011-09-13 and the end date is by default today's date, which is `r Sys.Date()`.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For our sample, we select 12 different assets for the analysis with exposure to all of the GICS sectors—-- energy, materials, industrials, utilities, healthcare, financials, consumer discretionary, consumer staples, information technology, communication services, and real estate. The start date is 2011-09-13 and the end date is by default today's date, which is `r Sys.Date()`.
 
 ```{python}
 # Create a list of symbols
@@ -124,7 +124,7 @@ daily_returns.tail(n = 5)
 daily_returns.mean() * 253
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; As can be seen, there are significant differences in the annualized performances between these assets. Amazon dominated the period with an annualized rate of return of $32.6\%$. Exxon Mobil Corporation, on the other hand, is at the bottom of the rankings, recording an annualized rate of return of only $4.7\%$ over the period. The annualized variance-covariance matrix of the returns can be computed using built-in `pandas` method `cov`:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; As can be seen, there are significant differences in the annualized performances between these assets. Amazon dominated the period with an annualized rate of return of $32.2\%$. Exxon Mobil Corporation, on the other hand, is at the bottom of the rankings, recording an annualized rate of return of only $4.2\%$ over the period. The annualized variance-covariance matrix of the returns can be computed using built-in `pandas` method `cov`:
 
 ```{python}
 daily_returns.cov() * 253
@@ -525,7 +525,7 @@ plotly::colorbar(title = "Sharpe Ratio")
 
 ## Capital Market Line
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Now that we have determined a set of efficient portfolios of risky assets, we may be interested in adding a risk-free asset to the mix. By adjusting the wealth allocation for the risk-free asset, it is possible for us to achieve any risk-return profile that lies on the straight line (in the the $\mu-\sigma$ diagram) between the risk-free asset and an efficient portfolio. This is called the capital market line, which is drawn from the point of the risk-free asset to the feasible region for risky assets. The capital market line has the equation:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Now that we have determined a set of efficient portfolios of risky assets, we may be interested in adding a risk-free asset to the mix. By adjusting the wealth allocation for the risk-free asset, it is possible for us to achieve any risk-return profile that lies on the straight line (in the $\mu-\sigma$ diagram) between the risk-free asset and an efficient portfolio. This is called the capital market line, which is drawn from the point of the risk-free asset to the feasible region for risky assets. The capital market line has the equation:
 
 \begin{align*}
 R_{p}=r_{f}+\frac{R_{T}-r_{f}}{\sigma_{T}} \sigma_{p}
@@ -766,7 +766,7 @@ plotly::plot_ly(
     annotations = list(
       x = py$tangency_port_sd,
       y = py$tangency_port_return,
-      text = "Tangency Portfolio \n Expected Return: 26.73% \n Volatility: 17.7%",
+      text = "Tangency Portfolio \n Expected Return: 26.64% \n Volatility: 17.83%",
       xref = "x",
       yref = "y",
       showarrow = TRUE,
