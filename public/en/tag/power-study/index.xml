@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Power Study | Yang (Ken) Wu</title>
+    <link>https://www.kenwuyang.com/en/tag/power-study/</link>
+      <atom:link href="https://www.kenwuyang.com/en/tag/power-study/index.xml" rel="self" type="application/rss+xml" />
+    <description>Power Study</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Yang Wu</copyright><lastBuildDate>Fri, 13 Nov 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://www.kenwuyang.com/media/Sharing.png</url>
+      <title>Power Study</title>
+      <link>https://www.kenwuyang.com/en/tag/power-study/</link>
+    </image>
+    
+    <item>
+      <title>Monte Carlo Simulation Study</title>
+      <link>https://www.kenwuyang.com/en/project/monte-carlo-simulation-study/</link>
+      <pubDate>Fri, 13 Nov 2020 00:00:00 +0000</pubDate>
+      <guid>https://www.kenwuyang.com/en/project/monte-carlo-simulation-study/</guid>
+      <description>&lt;p&gt;       This was a simulation project for my &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-statistics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;statistical simulation&lt;/a&gt; class. For better resolution, please enter full-screen (cmd + shift + f). For speaker notes, please press &amp;ldquo;S&amp;rdquo; on the keyboard while viewing the slides.&lt;/p&gt;
+&lt;iframe src=&#34;https://docs.google.com/presentation/d/e/2PACX-1vRLKjvxafrOkd1P16bRDnQ8WrCNHgBFqHxbvNShrldeFKyUt7ouZrQMpXnhksVViyYTwzX1uQ2mdtjP/embed?start=false&amp;loop=false&amp;delayms=3000&#34; frameborder=&#34;0&#34; width=&#34;750&#34; height=&#34;600&#34; allowfullscreen=&#34;true&#34; mozallowfullscreen=&#34;true&#34; webkitallowfullscreen=&#34;true&#34;&gt;&lt;/iframe&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

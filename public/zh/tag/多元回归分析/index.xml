@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>多元回归分析 | 武阳</title>
+    <link>https://www.kenwuyang.com/zh/tag/%E5%A4%9A%E5%85%83%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/</link>
+      <atom:link href="https://www.kenwuyang.com/zh/tag/%E5%A4%9A%E5%85%83%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/index.xml" rel="self" type="application/rss+xml" />
+    <description>多元回归分析</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>zh-Hans</language><copyright>© 2021 Yang Wu</copyright><lastBuildDate>Sat, 01 May 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://www.kenwuyang.com/media/Sharing.png</url>
+      <title>多元回归分析</title>
+      <link>https://www.kenwuyang.com/zh/tag/%E5%A4%9A%E5%85%83%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/</link>
+    </image>
+    
+    <item>
+      <title>数据分析：癌症患者前列腺特异性抗原水平</title>
+      <link>https://www.kenwuyang.com/zh/project/modeling-prostate-specific-antigen-levels/</link>
+      <pubDate>Sat, 01 May 2021 00:00:00 +0000</pubDate>
+      <guid>https://www.kenwuyang.com/zh/project/modeling-prostate-specific-antigen-levels/</guid>
+      <description>&lt;p&gt;       这份报告是我本科 &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-statistics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;多元回归分析&lt;/a&gt; 课程中接触的模拟项目。
+模拟的背景是一家拥有大量前列腺癌患者相关数据大学医学中心需要在以下领域进行分析:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;对数据集中重要的的变量进行单变量分析&lt;/li&gt;
+&lt;li&gt;建立多元回归模型，并全面评估对模型与数据的拟合程度，最终为选择一个成功模型提供理由和数据支持&lt;/li&gt;
+&lt;li&gt;对重要回归系数提供置信区间&lt;/li&gt;
+&lt;li&gt;残差分析、分析模型可靠性&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;请点击&lt;a href=&#34;https://www.kenwuyang.com/project/Modeling%20Prostate-Specific%20Antigen%20Levels/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;此链接&lt;/a&gt;获取报告。点击&lt;a href=&#34;https://www.kenwuyang.com/project/Modeling%20Prostate-Specific%20Antigen%20Levels/yang_wu_prostate_data.csv&#34; target=&#34;_blank&#34;&gt;此链接&lt;/a&gt;获得原始数据。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

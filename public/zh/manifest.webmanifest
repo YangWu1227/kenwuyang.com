@@ -1,18 +1,18 @@
 {
-  "name": "Yang (Ken) Wu",
-  "short_name": "Yang (Ken) Wu",
+  "name": "武阳",
+  "short_name": "武阳",
   "lang": "zh-Hans",
   "theme_color": "#707070",
   "background_color": "#707070",
   "icons": [{
-    "src": "/YangWu1227.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_192x192_fill_lanczos_center_3.png",
+    "src": "/media/icon_hu0e8b0ab40745ceb4f4042bc1d9ce4c3c_13641_192x192_fill_lanczos_center_3.png",
     "sizes": "192x192",
     "type": "image/png"
     }, {
-    "src": "/YangWu1227.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png",
+    "src": "/media/icon_hu0e8b0ab40745ceb4f4042bc1d9ce4c3c_13641_512x512_fill_lanczos_center_3.png",
     "sizes": "512x512",
     "type": "image/png"
      }],
   "display": "standalone",
-  "start_url": "/YangWu1227.github.io/zh/?utm_source=web_app_manifest"
+  "start_url": "/zh/?utm_source=web_app_manifest"
 }

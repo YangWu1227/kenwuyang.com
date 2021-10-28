@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>简单线性回归 | 武阳</title>
+    <link>https://www.kenwuyang.com/zh/tag/%E7%AE%80%E5%8D%95%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</link>
+      <atom:link href="https://www.kenwuyang.com/zh/tag/%E7%AE%80%E5%8D%95%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/index.xml" rel="self" type="application/rss+xml" />
+    <description>简单线性回归</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>zh-Hans</language><copyright>© 2021 Yang Wu</copyright><lastBuildDate>Mon, 19 Apr 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://www.kenwuyang.com/media/Sharing.png</url>
+      <title>简单线性回归</title>
+      <link>https://www.kenwuyang.com/zh/tag/%E7%AE%80%E5%8D%95%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/</link>
+    </image>
+    
+    <item>
+      <title>数据分析：模拟木材体积</title>
+      <link>https://www.kenwuyang.com/zh/project/modeling-lumber-volume-from-tree-diameter/</link>
+      <pubDate>Mon, 19 Apr 2021 00:00:00 +0000</pubDate>
+      <guid>https://www.kenwuyang.com/zh/project/modeling-lumber-volume-from-tree-diameter/</guid>
+      <description>&lt;p&gt;       这份报告是我本科 &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-statistics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;多元回归分析&lt;/a&gt; 课程中的第一个项目。 模拟的背景是一家木材公司的生产计划部门主管聘请我开发预测模型。木材公司希望用树木的直径来预测加工后的木材体积。生产计划部门主管表示需要在以下领域进行分析:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;根据树木直径预测加工后木材体积两个变量之间的关系开发一到两个线性回归模型&lt;/li&gt;
+&lt;li&gt;提供置信区间用于协助生产是的重要决策&lt;/li&gt;
+&lt;li&gt;提供小型、中型以及大型树木的平均产量的置信区间&lt;/li&gt;
+&lt;li&gt;提供预测区间&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;       请点击&lt;a href=&#34;https://www.kenwuyang.com/project/Modeling%20Lumber%20Volume/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;此链接&lt;/a&gt;获取报告。点击&lt;a href=&#34;https://www.kenwuyang.com/project/Modeling%20Lumber%20Volume/yang_wu_lumber_data.csv&#34; target=&#34;_blank&#34;&gt;此链接&lt;/a&gt;获得原始数据。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

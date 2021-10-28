@@ -2,281 +2,322 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>YangWu1227.github.io/courses/example/python/</loc>
-    <lastmod>2021-01-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/courses/example/visualization/</loc>
-    <lastmod>2021-01-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/courses/example/stats/</loc>
-    <lastmod>2021-01-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/talk/example-talk/</loc>
-    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/event/</loc>
-    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/</loc>
-    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
+    <loc>https://www.kenwuyang.com/en/categories/</loc>
+    <lastmod>2021-09-15T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="YangWu1227.github.io/zh/"
+                href="https://www.kenwuyang.com/zh/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="YangWu1227.github.io/"
+                href="https://www.kenwuyang.com/en/categories/"
                 />
   </url><url>
-    <loc>YangWu1227.github.io/categories/</loc>
-    <lastmod>2021-06-20T21:13:14-05:00</lastmod>
+    <loc>https://www.kenwuyang.com/en/tag/finance/</loc>
+    <lastmod>2021-09-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/tag/portfolio-optimization/</loc>
+    <lastmod>2021-09-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/post/portfolio-optimization-with-python/</loc>
+    <lastmod>2021-09-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/post/</loc>
+    <lastmod>2021-09-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/category/python/</loc>
+    <lastmod>2021-09-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/tags/</loc>
+    <lastmod>2021-09-15T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="YangWu1227.github.io/zh/categories/"
+                href="https://www.kenwuyang.com/zh/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="YangWu1227.github.io/categories/"
+                href="https://www.kenwuyang.com/en/tags/"
                 />
   </url><url>
-    <loc>YangWu1227.github.io/tag/finance/</loc>
-    <lastmod>2021-06-20T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/portfolio-optimization/</loc>
-    <lastmod>2021-06-20T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/post/portfolio-optimization-continued/</loc>
-    <lastmod>2021-06-20T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/post/</loc>
-    <lastmod>2021-06-20T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/category/r/</loc>
-    <lastmod>2021-06-20T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tags/</loc>
-    <lastmod>2021-06-20T21:13:14-05:00</lastmod>
+    <loc>https://www.kenwuyang.com/en/</loc>
+    <lastmod>2021-09-15T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="YangWu1227.github.io/zh/tags/"
+                href="https://www.kenwuyang.com/zh/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="YangWu1227.github.io/tags/"
+                href="https://www.kenwuyang.com/en/"
                 />
   </url><url>
-    <loc>YangWu1227.github.io/post/customizable-portfolio-dashboard/</loc>
-    <lastmod>2021-06-17T21:13:14-05:00</lastmod>
+    <loc>https://www.kenwuyang.com/en/tag/data-visualization/</loc>
+    <lastmod>2021-09-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>YangWu1227.github.io/tag/flexdashboard/</loc>
-    <lastmod>2021-06-17T21:13:14-05:00</lastmod>
+    <loc>https://www.kenwuyang.com/en/category/r/</loc>
+    <lastmod>2021-09-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>YangWu1227.github.io/tag/portfolio-analytics/</loc>
-    <lastmod>2021-06-17T21:13:14-05:00</lastmod>
+    <loc>https://www.kenwuyang.com/en/post/my-life-in-months/</loc>
+    <lastmod>2021-09-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>YangWu1227.github.io/tag/shiny-application/</loc>
-    <lastmod>2021-06-17T21:13:14-05:00</lastmod>
+    <loc>https://www.kenwuyang.com/en/tag/application/</loc>
+    <lastmod>2021-09-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>YangWu1227.github.io/tag/asset-returns/</loc>
-    <lastmod>2021-05-01T21:13:14-05:00</lastmod>
+    <loc>https://www.kenwuyang.com/en/tag/r-programming/</loc>
+    <lastmod>2021-09-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>YangWu1227.github.io/tag/data-visualization/</loc>
-    <lastmod>2021-05-01T21:13:14-05:00</lastmod>
+    <loc>https://www.kenwuyang.com/en/post/statistical-factories-part-ii/</loc>
+    <lastmod>2021-09-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>YangWu1227.github.io/post/visualization-asset-returns/</loc>
-    <lastmod>2021-05-01T21:13:14-05:00</lastmod>
+    <loc>https://www.kenwuyang.com/en/tag/statistics/</loc>
+    <lastmod>2021-09-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>YangWu1227.github.io/project/modeling-prostate-specific-antigen-levels/</loc>
+    <loc>https://www.kenwuyang.com/en/post/function-factory-estimating-probabilities-of-returns/</loc>
+    <lastmod>2021-08-31T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/tag/portfolio-analytics/</loc>
+    <lastmod>2021-08-31T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/tag/probability/</loc>
+    <lastmod>2021-08-31T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/post/function-factories-part-i/</loc>
+    <lastmod>2021-08-30T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/post/portfolio-optimization-dashboard/</loc>
+    <lastmod>2021-06-20T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/post/customizable-portfolio-dashboard/</loc>
+    <lastmod>2021-06-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/tag/flexdashboard/</loc>
+    <lastmod>2021-06-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/tag/shiny-application/</loc>
+    <lastmod>2021-06-17T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/project/modeling-prostate-specific-antigen-levels/</loc>
+    <lastmod>2021-05-01T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://www.kenwuyang.com/zh/project/modeling-prostate-specific-antigen-levels/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.kenwuyang.com/en/project/modeling-prostate-specific-antigen-levels/"
+                />
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/tag/multiple-regression/</loc>
     <lastmod>2021-05-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>YangWu1227.github.io/tag/multiple-regression/</loc>
+    <loc>https://www.kenwuyang.com/en/project/</loc>
+    <lastmod>2021-05-01T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://www.kenwuyang.com/zh/project/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.kenwuyang.com/en/project/"
+                />
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/post/visualizing-asset-returns/</loc>
     <lastmod>2021-05-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>YangWu1227.github.io/project/</loc>
-    <lastmod>2021-05-01T00:00:00+00:00</lastmod>
+    <loc>https://www.kenwuyang.com/en/project/modeling-lumber-volume-from-tree-diameter/</loc>
+    <lastmod>2021-04-19T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://www.kenwuyang.com/zh/project/modeling-lumber-volume-from-tree-diameter/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.kenwuyang.com/en/project/modeling-lumber-volume-from-tree-diameter/"
+                />
   </url><url>
-    <loc>YangWu1227.github.io/tag/statistics/</loc>
-    <lastmod>2021-05-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/project/modeling-lumber-volume-from-tree-diameter/</loc>
+    <loc>https://www.kenwuyang.com/en/tag/simple-regression/</loc>
     <lastmod>2021-04-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>YangWu1227.github.io/tag/simple-regression/</loc>
-    <lastmod>2021-04-19T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/economics/</loc>
+    <loc>https://www.kenwuyang.com/en/tag/economics/</loc>
     <lastmod>2021-03-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>YangWu1227.github.io/project/pay-in-the-wnba/</loc>
+    <loc>https://www.kenwuyang.com/en/project/pay-in-the-wnba/</loc>
     <lastmod>2021-03-05T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/sports/</loc>
-    <lastmod>2021-03-05T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/courses/</loc>
-    <lastmod>2021-01-24T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/courses/example/</loc>
-    <lastmod>2021-01-24T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/post/portfolio-returns-and-optimization/</loc>
-    <lastmod>2020-12-01T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/r-markdown/</loc>
-    <lastmod>2020-12-01T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/central-limit-theorem/</loc>
-    <lastmod>2020-11-04T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/probability/</loc>
-    <lastmod>2020-11-04T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/simulation/</loc>
-    <lastmod>2020-11-04T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/statistical-power/</loc>
-    <lastmod>2020-11-04T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/post/central-limit-theorem-and-power-simulation/</loc>
-    <lastmod>2020-11-04T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/data-wrangling/</loc>
-    <lastmod>2020-05-04T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/post/data-wrangling-in-economics/</loc>
-    <lastmod>2020-05-04T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/relational-database/</loc>
-    <lastmod>2020-05-04T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/tidyverse/</loc>
-    <lastmod>2020-05-04T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/application/</loc>
-    <lastmod>2020-04-23T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/post/applications-of-subsetting-in-r/</loc>
-    <lastmod>2020-04-23T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/programming/</loc>
-    <lastmod>2020-04-23T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/subsetting/</loc>
-    <lastmod>2020-04-23T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/project/braess-paradox-in-city-planning/</loc>
-    <lastmod>2020-03-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/calculus/</loc>
-    <lastmod>2020-03-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/mathematics/</loc>
-    <lastmod>2020-03-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/optimization/</loc>
-    <lastmod>2020-03-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/micro-economics/</loc>
-    <lastmod>2020-02-29T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/post/understanding-price-elasticity-in-professional-sports/</loc>
-    <lastmod>2020-02-29T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/profit-maximization/</loc>
-    <lastmod>2020-02-29T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/sports-economics/</loc>
-    <lastmod>2020-02-29T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/control-flows/</loc>
-    <lastmod>2020-01-01T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/post/control-flow-in-r/</loc>
-    <lastmod>2020-01-01T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/r-programming/</loc>
-    <lastmod>2020-01-01T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/vectorization/</loc>
-    <lastmod>2020-01-01T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/project/measles-epidemic-the-sir-model/</loc>
-    <lastmod>2019-12-19T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/tag/technical-report/</loc>
-    <lastmod>2019-12-19T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/post/implementing-math-concepts-in-r/</loc>
-    <lastmod>2019-10-29T21:13:14-05:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/publication-type/3/</loc>
-    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/publication/preprint/</loc>
-    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>YangWu1227.github.io/authors/</loc>
-    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="YangWu1227.github.io/zh/authors/"
+                href="https://www.kenwuyang.com/zh/project/pay-in-the-wnba/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="YangWu1227.github.io/authors/"
+                href="https://www.kenwuyang.com/en/project/pay-in-the-wnba/"
                 />
   </url><url>
-    <loc>YangWu1227.github.io/publication_types/</loc>
-    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
+    <loc>https://www.kenwuyang.com/en/tag/sports/</loc>
+    <lastmod>2021-03-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/post/are-sports-teams-not-profit-maximizers/</loc>
+    <lastmod>2021-02-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/tag/profit-maximization/</loc>
+    <lastmod>2021-02-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/tag/sports-economics/</loc>
+    <lastmod>2021-02-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/post/portfolio-optimization-and-returns/</loc>
+    <lastmod>2020-12-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/tag/r-markdown/</loc>
+    <lastmod>2020-12-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/project/monte-carlo-simulation-study/</loc>
+    <lastmod>2020-11-13T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="YangWu1227.github.io/zh/publication_types/"
+                href="https://www.kenwuyang.com/zh/project/monte-carlo-simulation-study/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="YangWu1227.github.io/publication_types/"
+                href="https://www.kenwuyang.com/en/project/monte-carlo-simulation-study/"
                 />
   </url><url>
-    <loc>YangWu1227.github.io/publication/</loc>
-    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
+    <loc>https://www.kenwuyang.com/en/tag/power-study/</loc>
+    <lastmod>2020-11-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>YangWu1227.github.io/tag/source-themes/</loc>
-    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
+    <loc>https://www.kenwuyang.com/en/tag/simulation/</loc>
+    <lastmod>2020-11-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>YangWu1227.github.io/author/yang-ken-wu/</loc>
-    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
+    <loc>https://www.kenwuyang.com/en/tag/central-limit-theorem/</loc>
+    <lastmod>2020-11-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>YangWu1227.github.io/slides/</loc>
-    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+    <loc>https://www.kenwuyang.com/en/tag/statistical-power/</loc>
+    <lastmod>2020-11-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>YangWu1227.github.io/slides/example/</loc>
-    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+    <loc>https://www.kenwuyang.com/en/post/the-central-limit-theorem-and-power-simulation/</loc>
+    <lastmod>2020-11-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>YangWu1227.github.io/publication-type/2/</loc>
-    <lastmod>2015-09-01T00:00:00+00:00</lastmod>
+    <loc>https://www.kenwuyang.com/en/tag/data-wrangling/</loc>
+    <lastmod>2020-05-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>YangWu1227.github.io/publication/journal-article/</loc>
-    <lastmod>2015-09-01T00:00:00+00:00</lastmod>
+    <loc>https://www.kenwuyang.com/en/post/data-wrangling-with-economics-data/</loc>
+    <lastmod>2020-05-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>YangWu1227.github.io/author/robert-ford/</loc>
-    <lastmod>2015-09-01T00:00:00+00:00</lastmod>
+    <loc>https://www.kenwuyang.com/en/tag/relational-data/</loc>
+    <lastmod>2020-05-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>YangWu1227.github.io/publication-type/1/</loc>
-    <lastmod>2013-07-01T00:00:00+00:00</lastmod>
+    <loc>https://www.kenwuyang.com/en/tag/tidyverse/</loc>
+    <lastmod>2020-05-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>YangWu1227.github.io/publication/conference-paper/</loc>
-    <lastmod>2013-07-01T00:00:00+00:00</lastmod>
+    <loc>https://www.kenwuyang.com/en/post/applications-of-subsetting-operators-in-r/</loc>
+    <lastmod>2020-04-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>YangWu1227.github.io/admin/</loc>
+    <loc>https://www.kenwuyang.com/en/tag/subsetting/</loc>
+    <lastmod>2020-04-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/project/braess-paradox-in-city-planning/</loc>
+    <lastmod>2020-03-14T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://www.kenwuyang.com/zh/project/braess-paradox-in-city-planning/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.kenwuyang.com/en/project/braess-paradox-in-city-planning/"
+                />
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/tag/calculus/</loc>
+    <lastmod>2020-03-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/tag/mathematics/</loc>
+    <lastmod>2020-03-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/tag/optimization/</loc>
+    <lastmod>2020-03-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/post/control-flow-in-r/</loc>
+    <lastmod>2020-01-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/tag/control-flows/</loc>
+    <lastmod>2020-01-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/tag/vectorization/</loc>
+    <lastmod>2020-01-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/project/measles-epidemic-the-sir-model/</loc>
+    <lastmod>2019-12-19T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://www.kenwuyang.com/zh/project/measles-epidemic-the-sir-model/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.kenwuyang.com/en/project/measles-epidemic-the-sir-model/"
+                />
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/tag/technical-report/</loc>
+    <lastmod>2019-12-19T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/post/implementing-mathematical-concepts-in-r/</loc>
+    <lastmod>2019-10-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/privacy/</loc>
+    <lastmod>2018-06-28T00:00:00+01:00</lastmod>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/admin/</loc>
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/authors/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://www.kenwuyang.com/zh/authors/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.kenwuyang.com/en/authors/"
+                />
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/publication_types/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://www.kenwuyang.com/zh/publication_types/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.kenwuyang.com/en/publication_types/"
+                />
+  </url><url>
+    <loc>https://www.kenwuyang.com/en/author/yang-ken-wu/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://www.kenwuyang.com/zh/author/%E6%AD%A6%E9%98%B3/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://www.kenwuyang.com/en/author/yang-ken-wu/"
+                />
   </url>
 </urlset>

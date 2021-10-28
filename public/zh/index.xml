@@ -1,16 +1,99 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Yang (Ken) Wu</title>
-    <link>YangWu1227.github.io/zh/</link>
-      <atom:link href="YangWu1227.github.io/zh/index.xml" rel="self" type="application/rss+xml" />
-    <description>Yang (Ken) Wu</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>zh-Hans</language><copyright>© 2021 Yang Wu</copyright>
+    <title>武阳</title>
+    <link>https://www.kenwuyang.com/zh/</link>
+      <atom:link href="https://www.kenwuyang.com/zh/index.xml" rel="self" type="application/rss+xml" />
+    <description>武阳</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>zh-Hans</language><copyright>© 2021 Yang Wu</copyright><lastBuildDate>Sat, 01 May 2021 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/YangWu1227.github.io/media/icon_hua2ec155b4296a9c9791d015323e16eb5_11927_512x512_fill_lanczos_center_3.png</url>
-      <title>Yang (Ken) Wu</title>
-      <link>YangWu1227.github.io/zh/</link>
+      <url>https://www.kenwuyang.com/media/Sharing.png</url>
+      <title>武阳</title>
+      <link>https://www.kenwuyang.com/zh/</link>
     </image>
+    
+    <item>
+      <title>数据分析：癌症患者前列腺特异性抗原水平</title>
+      <link>https://www.kenwuyang.com/zh/project/modeling-prostate-specific-antigen-levels/</link>
+      <pubDate>Sat, 01 May 2021 00:00:00 +0000</pubDate>
+      <guid>https://www.kenwuyang.com/zh/project/modeling-prostate-specific-antigen-levels/</guid>
+      <description>&lt;p&gt;       这份报告是我本科 &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-statistics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;多元回归分析&lt;/a&gt; 课程中接触的模拟项目。
+模拟的背景是一家拥有大量前列腺癌患者相关数据大学医学中心需要在以下领域进行分析:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;对数据集中重要的的变量进行单变量分析&lt;/li&gt;
+&lt;li&gt;建立多元回归模型，并全面评估对模型与数据的拟合程度，最终为选择一个成功模型提供理由和数据支持&lt;/li&gt;
+&lt;li&gt;对重要回归系数提供置信区间&lt;/li&gt;
+&lt;li&gt;残差分析、分析模型可靠性&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;请点击&lt;a href=&#34;https://www.kenwuyang.com/project/Modeling%20Prostate-Specific%20Antigen%20Levels/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;此链接&lt;/a&gt;获取报告。点击&lt;a href=&#34;https://www.kenwuyang.com/project/Modeling%20Prostate-Specific%20Antigen%20Levels/yang_wu_prostate_data.csv&#34; target=&#34;_blank&#34;&gt;此链接&lt;/a&gt;获得原始数据。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>数据分析：模拟木材体积</title>
+      <link>https://www.kenwuyang.com/zh/project/modeling-lumber-volume-from-tree-diameter/</link>
+      <pubDate>Mon, 19 Apr 2021 00:00:00 +0000</pubDate>
+      <guid>https://www.kenwuyang.com/zh/project/modeling-lumber-volume-from-tree-diameter/</guid>
+      <description>&lt;p&gt;       这份报告是我本科 &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-statistics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;多元回归分析&lt;/a&gt; 课程中的第一个项目。 模拟的背景是一家木材公司的生产计划部门主管聘请我开发预测模型。木材公司希望用树木的直径来预测加工后的木材体积。生产计划部门主管表示需要在以下领域进行分析:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;根据树木直径预测加工后木材体积两个变量之间的关系开发一到两个线性回归模型&lt;/li&gt;
+&lt;li&gt;提供置信区间用于协助生产是的重要决策&lt;/li&gt;
+&lt;li&gt;提供小型、中型以及大型树木的平均产量的置信区间&lt;/li&gt;
+&lt;li&gt;提供预测区间&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;       请点击&lt;a href=&#34;https://www.kenwuyang.com/project/Modeling%20Lumber%20Volume/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;此链接&lt;/a&gt;获取报告。点击&lt;a href=&#34;https://www.kenwuyang.com/project/Modeling%20Lumber%20Volume/yang_wu_lumber_data.csv&#34; target=&#34;_blank&#34;&gt;此链接&lt;/a&gt;获得原始数据。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>职业体育：性别薪酬差距</title>
+      <link>https://www.kenwuyang.com/zh/project/pay-in-the-wnba/</link>
+      <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>
+      <guid>https://www.kenwuyang.com/zh/project/pay-in-the-wnba/</guid>
+      <description>&lt;p&gt;       请点击&lt;a href=&#34;https://www.kenwuyang.com/project/Pay%20in%20the%20WNBA/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;此链接&lt;/a&gt;获取报告。点击&lt;a href=&#34;https://www.kenwuyang.com/project/Pay%20in%20the%20WNBA/yang_wu_WNBA_data.xlsx&#34; target=&#34;_blank&#34;&gt;此链接&lt;/a&gt;获得原始数据。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>蒙特卡洛模拟</title>
+      <link>https://www.kenwuyang.com/zh/project/monte-carlo-simulation-study/</link>
+      <pubDate>Fri, 13 Nov 2020 00:00:00 +0000</pubDate>
+      <guid>https://www.kenwuyang.com/zh/project/monte-carlo-simulation-study/</guid>
+      <description>&lt;p&gt;       此项目是我&lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-statistics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;统计模拟&lt;/a&gt;课的演讲。 请用键盘快捷键 (cmd + shift + f) 进入全屏。点击键盘 &amp;ldquo;S&amp;rdquo; 键显示我的演讲稿。&lt;/p&gt;
+&lt;iframe src=&#34;https://docs.google.com/presentation/d/e/2PACX-1vRLKjvxafrOkd1P16bRDnQ8WrCNHgBFqHxbvNShrldeFKyUt7ouZrQMpXnhksVViyYTwzX1uQ2mdtjP/embed?start=false&amp;loop=false&amp;delayms=3000&#34; frameborder=&#34;0&#34; width=&#34;750&#34; height=&#34;600&#34; allowfullscreen=&#34;true&#34; mozallowfullscreen=&#34;true&#34; webkitallowfullscreen=&#34;true&#34;&gt;&lt;/iframe&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>网络车流分配：布雷斯悖论</title>
+      <link>https://www.kenwuyang.com/zh/project/braess-paradox-in-city-planning/</link>
+      <pubDate>Sat, 14 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>https://www.kenwuyang.com/zh/project/braess-paradox-in-city-planning/</guid>
+      <description>&lt;p&gt;       这片论文是我本科 &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-mathematics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;多元微积分&lt;/a&gt;课程的期末项目。我用多变量最优化分析布雷斯悖论在网络车流分配中的实践。&lt;/p&gt;
+&lt;p&gt;       布雷斯悖论指在一个交通网络上增加一条路段反而使网络上的旅行时间增加。这一附加路段不但没有减少交通延滞，反而降低了整个交通网络的服务水准，这种出力不讨好且与人们直观感受相背的交通网络现象主要源于纳什均衡点并不一定是社会最优化。 此课题项目包含对一下微积分领域的应用:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;拉格朗日乘子&lt;/li&gt;
+&lt;li&gt;偏导数&lt;/li&gt;
+&lt;li&gt;临界点以及二阶导数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;       该课题项目的作者是一名大学教授，名叫 &lt;a href=&#34;https://monks.frontrange.edu/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Kenneth M Monks&lt;/a&gt;。如果有对项目课题感兴趣的，可以点击&lt;a href=&#34;https://www.kenwuyang.com/project/Braess%27%20Paradox/Assignment.pdf&#34; target=&#34;_blank&#34;&gt;此链接&lt;/a&gt;。我的&lt;a href=&#34;https://www.kenwuyang.com/project/Braess%27%20Paradox/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;论文&lt;/a&gt;用Latex系统排版，使用语言是英文。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>麻疹转播: SIR模型</title>
+      <link>https://www.kenwuyang.com/zh/project/measles-epidemic-the-sir-model/</link>
+      <pubDate>Thu, 19 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>https://www.kenwuyang.com/zh/project/measles-epidemic-the-sir-model/</guid>
+      <description>&lt;p&gt;       这份报告是我本科 &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-mathematics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;微积分&lt;/a&gt;课程中接触的模拟项目。 模拟的背景涉及到一个拥有50000 名居民的孤岛。岛上爆发麻疹流行病后，为了帮助监测疫情，我使用了一个简单的流行病学模型估算在各种条件下的传播率。SIR模型的建立基于以下三个假设&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不考虑死亡率&lt;/li&gt;
+&lt;li&gt;恢复健康后将永久免疫&lt;/li&gt;
+&lt;li&gt;不考虑人口流动等因素&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这份&lt;a href=&#34;https://www.kenwuyang.com/project/SIR%20model/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;报告&lt;/a&gt;用Latex系统排版，使用的语言是英文。&lt;/p&gt;
+</description>
+    </item>
     
   </channel>
 </rss>

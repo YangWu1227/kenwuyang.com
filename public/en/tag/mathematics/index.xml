@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mathematics | Yang (Ken) Wu</title>
+    <link>https://www.kenwuyang.com/en/tag/mathematics/</link>
+      <atom:link href="https://www.kenwuyang.com/en/tag/mathematics/index.xml" rel="self" type="application/rss+xml" />
+    <description>Mathematics</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Yang Wu</copyright><lastBuildDate>Sat, 14 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://www.kenwuyang.com/media/Sharing.png</url>
+      <title>Mathematics</title>
+      <link>https://www.kenwuyang.com/en/tag/mathematics/</link>
+    </image>
+    
+    <item>
+      <title>Braess&#39; Paradox in City Planning</title>
+      <link>https://www.kenwuyang.com/en/project/braess-paradox-in-city-planning/</link>
+      <pubDate>Sat, 14 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>https://www.kenwuyang.com/en/project/braess-paradox-in-city-planning/</guid>
+      <description>&lt;p&gt;       This paper was written for my undergraduate &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-mathematics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Calculus III&lt;/a&gt; class. The project was an instance where I applied the standard techniques of optimization from my multivariable calculus course to analyze a semi-realistic phenomenon&amp;mdash; Braess&#39; Paradox.&lt;/p&gt;
+&lt;p&gt;       Braess’ Paradox is a counterintuitive phenomenon, in which the removal of an edge in a congested network actually results in improved flow. In the 1968 paper “Uber ein Paradoxon aus der Verkehrsplanung” (Braess, 1968), Dietrich Braess first proposed a mathematical framework for detecting this paradox in a network. When Braess’ paper appeared in 1968, the application of mathematics to traffic planning was still an relatively untapped vein of inquiry. Today, the framework continues to be analyzed by researchers and used by transportation specialists in the design of traffic networks. The key techniques that are relevant in this project are as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Lagrange multipliers&lt;/li&gt;
+&lt;li&gt;Partial derivatives&lt;/li&gt;
+&lt;li&gt;Critical points and the second derivative test for surfaces&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;       The project outline is designed by &lt;a href=&#34;https://monks.frontrange.edu/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Kenneth M Monks&lt;/a&gt;, and the assignment can be found &lt;a href=&#34;https://www.kenwuyang.com/project/Braess%27%20Paradox/Assignment.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. Finally, my finished paper can be retrieved &lt;a href=&#34;https://www.kenwuyang.com/project/Braess%27%20Paradox/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Measles Epidemic: the SIR model</title>
+      <link>https://www.kenwuyang.com/en/project/measles-epidemic-the-sir-model/</link>
+      <pubDate>Thu, 19 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>https://www.kenwuyang.com/en/project/measles-epidemic-the-sir-model/</guid>
+      <description>&lt;p&gt;       This report was written for my undergraduate &lt;a href=&#34;https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-mathematics/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Calculus II&lt;/a&gt; class. The mock-scenario involves a measles outbreak on an isolated island with 50,000 inhabitants. To help monitor the situation, I employed a naive epidemiological model to provide estimations for the rate of transmission under various conditions.&lt;/p&gt;
+&lt;p&gt;       I implemented the model &lt;em&gt;naively&lt;/em&gt; by making three simplifying, but not necessarily implausible assumptions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;No mortality rate&lt;/li&gt;
+&lt;li&gt;Permanent immunity once recovered&lt;/li&gt;
+&lt;li&gt;Short time horizon in which there is no need to consider immigration and emigration&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;       Other diseases may certainly require a more complex model. In the case of a simulated measles epidemic, however, the differential equations model employed in this paper may be sufficient. The finished paper can be accessed &lt;a href=&#34;https://www.kenwuyang.com/project/SIR%20model/Yang_Wu_Writing_Sample.pdf&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Implementing Mathematical Concepts in R</title>
+      <link>https://www.kenwuyang.com/en/post/implementing-mathematical-concepts-in-r/</link>
+      <pubDate>Tue, 29 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>https://www.kenwuyang.com/en/post/implementing-mathematical-concepts-in-r/</guid>
+      <description>
+&lt;script src=&#34;https://www.kenwuyang.com/en/post/implementing-mathematical-concepts-in-r/index.en_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#the-binomial-theorem&#34;&gt;The Binomial Theorem&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#pascals-triangle&#34;&gt;Pascal’s Triangle&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In my first post, we will be implementing some interesting mathematical objects in R.&lt;/p&gt;
+&lt;p&gt;Why? Why not? I believe it’s a good way to practice solving problems in R.&lt;/p&gt;
+&lt;div id=&#34;the-binomial-theorem&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;The Binomial Theorem&lt;/h2&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{align*}
+    (x+y)^n=\sum_{k=0}^{n}\binom{n}{k}x^{k}y^{n-k}
+\end{align*}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Expanding:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{align*}
+    (x+y)^n=\binom{n}{0}x^{0}y^{n-0}+\binom{n}{1}x^{1}y^{n-1}+\binom{n}{2}x^{2}y^{n-2}+... \\ +\binom{n}{n-1}x^{n-1}y^{n-(n-1)}+\binom{n}{n}x^{n}y^{n-n}
+\end{align*}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;In R, we can tackle the implementation of the Binomial Theorem in three parts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the binomial coefficient&lt;/li&gt;
+&lt;li&gt;raising the real number &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; to the vector of powers &lt;span class=&#34;math inline&#34;&gt;\(k\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;raising the real number &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt; to the vector of powers &lt;span class=&#34;math inline&#34;&gt;\(n-k\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;binomial_theorem &amp;lt;- function(x, y, n) {
+
+  # Create a sequence from k = 0 to k = n
+  seq_k_n &amp;lt;- seq.int(from = 0, to = n, by = 1)
+
+
+  # Pre-allocate container for storing coefficients
+  binom_coeffs &amp;lt;- vector(mode = &amp;quot;double&amp;quot;, length = n + 1)
+  # Binomial coefficients
+  binom_coeffs &amp;lt;- purrr::map_dbl(.x = seq_k_n, .f = choose, n = n)
+
+
+  # Pre-allocate container for storing the x&amp;#39;s
+  vector_of_x &amp;lt;- vector(mode = &amp;quot;double&amp;quot;, length = n + 1)
+  # Raise x to the power of y
+  vector_of_x &amp;lt;- x^(seq_k_n)
+
+
+  # Pre-allocate container for storing the y&amp;#39;s
+  vector_of_y &amp;lt;- vector(mode = &amp;quot;double&amp;quot;, length = n + 1)
+  # Raise y to the power of n-k
+  vector_of_y &amp;lt;- y^(n - (seq_k_n))
+
+
+  # Product of the two vectors and their coefficients
+  prod &amp;lt;- binom_coeffs * vector_of_x * vector_of_y
+
+  # Summation operator
+  result &amp;lt;- sum(prod)
+  result
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;p&gt;Let’s see it in action:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Test
+x &amp;lt;- 924
+y &amp;lt;- 23
+n &amp;lt;- 39
+# Compute by hand
+(x + y)^n&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 1.195774e+116&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Compute using custom function
+binomial_theorem(x = x, y = y, n = n)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 1.195774e+116&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As can be seen, the results are exactly the same.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;/div&gt;
+&lt;div id=&#34;pascals-triangle&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Pascal’s Triangle&lt;/h2&gt;
+&lt;p&gt;Directly related to the Binomial coefficient is Pascal’s triangle, whose entries in each row are usually staggered relative to the numbers in the adjacent rows.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;Pascal&#39;s Triangle.png&#34; width=&#34;50%&#34; height=&#34;50%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;To implement Pascal’s triangle, we will use a for loop. Our goal is to write a program that finds the next row of Pascal’s triangle, given the previous rows.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Finding the (n + 1)th row of a Pascal&amp;#39;s triangle given n rows that precede it
+pascal_triangle_n_plus_1 &amp;lt;- function(x) {
+  if (!is.list(x)) {
+    rlang::abort(message = &amp;quot;The input object must a be a list containing the rows of Pascal&amp;#39;s Triangle.&amp;quot;)
+  }
+
+  # Set n equal to depth of the input list &amp;quot;x&amp;quot;, that is, the number of elements in x, where each represents a row
+  n &amp;lt;- length(x)
+  # Extract the last element (the nth row) from the input list &amp;quot;x&amp;quot; and store it as a new variable x_n
+  # Use [[ to extract the value rather than a sub-list
+  x_n &amp;lt;- x[[n]]
+  # Repeat the integer &amp;quot;1&amp;quot; (n + 1) times
+  # Note that the (n + 1)th  row has (n + 1) elements beginning and ending with 1
+  x_n_plus_1 &amp;lt;- rep(x = 1, times = n + 1)
+
+  # Loop to add all adjacent pairs in the nth row to obtain the (n + 1)th row
+  # Start with the second element and end with second to last element of each row
+  # This is because the first and last numbers in any given row are always 1
+  if (n &amp;gt; 1) {
+    # This is the prefix form of for loop
+    `for`(
+      var = i,
+      seq = 2:n,
+      action = x_n_plus_1[[i]] &amp;lt;- x_n[[i - 1]] + x_n[[i]]
+    )
+  }
+
+  # Append the (n + 1)th row to the list object
+  base::append(x, values = list(x_n_plus_1))
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;p&gt;Let’s see it in action:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Create a Pascal&amp;#39;s Triangle with 4 rows
+x &amp;lt;- list(c(1), c(1, 1), c(1, 2, 1), c(1, 3, 3, 1))
+# Row 5
+x &amp;lt;- pascal_triangle_n_plus_1(x = x)
+x[[5]]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 1 4 6 4 1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Row 6
+x &amp;lt;- pascal_triangle_n_plus_1(x = x)
+x[[6]]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1]  1  5 10 10  5  1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# We know that these row entries can be computed are the binomial coefficients 5 choose 0 thru 5 choose 5
+purrr::map2_dbl(
+  .x = rep(x = 5, times = 6),
+  .y = seq.int(from = 0, to = 5, by = 1),
+  .f = choose
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1]  1  5 10 10  5  1&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That’s it for my first post! I’ll update this post to include more interesting topics for my future self and perhaps others who may stumble across this.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
