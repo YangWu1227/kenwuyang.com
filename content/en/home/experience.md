@@ -32,8 +32,8 @@ experience:
     description: |2-
         Responsibilities include:
         
-        * Developed and modularized proprietary data cleaning scripts in Python. There are currently 13 functions in the module that take advantage of `pandas`, `numpy` and `data.table` and others as back-ends; together, these functions make it easy to automate a significant portion of the data cleaning process, significantly boosting the productivity of the data team.
-        * Automated survey top-line and cross-tabs generation for reporting purposes by developing an Rmarkdown template and wrapper functions. Combined with functional programming tools from the `purrr` package, these wrapper functions significantly increased code conciseness and reusability.  
+        * Developed and modularized proprietary data cleaning scripts in Python. There are currently 13 functions in the module that use `pandas`, `numpy` and `data.table` and others as back-ends; together, these functions make it easy to automate a significant portion of the data cleaning process, significantly boosting the productivity of the data team.
+        * Automated survey top-line and cross-tabs generation for reporting purposes by developing an Rmarkdown template and associating wrapper functions. Combined with functional programming tools from the `purrr` package, these wrapper functions significantly increased code conciseness and reusability.  
         * Created visualizations using `ggplot2` for a quantitative and qualitative [report](https://citizendata.com/news/disinformation-trumps-party-the-path-forward/).
         
         
