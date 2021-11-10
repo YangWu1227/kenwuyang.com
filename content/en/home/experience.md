@@ -32,7 +32,7 @@ experience:
     description: |2-
         Responsibilities include:
         
-        * Developed and modularized proprietary data cleaning scripts in Python. There are currently 13 functions in the module that use `pandas`, `numpy` and `data.table` and others as back-ends; together, these functions make it easy to automate a significant portion of the data cleaning process, significantly boosting the productivity of the data team.
+        * Developed and modularized data process automation scripts in Python. There are three modules--- `data_cleaning`, `data_validating`, and `data_uploading`. Functions from the first two modules are designed for data cleaning and validating tasks, using packages such as `pandas`, `numpy` and `data.table` and others as back-ends. Functions from the `data_uploading` module are aimed at automating cloud storage (AWS S3) and data warehouse (Redshift) related tasks, using mainly `psycopg2` in back-end. Together, these functions make it easy to automate a significant portion of the data processes, significantly boosting the productivity of the data team.
         * Automated survey top-line and cross-tabs generation for reporting purposes by developing an Rmarkdown template and associating wrapper functions. Combined with functional programming tools from the `purrr` package, these wrapper functions significantly increased code conciseness and reusability.  
         * Created visualizations using `ggplot2` for a quantitative and qualitative [report](https://citizendata.com/news/disinformation-trumps-party-the-path-forward/).
         
@@ -68,8 +68,7 @@ experience:
     description: |2-
         Responsibilities include:
         
-        * Deal sourcing, company research via websites like Crunchbase and AngelList, and sending outbound
-        introduction emails.
+        * Deal sourcing, company research via websites like Crunchbase and AngelList, and sending outbound introduction emails.
         * Attended regular pitch meetings with founders.
         * Responsible for conducting market analysis for cold inbound deals. See [sample market sizing analysis](https://docs.google.com/spreadsheets/d/1gNOvfOHwz_WpYD9CauAjTTJw3SDo6BuwPMNsVo0rH0o/edit?usp=sharing) and [sample competitor analysis](https://docs.google.com/document/d/13FYubiQLN0yWMOzcSPq5rbxZBjnmlVH_waDerUgkpxU/edit?usp=sharing).
         * Airtable maintenance.
