@@ -15,25 +15,36 @@ subtitle:
 # Date format for experience
 #   Refer to https://wowchemy.com/docs/customization/#date-format
 date_format: Jan 2006
-
+        
 # Experiences.
 #   Add/remove as many `experience` items below as you like.
 #   Required fields are `title`, `company`, and `date_start`.
 #   Leave `date_end` empty if it's your current employer.
 #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
 experience:
+  - title: Jr. Data Scientist
+    company: Citizen Data
+    company_url: 'https://citizendata.com/'
+    company_logo: citizen_logo
+    location: Washington DC
+    date_start: '2021-11-30'
+    date_end: ''
+    description: |2-
+
+
+
   - title: Data Engineering Intern
     company: Citizen Data
     company_url: 'https://citizendata.com/'
     company_logo: citizen_logo
     location: Washington DC
     date_start: '2021-10-11'
-    date_end: ''
+    date_end: '2021-11-30'
     description: |2-
         Responsibilities include:
         
-        * Developed and modularized data process automation scripts in Python. There are three modules--- `data_cleaning`, `data_validating`, and `data_uploading`. Functions from the first two modules are designed for data cleaning and validating tasks, using packages such as `pandas`, `numpy` and `data.table` and others as back-ends. Functions from the `data_uploading` module are aimed at automating cloud storage (AWS S3) and data warehouse (Redshift) related tasks, using mainly `psycopg2` in back-end. Together, these functions make it easy to automate a significant portion of the data processes, significantly boosting the productivity of the data team.
-        * Automated survey top-line and cross-tabs generation for reporting purposes by developing an Rmarkdown template and associating wrapper functions. Combined with functional programming tools from the `purrr` package, these wrapper functions significantly increased code conciseness and reusability.  
+        * Developed and modularized data process automation scripts in Python. There are three modules--- `data_cleaning`, `data_validating`, and `data_uploading`. Functions from the first two modules are designed for data cleaning and validating tasks, using packages such as `pandas`, `numpy` and `data.table` and others as back-ends. Functions from the `data_uploading` module are aimed at automating cloud storage (AWS S3) and data warehouse (Redshift) related tasks, using mainly `psycopg2` in the back-end. Together, these functions make it easy to automate a significant portion of the data processes, significantly boosting the productivity of the data team.
+        * Developed an R package to help facilitate survey cleaning, top-line and cross-tabs generation. along with the created Rmarkdown templates, this R package significantly increased code conciseness and reusability.  
         * Created visualizations using `ggplot2` for a quantitative and qualitative [report](https://citizendata.com/news/disinformation-trumps-party-the-path-forward/).
         
         
