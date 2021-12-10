@@ -43,8 +43,8 @@ experience:
     description: |2-
         Responsibilities include:
         
-        * Developed and modularized data process automation scripts in Python. There are three modules--- `data_cleaning`, `data_validating`, and `data_uploading`. Functions from the first two modules are designed for data cleaning and validating tasks, using packages such as `pandas`, `numpy` and `data.table` and others as back-ends. Functions from the `data_uploading` module are aimed at automating cloud storage (AWS S3) and data warehouse (Redshift) related tasks, using mainly `psycopg2` in the back-end. Together, these functions make it easy to automate a significant portion of the data processes, significantly boosting the productivity of the data team.
-        * Developed an R package to help facilitate survey cleaning, top-line and cross-tabs generation. along with the created Rmarkdown templates, this R package significantly increased code conciseness and reusability.  
+        * Developed and modularized data process automation scripts in Python. There are currently three modules--- `data_cleaning`, `data_validating`, and `data_uploading`. Functions from the first two modules are designed for data cleaning and validating tasks, using packages such as `pandas`, `numpy` and `data.table` and others as back-ends. Functions from the `data_uploading` module are aimed at automating cloud storage (AWS S3) and data warehouse (Redshift) related tasks, using mainly `psycopg2` and the AWS Software Development Toolkit (SDKs) in the back-end. Together, these functions make it easy to automate a significant portion of the data processes, significantly boosting the productivity of the data team.
+        * Developed an R package to help facilitate survey cleaning, top-line and cross-tabs generation. Along with the created Rmarkdown templates (for PDF and Microsoft word), this R package significantly increased code conciseness and reusability. It is a part of the data team's effort to standardize data processes and documentation.  
         * Created visualizations using `ggplot2` for a quantitative and qualitative [report](https://citizendata.com/news/disinformation-trumps-party-the-path-forward/).
         
         
@@ -59,9 +59,9 @@ experience:
     description: |2-
         Responsibilities include:
         
-        * Worked with a team of data scientists on the design and development of a database on cases related to the profiling and prosecution of Asian American researchers and scientists.  
-        * Provided database quality control and responsible for data collection tasks that require human supervision.
-        * Organizeed and created [fact sheets](https://docs.google.com/document/d/1Jp9YzanF8mKftf3njD4N1W7B2SDHiP7U53TUKxUdjNc/edit) using press releases from the Department of Justice's website.
+        * Worked with a team of data scientists on the design and development of a database on cases related to the profiling and prosecution of Asian American researchers and scientists. 
+        * Provided database quality control (data pre-processing, cleaning, and validating) and responsible for data collection tasks that require human supervision (for example, developing a script that automatically pulls court documents from a website and converts PDF's to plain text files to be processed by a race classification algorithm).
+        * Organized and created [fact sheets](https://docs.google.com/document/d/1Jp9YzanF8mKftf3njD4N1W7B2SDHiP7U53TUKxUdjNc/edit) using press releases from the Department of Justice's website.
         * Designed and created [reports](https://drive.google.com/file/d/1NrroLK-WcZQZYkoX5APcORQsaBuCbOYp/view?usp=sharing) on Asian Americans demographics using the census data.
         * Created [visualizations](https://public.tableau.com/app/profile/yang.wu3139/viz/AAJCPressReleaseFactSheet/CrosstabTextTable) of the press release data using Tableau.
         * Conducted policy research on the [NIH/NSF](https://docs.google.com/document/d/1ogwBGNxbciZjY6jpahR9JO-HvEyaRthl5ZvZz_NnQAw/edit#heading=h.s9rmfggyfz7e)'s involvement with the racial profiling of Asian American researchers and scientists.
@@ -79,9 +79,9 @@ experience:
     description: |2-
         Responsibilities include:
         
-        * Deal sourcing, company research via websites like Crunchbase and AngelList, and sending outbound introduction emails.
+        * Deal sourcing, company research via websites like Crunchbase and AngelList, and sending outbound introduction emails using a mail-merge program I wrote.
         * Attended regular pitch meetings with founders.
-        * Responsible for conducting market analysis for cold inbound deals. See [sample market sizing analysis](https://docs.google.com/spreadsheets/d/1gNOvfOHwz_WpYD9CauAjTTJw3SDo6BuwPMNsVo0rH0o/edit?usp=sharing) and [sample competitor analysis](https://docs.google.com/document/d/13FYubiQLN0yWMOzcSPq5rbxZBjnmlVH_waDerUgkpxU/edit?usp=sharing).
+        * Responsible for conducting market analysis for cold inbound deals. See [sample market sizing analysis](https://docs.google.com/spreadsheets/d/1gNOvfOHwz_WpYD9CauAjTTJw3SDo6BuwPMNsVo0rH0o/edit?usp=sharing) and [sample competitor analysis](https://docs.google.com/document/d/13FYubiQLN0yWMOzcSPq5rbxZBjnmlVH_waDerUgkpxU/edit?usp=sharing). All these reports are automated using the `python-docx` library or the `officeverse` packages in R.
         * Airtable maintenance.
         
 
