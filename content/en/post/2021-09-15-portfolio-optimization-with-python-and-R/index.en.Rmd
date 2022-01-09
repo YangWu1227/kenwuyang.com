@@ -78,7 +78,7 @@ symbols = [
   "XOM", "SHW", "JPM", "AEP", "UNH", "AMZN", 
   "KO", "BA", "AMT", "DD", "TSN", "SLG"
 ]
-# Initialize data container
+# Instantiate data frame container
 asset_data = pd.DataFrame()
 # For loop to get data from Yahoo finance
 for sym in symbols:
@@ -113,7 +113,7 @@ daily_returns = (
 daily_returns.tail(n = 5)
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The simple daily returns may be visualized using line charts, density plots, and histograms, which are covered in my other [post on visualizing asset data](https://www.kenwuyang.com/en/post/visualizing-asset-returns/). Even though the visualizations in that post use the `ggplot2` package in R, the `plotnine` package can be employed to produce them in Python. For now, let us annualize the daily returns over the 10-year period from 2011-9-13 to `r Sys.Date()`. We assume the number of trading days in a year is computed as follows:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The simple daily returns may be visualized using line charts, density plots, and histograms, which are covered in my other [post on visualizing asset data](https://www.kenwuyang.com/en/post/visualizing-asset-returns/). Even though the visualizations in that post use the `ggplot2` package in R, the `plotnine` package, or any other Python graphics librarires, can be employed to produce them in Python. For now, let us annualize the daily returns over the 10-year period from 2011-9-13 to `r Sys.Date()`. We assume the number of trading days in a year is computed as follows:
 
 \begin{align*}
 365.25 \text{(days on average per year)} \times \frac{5}{7} \text{(proportion work days per week)} \\
@@ -194,10 +194,10 @@ def portfolio_sd(weights):
 
 **Monte Carlo Simulation**
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The empty containers we initialize are lists; they are *mutable* and so growing them will not be memory inefficient. 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The empty containers we instantiate are lists; they are *mutable* and so growing them will not be memory inefficient. 
 
 ```{python}
-# Initialize empty list containers for returns and sd
+# instantiate empty list containers for returns and sd
 list_portfolio_returns = []
 list_portfolio_sd = []
 # For loop to simulate 5000 random weight vectors (numpy array objects)
@@ -418,7 +418,7 @@ target = np.linspace(
   stop = 0.30,
   num = 100
 )
-# Initialize empty container for the objective values to be minimized
+# instantiate empty container for the objective values to be minimized
 obj_sd = []
 # For loop to minimize objective function
 for target in target:

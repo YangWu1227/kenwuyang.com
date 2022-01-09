@@ -18,5 +18,5 @@ projects: []
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 此项目是我[统计模拟](https://www.kenyon.edu/academics/departments-and-majors/mathematics-statistics/academic-program-requirements/courses-in-statistics/)课的演讲。 请用键盘快捷键 (cmd + shift + f) 进入全屏。点击键盘 "S" 键显示我的演讲稿。
 
-<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRLKjvxafrOkd1P16bRDnQ8WrCNHgBFqHxbvNShrldeFKyUt7ouZrQMpXnhksVViyYTwzX1uQ2mdtjP/embed?start=false&loop=false&delayms=3000" frameborder="0" width="750" height="600" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<iframe src="https://docs.google.com/presentation/d/1UtB6QDlYfel_CF7uWvSXey3U7E2kgFKXImRH0sQvKVw/edit#slide=id.g10cc862877e_2_76" frameborder="0" width="750" height="600" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
