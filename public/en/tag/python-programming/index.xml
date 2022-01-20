@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python Programming | Yang (Ken) Wu</title>
+    <link>https://www.kenwuyang.com/en/tag/python-programming/</link>
+      <atom:link href="https://www.kenwuyang.com/en/tag/python-programming/index.xml" rel="self" type="application/rss+xml" />
+    <description>Python Programming</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><copyright>© 2021 Yang Wu</copyright><lastBuildDate>Sat, 08 Jan 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://www.kenwuyang.com/media/Sharing.png</url>
+      <title>Python Programming</title>
+      <link>https://www.kenwuyang.com/en/tag/python-programming/</link>
+    </image>
+    
+    <item>
+      <title>A Personal Pandas, Dplyr, Data.table Repository</title>
+      <link>https://www.kenwuyang.com/en/post/a-personal-pandas-dplyr-data-table-repository/</link>
+      <pubDate>Sat, 08 Jan 2022 00:00:00 +0000</pubDate>
+      <guid>https://www.kenwuyang.com/en/post/a-personal-pandas-dplyr-data-table-repository/</guid>
+      <description>
+&lt;script src=&#34;https://www.kenwuyang.com/en/post/a-personal-pandas-dplyr-data-table-repository/index.en_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#motivation&#34;&gt;Motivation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#packages-and-library&#34;&gt;Packages and Library&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#data-frame-creation&#34;&gt;Data Frame Creation&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#dplyr&#34;&gt;Dplyr&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#data.table&#34;&gt;Data.table&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#pandas&#34;&gt;Pandas&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;motivation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Motivation&lt;/h1&gt;
+&lt;p&gt;         The content and formatting of this post is &lt;em&gt;heavily&lt;/em&gt; inspired by the following comprehensive and awesome &lt;a href=&#34;https://atrebas.github.io/post/2019-03-03-datatable-dplyr/&#34;&gt;post&lt;/a&gt; by &lt;a href=&#34;https://atrebas.github.io/about/&#34;&gt;Atrebas&lt;/a&gt;. You could also find him on Twitter &lt;a href=&#34;https://twitter.com/atrebas&#34;&gt;here&lt;/a&gt;. I use both &lt;code&gt;R&lt;/code&gt; and &lt;code&gt;Python&lt;/code&gt; extensively in my work everyday, especially the data wrangling packages and library &lt;code&gt;data.table&lt;/code&gt;, &lt;code&gt;dplyr&lt;/code&gt; (its related siblingz &lt;code&gt;dbplyr&lt;/code&gt;, &lt;code&gt;dtplyr&lt;/code&gt; etc.), and &lt;code&gt;pandas&lt;/code&gt;. I find that, in my case, I often have to translate between different syntax and programmatic thinking when switching from one another. In &lt;code&gt;R&lt;/code&gt;, there are ways to accomplishing tasks and there are more Pythonic ways to do things in &lt;code&gt;Python&lt;/code&gt;. This is an attempt to create a list of code snippets that can hopefully become a reference, which will be updated over time, for myself and perhaps others as well.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;packages-and-library&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Packages and Library&lt;/h1&gt;
+&lt;p&gt;For &lt;code&gt;R&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tibble)
+library(dplyr)
+library(data.table)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For &lt;code&gt;Python&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import pandas as pd
+import numpy as np&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;data-frame-creation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Data Frame Creation&lt;/h1&gt;
+&lt;div id=&#34;dplyr&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Dplyr&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tb &amp;lt;- tibble(
+  x = c(1, 2, 3),
+  y = c(2, 3, 4)
+)
+tb&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 3 × 2
+##       x     y
+##   &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+## 1     1     2
+## 2     2     3
+## 3     3     4&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;data.table&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Data.table&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dt &amp;lt;- data.table(
+  x = c(1, 2, 3),
+  y = c(2, 3, 4)
+)
+dt&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##    x y
+## 1: 1 2
+## 2: 2 3
+## 3: 3 4&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;pandas&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Pandas&lt;/h2&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;df = pd.DataFrame({
+  &amp;#39;x&amp;#39;: [1, 2, 3], 
+  &amp;#39;y&amp;#39;: [2, 3, 4]
+})
+df&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##    x  y
+## 0  1  2
+## 1  2  3
+## 2  3  4&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
