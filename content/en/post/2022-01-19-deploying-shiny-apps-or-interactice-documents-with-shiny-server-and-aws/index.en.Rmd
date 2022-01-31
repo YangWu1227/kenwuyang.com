@@ -650,6 +650,7 @@ $ sudo rm your-site-config
 map $http_upgrade $connection_upgrade {
     default upgrade;
     ''      close;
+} 
 ```
 
 You can use the following command to open the configuration file:
