@@ -1,0 +1,1091 @@
+---
+title: Deploying Shiny Apps or Interatice Documents with Shiny Server and AWS
+author: Yang Wu
+date: '2022-01-19'
+slug: deploying-shiny-apps-or-interatice-documents-with-shiny-server-and-aws
+categories:
+  - R
+  - AWS
+tags:
+  - Shiny Application
+  - Flexdashboard
+  - AWS
+subtitle: ''
+summary: 'Steps for deploying shiny applications or interactive documents with AWS'
+authors: []
+lastmod: '2022-01-19T20:50:39-05:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+output:
+  blogdown::html_page:
+    toc: true
+---
+
+<script src="{{< blogdown/postref >}}index.en_files/header-attrs/header-attrs.js"></script>
+
+<div id="TOC">
+<ul>
+<li><a href="#step-1-aws-ec2">Step 1: AWS EC2</a>
+<ul>
+<li><a href="#launch-an-ec2-instance-and-select-an-ami">Launch an EC2 Instance and Select an AMI</a></li>
+<li><a href="#choose-an-instance-type">Choose an Instance Type</a></li>
+<li><a href="#configure-instance-details">Configure Instance Details</a></li>
+<li><a href="#add-tags">Add Tags</a></li>
+<li><a href="#configure-security-group">Configure Security Group</a></li>
+<li><a href="#key-pair">Key Pair</a></li>
+<li><a href="#elastic-ip">Elastic IP</a></li>
+</ul></li>
+<li><a href="#step-2-connecting-to-aws-ec2">Step 2: Connecting to AWS EC2</a>
+<ul>
+<li><a href="#connecting-via-ssh">Connecting via SSH</a></li>
+<li><a href="#disconnecting">Disconnecting</a></li>
+<li><a href="#upgrading-and-installing-system-packages">Upgrading and Installing System Packages</a></li>
+</ul></li>
+<li><a href="#step-3-installing-r-rstudio-server-and-shiny-server">Step 3: Installing R, Rstudio Server, and Shiny Server</a>
+<ul>
+<li><a href="#installing-r-from-cran">Installing R from CRAN</a></li>
+<li><a href="#installing-rstudio-server">Installing Rstudio Server</a></li>
+<li><a href="#installing-shiny-server">Installing Shiny Server</a></li>
+<li><a href="#checking-installed">Checking installed</a></li>
+<li><a href="#install-r-packages-system-library">Install R packages (System Library)</a></li>
+<li><a href="#install-r-packages-user-library">Install R packages (User Library)</a></li>
+</ul></li>
+<li><a href="#step-4-rstudio-server-and-ide">Step 4: Rstudio Server and IDE</a>
+<ul>
+<li><a href="#user-login">User Login</a></li>
+<li><a href="#user-library">User Library</a></li>
+</ul></li>
+<li><a href="#step-5-shiny-server">Step 5: Shiny Server</a>
+<ul>
+<li><a href="#configure-shiny-server">Configure Shiny Server</a></li>
+<li><a href="#reverse-proxy">Reverse Proxy</a></li>
+</ul></li>
+<li><a href="#step-6-deployment">Step 6: Deployment</a>
+<ul>
+<li><a href="#remove-example-shiny-files">Remove Example Shiny Files</a></li>
+<li><a href="#github">Github</a></li>
+<li><a href="#deploying-with-shiny-server">Deploying With Shiny Server</a></li>
+</ul></li>
+<li><a href="#step-7-recommended-domain-name">Step 7 (Recommended): Domain Name</a>
+<ul>
+<li><a href="#google-domain">Google Domain</a></li>
+<li><a href="#dns">DNS</a></li>
+<li><a href="#configure-nginx">Configure Nginx</a></li>
+</ul></li>
+<li><a href="#step-8-highly-recommended-secure-with-https">Step 8 (Highly Recommended): Secure With HTTPS</a>
+<ul>
+<li><a href="#lets-encrypt-with-certbot">Let’s Encrypt With Certbot</a></li>
+<li><a href="#configure-nginx-1">Configure Nginx</a></li>
+<li><a href="#add-port-443-to-ec2-security-group">Add Port 443 to EC2 Security Group</a></li>
+<li><a href="#include-http-strict-transport-security">Include HTTP Strict-Transport-Security</a></li>
+</ul></li>
+<li><a href="#step-9-optional-password-protect">Step 9 (Optional): Password Protect</a>
+<ul>
+<li><a href="#configure-nginx-2">Configure Nginx</a></li>
+<li><a href="#user-login-1">User Login</a></li>
+</ul></li>
+<li><a href="#resources">Resources</a>
+<ul>
+<li><a href="#shiny">Shiny</a></li>
+<li><a href="#aws">AWS</a></li>
+<li><a href="#nginx">Nginx</a></li>
+<li><a href="#operating-systems-and-it">Operating Systems and IT</a></li>
+</ul></li>
+</ul>
+</div>
+
+<p>       Recently, I needed to deploy a <code>flexdashboard</code> that I had built. For shiny applications or interactive documents, there are a few options for deployment and hosting, including <a href="https://www.shinyapps.io/?_ga=2.44184228.1231910523.1642619545-1368666574.1621921327">shinyapp.io</a>, <a href="https://www.rstudio.com/products/connect/?_ga=2.82041238.1231910523.1642619545-1368666574.1621921327">RStudio Connect</a>, and <a href="https://www.rstudio.com/products/shiny/shiny-server/">Shiny Server</a>. The available resource that I had was our AWS EC2 instance, and so I decided to host our <code>flexdashboard</code> through shiny-server and AWS EC2. In short, I want to document the steps that I took and the resources that have helped me better understand the deployment process in this post for future reference. This post will be updated as my understanding of AWS, shiny, and application deployment improves over time. A <strong>note</strong> is that I am a MAC user, which means I’ll be using the Terminal app initially for the EC2 set up.</p>
+<p>       Some resources that have helped me understand AWS and EC2 are the following:</p>
+<ul>
+<li><p><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html" class="uri">https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html</a></p></li>
+<li><p><a href="https://searchaws.techtarget.com/definition/Amazon-EC2-instances" class="uri">https://searchaws.techtarget.com/definition/Amazon-EC2-instances</a></p></li>
+<li><p><a href="https://youtu.be/izyqJPl9wW8" class="uri">https://youtu.be/izyqJPl9wW8</a></p></li>
+</ul>
+<div id="step-1-aws-ec2" class="section level2">
+<h2>Step 1: AWS EC2</h2>
+<p>       If you are working for an organization that uses AWS EC2, the chances are that your data team or IT department may already have an EC2 instance running. In that case, I would consult your cloud manager or supervisor or whoever manages your organization’s AWS account regarding the following:</p>
+<ul>
+<li><p>The root user could create your <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-iam.html">IAM</a> user account, which gives you certain access rights.</p></li>
+<li><p>You would need to connect to EC2 via a Secure Shell (SSH) using a Command Line Interface (CLI), and so you need to obtain the AWS EC2 Key <code>.pem</code> private key file.</p></li>
+<li><p>You may also want to obtain the SSH commands that allows you to SSH into your organization’s EC2 instance.</p></li>
+</ul>
+<p>The rest of the setup steps may differ quite a bit depending on whether or not you are using your organization’s EC2 instance or running your own. For the purpose of this post, however, we will create our own personal AWS account and EC2 instance. I find that practicing deploying an application using my own AWS account and EC2 instance has helped me ultimately set up the production environment on my organization’s EC2 instance. The first step, though, is to register for an <a href="https://aws.amazon.com/">AWS</a> account, which is free of charge.</p>
+<div id="launch-an-ec2-instance-and-select-an-ami" class="section level3">
+<h3>Launch an EC2 Instance and Select an AMI</h3>
+<p>       Launch an EC2 instance by selecting an <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html">Amazon AMI</a>.</p>
+<p><img src="images/ami.png" width="750" height="600"></p>
+<p>Because many tutorials and resources online are based on the Ubuntu Server AMI, we will use this as well. Not only does this option have the <a href="https://aws.amazon.com/free/">free tier</a> option but, based on my experience, it also could save us a lot of pain in having to deal with system requirements later on. The Ubuntu 20.04.1 LTS (at the time of writing this post) is a well documented operating system with a large user base and so trouble shooting is relatively easier in my experience compared to an AMI such as the Amazon Linux 1 or 2 AMI, which are based on Red Hat Enterprise Linux (RHEL). If you work for an organization, you may not be able to choose which AMI to use. But the steps that follow should theoretically work with other AMI (for instance, we use the Amazon Linux 1 AMI at our organization); just note that you may run into problems installing the required system libraries and packages needed for deployment and even for R packages.</p>
+</div>
+<div id="choose-an-instance-type" class="section level3">
+<h3>Choose an Instance Type</h3>
+<p>       We will choose <code>t2.micro</code>, which is free tier eligible. Depending on your needs for computing resources (for instance, installing R packages with complied code), you may run out of memory with 1 CPU and 1GB of RAM, therefore, you could also consider other instance types. I recommend reading the following <a href="https://www.qa.com/about-qa/our-thinking/understanding-t2-and-t3-cpu-credits-in-aws/">article</a> to better understand the differences between instance types.</p>
+<p><img src="images/instance_type.png" width="750" height="600"></p>
+</div>
+<div id="configure-instance-details" class="section level3">
+<h3>Configure Instance Details</h3>
+<p>       We could leave this as default.</p>
+<div id="add-storage" class="section level4">
+<h4>Add Storage</h4>
+<p>       The default EBS volume size is 8 GB but we get up to 30 GB of General Purpose SSD via the free tier. See the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Storage.html">documentation</a> on EBS volume options.</p>
+<p><img src="images/storage.png" width="750" height="600"></p>
+</div>
+</div>
+<div id="add-tags" class="section level3">
+<h3>Add Tags</h3>
+<p>       Tags may be useful for organizing your AWS services. See the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">documentation</a> for more on this.</p>
+</div>
+<div id="configure-security-group" class="section level3">
+<h3>Configure Security Group</h3>
+<p>       <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">Security groups</a> function as virtual firewalls for your EC2 instances to control inbound and outbound traffic. By default, AWS blocks traffic from all ports except for port 22, which is the port we use to SSH into our instance. I use the following configuration based on <a href="http://mgritts.github.io/2016/07/08/shiny-aws/">mgritts</a>’s article.</p>
+<table>
+<colgroup>
+<col width="12%" />
+<col width="9%" />
+<col width="11%" />
+<col width="25%" />
+<col width="41%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Protocol</th>
+<th>Port Range</th>
+<th>Source</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SSH</td>
+<td>TCP</td>
+<td>22</td>
+<td>Anywhere: 0.0.0.0/0, ::0</td>
+<td>SSH</td>
+</tr>
+<tr class="even">
+<td>HTTP</td>
+<td>TCP</td>
+<td>80</td>
+<td>Anywhere: 0.0.0.0/0, ::0</td>
+<td>Use nginx to password protect and set up proxy</td>
+</tr>
+<tr class="odd">
+<td>Custom TCPI</td>
+<td>TCP</td>
+<td>3838</td>
+<td>Anywhere: 0.0.0.0/0, ::0</td>
+<td>Default R Shiny server</td>
+</tr>
+<tr class="even">
+<td>Custom TCPI</td>
+<td>TCP</td>
+<td>8787</td>
+<td>Anywhere: 0.0.0.0/0, ::0</td>
+<td>Default R Studio server</td>
+</tr>
+</tbody>
+</table>
+<p>Since our instance is utilized as a web server, we use security rules to allow IP addresses to access our instance using HTTP or Custom TCP, so that external users can browse the content on our web server.</p>
+<ul>
+<li><p>The second rule allows for inbound <a href="https://www.techopedia.com/definition/15709/port-80">HTTP</a> access from all IPv4 and IPv6 addresses.</p></li>
+<li><p>The third and forth allow for displaying web data based port numbers.</p></li>
+</ul>
+</div>
+<div id="key-pair" class="section level3">
+<h3>Key Pair</h3>
+<p>       The last step for setting up an EC2 instance is creating your <code>.pem</code> private key <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">file</a>, or select to use an existing key file provided by your organization.</p>
+<p><img src="images/pem.png" width="450" height="300"></p>
+<p>Finally, launch your instance.</p>
+</div>
+<div id="elastic-ip" class="section level3">
+<h3>Elastic IP</h3>
+<p>       An <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">elastic IP address</a> is different than your EC2 instance’s Public IPv4 address; in short, an Elastic IP address is allocated to your AWS account, and is yours until you release it. Therefore, this IP address can be reused for your EC2 instances. The re-usability of our IP may be useful when we want to upgrade or downgrade our EC2 instance type. We can simply associate the elastic IP address to the new server. Or, if something bad happens to our EC2 instance for whatever reason, an elastic IP address allows us to mask the failure of an instance or software by rapidly remapping the address to another instance in our account.</p>
+<p><img src="images/elastic_ip.png" width="750" height="600"></p>
+<p>Next, select the <code>Action</code> drop down menu in the top right corner and choose <code>Associate Elastic IP address</code>. From now on, every time we make changes to our EC2 instance, we can simply re-associate this IP address to our new instance.</p>
+</div>
+</div>
+<div id="step-2-connecting-to-aws-ec2" class="section level2">
+<h2>Step 2: Connecting to AWS EC2</h2>
+<div id="connecting-via-ssh" class="section level3">
+<h3>Connecting via SSH</h3>
+<p>       To connect to our EC2 instance via SSH, we will use the terminal (for windows, the steps for <code>PuTTY</code> can be found <a href="https://business-science.github.io/shiny-production-with-aws-book/connecting-to-ec2-with-ssh-secure-shell.html">here</a>). When you select “Connect” in your AWS console, you should be taken to the following page:</p>
+<p><img src="images/connect.png" width="550" height="400"></p>
+<ul>
+<li>Open your terminal, navigate to the location of your <code>.pem</code> key:</li>
+</ul>
+<pre class="r"><code># Change working directory 
+$ cd path_to_pem_file</code></pre>
+<ul>
+<li>Next, run the following command to ensure that your key is not publicly viewable:</li>
+</ul>
+<pre class="r"><code>$ chmod 400 file.pem</code></pre>
+<ul>
+<li>Connect to your instance:</li>
+</ul>
+<pre class="r"><code>$ ssh -i &quot;file.pem&quot; ubuntu@ec2-public-ip-address.compute-1.amazonaws.com</code></pre>
+<p>If this is your first time connecting to your EC2 instance, you may receive an <code>Are you sure you want to continue connecting (yes/no/[fingerprint])?</code> prompt. Entering <code>yes</code> should successfully connect you to your EC2 instance:</p>
+<pre class="r"><code>Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.11.0-1022-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Sat Jan 29 01:27:58 UTC 2022
+
+  System load:  0.0               Processes:             100
+  Usage of /:   4.9% of 29.02GB   Users logged in:       0
+  Memory usage: 21%               IPv4 address for eth0: 172.31.91.243
+  Swap usage:   0%
+
+
+1 update can be applied immediately.
+To see these additional updates run: apt list --upgradable</code></pre>
+</div>
+<div id="disconnecting" class="section level3">
+<h3>Disconnecting</h3>
+<p>       To disconnect from your instance:</p>
+<pre class="r"><code>$ exit</code></pre>
+</div>
+<div id="upgrading-and-installing-system-packages" class="section level3">
+<h3>Upgrading and Installing System Packages</h3>
+<p>       This particular step and many of the steps that follow are places where the operating system will begin to matter. The following commands are meant to work with the Ubuntu OS (a Debian-based Linux distribution). For instance, the <a href="https://www.vultr.com/docs/using-apt-utilities-on-ubuntu/">Advanced package tool</a>, or APT, used to handle the installation and removal of software is developed for Ubuntu/Debian system software packages. For Red Hat-based Linux systems such as the official Amazon Linux AMI 1 or 2, the <a href="https://www.redhat.com/sysadmin/how-manage-packages">Yellowdog Updater, Modified</a>, or YUM, package-management utility is used. In addition, R packages can depend on software external to the R ecosystem. On Ubuntu, for instance, in order to install the <code>curl</code> R package, you must install the system library first via <code>apt-get install libcurl</code>. Resolving system dependency issues can be painful at times, especially if you are using a different operating system (AMI). The one effective way for troubleshooting based on my own experience is simply Google searching for system dependencies on an ad-hoc basis (after an error is thrown, for instance, when you try to install an R package). If you are lucky, you won’t be the first to crash because of a missing system library. If you are using another AMI that runs another operating system, you must also figure out how to install the library.</p>
+<pre class="r"><code># Update commands
+$ sudo apt update
+$ sudo apt-get update -y
+$ sudo apt-get dist-upgrade -y
+# Install some system libraries
+$ sudo apt-get -y install \
+    nginx \
+    gdebi-core \
+    apache2-utils \
+    pandoc \
+    pandoc-citeproc \
+    libssl-dev \
+    libcurl4-gnutls-dev \
+    libcairo2-dev \
+    libgsl0-dev \
+    libgdal-dev \
+    libgeos-dev \
+    libproj-dev \
+    libxml2-dev \
+    libxt-dev \
+    libv8-dev \
+    libhdf5-dev \
+    git</code></pre>
+<p>       The difference between <code>apt-get</code> and <code>apt</code> is that the former is an older version with more command options while “apt” is a newer, more user-friendly command with fewer options. To understand these shell commands, I found that <a href="https://explainshell.com/">explainshell.com</a> (its github repo can be found <a href="https://github.com/idank/explainshell%5D">here</a>) is extremely useful. Other resources are:</p>
+<ul>
+<li><p><a href="https://www.freebsd.org/cgi/man.cgi?query=ssh">FreeBSD Manual Pages</a></p></li>
+<li><p><a href="https://business-science.github.io/shiny-production-with-aws-book/linux-command-line-interface-cli.html">Chapter 7</a> of Matt Dancho’s book</p></li>
+</ul>
+<p>To be able to compile R packages, we also need to install the <a href="https://linuxhint.com/install-build-essential-ubuntu/">build-essentials</a> packages that are necessary for compiling software:</p>
+<pre class="r"><code>$ sudo apt install build-essential</code></pre>
+<p>On Ubuntu, you may run the following command to check on disk space:</p>
+<pre class="r"><code>$ df -h</code></pre>
+<p>If <code>nginx</code> is installed successfully, you should see the following page by entering your <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html">Public IPv4 address</a> (obtained from <code>Instance summary</code>) into your web browser:</p>
+<p><img src="images/nginx.png" width="550" height="400"></p>
+</div>
+</div>
+<div id="step-3-installing-r-rstudio-server-and-shiny-server" class="section level2">
+<h2>Step 3: Installing R, Rstudio Server, and Shiny Server</h2>
+<div id="installing-r-from-cran" class="section level3">
+<h3>Installing R from CRAN</h3>
+<p>       Because R updates frequently, the latest stable version isn’t always available from Ubuntu’s default repositories, and so we’ll need to add the external repository maintained by CRAN. To install the latest version of R from <a href="https://cran.r-project.org/">CRAN</a>, the commands are as follows:</p>
+<pre class="r"><code># Update indices
+$ sudo apt update -qq
+# Install two helper packages 
+$ sudo apt install --no-install-recommends software-properties-common dirmngr
+# Add the signing key (by Michael Rutter) for these repositories
+# To verify key, run gpg --show-keys /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc 
+# Fingerprint: 298A3A825C0D65DFD57CBB651716619E084DAB9
+wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+# Add the R 4.0 repo from CRAN -- adjust &#39;focal&#39; to &#39;groovy&#39; or &#39;bionic&#39; as needed
+sudo add-apt-repository &quot;deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/&quot;</code></pre>
+<p>The instructions for installing R on other operating systems can be found <a href="https://cran.r-project.org/">here</a> under “Download and Install R”. Finally, run the following command to install R:</p>
+<pre class="r"><code># Install recommended packages
+$ sudo apt install r-base</code></pre>
+<p>Or, install without considering recommended packages:</p>
+<pre class="r"><code># Install without recommended packages
+$ sudo apt install --no-install-recommends r-base</code></pre>
+<p>To check the R version:</p>
+<pre class="r"><code>$ R --version</code></pre>
+<p>Other useful commands are:</p>
+<pre class="r"><code># Run R from the terminal
+$ R 
+# Quit
+$ q()</code></pre>
+<p>       If you are using an operating such as the Amazon Linux AMI 1, the stable version of R in the default repository is, at the time of writing this post, 3.x; therefore, this may or may not be troublesome depending on the R packages you need to install.</p>
+</div>
+<div id="installing-rstudio-server" class="section level3">
+<h3>Installing Rstudio Server</h3>
+<p>       To download the latest version of Rstudio server, use the following <a href="https://www.rstudio.com/products/rstudio/download-server/">link</a> and select your Linux Platform. The official instructions are easy to follow, use the following commands to install Rstudio server for Ubuntu 20 (at the time of writing this post):</p>
+<pre class="r"><code>$ sudo apt-get install gdebi-core
+$ wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2021.09.2-382-amd64.deb
+$ sudo gdebi rstudio-server-2021.09.2-382-amd64.deb</code></pre>
+</div>
+<div id="installing-shiny-server" class="section level3">
+<h3>Installing Shiny Server</h3>
+<p>       Similarly, install the <code>Shiny</code> R package and the latest version of Shiny Server by following the instructions on this <a href="https://www.rstudio.com/products/shiny/download-server/">page</a>.</p>
+<pre class="r"><code># Install shiny
+# This may take a while to compile on tc2.micro
+$ sudo su - \
+-c &quot;R -e \&quot;install.packages(&#39;shiny&#39;, repos=&#39;https://cran.rstudio.com/&#39;)\&quot;&quot;
+# Install shiny server
+$ sudo apt-get install gdebi-core
+$ wget https://download3.rstudio.org/ubuntu-14.04/x86_64/shiny-server-1.5.17.973-amd64.deb
+$ sudo gdebi shiny-server-1.5.17.973-amd64.deb</code></pre>
+</div>
+<div id="checking-installed" class="section level3">
+<h3>Checking installed</h3>
+<p>On Ubuntu, run the following commands:</p>
+<pre class="r"><code>$ cd ~
+$ ls</code></pre>
+<p>You should see that both Rstudio server and Shiny server are installed. On RedHat-based Linux distributions, you might use the following commands to check if both servers are properly installed:</p>
+<pre class="r"><code># List installed packages
+$ sudo yum list installed
+# Use grep command to filter for specific package
+$ sudo yum list installed | grep nginx</code></pre>
+<p>Other resources that I have found useful are as follows:</p>
+<ul>
+<li><p>Bash cheat sheet by <a href="https://gist.github.com/LeCoupa/122b12050f5fb267e75f">Julien Le Coupanec</a></p></li>
+<li><p>Linux and Ubuntu Terminal <a href="https://garywoodfine.com/linux-terminal-command-cheat-sheets/">cheat sheet</a></p></li>
+<li><p>YUM commands <a href="https://access.redhat.com/sites/default/files/attachments/rh_yum_cheatsheet_1214_jcs_print-1.pdf">cheat sheet</a></p></li>
+</ul>
+<p>If you enter <code>http://&lt;public-ipv4&gt;:8787</code> and <code>http://&lt;public-ipv4&gt;:3838</code> into your browser, you should see the following pages:</p>
+<p><img src="images/rstudio_server.png" width="550" height="400"></p>
+<p>And</p>
+<p><img src="images/shiny_server.png" width="550" height="400"></p>
+</div>
+<div id="install-r-packages-system-library" class="section level3">
+<h3>Install R packages (System Library)</h3>
+<p>       One way to install R packages is to install them in a <a href="https://r-pkgs.org/package-structure-state.html#library">system-level or global library</a>; this library is available for all users and roles of your EC2 instance. The syntax for installing R packages from CRAN within the terminal is as follows:</p>
+<pre class="r"><code>$ sudo su - -c &quot;R -e \&quot;install.packages(c(&#39;tidyverse&#39;, &#39;data.table&#39;), repos=&#39;http://cran.rstudio.com/&#39;)\&quot;&quot;</code></pre>
+<p>To install developmental versions of R packages from github:</p>
+<pre class="r"><code>$ sudo su - -c &quot;R -e \&quot;install.packages(&#39;devtools&#39;, repos=&#39;http://cran.rstudio.com/&#39;)\&quot;&quot;
+$ sudo su - -c &quot;R -e \&quot;devtools::install_github(&#39;tidyverse/ggplot2&#39;)\&quot;&quot;</code></pre>
+<p><strong>Note</strong>: As mentioned earlier, with the <code>t2.micro</code> instance type, you may simply run out of memory installing some R packages with compiled code (<code>Rcpp</code>, <code>RcppArmadillo</code>). When this happens, the installation process would seemingly be stuck in an never-ending process that would need to be killed.</p>
+</div>
+<div id="install-r-packages-user-library" class="section level3">
+<h3>Install R packages (User Library)</h3>
+<p>       Alternatively, there is also the option to install add-on R packages in a <a href="https://r-pkgs.org/package-structure-state.html#library">user-level library</a>, which may be appealing for many reasons. We will return to this once we set up the user credentials for Rstudio server.</p>
+</div>
+</div>
+<div id="step-4-rstudio-server-and-ide" class="section level2">
+<h2>Step 4: Rstudio Server and IDE</h2>
+<div id="user-login" class="section level3">
+<h3>User Login</h3>
+<p>       The RStudio Server enables you to provide a browser based interface (the RStudio IDE) to a version of R running on a remote Linux server. The RStudio IDE can be accessed by entering <code>http://&lt;public-ipv4&gt;:8787</code> into your browser. The log in credentials use the user information on your EC2 instance, which is stored in the <code>/etc/passwd</code> file. This <a href="https://www.cyberciti.biz/faq/understanding-etcpasswd-file-format/">file</a> stores essential information about the users on the system. We can manage users on our EC2 instance using the following commands for linux:</p>
+<ul>
+<li>In Ubuntu, there are two command-line tools that you can use to create a new user account: <code>useradd</code> and <code>adduser</code>. The former, <code>useradd</code>, is a low-level utility and <code>adduser</code> is a script written in Perl that acts as a friendly interactive frontend for <code>useradd</code>:</li>
+</ul>
+<pre class="r"><code>$ sudo adduser username</code></pre>
+<p>The command above will prompt you to enter the following information to set up the user:</p>
+<pre class="r"><code>Adding user `username&#39; ...
+Adding new group `username&#39; (1001) ...
+Adding new user `username&#39; (1001) with group `username&#39; ...
+Creating home directory `/home/username&#39; ...
+Copying files from `/etc/skel&#39; ...
+New password: 
+Retype new password: 
+passwd: password updated successfully
+Changing the user information for username
+Enter the new value, or press ENTER for the default
+    Full Name []: Your Name
+    Room Number []: 
+    Work Phone []: 
+    Home Phone []: 
+    Other []: 
+Is the information correct? [Y/n] y</code></pre>
+<p>       This will create the new user’s home directory, and copy files from <code>/etc/skel</code> to this directory. Within the home directory, the user can write, edit, and delete files and directories. To allow this user to be able to perform administrative tasks, add this existing user to the sudo <a href="https://linuxize.com/post/how-to-add-user-to-group-in-linux/">group</a> using <a href="https://linuxize.com/post/usermod-command-in-linux/">usermod</a>:</p>
+<pre class="r"><code>$ sudo usermod -a -G sudo username</code></pre>
+<p>       Always use the <code>-a</code> (append) option when adding a user to a new group. If you omit the <code>-a</code> option, the user will be removed from any groups not listed after the -G option. On success, the <code>usermod</code> command does not display any output, but warns you if the user or group doesn’t exist.</p>
+<ul>
+<li>In Ubuntu, you can use two commands to delete a user account: <code>userdel</code> and its interactive frontend <code>deluser</code>:</li>
+</ul>
+<pre class="r"><code>$ sudo deluser username</code></pre>
+<p>To delete the user and its home directory and mail spool, use the <code>--remove-home</code> flag:</p>
+<pre class="r"><code>$ sudo deluser --remove-home username</code></pre>
+<p>Note that sometimes you may need to <a href="https://docs.rstudio.com/ide/server-pro/1.1.463/server-management.html">kill an R session</a> before removing the user:</p>
+<pre class="r"><code># Kill an individual session
+$ sudo rstudio-server kill-session &lt;pid&gt;
+# Force kill all running sessions
+$ sudo rstudio-server kill-all</code></pre>
+<p>The session process ID can be obtained with the following base R function:</p>
+<pre class="r"><code>Sys.getpid()</code></pre>
+<ul>
+<li>To change password for a user:</li>
+</ul>
+<pre class="r"><code>$ sudo passwd username</code></pre>
+<ul>
+<li>To remove a password and set up a new password upon deletion:</li>
+</ul>
+<pre class="r"><code>$ sudo passwd -d username</code></pre>
+<ul>
+<li>To see list of all users, simply use the following commands:</li>
+</ul>
+<pre class="r"><code># List users
+$ cat /etc/passwd
+$ cut -d: -f1 /etc/passwd
+# Search for username using the grep command
+$ grep username /etc/passwd
+# Or
+$ grep -w &#39;^username&#39; /etc/passwd</code></pre>
+<ul>
+<li>To see details about the file:</li>
+</ul>
+<pre class="r"><code>$ stat /etc/passwd</code></pre>
+<p>       More information can be found via the Rstudio Server <a href="https://docs.rstudio.com/ide/server-pro/1.1.463/index.html">administration guide</a>. Finally, logging into your Rstudio IDE should take you to the following GUI:</p>
+<p><img src="images/rstudio_ide.png" width="750" height="600"></p>
+</div>
+<div id="user-library" class="section level3">
+<h3>User Library</h3>
+<p>       Once you have set up a user on your EC2 instance, which creates a home directory for the username, your user-level library will be set up as well, so there is nothing extra to do here. Login to your rstudio IDE and run the following function:</p>
+<pre class="r"><code>.libPaths()</code></pre>
+<p>This would return the following paths on Ubuntu:</p>
+<pre class="r"><code>[1] &quot;/home/username/R/x86_64-pc-linux-gnu-library/4.1&quot;
+[2] &quot;/usr/local/lib/R/site-library&quot;                  
+[3] &quot;/usr/lib/R/site-library&quot;                        
+[4] &quot;/usr/lib/R/library&quot;  </code></pre>
+<p>On RedHat (for instance, the Amazon Linux AMI 1), the output may be something like:</p>
+<pre class="r"><code>[1] &quot;/home/username/R/x86_64-redhat-linux-gnu-library/3.4&quot;
+[2] &quot;/usr/lib64/R/library&quot;                                    
+[3] &quot;/usr/share/R/library&quot;  </code></pre>
+<p>The first path is always your user library, which means that running <code>install.package()</code> using the Rstudio IDE will install the packages in that path. On Debian and Ubuntu, the <code>R_LIBS_USER</code> <a href="https://rstats.wtf/r-startup.html">environment variable</a> is set in <code>/etc/R/Renviron</code>.</p>
+<pre class="r"><code>R_LIBS_USER=${R_LIBS_USER-&#39;~/R/$platform-library/R-version&#39;}</code></pre>
+<p>where <code>$platform</code> is something like ‘x86_64-pc-linux-gnu-library’ and is dependent on the version of R installed on your EC2 instance. The environment variable <code>R_LIBS_SITE</code> is set in <code>/etc/R/Renviron</code> to</p>
+<pre class="r"><code>R_LIBS_SITE=${R_LIBS_SITE-&#39;/usr/local/lib/R/site-library:/usr/lib/R/site-library:/usr/lib/R/library&#39;}</code></pre>
+<p>We can access the environment variables via:</p>
+<pre class="r"><code>$ sudo nano /etc/R/Renviron</code></pre>
+<p>       The R packages part of <code>r-base</code> and <code>r-recommended</code> are installed into the directory <code>/usr/lib/R/library</code>. The other R packages available as precompiled Debian packages <code>r-cran-*</code> and <code>r-bioc-*</code> are installed into <code>/usr/lib/R/site-library</code>. More information for Debian packages of R software can be found in the following <a href="https://cran.r-project.org/bin/linux/debian/#pathways-to-r-packages">article</a>. For other operating systems, the location of these <em>start-up</em> files may be different. But the configuration files can be edited directly in the IDE:</p>
+<pre class="r"><code># Install usethis
+install.packages(&quot;usethis&quot;)
+# Open configuration files
+usethis::edit_r_environ()</code></pre>
+</div>
+</div>
+<div id="step-5-shiny-server" class="section level2">
+<h2>Step 5: Shiny Server</h2>
+<p>       The best resource available for Shiny server is the <a href="https://docs.rstudio.com/shiny-server/">administrative guide</a>, which covers the most important information from system requirements to server management to hosting models to security.</p>
+<div id="configure-shiny-server" class="section level3">
+<h3>Configure Shiny Server</h3>
+<p>       <strong>Important</strong>: The first thing, though, is to stop the server:</p>
+<pre class="r"><code># Ubuntu
+$ sudo systemctl stop shiny-server
+# Redhat
+$ sudo stop shiny-server</code></pre>
+<p>Other useful commands include:</p>
+<pre class="r"><code># Ubuntu
+$ sudo systemctl start shiny-server
+$ sudo systemctl status shiny-server
+$ sudo systemctl restart shiny-server
+# Redhat
+$ sudo start shiny-server
+$ sudo status shiny-server
+$ sudo restart shiny-server</code></pre>
+<p>       To configure Shiny server, we need to modify the <a href="https://docs.rstudio.com/shiny-server/#default-configuration">default configuration file</a> located at <code>/etc/shiny-server/shiny-server.conf</code> using <a href="https://linuxize.com/post/how-to-use-nano-text-editor/">GNU nano</a>.</p>
+<pre class="r"><code>$ sudo nano /etc/shiny-server/shiny-server.conf</code></pre>
+<p>This should open the default configuration file:</p>
+<p><img src="images/shiny_config.png" width="650" height="500"></p>
+<p>       This configuration expects that your Shiny applications are located in the following path <code>/srv/shiny-server/</code>. For other hosting models, please see the following <a href="https://docs.rstudio.com/shiny-server/#hosting-model">section</a> of the administrative guide. There is one sample application in the path <code>/srv/shiny-server/sample-apps/hello/</code>. By default, Shiny Server listens (receives information) on port 3838, so the example application will be available at <code>http://&lt;server-address&gt;:3838/sample-apps/hello/</code>. I added the following directives to the configuration file (the list of all the directives that are supported in Shiny Server config files can be found <a href="https://docs.rstudio.com/shiny-server/#appendix">here</a> in section “7.2 Configuration Settings”):</p>
+<p><img src="images/shiny_config_modified.png" width="650" height="500"></p>
+<ul>
+<li><p>I added the <code>run_as</code> directive followed by my username. For one, the paths in which R will look for packages (<code>.libPaths()</code>) are often user-dependent. Since the packages required to run a Shiny application are installed in my user-level library, I must run the application as the correct user. For locations configured with <code>site_dir</code>, the <code>run_as</code> setting will be used to determine which user should spawn the R Shiny processes. This setting can be configured globally, or for a particular <strong>server</strong> or <strong>location</strong>.</p></li>
+<li><p>I added <code>sanitize_errors off</code> to report error on the client. This is optional, since you could always check the log files located in the path <code>/var/log/shiny-server</code> using the <a href="https://linuxize.com/post/less-command-in-linux/">Less</a> command.</p></li>
+</ul>
+<pre class="r"><code>$ cd /var/log/shiny-server
+$ sudo less [file_name].log</code></pre>
+<ul>
+<li>I changed <code>directory_index</code> to <code>off</code> to disable the <code>directoryIndex</code> page when user visits the base URL— <code>http://&lt;public-ipv4&gt;:3838</code>.</li>
+</ul>
+</div>
+<div id="reverse-proxy" class="section level3">
+<h3>Reverse Proxy</h3>
+<p>       A reverse proxy is the application that sits in front of back-end applications and forwards client requests to those applications. An <a href="https://www.charlesbordet.com/en/guide-shiny-aws/#3-set-up-a-reverse-proxy-with-nginx">analogy</a> that helped me understand this better is to think of the server as a house that has many doors, which are called <a href="https://www.cloudflare.com/learning/network-layer/what-is-a-computer-port/">ports</a>. We are limited to 65535 listening TCP ports. If we wish to obtain some information in the house (that is, the server), we must pass one of these ports to retrieve the information from the information provider (a specific process, application or a service) associated with that port.</p>
+<p>       Shiny server is one of such information providers, and it is located at port 3838. In order to reach Shiny server, we must specify the port number in the URL we enter into the browser— <code>http://&lt;server-address&gt;:3838</code>. If we do not specific the port number or if we specified the incorrect number, we will not be able to obtain data stream from Shiny server. The reserve proxy functions like a doorman at the main entrance of the house that brings us to the right information provider without having to specify which door to pass through. It directs client requests to the appropriate back-end server.</p>
+<p>       In other words, we simply need to type <code>http://&lt;server-address&gt;</code> or <code>http://&lt;server-address&gt;/*</code> (<code>*</code> means any sub-domain) into our browser to speak to the reverse proxy, which fetches the right information for us directly. <strong>In speaking to the reverse proxy, we do not have to specify the port number since we will have already configured the proxy to know exactly which port we want to reach.</strong> For this task, we will use <code>nginx</code> to set up the reverse proxy, which should already be installed on your EC2 instance.</p>
+<p>       To configure <code>nginx</code>, we first need to <strong>stop</strong> the service.</p>
+<pre class="r"><code>$ sudo service nginx stop
+# Other useful commands
+$ sudo service nginx start
+$ sudo service nginx status</code></pre>
+<p>Next, we need to navigate to the directory where <code>nginx</code> is installed:</p>
+<pre class="r"><code>$ cd /etc/nginx
+$ ls</code></pre>
+<p>       The results of <code>ls</code> will differ, sometimes substantially, depending on the AMI (and the operating system) that you are using. For instance, on Ubuntu, the default installation of <code>nginx</code> will create a <code>sites-avalable</code> and a <code>sites-enabled</code> directory. On RedHat/CentOS/Fedora, the default installation of <code>nginx</code> does not include such directories. For those operating systems, the default place to store the configuration files is the following directory <code>/etc/nginx/conf.d/*.conf</code>. Then, in the <code>/etc/nginx/nginx.conf</code> file, add the <code>include /etc/nginx/conf.d/*.conf;</code> directive in the http block to tell <code>nginx</code> to pull in any files in the <code>conf.d</code> directory that has the extension <code>.conf</code>. We are on Ubuntu, and so the following set up steps are needed:</p>
+<ul>
+<li>Having navigated to the <code>/etc/nginx</code> directory, we should see the following sub-directories:</li>
+</ul>
+<pre class="r"><code>conf.d          koi-utf     modules-available  proxy_params     sites-enabled  win-utf
+fastcgi.conf    koi-win     modules-enabled    scgi_params      snippets
+fastcgi_params  mime.types  nginx.conf         sites-available  uwsgi_params</code></pre>
+<ul>
+<li>Navigate to the <code>sites-available</code> directory and create a new configuration file specifically for Shiny server:</li>
+</ul>
+<pre class="r"><code>$ cd sites-available
+$ sudo nano shiny.conf</code></pre>
+<ul>
+<li>Write the following block of directives in the <code>shiny.conf</code> file:</li>
+</ul>
+<pre class="r"><code>server {
+    # Listen on 80 port
+    listen 80;
+    # For IPv6 addresses
+    listen [::]:80;
+    # The reverse proxy
+    location / {
+        proxy_pass http://127.0.0.1:3838/;
+        proxy_redirect http://127.0.0.1:3838/ $scheme://$host/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_read_timeout 20d;
+        proxy_buffering off;
+    }
+}</code></pre>
+<p>       When <code>nginx</code> proxies a request, it <strong>1)</strong> sends the request (i.e., a client trying to access our shiny application or interactive document hosted on our EC2 instance) to a specified proxied server, <strong>2)</strong> fetches the response, and <strong>3)</strong> sends it back to the client. To understand the configuration above:</p>
+<ul>
+<li><p>The <code>proxy_pass</code> directive passes all requests processed in location <code>/</code> to the proxied server at the specified address <code>http://127.0.0.1:3838/</code>. See more details on this <a href="https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass">here</a>. Note also that the “/” prefix is used for matching requests. The location block above provides the shortest prefix (length one), and only if all other location blocks fail to provide a match will this block be used. Since we do not have any other location blocks at the moment, this one will be used.</p></li>
+<li><p>The <code>proxy_redirect</code> directive does something like URL rewrite, replacing <code>http://127.0.0.1:3838/</code> with variables <code>$scheme://$host/</code>. You can read more details on <code>proxy_redirect</code> <a href="https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_redirect">here</a> and on the components of a URL <a href="https://www.ibm.com/docs/en/cics-ts/5.2?topic=concepts-components-url">here</a>. The full list of <code>nginx</code> variables can be found <a href="http://nginx.org/en/docs/varindex.html">here</a>.</p></li>
+<li><p>The <code>proxy_http_version</code> directive sets the HTTP protocol version for proxying. By default, version 1.0 is used. More details <a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_http_version">here</a>.</p></li>
+<li><p>The two <code>proxy_set_header field value</code> directives have something to do with <a href="http://nginx.org/en/docs/http/websocket.html">WebSocket proxying</a>. These headers have to be passed explicitly so that the proxied server can know the client’s intention to switch a protocol to <a href="https://youtu.be/1BfCnjr_Vjg">WebSocket</a>.</p></li>
+<li><p>By default, the web socket connection will be closed if the proxied server does not transmit any data within 60 seconds. This timeout can be increased with the <code>proxy_read_timeout</code> directive. Set this to 20 days. The configuration measure units can be found <a href="http://nginx.org/en/docs/syntax.html">here</a>.</p></li>
+<li><p>The final directive <code>proxy_buffering</code> turns response buffering off. Disabling response buffering is necessary for applications that need immediate access to the data stream according to the following <a href="https://www.nginx.com/blog/performance-tuning-tips-tricks">article</a> on <code>nginx</code> performance.</p></li>
+</ul>
+<p>       Next, we need to create a shortcut (symbolic link) inside the <code>sites-enabled</code> directory. The reason is that <code>nginx</code> does not look at <code>sites-available</code> but only the <code>sites-enabled</code> directory in the <code>/etc/nginx/nginx.conf</code> configuration file. We create the <code>.conf</code> files inside <code>sites-available</code> and create a shortcut inside <code>sites-enabled</code> to access it. One benefit of this is that, to temporarily deactivate your access to Shiny, you only have to delete the shortcut but not the actual configuration file in <code>sites-available</code>:</p>
+<pre class="r"><code>$ cd /etc/nginx/sites-enabled
+# Use absolute path
+$ sudo ln -s /etc/nginx/sites-available/shiny.conf /etc/nginx/sites-enabled/
+# To remove a symbolic link
+$ sudo rm your-site-config  </code></pre>
+<ul>
+<li>Finally, we need to add the following block to the configuration file located in <code>/etc/nginx/nginx.conf</code> as specified <a href="http://nginx.org/en/docs/http/websocket.html">here</a>. Note that you must add the following <strong>within the http bloc</strong> in the <code>nginx</code> configuration file:</li>
+</ul>
+<pre class="r"><code>map $http_upgrade $connection_upgrade {
+    default upgrade;
+    &#39;&#39;      close;</code></pre>
+<p>You can use the following command to open the configuration file:</p>
+<pre class="r"><code>$ sudo nano /etc/nginx/nginx.conf</code></pre>
+<ul>
+<li>To test if the configuration files are syntactically correct, run the following:</li>
+</ul>
+<pre class="r"><code>$ sudo nginx -t</code></pre>
+<p>This should output the results below if the configuration test has passed:</p>
+<pre class="r"><code>nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful</code></pre>
+<ul>
+<li><strong>Important</strong>: By default, there will be a <code>default</code> configuration file located in the <code>sites-available</code> and <code>sites-enabled</code> directories. We must also remove them:</li>
+</ul>
+<pre class="r"><code>$ cd /etc/nginx/sites-enabled
+$ sudo rm default
+$ cd /etc/nginx/sites-available
+$ sudo rm default</code></pre>
+<ul>
+<li>Finally, restart <code>nginx</code>:</li>
+</ul>
+<pre class="r"><code>$ sudo service nginx start</code></pre>
+</div>
+</div>
+<div id="step-6-deployment" class="section level2">
+<h2>Step 6: Deployment</h2>
+<div id="remove-example-shiny-files" class="section level3">
+<h3>Remove Example Shiny Files</h3>
+<p>       To deploy your shiny application or interactive documents, we first need to remove the default <code>index.html</code> and <code>sample-apps</code> from the R Shiny server:</p>
+<pre class="r"><code># Set file permissions to read/write
+$ sudo chmod 7777 /srv/shiny-server/
+$ sudo rm /srv/shiny-server/index.html
+$ sudo rm -rf /srv/shiny-server/sample-apps</code></pre>
+<p>For other chmod options, see <a href="https://business-science.github.io/shiny-production-with-aws-book/linux-command-line-interface-cli.html">Chapter 7</a> of Matt Dancho’s book.</p>
+</div>
+<div id="github" class="section level3">
+<h3>Github</h3>
+<p>       You could upload the source files of your shiny application or interactive document directly to your EC2 instance using the <code>upload</code> button in file pane of the Rstudio IDE:</p>
+<p><img src="images/upload.png" width="450" height="400"></p>
+<p>However, in this post, we will opt to host the source files in a remote repository on <a href="https://github.com/">github</a>, and then cloning said repository from within the Rstudio IDE on our EC2 instance. One huge benefit of this approach is <a href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control">version control</a>, which allows us to easily keep track of changes to our source files over time. To set up the remote repository on github for the source files, you could read the following <a href="https://business-science.github.io/shiny-production-with-aws-book/github.html">chapter</a> of Matt Dancho’s book. Some resources that helped me learn more about Github and git version control in the past are:</p>
+<ul>
+<li><p><a href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control" class="uri">https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control</a></p></li>
+<li><p><a href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup" class="uri">https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup</a></p></li>
+<li><p><a href="https://r-pkgs.org/git.html" class="uri">https://r-pkgs.org/git.html</a></p></li>
+<li><p><a href="https://docs.github.com/en/repositories" class="uri">https://docs.github.com/en/repositories</a></p></li>
+</ul>
+<p>       Assuming that you now have a github repository containing all of your source files and their dependencies. The next step is to configure your git <code>user.name</code> and <code>user.email</code> in the Rstudio terminal using the following commands:</p>
+<pre class="r"><code>git config --global user.name &#39;Your Name&#39;
+git config --global user.email &#39;your_email@example.com&#39;
+git config --global credential.helper &#39;cache --timeout=10000000&#39;</code></pre>
+<p>The <a href="https://git-scm.com/docs/git-credential-cache">third command</a> tells git to cache your password for the next four months (about ten million seconds). For more details, please see the following <a href="https://github.com/jennybc/stat540_2014/blob/master/seminars/seminar92_git.md">tutorial</a> by Jenny Bryan. Once you have configured your name and e-mail address in git, the following steps will clone the remote repository containing your source files from within the Rstudio IDE on your EC2 instance:</p>
+<ul>
+<li>In your repository, click on the <code>Code</code> (green) button and copy the HTTPS URL in the drop-down menu.</li>
+</ul>
+<p><img src="images/github.png" width="750" height="600"></p>
+<ul>
+<li>Create a new project within your Rstudio IDE on your EC2 instance. Select <code>Version Control</code>.</li>
+</ul>
+<p><img src="images/clone.png" width="750" height="600"></p>
+<ul>
+<li>Select “Clone a project from a Git repository” and enter your URL and the name of your git repository.</li>
+</ul>
+<p><img src="images/clone_git.png" width="750" height="600"></p>
+<ul>
+<li>Once you create the project, you should see that your source files are located in the file pane of the IDE:</li>
+</ul>
+<p><img src="images/source_ide.png" width="750" height="600"></p>
+</div>
+<div id="deploying-with-shiny-server" class="section level3">
+<h3>Deploying With Shiny Server</h3>
+<p>       You are now ready to copy the source files on your EC2 to <code>/srv/shiny-server/</code>. Recall from the previous section that we are deploying through a hosting model called <code>site_dir</code>, which hosts the entire directory tree at <code>/srv/shiny-server</code>. Run the following functions to create a sub-directory within <code>/srv/shiny-server/</code> and copy your source files from your EC2 instance into said sub-directory. The name of the directory can be anything as long as it is syntactically valid:</p>
+<pre class="r"><code># To create a new sub-directory
+dir.create(path = &quot;/srv/shiny-server/portfolio_dashboard&quot;)
+# Copy the source file into the directory created above
+file.copy(&quot;dashboard.Rmd&quot;, &quot;/srv/shiny-server/portfolio_dashboard&quot;)</code></pre>
+<p>If you get an error that the file you are seeking to copy does not exist, check to make sure that the first file path is specified correctly. If you created the project using the steps above, your working directory should be the project directory on your EC2 instance. Some other useful functions and commands are:</p>
+<pre class="r"><code># To remove files
+file.remove(&quot;/srv/shiny-server/portfolio_dashboard/dashboard.Rmd&quot;)
+# To list files in a directory
+list.files(path = &quot;/srv/shiny-server/portfolio_dashboard/&quot;)</code></pre>
+<p>In the terminal (as in our EC2 instance and not the Rstudio IDE):</p>
+<pre class="r"><code># To remove directories within /srv/shiny-server/
+$ sudo rm -rf /srv/shiny-server/sub_directory</code></pre>
+<p>       Now, in your browser, enter <code>http://http://&lt;public-ipv4&gt;/*</code> (if you created a sub-directory within <code>/srv/shiny-server/</code>) or <code>http://&lt;public-ipv4&gt;</code> (if you simply copied the source files to <code>/srv/shiny-server/</code>). Your application or interactive documents should be successfully deployed at you EC2’s elastic IP address:</p>
+<p><img src="images/success.png" width="750" height="600"></p>
+</div>
+</div>
+<div id="step-7-recommended-domain-name" class="section level2">
+<h2>Step 7 (Recommended): Domain Name</h2>
+<div id="google-domain" class="section level3">
+<h3>Google Domain</h3>
+<p>       A <a href="https://domains.google/learn/web-terms-101/">domain name</a> is simply the name of a website. Examples of domain names include <code>google.com</code>, <code>wikipedia.org</code>, and <code>youtube.com</code>. If we wish to use a domain name rather than the raw IPv4/elastic IP address of our EC2 instance (for instance, you work for an organization that is security-conscious about potentially exposing its IP address), we need to purchase a domain name. If you are lucky, changes are that your organization may already own a domain. But, for this post, we will purchase our own domain name. You may be tempted to look for free solutions, but remember the century-old adage:</p>
+<blockquote>
+<p>There ain’t no such thing as a free lunch.</p>
+</blockquote>
+<p>Plus, when it comes to domain names, the following statement may also be accurate:</p>
+<blockquote>
+<p>Customers should not buy from people simply for cheaps, but buy from those they can trust.</p>
+</blockquote>
+<p>       Fortunately, there are many trusted domain registrars where domains are available at very <em>reasonable</em> prices. You could check the Forbes <a href="https://www.forbes.com/advisor/business/software/best-domain-registrar/">list</a> for the <em>best</em> domain registrars of 2021. In this post, we will use <a href="https://domains.google/">google domain</a>, which I have been using for my personal website, but you could also use any other registrars. The set up should be very similar for almost all domain registrars.</p>
+<ul>
+<li>The first step is to navigate to <a href="https://domains.google/">google domain</a>, and enter a domain into the search box:</li>
+</ul>
+<p><img src="images/find_domain.png" width="750" height="600"></p>
+<p>You may wish to choose something that is not extremely well-known or popular, since those would likely have already been purchased.</p>
+<ul>
+<li>Select your domain name and proceed to checkout. Note that you need a Google account in order to purchase a domain. Signing up for a Google account is <strong>free</strong>.</li>
+</ul>
+<p><img src="images/domain_price.png" width="750" height="600"></p>
+<ul>
+<li>Finally, you should see your purchased domain name under <code>My Domain</code> to the left of the interface. For example, here are my purchased domain names:</li>
+</ul>
+<p><img src="images/mydomains.png" width="750" height="600"></p>
+</div>
+<div id="dns" class="section level3">
+<h3>DNS</h3>
+<blockquote>
+<p>The Domain Name System, <a href="https://dnsmadeeasy.com/support/what-is-dns">DNS</a>, is a system that … resolves domain names and IP addresses. It converts [humanly] readable domain names (e.g., www.google.com) into Internet Protocol (IP) addresses (e.g., 173.194.39.78). Computers can only communicate using series of numbers, so DNS was developed as a sort of “phonebook” that translates the domain you enter in your browser into a computer readable IP.</p>
+</blockquote>
+<p>       In short, the DNS is what makes it possible to navigate the web using domain names like <code>google.com</code> instead of having to remember and use the underlying IP addresses for a given website, such as 172.217.3.206. To point the purchased domain name to our application hosted on our EC2 instance, we need to create an entry of <a href="https://support.google.com/domains/answer/3290350?authuser=2&amp;hl=en">resource record</a> via the <code>DNS</code> tab to the left of the interface:</p>
+<p><img src="images/dns.png" width="750" height="600"></p>
+<p>This step should be almost identical irrespective of the domain registrar. To understand the set up above:</p>
+<ul>
+<li><p>The <code>Host name</code> field specifies the domain, subdomain, or host. The default is <code>@</code>, which is the domain name that we have purchased. Since I want my main domain <code>dashwu.com</code> to redirect to my AWS server, I used <code>@</code>. If you wish to use a subdomain to redirect to your AWS server, you can enter something like <code>subdomain</code> in the box. Then, <code>dashwu.com/subdomain</code> will redirect to your AWS server.</p></li>
+<li><p>The <code>Type</code> field specifies the type of the record. We wish to point the domain to the application hosted on our EC2 instance at our elastic IP address. IP addresses are numeric addresses. When a website is created, an A (IPv4) or AAAA (IPv6) record is used to define the IP address of the website host. Therefore, we choose <code>A</code> as our record type. To learn about other record types, see the Google Domains Help <a href="https://support.google.com/domains/answer/10751068?authuser=2">Page</a>.</p></li>
+<li><p>The <code>Time-To-Live (TTL)</code> field controls how often your local copy of the resource record is updated or discarded (the default is 1 hour).</p></li>
+<li><p>Lastly, the <code>Data</code> field specifies the information stored in the record. This would be different depending on the record type. In this case, it would be our AWS elastic IP address, e.g., <code>123.123.123.123</code>.</p></li>
+</ul>
+</div>
+<div id="configure-nginx" class="section level3">
+<h3>Configure Nginx</h3>
+<p>       The last step is to add the <code>server_name</code> directive to the <code>nginx</code> configuration file located at <code>/etc/nginx/sites-available/shiny.conf</code>:</p>
+<pre class="r"><code>$ sudo service nginx stop
+$ sudo nano /etc/nginx/sites-available/shiny.conf</code></pre>
+<p>The modified configuration file would be as follows (make sure you swap the placeholder <code>your_domain_name</code> with your own domain name):</p>
+<pre class="r"><code>server {
+    # Listen on 80 port
+    listen 80;
+    # For IPv6 addresses
+    listen [::]:80;
+    # Server name
+    server_name your_domain_name;
+    # The reverse proxy
+    location / {
+        proxy_pass http://127.0.0.1:3838/;
+        proxy_redirect http://127.0.0.1:3838/ $scheme://$host/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_read_timeout 20d;
+        proxy_buffering off;
+    }
+}</code></pre>
+<p>You could read the <a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#server_name">documentation</a> for details on the <code>server_name</code> directive.</p>
+<pre class="r"><code># Restart nginx
+$ sudo service nginx start</code></pre>
+</div>
+</div>
+<div id="step-8-highly-recommended-secure-with-https" class="section level2">
+<h2>Step 8 (Highly Recommended): Secure With HTTPS</h2>
+<p>       If you examine your web browser when accessing your application, you may see a <code>flag</code> that looks as follows:</p>
+<p><img src="images/not_secure.png" width="350" height="200"></p>
+<p>This is because some web browsers, such as Chrome, flags <a href="https://www.cloudflare.com/learning/ddos/glossary/hypertext-transfer-protocol-http/">HTTP</a> websites as <code>Not Secure</code> in the URL bar. The flag is, in part, an effort to <em>encourage</em> web developers to switch to <a href="https://www.cloudflare.com/learning/ssl/what-is-https/">Hypertext transfer protocol secure</a> (HTTPS), which is the secure version of HTTP and is also the primary protocol used to send data between a web browser and a website. While HTTP is the foundation of the internet, data stream transferring that occurs over HTTP are not encrypted, making it vulnerable to security risks such as <a href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack">Man-in-the-middle attacks</a>. With HTTPS, traffic is encrypted such that even if the data were to be intercepted, they would appear as non-humanly readable characters.</p>
+<p>       For our purposes, this may be of concern to our clients or our bosses, so we should take care to address the problem. HTTPS uses an encryption protocol that is called <a href="https://www.cloudflare.com/learning/ssl/transport-layer-security-tls/">Transport Layer Security</a> (TLS). In order to switch from HTTP to HTTPS, we first need to obtain an <a href="https://www.cloudflare.com/learning/ssl/what-is-an-ssl-certificate/">TSL/SSL certificate</a>, which is a data file hosted in a website’s server that contains the website’s public key and identity, along with other related information. We can usually obtain the certificate from a certificate authority (CA), but this approach has a cost to it. Instead, we will obtain our certificate from the <a href="https://letsencrypt.org/">Let’s Encrypt certificate authority</a>, which offers digital certificates for free to anyone who owns a domain name.</p>
+<div id="lets-encrypt-with-certbot" class="section level3">
+<h3>Let’s Encrypt With Certbot</h3>
+<p>       To obtain the the TSL certificate, we will use <a href="https://certbot.eff.org/pages/about">Certbot</a>, which is an open source software using <code>Let’s Encrypt</code> certificates on websites in order to enable HTTPS. Proceed to the following <a href="https://certbot.eff.org/instructions">instructions page</a> to obtain the most <em>up-to-date</em> installation instructions for your EC2 instance. The choices for software and system should be:</p>
+<ul>
+<li><p>Software: Nginx</p></li>
+<li><p>System: Whatever AMI/OS you are running on your EC2</p></li>
+<li><p>Previously, Certbot can be installed from the Certbot Personal Package Archive (PPA). The first step is to install <a href="https://snapcraft.io/about">snapd</a>. Conveniently, on Ubuntu 20.04.3 LTS (at the time of writing this post), Snap is pre-installed and ready to go out of the box. The following command ensures we have the latest version of <code>snapd</code>:</p></li>
+</ul>
+<pre class="r"><code>$ sudo snap install core; sudo snap refresh core</code></pre>
+<ul>
+<li>Install Certbot:</li>
+</ul>
+<pre class="r"><code>$ sudo snap install --classic certbot</code></pre>
+<p>This should return something like the following:</p>
+<pre class="r"><code>certbot 1.22.0 from Certbot Project (certbot-eff✓) installed</code></pre>
+<ul>
+<li>Use the following to make a symbolic link between the two file paths:</li>
+</ul>
+<pre class="r"><code>$ sudo ln -s /snap/bin/certbot /usr/bin/certbot</code></pre>
+<ul>
+<li>There is a way to run Certbot so that it edits your <code>nginx</code> configuration automatically to serve it. But we just need to get a certificate, since we would like to configure <code>nginx</code> ourselves (<code>certonly</code> stands for “certificate only”):</li>
+</ul>
+<pre class="r"><code># Using the --nginx flag
+$ sudo certbot certonly --nginx</code></pre>
+<p>For more information, you could refer to the Certbot <a href="https://eff-certbot.readthedocs.io/en/stable/using.html">documentation</a>. The program above will prompt you to enter an email address before confirming that you have successfully received a certificate:</p>
+<p><img src="images/certbot.png" width="550" height="400"></p>
+<ul>
+<li>The Certbot packages on your system come with a cron job or systemd timer that will renew your certificates automatically before they expire. To test automatic renewal:</li>
+</ul>
+<pre class="r"><code>$ sudo certbot renew --dry-run</code></pre>
+<p>This should return something like the following:</p>
+<pre class="r"><code>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Processing /etc/letsencrypt/renewal/dashwu.com.conf
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Account registered.
+Simulating renewal of an existing certificate for dashwu.com
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Congratulations, all simulated renewals succeeded: 
+  /etc/letsencrypt/live/dashwu.com/fullchain.pem (success)</code></pre>
+<ul>
+<li>The command to renew certbot is installed in one of the following locations:</li>
+</ul>
+<pre class="r"><code>$ cd /etc/crontab/
+$ cd /etc/cron.*/*
+$ cd systemctl list-timers</code></pre>
+<ul>
+<li>The certificate and key are save to:</li>
+</ul>
+<pre class="r"><code># Become root user
+$ sudo -i
+$ cd /etc/letsencrypt/live/dashwu.com/</code></pre>
+</div>
+<div id="configure-nginx-1" class="section level3">
+<h3>Configure Nginx</h3>
+<p>       The default port for browser access is port 80, but HTTPS defaults to port 443. See the full list of default port numbers <a href="https://docs.oracle.com/en/storage/tape-storage/sl4000/slklg/default-port-numbers.html#GUID-8B442CCE-F94D-4DFB-9F44-996DE72B2558">here</a>. Stop <code>nginx</code> and open up the configuration file:</p>
+<pre class="r"><code>$ sudo service nginx stop
+$ sudo nano /etc/nginx/sites-available/shiny.conf</code></pre>
+<p>You configuration file should look similar to this:</p>
+<pre class="r"><code>server {
+    # Listen on 80 port
+    listen 80;
+    # For IPv6 addresses
+    listen [::]:80;
+    # Server name
+    server_name dashwu.com;
+    # The reverse proxy
+    location / {
+        proxy_pass http://127.0.0.1:3838/;
+        proxy_redirect http://127.0.0.1:3838/ $scheme://$host/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_read_timeout 20d;
+        proxy_buffering off;
+    }
+}</code></pre>
+<p>We modify the file as follows:</p>
+<ul>
+<li>Add the <code>http2</code> parameter to the listen directives (see <a href="https://nginx.org/en/docs/http/ngx_http_v2_module.html">documentation</a>):</li>
+</ul>
+<pre class="r"><code>listen 443 ssl http2;
+listen [::]:443 ssl http2;</code></pre>
+<ul>
+<li>Add a single catch-all HTTP block (above our HTTPS server block) to redirect all traffic to the HTTPS version of the site:</li>
+</ul>
+<pre class="r"><code>server {
+    # Sets server block as the default (catch-all) block for all unmatched domains
+    listen 80;
+    listen [::]:80;
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}</code></pre>
+<p>The line <code>return 301 https://$host$request_uri</code> redirects all traffic to the corresponding HTTPS server block with <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/301">status code 301</a>. The <code>$host</code> variable holds the domain name of the request.</p>
+<ul>
+<li>We also need to add a huge block that Mozilla’s <a href="https://ssl-config.mozilla.org/">SSL/TLS Configuration Generator</a> returns. Our configuration file should now look like this:</li>
+</ul>
+<pre class="r"><code>server {
+    listen 80;
+    listen [::]:80;
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name dashwu.com;
+
+    location / {
+        proxy_pass http://127.0.0.1:3838/;
+        proxy_redirect http://127.0.0.1:3838/ $scheme://$host/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_read_timeout 20d;
+        proxy_buffering off;
+    }
+  
+    ssl_certificate /etc/letsencrypt/live/dashwu.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/dashwu.com/privkey.pem;
+    ssl_session_timeout 1d;
+    ssl_session_cache shared:MozSSL:10m;  # About 40000 sessions
+    ssl_session_tickets off;
+
+    # curl https://ssl-config.mozilla.org/ffdhe2048.txt &gt; /path/to/dhparam
+    ssl_dhparam /etc/ssl/certs/dhparam.pem;
+
+    # intermediate configuration
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;
+    ssl_prefer_server_ciphers off;
+
+    # HSTS (ngx_http_headers_module is required) (63072000 seconds)
+    # add_header Strict-Transport-Security &quot;max-age=63072000&quot; always;
+
+    # OCSP stapling
+    ssl_stapling on;
+    ssl_stapling_verify on;
+
+    # verify chain of trust of OCSP response using Root CA and Intermediate certs
+    ssl_trusted_certificate /etc/letsencrypt/live/dashwu.com/chain.pem;
+}</code></pre>
+<p>The path placeholders that I have changed after copying the results of the generator are as follows:</p>
+<ul>
+<li><code>ssl_certificate</code> and <code>ssl_certificate_key</code>:</li>
+</ul>
+<pre class="r"><code>ssl_certificate /etc/letsencrypt/live/dashwu.com/fullchain.pem;
+ssl_certificate_key /etc/letsencrypt/live/dashwu.com/privkey.pem;</code></pre>
+<ul>
+<li>For the <code>ssl_dhparam</code> directive, use the comment to create a <code>dhparam.pem</code> file:</li>
+</ul>
+<pre class="r"><code>$ sudo -i
+$ curl https://ssl-config.mozilla.org/ffdhe2048.txt &gt; /etc/ssl/certs/dhparam.pem
+# Add to nginx configuration
+ssl_dhparam /etc/ssl/certs/dhparam.pem;</code></pre>
+<p>Another way is to use <a href="https://www.openssl.org/">OpenSSL</a>, making sure that 2048 bits is used to create the <code>.pem</code> file:</p>
+<pre class="r"><code>$ openssl dhparam -out /etc/ssl/dhparam.pem 2048</code></pre>
+<ul>
+<li>The <code>ssl_trusted_certificate</code> <a href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_trusted_certificate">directive</a> specifies a file with trusted CA certificates in the PEM format used to verify client certificates and OCSP responses if ssl_stapling is enabled (True for our configuration). According to the README file located in <code>/etc/letsencrypt/live/dashwu.com</code>, the <code>chain.pem</code> is used for OCSP stapling. Therefore, we need to add the following path to the configuration:</li>
+</ul>
+<pre class="r"><code>ssl_trusted_certificate /etc/letsencrypt/live/dashwu.com/chain.pem;</code></pre>
+<ul>
+<li>The <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security">HTTP Strict-Transport-Security</a> response header informs browsers that the site should only be accessed using HTTPS, and that any future attempts to access it using HTTP should automatically be converted to HTTPS. Comment out the <code>add_header Strict-Transport-Security "max-age=63072000" always;</code> line since we only want to include it when we are sure everything is working.</li>
+</ul>
+</div>
+<div id="add-port-443-to-ec2-security-group" class="section level3">
+<h3>Add Port 443 to EC2 Security Group</h3>
+<p>       The following <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html#adding-security-group-rule">steps</a> add a new rule to our EC2’s security group:</p>
+<ul>
+<li><p>Navigate to the left pane and select “Security Group” under “Network &amp; Security”</p></li>
+<li><p>Select the security group for you EC2 instance, choose Actions, Edit inbound rules</p></li>
+<li><p>The following inbound rules should be added:</p></li>
+</ul>
+<p><img src="images/port_443.png" width="750" height="600"></p>
+<p>Restart <code>nginx</code>:</p>
+<pre class="r"><code>$ sudo service nginx start</code></pre>
+</div>
+<div id="include-http-strict-transport-security" class="section level3">
+<h3>Include HTTP Strict-Transport-Security</h3>
+<p>       Enter your elastic IP into your browser, you should see that your browser has flagged your connection as secure:</p>
+<p><img src="images/secured.png" width="350" height="200"></p>
+<p>Now you may include the <code>HTTP Strict-Transport-Security</code> header in the <code>nginx</code> configuration file by <em>uncommenting</em> the line:</p>
+<pre class="r"><code>$ sudo service nginx stop
+$ sudo nano /etc/nginx/sites-available/shiny.conf
+# Uncomment 
+add_header Strict-Transport-Security &quot;max-age=63072000&quot; always;
+# Restart
+$ sudo service nginx start</code></pre>
+</div>
+</div>
+<div id="step-9-optional-password-protect" class="section level2">
+<h2>Step 9 (Optional): Password Protect</h2>
+<p>       Sometimes we may need to password protect our application. For this task, we will use <code>nginx</code> again. In particular, the <a href="http://nginx.org/en/docs/http/ngx_http_auth_basic_module.html">ngx_http_auth_basic_module</a> module allows for limiting access to resources by validating the <code>user name</code> and <code>password</code> using the “HTTP Basic Authentication” protocol.</p>
+<div id="configure-nginx-2" class="section level3">
+<h3>Configure Nginx</h3>
+<p>       The following steps configure the <code>nginx</code> configuration file located at <code>/etc/nginx/sites-available/shiny.conf</code> to use the <code>ngx_http_auth_basic_module</code>. If you have not set up a domain name or switched to HTTPS, your configuration file may look different, but the steps should be very similar regardless. You essentially need to add a location block inside your server block.</p>
+<ul>
+<li>Stop <code>nginx</code> and open up the configuration file:</li>
+</ul>
+<pre class="r"><code>$ sudo service nginx stop
+$ sudo nano /etc/nginx/sites-available/shiny.conf</code></pre>
+<ul>
+<li>Add the following location block in addition to the existing location block with the shortest prefix “/”. However, we will use the name of the sub-directory within <code>/srv/shiny-server/</code> (for me, this is <code>/portfolio_dashboard</code>) as <code>location_match</code> so that only the application located in that sub-directory is password protected. This ensures that not all of your applications use the same password. Once you create more than one of such sub-directories under <code>/srv/shiny-server/</code> to host multiple applications, you have the flexibility to choose which ones are public and password protected with this set up.</li>
+</ul>
+<pre class="r"><code>location /name_of_subdirectory {
+    proxy_pass http://127.0.0.1:3838/;
+    proxy_redirect http://127.0.0.1:3838/ $scheme://$host/;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection $connection_upgrade;
+    proxy_read_timeout 20d;
+    proxy_buffering off;
+    # Add the following
+    auth_basic &quot;Username and Password are required&quot;;
+    auth_basic_user_file /etc/nginx/.htpasswd;
+}</code></pre>
+<p>More details on <code>nginx</code> location blocks can be found <a href="http://nginx.org/en/docs/beginners_guide.html">here</a> under section “Serving Static Content”. For more on <code>nginx</code> server and location block selection algorithms, see the following <a href="https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms">article</a>.</p>
+<ul>
+<li>Your configuration file should now look similar to this:</li>
+</ul>
+<pre class="r"><code>server {
+    listen 80;
+    listen [::]:80;
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name dashwu.com;
+
+    # The reverse proxy
+    location / {
+        proxy_pass http://127.0.0.1:3838/;
+        proxy_redirect http://127.0.0.1:3838/ $scheme://$host/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_read_timeout 20d;
+        proxy_buffering off;
+    }
+
+    # For portfolio_dashboard
+    location /portfolio_dashboard {
+        proxy_pass http://127.0.0.1:3838/;
+        proxy_redirect http://127.0.0.1:3838/ $scheme://$host/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_read_timeout 20d;
+        proxy_buffering off;
+        auth_basic &quot;Username and Password are required&quot;;
+        auth_basic_user_file /etc/nginx/.htpasswd;
+    }
+
+    ssl_certificate /etc/letsencrypt/live/dashwu.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/dashwu.com/privkey.pem;
+    ssl_session_timeout 1d;
+    ssl_session_cache shared:MozSSL:10m;  # About 40000 sessions
+    ssl_session_tickets off;
+
+    # curl https://ssl-config.mozilla.org/ffdhe2048.txt &gt; /path/to/dhparam
+    ssl_dhparam /etc/ssl/certs/dhparam.pem;
+
+    # intermediate configuration
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-S&gt;
+    ssl_prefer_server_ciphers off;
+
+    # HSTS (ngx_http_headers_module is required) (63072000 seconds)
+    add_header Strict-Transport-Security &quot;max-age=63072000&quot; always;
+
+    # OCSP stapling
+    ssl_stapling on;
+    ssl_stapling_verify on;
+
+    # verify chain of trust of OCSP response using Root CA and Intermediate certs
+    ssl_trusted_certificate /etc/letsencrypt/live/dashwu.com/chain.pem;
+}</code></pre>
+<ul>
+<li>If you navigate to your elastic IP address, you should now see that your application is now password protected:</li>
+</ul>
+<p><img src="images/password.png" width="350" height="200"></p>
+</div>
+<div id="user-login-1" class="section level3">
+<h3>User Login</h3>
+<p>       The final step is to create username-password pairs to access your application hosted on your EC2 instance at your elastic IP address. We could do so using <code>apache2-utils</code> (Debian, Ubuntu) or <code>httpd-tools</code> (RHEL/CentOS/Oracle Linux). In section “Upgrading and Installing System Packages”, we have installed <code>apache2-utils</code>. To check if it is indeed installed:</p>
+<pre class="r"><code>$ dpkg --list | grep apache2-utils
+# If not installed
+$ sudo apt-get -y install apache2-utils</code></pre>
+<ul>
+<li>To create a password file and a first user. Use the <code>htpasswd</code> utility with the <code>-c</code> flag (which stands for “create a new file”). The file <code>pathname</code> is the first argument and the <code>username</code> is the second argument:</li>
+</ul>
+<pre class="r"><code>$ sudo htpasswd -c /etc/nginx/.htpasswd user1</code></pre>
+<p>This should prompt you to enter a password for <code>user1</code>.</p>
+<ul>
+<li>Creating additional user-password pairs does not require the <code>-c</code> flag since the file already exists:</li>
+</ul>
+<pre class="r"><code>$ sudo htpasswd /etc/nginx/.htpasswd user2</code></pre>
+<ul>
+<li>To list all files containing paired usernames and <a href="https://docs.oracle.com/cd/E26180_01/Platform.94/ATGPersProgGuide/html/s0506passwordhashing01.html">hashed passwords</a>:</li>
+</ul>
+<pre class="r"><code>$ cat /etc/nginx/.htpasswd</code></pre>
+<ul>
+<li>To remove a user, simply delete the file using the <code>-D</code> flag:</li>
+</ul>
+<pre class="r"><code>$ sudo htpasswd -D /etc/nginx/.htpasswd user2</code></pre>
+<ul>
+<li>To change password for a user:</li>
+</ul>
+<pre class="r"><code># Change password for user2
+$ sudo htpasswd /etc/nginx/.htpasswd user2</code></pre>
+<p>Refer to the <a href="https://httpd.apache.org/docs/2.4/programs/htpasswd.html">manual page</a> to see other command line arguments.</p>
+</div>
+</div>
+<div id="resources" class="section level2">
+<h2>Resources</h2>
+<p>The hyperlinks embedded through out the post are some of the resources that have helped me improve my understanding (however imperfect) of the deployment process, especially through peaking <em>under the hood</em> of things. In addition, I also found the following links extremely useful.</p>
+<div id="shiny" class="section level3">
+<h3>Shiny</h3>
+<ul>
+<li><p><a href="https://github.com/reidfalconer/aws_dashboard_deployment" class="uri">https://github.com/reidfalconer/aws_dashboard_deployment</a></p></li>
+<li><p><a href="https://www.charlesbordet.com/en/guide-shiny-aws/#intro" class="uri">https://www.charlesbordet.com/en/guide-shiny-aws/#intro</a></p></li>
+<li><p><a href="http://mgritts.github.io/2016/07/08/shiny-aws/" class="uri">http://mgritts.github.io/2016/07/08/shiny-aws/</a></p></li>
+<li><p><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-shiny-server-on-ubuntu-16-04" class="uri">https://www.digitalocean.com/community/tutorials/how-to-set-up-shiny-server-on-ubuntu-16-04</a></p></li>
+<li><p><a href="https://support.rstudio.com/hc/en-us/articles/213733868-Running-Shiny-Server-with-a-Proxy" class="uri">https://support.rstudio.com/hc/en-us/articles/213733868-Running-Shiny-Server-with-a-Proxy</a></p></li>
+</ul>
+</div>
+<div id="aws" class="section level3">
+<h3>AWS</h3>
+<ul>
+<li><p><a href="https://docs.aws.amazon.com/" class="uri">https://docs.aws.amazon.com/</a></p></li>
+<li><p><a href="https://business-science.github.io/shiny-production-with-aws-book/" class="uri">https://business-science.github.io/shiny-production-with-aws-book/</a></p></li>
+</ul>
+</div>
+<div id="nginx" class="section level3">
+<h3>Nginx</h3>
+<ul>
+<li><a href="http://nginx.org/en/docs/" class="uri">http://nginx.org/en/docs/</a></li>
+</ul>
+</div>
+<div id="operating-systems-and-it" class="section level3">
+<h3>Operating Systems and IT</h3>
+<ul>
+<li><p><a href="https://linuxize.com/post/how-to-add-and-delete-users-on-ubuntu-20-04/" class="uri">https://linuxize.com/post/how-to-add-and-delete-users-on-ubuntu-20-04/</a></p></li>
+<li><p><a href="https://www.cyberciti.biz/faq/understanding-etcpasswd-file-format/" class="uri">https://www.cyberciti.biz/faq/understanding-etcpasswd-file-format/</a></p></li>
+<li><p><a href="https://www.cyberciti.biz/faq/understanding-etcshadow-file/" class="uri">https://www.cyberciti.biz/faq/understanding-etcshadow-file/</a></p></li>
+<li><p><a href="https://www.cyberciti.biz/faq/understanding-etcgroup-file/" class="uri">https://www.cyberciti.biz/faq/understanding-etcgroup-file/</a></p></li>
+<li><p><a href="https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/" class="uri">https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/</a></p></li>
+<li><p><a href="https://httpd.apache.org/docs/" class="uri">https://httpd.apache.org/docs/</a></p></li>
+</ul>
+</div>
+</div>
