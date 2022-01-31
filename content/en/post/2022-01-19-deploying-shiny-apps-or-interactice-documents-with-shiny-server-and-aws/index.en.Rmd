@@ -1,8 +1,8 @@
 ---
-title: Deploying Shiny Apps or Interatice Documents with Shiny Server and AWS
+title: Deploying Shiny Apps or Interactice Documents with Shiny Server and AWS
 author: Yang Wu
 date: '2022-01-19'
-slug: deploying-shiny-apps-or-interatice-documents-with-shiny-server-and-aws
+slug: deploying-shiny-apps-or-interactice-documents-with-shiny-server-and-aws
 categories:
   - R
   - AWS
@@ -42,7 +42,7 @@ library(knitr)
 
 ## Step 1: AWS EC2
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If you are working for an organization that uses AWS EC2, the chances are that your data team or IT department may already have an EC2 instance running. In that case, I would consult your cloud manager or supervisor or whoever manages your organization's AWS account regarding the following:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If you are working for an organization that uses AWS EC2, the chances are your data team or IT department may already have an EC2 instance running. In that case, I would consult your cloud manager or supervisor or whoever manages your organization's AWS account regarding the following:
 
 * The root user could create your [IAM](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-iam.html) user account, which gives you certain access rights.
 
