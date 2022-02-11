@@ -107,10 +107,10 @@ output:
 </ul>
 <div id="step-1-aws-ec2" class="section level2">
 <h2>Step 1: AWS EC2</h2>
-<p>       If you are working for an organization that uses AWS EC2, the chances are that your data team or IT department may already have an EC2 instance running. In that case, I would consult your cloud manager or supervisor or whoever manages your organization’s AWS account regarding the following:</p>
+<p>       If you are working for an organization that uses AWS EC2, the chances are that your data team or IT department may already have an EC2 instance running. In that case, consult your cloud manager or supervisor or whoever manages your organization’s AWS account regarding the following:</p>
 <ul>
 <li><p>The root user could create your <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-iam.html">IAM</a> user account, which gives you certain access rights.</p></li>
-<li><p>You would need to connect to EC2 via a Secure Shell (SSH) using a Command Line Interface (CLI), and so you need to obtain the AWS EC2 Key <code>.pem</code> private key file.</p></li>
+<li><p>You would need to connect to EC2 via a Secure Shell (SSH) using a Command Line Interface (CLI), and so you need to obtain the AWS EC2 <code>.pem</code> private key file.</p></li>
 <li><p>You may also want to obtain the SSH commands that allows you to SSH into your organization’s EC2 instance.</p></li>
 </ul>
 <p>The rest of the setup steps may differ quite a bit depending on whether or not you are using your organization’s EC2 instance or running your own. For the purpose of this post, however, we will create our own personal AWS account and EC2 instance. I find that practicing deploying an application using my own AWS account and EC2 instance has helped me ultimately set up the production environment on my organization’s EC2 instance. The first step, though, is to register for an <a href="https://aws.amazon.com/">AWS</a> account, which is free of charge.</p>
@@ -118,11 +118,11 @@ output:
 <h3>Launch an EC2 Instance and Select an AMI</h3>
 <p>       Launch an EC2 instance by selecting an <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html">Amazon AMI</a>.</p>
 <p><img src="images/ami.png" width="750" height="600"></p>
-<p>Because many tutorials and resources online are based on the Ubuntu Server AMI, we will use this as well. Not only does this option have the <a href="https://aws.amazon.com/free/">free tier</a> option but, based on my experience, it also could save us a lot of pain in having to deal with system requirements later on. The Ubuntu 20.04.1 LTS (at the time of writing this post) is a well documented operating system with a large user base and so trouble shooting is relatively easier in my experience compared to an AMI such as the Amazon Linux 1 or 2 AMI, which are based on Red Hat Enterprise Linux (RHEL). If you work for an organization, you may not be able to choose which AMI to use. But the steps that follow should theoretically work with other AMI (for instance, we use the Amazon Linux 1 AMI at our organization); just note that you may run into problems installing the required system libraries and packages needed for deployment and even for R packages.</p>
+<p>Because many tutorials and resources online are based on the Ubuntu Server AMI, we will use this as well. Not only does this option have the <a href="https://aws.amazon.com/free/">free tier</a> option but, based on my experience, it could also save us a lot of pain in having to deal with system requirements later on. The Ubuntu 20.04.1 LTS (at the time of writing this post) is a well documented operating system with a large user base and so trouble shooting is relatively easier in my experience compared to an AMI such as the Amazon Linux AMI 1, which is based on Red Hat Enterprise Linux (RHEL). If you work for an organization, you may not be able to choose which AMI to use. But the steps that follow should theoretically work with other AMI (for instance, we use the Amazon Linux AMI at our organization), but note that you may run into problems installing the required system libraries and packages needed for deployment and even for R packages.</p>
 </div>
 <div id="choose-an-instance-type" class="section level3">
 <h3>Choose an Instance Type</h3>
-<p>       We will choose <code>t2.micro</code>, which is free tier eligible. Depending on your needs for computing resources (for instance, installing R packages with complied code), you may run out of memory with 1 CPU and 1GB of RAM, therefore, you could also consider other instance types. I recommend reading the following <a href="https://www.qa.com/about-qa/our-thinking/understanding-t2-and-t3-cpu-credits-in-aws/">article</a> to better understand the differences between instance types.</p>
+<p>       We will choose <code>t2.micro</code>, which is free tier eligible. Depending on your needs for computing resources (for instance, installing R packages with complied code), you may run out of memory with 1 CPU and 1GB of RAM, so you could also consider other instance types. I recommend reading the following <a href="https://www.qa.com/about-qa/our-thinking/understanding-t2-and-t3-cpu-credits-in-aws/">article</a> to better understand the differences between instance types.</p>
 <p><img src="images/instance_type.png" width="750" height="600"></p>
 </div>
 <div id="configure-instance-details" class="section level3">
@@ -189,7 +189,7 @@ output:
 </tr>
 </tbody>
 </table>
-<p>Since our instance is utilized as a web server, we use security rules to allow IP addresses to access our instance using HTTP or Custom TCP, so that external users can browse the content on our web server.</p>
+<p>Since our instance is utilized as a web server, we use security rules to allow IP addresses to access our instance using HTTP or Custom TCP so that external users can browse the content on our web server.</p>
 <ul>
 <li><p>The second rule allows for inbound <a href="https://www.techopedia.com/definition/15709/port-80">HTTP</a> access from all IPv4 and IPv6 addresses.</p></li>
 <li><p>The third and forth allow for displaying web data based port numbers.</p></li>
@@ -203,31 +203,31 @@ output:
 </div>
 <div id="elastic-ip" class="section level3">
 <h3>Elastic IP</h3>
-<p>       An <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">elastic IP address</a> is different than your EC2 instance’s Public IPv4 address; in short, an Elastic IP address is allocated to your AWS account, and is yours until you release it. Therefore, this IP address can be reused for your EC2 instances. The re-usability of our IP may be useful when we want to upgrade or downgrade our EC2 instance type. We can simply associate the elastic IP address to the new server. Or, if something bad happens to our EC2 instance for whatever reason, an elastic IP address allows us to mask the failure of an instance or software by rapidly remapping the address to another instance in our account.</p>
+<p>       An <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">elastic IP address</a> is different than our EC2 instance’s Public IPv4 address; in short, an Elastic IP address is allocated to our AWS account, and is ours until we release it. Therefore, this IP address can be reused for our EC2 instances. The re-usability of our IP may be useful when we want to upgrade or downgrade our EC2 instance type. Without an elastic IP address, a new Public IPv4 address will be used each time we stop and re-launch our instance. This means that any service that depends on our public IP will need to be updated. The benefit of an elastic IP address is that we can simply associate it to the new server. In other words, the elastic IP address allows us to mask the failure of an instance or software by rapidly remapping the address to a new instance in our account. The setup is as follows:</p>
 <p><img src="images/elastic_ip.png" width="750" height="600"></p>
-<p>Next, select the <code>Action</code> drop down menu in the top right corner and choose <code>Associate Elastic IP address</code>. From now on, every time we make changes to our EC2 instance, we can simply re-associate this IP address to our new instance.</p>
+<p>Select the <code>Action</code> drop down menu in the top right corner and choose <code>Associate Elastic IP address</code>. From now on, every time we make changes to our EC2 instance, we can simply re-associate this IP address to our new instance.</p>
 </div>
 </div>
 <div id="step-2-connecting-to-aws-ec2" class="section level2">
 <h2>Step 2: Connecting to AWS EC2</h2>
 <div id="connecting-via-ssh" class="section level3">
 <h3>Connecting via SSH</h3>
-<p>       To connect to our EC2 instance via SSH, we will use the terminal (for windows, the steps for <code>PuTTY</code> can be found <a href="https://business-science.github.io/shiny-production-with-aws-book/connecting-to-ec2-with-ssh-secure-shell.html">here</a>). When you select “Connect” in your AWS console, you should be taken to the following page:</p>
+<p>       To connect to our EC2 instance via SSH, we will use the terminal (for windows, the steps for <code>PuTTY</code> can be found <a href="https://business-science.github.io/shiny-production-with-aws-book/connecting-to-ec2-with-ssh-secure-shell.html">here</a>). When you select “Connect” in our AWS console, you should be taken to the following page:</p>
 <p><img src="images/connect.png" width="550" height="400"></p>
 <ul>
-<li>Open your terminal, navigate to the location of your <code>.pem</code> key:</li>
+<li>Open the terminal, navigate to the location of our <code>.pem</code> key:</li>
 </ul>
 <pre class="r"><code># Change working directory 
 $ cd path_to_pem_file</code></pre>
 <ul>
-<li>Next, run the following command to ensure that your key is not publicly viewable:</li>
+<li>Next, run the following command to ensure that our key is not publicly viewable:</li>
 </ul>
 <pre class="r"><code>$ chmod 400 file.pem</code></pre>
 <ul>
-<li>Connect to your instance:</li>
+<li>Connect to the instance:</li>
 </ul>
 <pre class="r"><code>$ ssh -i &quot;file.pem&quot; ubuntu@ec2-public-ip-address.compute-1.amazonaws.com</code></pre>
-<p>If this is your first time connecting to your EC2 instance, you may receive an <code>Are you sure you want to continue connecting (yes/no/[fingerprint])?</code> prompt. Entering <code>yes</code> should successfully connect you to your EC2 instance:</p>
+<p>If this is your first time connecting to your EC2 instance, you may receive an <code>Are you sure you want to continue connecting (yes/no/[fingerprint])?</code> prompt. Entering <code>yes</code> should successfully connect you to you EC2 instance:</p>
 <pre class="r"><code>Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.11.0-1022-aws x86_64)
 
  * Documentation:  https://help.ubuntu.com
@@ -247,12 +247,12 @@ To see these additional updates run: apt list --upgradable</code></pre>
 </div>
 <div id="disconnecting" class="section level3">
 <h3>Disconnecting</h3>
-<p>       To disconnect from your instance:</p>
+<p>       To disconnect from our instance:</p>
 <pre class="r"><code>$ exit</code></pre>
 </div>
 <div id="upgrading-and-installing-system-packages" class="section level3">
 <h3>Upgrading and Installing System Packages</h3>
-<p>       This particular step and many of the steps that follow are places where the operating system will begin to matter. The following commands are meant to work with the Ubuntu OS (a Debian-based Linux distribution). For instance, the <a href="https://www.vultr.com/docs/using-apt-utilities-on-ubuntu/">Advanced package tool</a>, or APT, used to handle the installation and removal of software is developed for Ubuntu/Debian system software packages. For Red Hat-based Linux systems such as the official Amazon Linux AMI 1 or 2, the <a href="https://www.redhat.com/sysadmin/how-manage-packages">Yellowdog Updater, Modified</a>, or YUM, package-management utility is used. In addition, R packages can depend on software external to the R ecosystem. On Ubuntu, for instance, in order to install the <code>curl</code> R package, you must install the system library first via <code>apt-get install libcurl</code>. Resolving system dependency issues can be painful at times, especially if you are using a different operating system (AMI). The one effective way for troubleshooting based on my own experience is simply Google searching for system dependencies on an ad-hoc basis (after an error is thrown, for instance, when you try to install an R package). If you are lucky, you won’t be the first to crash because of a missing system library. If you are using another AMI that runs another operating system, you must also figure out how to install the library.</p>
+<p>       This particular step and many of the steps that follow are places where the operating system will begin to matter. The following commands are meant to work with the Ubuntu OS (a Debian-based Linux distribution). For instance, the <a href="https://www.vultr.com/docs/using-apt-utilities-on-ubuntu/">Advanced package tool</a>, or APT, used to handle the installation and removal of software is developed for Ubuntu/Debian system software packages. For Red Hat-based Linux systems, the <a href="https://www.redhat.com/sysadmin/how-manage-packages">Yellowdog Updater, Modified</a>, or YUM, package-management utility is used. In addition, R packages can depend on software external to the R ecosystem. On Ubuntu, for instance, in order to install the <code>curl</code> R package, we must install the system library first via <code>apt-get install libcurl</code>. Resolving system dependency issues can be painful at times, and the pain points may vary based on the operating system (AMI). One effective way for troubleshooting based on my own experience is simply Google searching for system dependencies on an ad-hoc basis (after an error is thrown, for instance, when your try to install an R package). If your are lucky, you won’t be the first to crash because of a missing system library.</p>
 <pre class="r"><code># Update commands
 $ sudo apt update
 $ sudo apt-get update -y
@@ -276,7 +276,7 @@ $ sudo apt-get -y install \
     libv8-dev \
     libhdf5-dev \
     git</code></pre>
-<p>       The difference between <code>apt-get</code> and <code>apt</code> is that the former is an older version with more command options while “apt” is a newer, more user-friendly command with fewer options. To understand these shell commands, I found that <a href="https://explainshell.com/">explainshell.com</a> (its github repo can be found <a href="https://github.com/idank/explainshell%5D">here</a>) is extremely useful. Other resources are:</p>
+<p>       The difference between <code>apt-get</code> and <code>apt</code> is that the former is an older command with more options while <code>apt</code> is a newer, more user-friendly command with fewer options. To understand these shell commands, I found <a href="https://explainshell.com/">explainshell.com</a> (its github repo can be found <a href="https://github.com/idank/explainshell%5D">here</a>) to be extremely useful. Other resources that are also helpful include:</p>
 <ul>
 <li><p><a href="https://www.freebsd.org/cgi/man.cgi?query=ssh">FreeBSD Manual Pages</a></p></li>
 <li><p><a href="https://business-science.github.io/shiny-production-with-aws-book/linux-command-line-interface-cli.html">Chapter 7</a> of Matt Dancho’s book</p></li>
@@ -285,7 +285,7 @@ $ sudo apt-get -y install \
 <pre class="r"><code>$ sudo apt install build-essential</code></pre>
 <p>On Ubuntu, you may run the following command to check on disk space:</p>
 <pre class="r"><code>$ df -h</code></pre>
-<p>If <code>nginx</code> is installed successfully, you should see the following page by entering your <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html">Public IPv4 address</a> (obtained from <code>Instance summary</code>) into your web browser:</p>
+<p>If <code>nginx</code> is installed successfully, you should see the following page by entering your <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html">Public IPv4 address</a> (obtained from <code>Instance summary</code> in your AWS console) into your web browser:</p>
 <p><img src="images/nginx.png" width="550" height="400"></p>
 </div>
 </div>
@@ -317,11 +317,11 @@ $ sudo apt install --no-install-recommends r-base</code></pre>
 $ R 
 # Quit
 $ q()</code></pre>
-<p>       If you are using an operating such as the Amazon Linux AMI 1, the stable version of R in the default repository is, at the time of writing this post, 3.x; therefore, this may or may not be troublesome depending on the R packages you need to install.</p>
+<p>       If you are using an operating system that comes with another AMI, the stable version of R its the default repository may be different. For Amazon Linux AMI, the latest version of R is 3.x; depending on the R packages you need to install, this may or may not be troublesome.</p>
 </div>
 <div id="installing-rstudio-server" class="section level3">
 <h3>Installing Rstudio Server</h3>
-<p>       To download the latest version of Rstudio server, use the following <a href="https://www.rstudio.com/products/rstudio/download-server/">link</a> and select your Linux Platform. The official instructions are easy to follow, use the following commands to install Rstudio server for Ubuntu 20 (at the time of writing this post):</p>
+<p>       To download the latest version of Rstudio server, use the following <a href="https://www.rstudio.com/products/rstudio/download-server/">link</a> and select your linux platform. The official instructions are easy to follow, use the following commands to install Rstudio server for Ubuntu 20 (at the time of writing this post):</p>
 <pre class="r"><code>$ sudo apt-get install gdebi-core
 $ wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2021.09.2-382-amd64.deb
 $ sudo gdebi rstudio-server-2021.09.2-382-amd64.deb</code></pre>
@@ -366,11 +366,11 @@ $ sudo yum list installed | grep nginx</code></pre>
 <p>To install developmental versions of R packages from github:</p>
 <pre class="r"><code>$ sudo su - -c &quot;R -e \&quot;install.packages(&#39;devtools&#39;, repos=&#39;http://cran.rstudio.com/&#39;)\&quot;&quot;
 $ sudo su - -c &quot;R -e \&quot;devtools::install_github(&#39;tidyverse/ggplot2&#39;)\&quot;&quot;</code></pre>
-<p><strong>Note</strong>: As mentioned earlier, with the <code>t2.micro</code> instance type, you may simply run out of memory installing some R packages with compiled code (<code>Rcpp</code>, <code>RcppArmadillo</code>). When this happens, the installation process would seemingly be stuck in an never-ending process that would need to be killed.</p>
+<p><strong>Note</strong>: As mentioned earlier, with the <code>t2.micro</code> instance type, you may simply run out of memory installing certain R packages with compiled code (for example, <code>Rcpp</code> and <code>RcppArmadillo</code>). If this happens, it would appear that the installation process has been stuck in a never-ending process.</p>
 </div>
 <div id="install-r-packages-user-library" class="section level3">
 <h3>Install R packages (User Library)</h3>
-<p>       Alternatively, there is also the option to install add-on R packages in a <a href="https://r-pkgs.org/package-structure-state.html#library">user-level library</a>, which may be appealing for many reasons. We will return to this once we set up the user credentials for Rstudio server.</p>
+<p>       Alternatively, there is also the option to install add-on R packages (those that do not come with base R) in a <a href="https://r-pkgs.org/package-structure-state.html#library">user-level library</a>, which may be appealing for many reasons. We will return to this once we set up the user credentials for Rstudio server.</p>
 </div>
 </div>
 <div id="step-4-rstudio-server-and-ide" class="section level2">
@@ -565,7 +565,8 @@ $ sudo rm your-site-config  </code></pre>
 </ul>
 <pre class="r"><code>map $http_upgrade $connection_upgrade {
     default upgrade;
-    &#39;&#39;      close;</code></pre>
+    &#39;&#39;      close;
+} </code></pre>
 <p>You can use the following command to open the configuration file:</p>
 <pre class="r"><code>$ sudo nano /etc/nginx/nginx.conf</code></pre>
 <ul>
@@ -726,7 +727,7 @@ $ sudo service nginx start</code></pre>
 <h2>Step 8 (Highly Recommended): Secure With HTTPS</h2>
 <p>       If you examine your web browser when accessing your application, you may see a <code>flag</code> that looks as follows:</p>
 <p><img src="images/not_secure.png" width="350" height="200"></p>
-<p>This is because some web browsers, such as Chrome, flags <a href="https://www.cloudflare.com/learning/ddos/glossary/hypertext-transfer-protocol-http/">HTTP</a> websites as <code>Not Secure</code> in the URL bar. The flag is, in part, an effort to <em>encourage</em> web developers to switch to <a href="https://www.cloudflare.com/learning/ssl/what-is-https/">Hypertext transfer protocol secure</a> (HTTPS), which is the secure version of HTTP and is also the primary protocol used to send data between a web browser and a website. While HTTP is the foundation of the internet, data stream transferring that occurs over HTTP are not encrypted, making it vulnerable to security risks such as <a href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack">Man-in-the-middle attacks</a>. With HTTPS, traffic is encrypted such that even if the data were to be intercepted, they would appear as non-humanly readable characters.</p>
+<p>This is because some web browsers, such as Chrome, flag <a href="https://www.cloudflare.com/learning/ddos/glossary/hypertext-transfer-protocol-http/">HTTP</a> websites as <code>Not Secure</code> in the URL bar. The flag is, in part, an effort to <em>encourage</em> web developers to switch to <a href="https://www.cloudflare.com/learning/ssl/what-is-https/">Hypertext transfer protocol secure</a> (HTTPS), which is the secure version of HTTP and is also the primary protocol used to send data between a web browser and a website. While HTTP is the foundation of the internet, data stream transferring that occurs over HTTP is not encrypted, making it vulnerable to security risks such as <a href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack">Man-in-the-middle attacks</a>. With HTTPS, traffic is encrypted such that even if the data were to be intercepted, they would appear as non-humanly readable characters.</p>
 <p>       For our purposes, this may be of concern to our clients or our bosses, so we should take care to address the problem. HTTPS uses an encryption protocol that is called <a href="https://www.cloudflare.com/learning/ssl/transport-layer-security-tls/">Transport Layer Security</a> (TLS). In order to switch from HTTP to HTTPS, we first need to obtain an <a href="https://www.cloudflare.com/learning/ssl/what-is-an-ssl-certificate/">TSL/SSL certificate</a>, which is a data file hosted in a website’s server that contains the website’s public key and identity, along with other related information. We can usually obtain the certificate from a certificate authority (CA), but this approach has a cost to it. Instead, we will obtain our certificate from the <a href="https://letsencrypt.org/">Let’s Encrypt certificate authority</a>, which offers digital certificates for free to anyone who owns a domain name.</p>
 <div id="lets-encrypt-with-certbot" class="section level3">
 <h3>Let’s Encrypt With Certbot</h3>
@@ -891,7 +892,7 @@ ssl_dhparam /etc/ssl/certs/dhparam.pem;</code></pre>
 <p>Another way is to use <a href="https://www.openssl.org/">OpenSSL</a>, making sure that 2048 bits is used to create the <code>.pem</code> file:</p>
 <pre class="r"><code>$ openssl dhparam -out /etc/ssl/dhparam.pem 2048</code></pre>
 <ul>
-<li>The <code>ssl_trusted_certificate</code> <a href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_trusted_certificate">directive</a> specifies a file with trusted CA certificates in the PEM format used to verify client certificates and OCSP responses if ssl_stapling is enabled (True for our configuration). According to the README file located in <code>/etc/letsencrypt/live/dashwu.com</code>, the <code>chain.pem</code> is used for OCSP stapling. Therefore, we need to add the following path to the configuration:</li>
+<li>The <code>ssl_trusted_certificate</code> <a href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_trusted_certificate">directive</a> specifies a file with trusted CA certificates in the PEM format used to verify client certificates and OCSP responses if ssl_stapling is enabled (True for our configuration). According to the README file located in <code>/etc/letsencrypt/live/dashwu.com</code>, the <code>chain.pem</code> file is used for OCSP stapling. Therefore, we need to add the following path to the configuration:</li>
 </ul>
 <pre class="r"><code>ssl_trusted_certificate /etc/letsencrypt/live/dashwu.com/chain.pem;</code></pre>
 <ul>
@@ -935,9 +936,9 @@ $ sudo service nginx start</code></pre>
 <pre class="r"><code>$ sudo service nginx stop
 $ sudo nano /etc/nginx/sites-available/shiny.conf</code></pre>
 <ul>
-<li>Add the following location block in addition to the existing location block with the shortest prefix “/”. However, we will use the name of the sub-directory within <code>/srv/shiny-server/</code> (for me, this is <code>/portfolio_dashboard</code>) as <code>location_match</code> so that only the application located in that sub-directory is password protected. This ensures that not all of your applications use the same password. Once you create more than one of such sub-directories under <code>/srv/shiny-server/</code> to host multiple applications, you have the flexibility to choose which ones are public and password protected with this set up.</li>
+<li>Add the following directives to the existing location block with the shortest prefix “/”:</li>
 </ul>
-<pre class="r"><code>location /name_of_subdirectory {
+<pre class="r"><code>location / {
     proxy_pass http://127.0.0.1:3838/;
     proxy_redirect http://127.0.0.1:3838/ $scheme://$host/;
     proxy_http_version 1.1;
@@ -949,7 +950,7 @@ $ sudo nano /etc/nginx/sites-available/shiny.conf</code></pre>
     auth_basic &quot;Username and Password are required&quot;;
     auth_basic_user_file /etc/nginx/.htpasswd;
 }</code></pre>
-<p>More details on <code>nginx</code> location blocks can be found <a href="http://nginx.org/en/docs/beginners_guide.html">here</a> under section “Serving Static Content”. For more on <code>nginx</code> server and location block selection algorithms, see the following <a href="https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms">article</a>.</p>
+<p>More details on <code>nginx</code> location blocks can be found <a href="http://nginx.org/en/docs/beginners_guide.html">here</a> under section “Serving Static Content”. For more information on <code>nginx</code> server and location block selection algorithms, see the following <a href="https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms">article</a>.</p>
 <ul>
 <li>Your configuration file should now look similar to this:</li>
 </ul>
@@ -969,17 +970,6 @@ server {
 
     # The reverse proxy
     location / {
-        proxy_pass http://127.0.0.1:3838/;
-        proxy_redirect http://127.0.0.1:3838/ $scheme://$host/;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_read_timeout 20d;
-        proxy_buffering off;
-    }
-
-    # For portfolio_dashboard
-    location /portfolio_dashboard {
         proxy_pass http://127.0.0.1:3838/;
         proxy_redirect http://127.0.0.1:3838/ $scheme://$host/;
         proxy_http_version 1.1;
@@ -1022,7 +1012,7 @@ server {
 </div>
 <div id="user-login-1" class="section level3">
 <h3>User Login</h3>
-<p>       The final step is to create username-password pairs to access your application hosted on your EC2 instance at your elastic IP address. We could do so using <code>apache2-utils</code> (Debian, Ubuntu) or <code>httpd-tools</code> (RHEL/CentOS/Oracle Linux). In section “Upgrading and Installing System Packages”, we have installed <code>apache2-utils</code>. To check if it is indeed installed:</p>
+<p>       The final step is to create username-password pairs to access your application hosted on your EC2 instance at your elastic IP address. We could do so using <code>apache2-utils</code> (Debian, Ubuntu) or <code>httpd-tools</code> (RHEL/CentOS/Oracle Linux). In section “Upgrading and Installing System Packages”, we have already installed <code>apache2-utils</code>. To check if it is indeed installed:</p>
 <pre class="r"><code>$ dpkg --list | grep apache2-utils
 # If not installed
 $ sudo apt-get -y install apache2-utils</code></pre>
@@ -1053,7 +1043,7 @@ $ sudo htpasswd /etc/nginx/.htpasswd user2</code></pre>
 </div>
 <div id="resources" class="section level2">
 <h2>Resources</h2>
-<p>The hyperlinks embedded through out the post are some of the resources that have helped me improve my understanding (however imperfect) of the deployment process, especially through peaking <em>under the hood</em> of things. In addition, I also found the following links extremely useful.</p>
+<p>       The hyperlinks embedded through out the post are the resources that have helped me improve my understanding of the deployment process, particularly through peaking <em>under the hood</em> of things. In addition, I also found the following links extremely useful.</p>
 <div id="shiny" class="section level3">
 <h3>Shiny</h3>
 <ul>

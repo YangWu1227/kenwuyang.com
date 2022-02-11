@@ -42,11 +42,11 @@ library(knitr)
 
 ## Step 1: AWS EC2
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If you are working for an organization that uses AWS EC2, the chances are that your data team or IT department may already have an EC2 instance running. In that case, I would consult your cloud manager or supervisor or whoever manages your organization's AWS account regarding the following:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If you are working for an organization that uses AWS EC2, the chances are that your data team or IT department may already have an EC2 instance running. In that case, consult your cloud manager or supervisor or whoever manages your organization's AWS account regarding the following:
 
 * The root user could create your [IAM](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-iam.html) user account, which gives you certain access rights.
 
-* You would need to connect to EC2 via a Secure Shell (SSH) using a Command Line Interface (CLI), and so you need to obtain the AWS EC2 Key `.pem` private key file.
+* You would need to connect to EC2 via a Secure Shell (SSH) using a Command Line Interface (CLI), and so you need to obtain the AWS EC2 `.pem` private key file.
 
 * You may also want to obtain the SSH commands that allows you to SSH into your organization's EC2 instance. 
 
@@ -58,11 +58,11 @@ The rest of the setup steps may differ quite a bit depending on whether or not y
 
 <img src="images/ami.png" width="750" height="600">
 
-Because many tutorials and resources online are based on the Ubuntu Server AMI, we will use this as well. Not only does this option have the [free tier](https://aws.amazon.com/free/) option but, based on my experience, it also could save us a lot of pain in having to deal with system requirements later on. The Ubuntu 20.04.1 LTS (at the time of writing this post) is a well documented operating system with a large user base and so trouble shooting is relatively easier in my experience compared to an AMI such as the Amazon Linux 1 or 2 AMI, which are based on Red Hat Enterprise Linux (RHEL). If you work for an organization, you may not be able to choose which AMI to use. But the steps that follow should theoretically work with other AMI (for instance, we use the Amazon Linux 1 AMI at our organization); just note that you may run into problems installing the required system libraries and packages needed for deployment and even for R packages.
+Because many tutorials and resources online are based on the Ubuntu Server AMI, we will use this as well. Not only does this option have the [free tier](https://aws.amazon.com/free/) option but, based on my experience, it could also save us a lot of pain in having to deal with system requirements later on. The Ubuntu 20.04.1 LTS (at the time of writing this post) is a well documented operating system with a large user base and so trouble shooting is relatively easier in my experience compared to an AMI such as the Amazon Linux AMI 1, which is based on Red Hat Enterprise Linux (RHEL). If you work for an organization, you may not be able to choose which AMI to use. But the steps that follow should theoretically work with other AMI (for instance, we use the Amazon Linux AMI at our organization), but note that you may run into problems installing the required system libraries and packages needed for deployment and even for R packages.
 
 ### Choose an Instance Type
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We will choose `t2.micro`, which is free tier eligible. Depending on your needs for computing resources (for instance, installing R packages with complied code), you may run out of memory with 1 CPU and 1GB of RAM, therefore, you could also consider other instance types. I recommend reading the following [article](https://www.qa.com/about-qa/our-thinking/understanding-t2-and-t3-cpu-credits-in-aws/) to better understand the differences between instance types.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We will choose `t2.micro`, which is free tier eligible. Depending on your needs for computing resources (for instance, installing R packages with complied code), you may run out of memory with 1 CPU and 1GB of RAM, so you could also consider other instance types. I recommend reading the following [article](https://www.qa.com/about-qa/our-thinking/understanding-t2-and-t3-cpu-credits-in-aws/) to better understand the differences between instance types.
 
 <img src="images/instance_type.png" width="750" height="600">
 
@@ -91,7 +91,7 @@ Because many tutorials and resources online are based on the Ubuntu Server AMI, 
 | Custom TCPI | TCP      | 3838       | Anywhere: 0.0.0.0/0, ::0 | Default R Shiny server                     |
 | Custom TCPI | TCP      | 8787       | Anywhere: 0.0.0.0/0, ::0 | Default R Studio server                     |
 
-Since our instance is utilized as a web server, we use security rules to allow IP addresses to access our instance using HTTP or Custom TCP, so that external users can browse the content on our web server.
+Since our instance is utilized as a web server, we use security rules to allow IP addresses to access our instance using HTTP or Custom TCP so that external users can browse the content on our web server.
 
 * The second rule allows for inbound [HTTP](https://www.techopedia.com/definition/15709/port-80) access from all IPv4 and IPv6 addresses.
 
@@ -107,40 +107,40 @@ Finally, launch your instance.
 
 ### Elastic IP
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; An [elastic IP address](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html) is different than your EC2 instance's Public IPv4 address; in short, an Elastic IP address is allocated to your AWS account, and is yours until you release it. Therefore, this IP address can be reused for your EC2 instances. The re-usability of our IP may be useful when we want to upgrade or downgrade our EC2 instance type. We can simply associate the elastic IP address to the new server. Or, if something bad happens to our EC2 instance for whatever reason, an elastic IP address allows us to mask the failure of an instance or software by rapidly remapping the address to another instance in our account.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; An [elastic IP address](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html) is different than our EC2 instance's Public IPv4 address; in short, an Elastic IP address is allocated to our AWS account, and is ours until we release it. Therefore, this IP address can be reused for our EC2 instances. The re-usability of our IP may be useful when we want to upgrade or downgrade our EC2 instance type. Without an elastic IP address, a new Public IPv4 address will be used each time we stop and re-launch our instance. This means that any service that depends on our public IP will need to be updated. The benefit of an elastic IP address is that we can simply associate it to the new server. In other words, the elastic IP address allows us to mask the failure of an instance or software by rapidly remapping the address to a new instance in our account. The setup is as follows:
 
 <img src="images/elastic_ip.png" width="750" height="600">
 
-Next, select the `Action` drop down menu in the top right corner and choose `Associate Elastic IP address`. From now on, every time we make changes to our EC2 instance, we can simply re-associate this IP address to our new instance. 
+Select the `Action` drop down menu in the top right corner and choose `Associate Elastic IP address`. From now on, every time we make changes to our EC2 instance, we can simply re-associate this IP address to our new instance. 
 
 ## Step 2: Connecting to AWS EC2
 
 ### Connecting via SSH
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To connect to our EC2 instance via SSH, we will use the terminal (for windows, the steps for `PuTTY` can be found [here](https://business-science.github.io/shiny-production-with-aws-book/connecting-to-ec2-with-ssh-secure-shell.html)). When you select "Connect" in your AWS console, you should be taken to the following page:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To connect to our EC2 instance via SSH, we will use the terminal (for windows, the steps for `PuTTY` can be found [here](https://business-science.github.io/shiny-production-with-aws-book/connecting-to-ec2-with-ssh-secure-shell.html)). When you select "Connect" in our AWS console, you should be taken to the following page:
 
 <img src="images/connect.png" width="550" height="400">
 
-* Open your terminal, navigate to the location of your `.pem` key:
+* Open the terminal, navigate to the location of our `.pem` key:
 
 ```{r, eval=FALSE}
 # Change working directory 
 $ cd path_to_pem_file
 ```
 
-* Next, run the following command to ensure that your key is not publicly viewable:
+* Next, run the following command to ensure that our key is not publicly viewable:
 
 ```{r, eval=FALSE}
 $ chmod 400 file.pem
 ```
 
-* Connect to your instance:
+* Connect to the instance:
 
 ```{r, eval=FALSE}
 $ ssh -i "file.pem" ubuntu@ec2-public-ip-address.compute-1.amazonaws.com
 ```
 
-If this is your first time connecting to your EC2 instance, you may receive an `Are you sure you want to continue connecting (yes/no/[fingerprint])?` prompt. Entering `yes` should successfully connect you to your EC2 instance: 
+If this is your first time connecting to your EC2 instance, you may receive an `Are you sure you want to continue connecting (yes/no/[fingerprint])?` prompt. Entering `yes` should successfully connect you to you EC2 instance: 
 
 ```{r, eval=FALSE}
 Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.11.0-1022-aws x86_64)
@@ -163,7 +163,7 @@ To see these additional updates run: apt list --upgradable
 
 ### Disconnecting
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To disconnect from your instance:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To disconnect from our instance:
 
 ```{r, eval=FALSE}
 $ exit
@@ -171,7 +171,7 @@ $ exit
 
 ### Upgrading and Installing System Packages 
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This particular step and many of the steps that follow are places where the operating system will begin to matter. The following commands are meant to work with the Ubuntu OS (a Debian-based Linux distribution). For instance, the [Advanced package tool](https://www.vultr.com/docs/using-apt-utilities-on-ubuntu/), or APT, used to handle the installation and removal of software is developed for Ubuntu/Debian system software packages. For Red Hat-based Linux systems such as the official Amazon Linux AMI 1 or 2, the [Yellowdog Updater, Modified](https://www.redhat.com/sysadmin/how-manage-packages), or YUM, package-management utility is used. In addition, R packages can depend on software external to the R ecosystem. On Ubuntu, for instance, in order to install the `curl` R package, you must install the system library first via `apt-get install libcurl`. Resolving system dependency issues can be painful at times, especially if you are using a different operating system (AMI). The one effective way for troubleshooting based on my own experience is simply Google searching for system dependencies on an ad-hoc basis (after an error is thrown, for instance, when you try to install an R package). If you are lucky, you won’t be the first to crash because of a missing system library. If you are using another AMI that runs another operating system, you must also figure out how to install the library.      
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This particular step and many of the steps that follow are places where the operating system will begin to matter. The following commands are meant to work with the Ubuntu OS (a Debian-based Linux distribution). For instance, the [Advanced package tool](https://www.vultr.com/docs/using-apt-utilities-on-ubuntu/), or APT, used to handle the installation and removal of software is developed for Ubuntu/Debian system software packages. For Red Hat-based Linux systems, the [Yellowdog Updater, Modified](https://www.redhat.com/sysadmin/how-manage-packages), or YUM, package-management utility is used. In addition, R packages can depend on software external to the R ecosystem. On Ubuntu, for instance, in order to install the `curl` R package, we must install the system library first via `apt-get install libcurl`. Resolving system dependency issues can be painful at times, and the pain points may vary based on the operating system (AMI). One effective way for troubleshooting based on my own experience is simply Google searching for system dependencies on an ad-hoc basis (after an error is thrown, for instance, when your try to install an R package). If your are lucky, you won’t be the first to crash because of a missing system library.     
 
 ```{r, eval=FALSE}
 # Update commands
@@ -199,7 +199,7 @@ $ sudo apt-get -y install \
     git
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The difference between `apt-get` and `apt` is that the former is an older version with more command options while “apt” is a newer, more user-friendly command with fewer options. To understand these shell commands, I found that [explainshell.com](https://explainshell.com/) (its github repo can be found [here](https://github.com/idank/explainshell])) is extremely useful. Other resources are:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The difference between `apt-get` and `apt` is that the former is an older command with more options while `apt` is a newer, more user-friendly command with fewer options. To understand these shell commands, I found [explainshell.com](https://explainshell.com/) (its github repo can be found [here](https://github.com/idank/explainshell])) to be extremely useful. Other resources that are also helpful include:
 
 * [FreeBSD Manual Pages](https://www.freebsd.org/cgi/man.cgi?query=ssh)
 
@@ -217,7 +217,7 @@ On Ubuntu, you may run the following command to check on disk space:
 $ df -h
 ```
 
-If `nginx` is installed successfully, you should see the following page by entering your [Public IPv4 address](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html) (obtained from `Instance summary`) into your web browser:
+If `nginx` is installed successfully, you should see the following page by entering your [Public IPv4 address](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html) (obtained from `Instance summary` in your AWS console) into your web browser:
 
 <img src="images/nginx.png" width="550" height="400">
 
@@ -269,11 +269,11 @@ $ R
 $ q()
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If you are using an operating such as the Amazon Linux AMI 1, the stable version of R in the default repository is, at the time of writing this post, 3.x; therefore, this may or may not be troublesome depending on the R packages you need to install.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If you are using an operating system that comes with another AMI, the stable version of R its the default repository may be different. For Amazon Linux AMI, the latest version of R is 3.x; depending on the R packages you need to install, this may or may not be troublesome.
 
 ### Installing Rstudio Server
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To download the latest version of Rstudio server, use the following [link](https://www.rstudio.com/products/rstudio/download-server/) and select your Linux Platform. The official instructions are easy to follow, use the following commands to install Rstudio server for Ubuntu 20 (at the time of writing this post):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To download the latest version of Rstudio server, use the following [link](https://www.rstudio.com/products/rstudio/download-server/) and select your linux platform. The official instructions are easy to follow, use the following commands to install Rstudio server for Ubuntu 20 (at the time of writing this post):
 
 ```{r, eval=FALSE}
 $ sudo apt-get install gdebi-core
@@ -345,11 +345,11 @@ $ sudo su - -c "R -e \"install.packages('devtools', repos='http://cran.rstudio.c
 $ sudo su - -c "R -e \"devtools::install_github('tidyverse/ggplot2')\""
 ```
 
-**Note**: As mentioned earlier, with the `t2.micro` instance type, you may simply run out of memory installing some R packages with compiled code (`Rcpp`, `RcppArmadillo`). When this happens, the installation process would seemingly be stuck in an never-ending process that would need to be killed.
+**Note**: As mentioned earlier, with the `t2.micro` instance type, you may simply run out of memory installing certain R packages with compiled code (for example, `Rcpp` and `RcppArmadillo`). If this happens, it would appear that the installation process has been stuck in a never-ending process.
 
 ### Install R packages (User Library)
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Alternatively, there is also the option to install add-on R packages in a [user-level library](https://r-pkgs.org/package-structure-state.html#library), which may be appealing for many reasons. We will return to this once we set up the user credentials for Rstudio server.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Alternatively, there is also the option to install add-on R packages (those that do not come with base R) in a [user-level library](https://r-pkgs.org/package-structure-state.html#library), which may be appealing for many reasons. We will return to this once we set up the user credentials for Rstudio server.
 
 ## Step 4: Rstudio Server and IDE
 
@@ -867,7 +867,7 @@ $ sudo service nginx start
 
 <img src="images/not_secure.png" width="350" height="200">
 
-This is because some web browsers, such as Chrome, flags [HTTP](https://www.cloudflare.com/learning/ddos/glossary/hypertext-transfer-protocol-http/) websites as `Not Secure` in the URL bar. The flag is, in part, an effort to *encourage* web developers to switch to [Hypertext transfer protocol secure](https://www.cloudflare.com/learning/ssl/what-is-https/) (HTTPS), which is the secure version of HTTP and is also the primary protocol used to send data between a web browser and a website. While HTTP is the foundation of the internet, data stream transferring that occurs over HTTP are not encrypted, making it vulnerable to security risks such as [Man-in-the-middle attacks](https://en.wikipedia.org/wiki/Man-in-the-middle_attack). With HTTPS, traffic is encrypted such that even if the data were to be intercepted, they would appear as non-humanly readable characters.
+This is because some web browsers, such as Chrome, flag [HTTP](https://www.cloudflare.com/learning/ddos/glossary/hypertext-transfer-protocol-http/) websites as `Not Secure` in the URL bar. The flag is, in part, an effort to *encourage* web developers to switch to [Hypertext transfer protocol secure](https://www.cloudflare.com/learning/ssl/what-is-https/) (HTTPS), which is the secure version of HTTP and is also the primary protocol used to send data between a web browser and a website. While HTTP is the foundation of the internet, data stream transferring that occurs over HTTP is not encrypted, making it vulnerable to security risks such as [Man-in-the-middle attacks](https://en.wikipedia.org/wiki/Man-in-the-middle_attack). With HTTPS, traffic is encrypted such that even if the data were to be intercepted, they would appear as non-humanly readable characters.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For our purposes, this may be of concern to our clients or our bosses, so we should take care to address the problem. HTTPS uses an encryption protocol that is called [Transport Layer Security](https://www.cloudflare.com/learning/ssl/transport-layer-security-tls/) (TLS). In order to switch from HTTP to HTTPS, we first need to obtain an [TSL/SSL certificate](https://www.cloudflare.com/learning/ssl/what-is-an-ssl-certificate/), which is a data file hosted in a website's server that contains the website's public key and identity, along with other related information. We can usually obtain the certificate from a certificate authority (CA), but this approach has a cost to it. Instead, we will obtain our certificate from the [Let's Encrypt certificate authority](https://letsencrypt.org/), which offers digital certificates for free to anyone who owns a domain name.
 
@@ -1084,7 +1084,7 @@ Another way is to use [OpenSSL](https://www.openssl.org/), making sure that 2048
 $ openssl dhparam -out /etc/ssl/dhparam.pem 2048
 ```
 
-* The `ssl_trusted_certificate` [directive](http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_trusted_certificate) specifies a file with trusted CA certificates in the PEM format used to verify client certificates and OCSP responses if ssl_stapling is enabled (True for our configuration). According to the README file located in `/etc/letsencrypt/live/dashwu.com`,  the `chain.pem` is used for OCSP stapling. Therefore, we need to add the following path to the configuration:
+* The `ssl_trusted_certificate` [directive](http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_trusted_certificate) specifies a file with trusted CA certificates in the PEM format used to verify client certificates and OCSP responses if ssl_stapling is enabled (True for our configuration). According to the README file located in `/etc/letsencrypt/live/dashwu.com`,  the `chain.pem` file is used for OCSP stapling. Therefore, we need to add the following path to the configuration:
 
 ```{r, eval=FALSE}
 ssl_trusted_certificate /etc/letsencrypt/live/dashwu.com/chain.pem;
@@ -1142,10 +1142,10 @@ $ sudo service nginx stop
 $ sudo nano /etc/nginx/sites-available/shiny.conf
 ```
 
-* Add the following location block in addition to the existing location block with the shortest prefix "/". However, we will use the name of the sub-directory within `/srv/shiny-server/` (for me, this is `/portfolio_dashboard`) as `location_match` so that only the application located in that sub-directory is password protected. This ensures that not all of your applications use the same password. Once you create more than one of such sub-directories under `/srv/shiny-server/` to host multiple applications, you have the flexibility to choose which ones are public and password protected with this set up.
+* Add the following directives to the existing location block with the shortest prefix "/":
 
 ```{r, eval=FALSE}
-location /name_of_subdirectory {
+location / {
     proxy_pass http://127.0.0.1:3838/;
     proxy_redirect http://127.0.0.1:3838/ $scheme://$host/;
     proxy_http_version 1.1;
@@ -1159,7 +1159,7 @@ location /name_of_subdirectory {
 }
 ```
 
-More details on `nginx` location blocks can be found [here](http://nginx.org/en/docs/beginners_guide.html) under section "Serving Static Content". For more on `nginx` server and location block selection algorithms, see the following [article](https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms). 
+More details on `nginx` location blocks can be found [here](http://nginx.org/en/docs/beginners_guide.html) under section "Serving Static Content". For more information on `nginx` server and location block selection algorithms, see the following [article](https://www.digitalocean.com/community/tutorials/understanding-nginx-server-and-location-block-selection-algorithms). 
 
 * Your configuration file should now look similar to this:
 
@@ -1180,17 +1180,6 @@ server {
 
     # The reverse proxy
     location / {
-        proxy_pass http://127.0.0.1:3838/;
-        proxy_redirect http://127.0.0.1:3838/ $scheme://$host/;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_read_timeout 20d;
-        proxy_buffering off;
-    }
-
-    # For portfolio_dashboard
-    location /portfolio_dashboard {
         proxy_pass http://127.0.0.1:3838/;
         proxy_redirect http://127.0.0.1:3838/ $scheme://$host/;
         proxy_http_version 1.1;
@@ -1234,7 +1223,7 @@ server {
 
 ### User Login
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The final step is to create username-password pairs to access your application hosted on your EC2 instance at your elastic IP address. We could do so using `apache2-utils` (Debian, Ubuntu) or `httpd-tools` (RHEL/CentOS/Oracle Linux). In section "Upgrading and Installing System Packages", we have installed `apache2-utils`. To check if it is indeed installed:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The final step is to create username-password pairs to access your application hosted on your EC2 instance at your elastic IP address. We could do so using `apache2-utils` (Debian, Ubuntu) or `httpd-tools` (RHEL/CentOS/Oracle Linux). In section "Upgrading and Installing System Packages", we have already installed `apache2-utils`. To check if it is indeed installed:
 
 ```{r, eval=FALSE}
 $ dpkg --list | grep apache2-utils
@@ -1279,7 +1268,7 @@ Refer to the [manual page](https://httpd.apache.org/docs/2.4/programs/htpasswd.h
 
 ## Resources
 
-The hyperlinks embedded through out the post are some of the resources that have helped me improve my understanding (however imperfect) of the deployment process, especially through peaking *under the hood* of things. In addition, I also found the following links extremely useful.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The hyperlinks embedded through out the post are the resources that have helped me improve my understanding of the deployment process, particularly through peaking *under the hood* of things. In addition, I also found the following links extremely useful.  
 
 ### Shiny
 
