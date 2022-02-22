@@ -6,7 +6,7 @@ theme: "starter-hugo-academic"
 
 title: Yang (Ken) Wu # Website name
 baseurl: 'https://www.kenwuyang.com/' # Website URL
-copyright: '© 2021 Yang Wu' # Footer text, e.g. '© {year} Me'
+copyright: '© {year} Yang Wu' # Footer text, e.g. '© {year} Me'
 
 ############################
 ## LANGUAGE

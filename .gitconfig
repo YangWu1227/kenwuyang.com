@@ -1,0 +1,7 @@
+[user]
+	name = YangWu1227
+	email = yangwu2020@gmail.com
+[merge]
+	conflictstyle = diff3
+[core]
+	excludesfile = /Users/kenwu/.gitignore_global
