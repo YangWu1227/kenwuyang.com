@@ -31,7 +31,8 @@ experience:
     date_end: ''
     description: |2-
 
-        * Successfully built and deployed a `flexdashboard` with `shiny` run-time via AWS EC2, allowing our partners to access our data via a front-end web application user interface.
+        * Successfully built and deployed a `flexdashboard` with `shiny-server` and AWS EC2, allowing our partners to access our data via a front-end user interface. The dashboard uses the `citizenr` package developed in effort to support survey cleaning, topline and crosstabs generation.
+        * Developing a `feature_selection` Python module for the `pycitizen` package that aims at simplifying and standardizing the feature selection and engineering pipeline for our machine learning and predictive models. 
 
   - title: Data Engineering Intern
     company: Citizen Data
@@ -43,7 +44,7 @@ experience:
     description: |2-
         Responsibilities include:
         
-        * Developed and modularized data process automation scripts in Python. There are currently three modules--- `data_cleaning`, `data_validating`, and `data_uploading`. Functions from the first two modules are designed for data cleaning and validating tasks, using packages such as `pandas`, `numpy` and `data.table` and others as back-ends. Functions from the `data_uploading` module are aimed at automating cloud storage (AWS S3) and data warehouse (Redshift) related tasks, using mainly `psycopg2` and the AWS Software Development Toolkit (SDKs) in the back-end. Together, these functions make it easy to automate a significant portion of the data processes, significantly boosting the productivity of the data team.
+        * Developed a Python package `pycitizen` for data process automation. There are currently three modules--- `data_cleaning`, `data_validating`, and `aws_utils`. Functions from the first two modules are designed for data cleaning and validating tasks, using packages such as `pandas`, `numpy` and `data.table` and others as dependencies. Functions from the `aws_utils` module are aimed at automating cloud storage (AWS S3) and data warehouse (Redshift) related tasks, using mainly `psycopg2`, `boto3` and the AWS Software Development Toolkit (SDKs) as implementations. Together, these functions make it easy to automate a significant portion of the data processes, significantly boosting the productivity of the data team.
         * Developed an R package `citizenr` to help facilitate survey cleaning, topline and crosstabs generation once the data is processed by upstream processes. Along with the created Rmarkdown templates (for PDF and Microsoft word), this R package significantly increased code conciseness and reusability. It is a part of the data team's effort to standardize data processes and documentation.  
         * Created visualizations using `ggplot2` for a quantitative and qualitative [report](https://citizendata.com/news/disinformation-trumps-party-the-path-forward/).
         
