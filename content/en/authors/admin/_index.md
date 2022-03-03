@@ -42,6 +42,6 @@ superuser: true
 title: Yang (Ken) Wu
 ---
 
-Hello! Welcome to my personal site! I am a recent graduate of Kenyon College, where I studied Economics and Statistics. I am passionate about economics, applied statistics, programming, and data science and wish to explore a career in industries and fields that derive value from quantitative analysis and insights. I am a curious individual who is always seeking to learning new things. This stems from my strong desire to bring value to others and be helpful in every situation I am in. 
+Hello! Welcome to my personal site! I am a recent graduate of Kenyon College, where I studied Economics and Statistics. I am passionate about economics, applied statistics, programming, and data science and wish to explore a career in industries and fields that derive value from quantitative analysis and insights. I am a curious individual who is always seeking to learning new things. I have a strong desire to bring value to others and be helpful in every situation I am in. You can find most if not all of my projects in my github [repositories](https://github.com/YangWu1227).
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/Yang_Ken_Wu_Resume.pdf" "newtab" >}}resumé{{< /staticref >}}.
