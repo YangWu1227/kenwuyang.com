@@ -32,10 +32,10 @@ description: 'A personal blogging site and project portfolio by Ken Yang Wu'
 email: yangwu2020-at-gmail-dot-com
 phone: 
 address:
-  street: 503 lake Dr
-  city: Princeton
-  region: NJ
-  postcode: '08540'
+  street:
+  city:
+  region: United States
+  postcode:
   country: United States
   country_code: US
 coordinates:
