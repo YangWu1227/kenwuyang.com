@@ -1,0 +1,627 @@
+---
+title: A pandas, dyplr, data.table, and pydatatable Repository
+author: Yang Wu
+date: '2022-05-07'
+slug: a-pandas-dyplr-data-table-and-pydatatable-repository
+categories:
+  - R
+  - Python
+tags:
+  - R Programming
+  - Python Programming
+subtitle: ''
+summary: 'A running list of everyday data wrangling code snippets'
+authors: []
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+output:
+  blogdown::html_page:
+    toc: true
+---
+
+```{r global_options, echo = FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(results = "hold")
+library(knitr)
+library(tibble)
+library(dplyr)
+library(data.table)
+library(reticulate)
+reticulate::use_condaenv(
+  condaenv = "python_automation",
+  required = TRUE
+)
+```
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/show-hide-console-outputs.js"></script>
+
+<style>
+    h3 {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 0px;
+    margin-bottom: 3px;
+    }
+</style>
+
+# Motivation
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The content and formatting of this post is *shamelessly* taken from the following comprehensive and awesome [post](https://atrebas.github.io/post/2019-03-03-datatable-dplyr/) by [Atrebas](https://atrebas.github.io/about/) and the pydatable [page](https://datatable.readthedocs.io/en/latest/manual/index-manual.html). You could also find Atrebas on Twitter [here](https://twitter.com/atrebas). I use both `R` and `Python` extensively in my work everyday, especially the data wrangling packages and library `data.table` (`pydatatable`), `dplyr` and `pandas`. I find that, in my case, I often have to translate between similar but different syntax when switching from one another. In `R`, there are ways to accomplishing tasks and there are more Pythonic ways to do things in `Python`. This is an attempt to create a list of code snippets that can hopefully become a reference for myself.    
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The outputs of code blocks are hidden by default, but they may be shown by clicking the button below:
+
+<div style="text-align: center;"><input type='button' id='hideshow' value='Hide the outputs'></div>
+
+<br><hr>
+## Packages and Library
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{r, message=FALSE, warning=FALSE}
+library(tibble)
+library(tidyr)
+library(dplyr)
+library(data.table)
+```
+</td><td align="left">
+```{python, message=FALSE, warning=FALSE}
+import pandas as pd
+import numpy as np
+from random import sample
+from datatable import dt, f, by, g, join, sort, update, ifelse, first
+```
+</td></tr></tbody></table>
+
+<br><hr>
+
+## DataFrame Creation
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+nums = sample(range(1, 20), 9)
+PD = pd.DataFrame({
+  'A': nums,
+  'B': range(1, 10),
+  'C': ["b"]*3 + ["a"]*3 + ["c"]*3,
+  'D': ['startswith_this', np.NaN, 'c', 'd', 'e', np.NaN, 'this_endwith', 'k', 'z']
+})
+PD 
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Pydatatable
+PY_DT = dt.Frame({
+  'A': nums,
+  'B': range(1, 10),
+  'C': ["b"]*3 + ["a"]*3 + ["c"]*3,
+  'D': ['startswith_this', None, 'c', 'd', 'e', None, 'this_endwith', 'k', 'z']
+})
+PY_DT
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+TB <- tibble(
+  A = py$nums,
+  B = 1:9,
+  C = rep(c("b", "a", "c"), each = 3),
+  D = c("startswith_this", NA_character_, "c", "d", "e", NA_character_, "this_endwith", "k", "z")
+)
+TB
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+R_DT <- data.table(
+  A = py$nums,
+  B = 1:9,
+  C = rep(c("b", "a", "c"), each = 3),
+  D = c("startswith_this", NA_character_, "c", "d", "e", NA_character_, "this_endwith", "k", "z")
+)
+R_DT
+```
+</td></tr></tbody></table>
+
+
+## Row Selection
+
+### Select a single row
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+PD.loc[2]
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Pydatatable
+PY_DT[2, :]
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+TB[2, ]
+# Or
+slice(TB, 2)
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+R_DT[2]
+```
+</td></tr></tbody></table>
+
+### Select several rows by their indices
+
+Note that Python uses zero-based indexing.
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+PD.iloc[[2, 3, 4], :]
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Pydatatable
+PY_DT[[2, 3, 4], :]
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+TB[c(3, 4, 5), ]
+# Or
+slice(TB, c(3, 4, 5))
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+R_DT[c(3, 4, 5), ]
+# OR
+R_DT[c(3, 4, 5)] 
+```
+</td></tr></tbody></table>
+
+### Select a slice of rows by position
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+PD.iloc[2:5]
+# Or
+PD.iloc[range(2, 5)]
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Pydatatable
+PY_DT[2:5, :]
+# Or
+PY_DT[range(2, 5), :]
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+TB[3:5, ]
+# Or
+slice(TB, 3:5)
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+R_DT[3:5, ]
+# Or
+R_DT[3:5] 
+```
+</td></tr></tbody></table>
+
+### Select every second row
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+PD.iloc[::2]
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Pydatatable
+PY_DT[::2, :]
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+TB[seq.int(from = 1, to = nrow(TB), by = 2), ]
+# Or
+slice(TB, seq.int(from = 1, to = nrow(TB), by = 2))
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+R_DT[seq.int(from = 1, to = nrow(TB), by = 2), ]
+# Or
+R_DT[seq.int(from = 1, to = nrow(TB), by = 2)] 
+```
+</td></tr></tbody></table>
+
+### Select all rows other than rows 1, 2, 3, and 9
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+# Start at index 3 and stop at 8, and 1 step at a time
+PD.iloc[slice(3, 8, None)]
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Pydatatable
+# Start at index 3 and stop at 8, and 1 step at a time
+PY_DT[slice(3, 8, None), :]
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+TB[-c(1:3, 9), ]
+# Or
+slice(TB, -c(1:3, 9))
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+R_DT[!c(1:3, 9), ] 
+# Or 
+R_DT[-c(1:3, 9), ]
+```
+</td></tr></tbody></table>
+
+### Select rows using a boolean mask
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+# Number of elements must match the number of rows
+PD.iloc[[True, False, True] * 3]
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Pydatatable
+PY_DT[[True, False, True] * 3, :]
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+TB[rep(c(TRUE, FALSE, TRUE), 3), ]
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+R_DT[rep(c(TRUE, FALSE, TRUE), 3), ]
+```
+</td></tr></tbody></table>
+
+### Select rows on a single condition
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+PD.loc[PD['A'] > 9]
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Pydatatable
+PY_DT[f.A > 9, :]
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+filter(TB, A > 9)
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+R_DT[A > 9]
+# Or set key for faster binary search
+setkeyv(R_DT, cols = "A")
+R_DT[A > 9] 
+# Remove key
+setkeyv(R_DT, cols = NULL)
+```
+</td></tr></tbody></table>
+
+### Select rows on multiple conditions, using OR
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+PD.loc[(PD['A'] > 9) | (PD['C'] == 'b')]
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Pydatatable
+PY_DT[(f.A > 9) | (f.C == 'b'), :]
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+filter(TB, A > 9 | C == 'b')
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+R_DT[A > 9 | C == 'b', ]
+# Or set keys for faster binary search
+setkeyv(R_DT, cols = c("A", "C"))
+R_DT[A > 9 | C == 'b', ] 
+# Remove key
+setkeyv(R_DT, cols = NULL)
+```
+</td></tr></tbody></table>
+
+### Select rows on multiple conditions, using AND
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+PD.loc[(PD['A'] > 9) & (PD['C'] == 'a')]
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Pydatatable
+PY_DT[(f.A > 9) & (f.C == 'a'), :]
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+filter(TB, A > 9 & C == 'a')
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+R_DT[A > 9 & C == 'a', ]
+# Or set keys for faster binary search
+setkeyv(R_DT, cols = c("A", "C"))
+R_DT[A > 9 & C == 'a', ] 
+# Remove key
+setkeyv(R_DT, cols = NULL)
+```
+</td></tr></tbody></table>
+
+### Select rows on conditions, using IN
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+PD.loc[PD.C.isin(('a', 'c'))]
+```
+</td><td align="left">
+The `isin` functionality is currently missing but may be implemented; the solution below involves the `re.match` function, which was added in 1.1.0.
+```{python, eval=FALSE}
+# Pydatatable
+items = ['a','c']
+regex = f"{'|'.join(items)}"
+regex
+PY_DT[dt.re.match(column=f.C, pattern=regex), :]
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+filter(TB, C %in% c("a", "c"))
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+R_DT[C %chin% c("a", "c"), ]
+```
+</td></tr></tbody></table>
+
+### Filter unique rows
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+PD.drop_duplicates(subset='C', keep='first', inplace=False)
+```
+</td><td align="left">
+The `unique` functionality from `R` is currently not implemented. The solution below groups by the column in which we wish to look for duplicates, in which case the duplicated rows will be grouped together. Then, we keep the first row of each group.
+```{python, eval=TRUE}
+# Pydatatable
+PY_DT[:, first(f[:]), by(f.C)]
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+distinct(TB, C, .keep_all = T)
+```
+</td><td align="left">
+The `duplicated` generic has a method defined for `data.table`, which returns a logical vector indicating which rows of a `data.table` are duplicates of a row with smaller subscripts. Note that for `data.table`, the returned unique rows returned may be different from those returned by `dplyr` and `pandas` since the rows are sorted by "C" first and foremost.
+```{r, eval=TRUE}
+# Data.table
+duplicated(R_DT, by = c("C"))
+# Duplicated rows removed by columns specified in 'by' argument
+setkeyv(R_DT, cols = "C")
+unique(R_DT, by = c("C"))
+setkeyv(R_DT, cols = NULL)
+```
+</td></tr></tbody></table>
+
+### Remove missing rows
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+PD.dropna(axis=0, subset='D', inplace=False)
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Pydatatable
+# Create a copy since 'del' modifies in place
+copy_PY_DT = PY_DT.copy()
+del copy_PY_DT[f.D == None, :]
+copy_PY_DT
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+drop_na(TB, D)
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+na.omit(R_DT, cols = "D")
+```
+</td></tr></tbody></table>
+
+### Randomly sample rows
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+PD.sample(
+  n=5, 
+  frac=None, 
+  # Allow or disallow sampling of the same row more than once
+  replace=False, 
+  weights=None, 
+  random_state=None, 
+  # Defaults to 0 (index) for Series and DataFrames
+  axis=None, 
+  ignore_index=False
+)
+PD.sample(
+  n=None, 
+  frac=0.25, 
+  # Allow or disallow sampling of the same row more than once
+  replace=False, 
+  weights=None, 
+  random_state=None, 
+  # Defaults to 0 (index) for Series and DataFrames
+  axis=None, 
+  ignore_index=False
+)
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Pydatatable
+PY_DT[sample(range(0, PY_DT.nrows), 5), :]
+PY_DT[sample(range(0, PY_DT.nrows), int(PY_DT.nrows * 0.25)), :]
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+slice_sample(TB, n = 5)   
+slice_sample(TB, prop = 0.25)
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+R_DT[sample(.N, 5)]
+R_DT[sample(.N, .N * 0.25)]
+```
+</td></tr></tbody></table>
+
+### Select rows using regex
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+The argument `na` is the default value shown if element tested is not a string.
+```{python, eval=TRUE}
+# Pandas
+PD.loc[PD.D.str.startswith('startswith', na=False)]
+PD.loc[PD.D.str.endswith('endwith', na=False)]
+```
+</td><td align="left">
+```{python, eval=FALSE}
+# Pydatatable
+PY_DT[dt.re.match(column=f.D, pattern="^startswith"), :]
+PY_DT[dt.re.match(column=f.D, pattern="endwith$"), :]
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+filter(TB, grepl("^startswith", D))
+filter(TB, grepl("endwith$", D))
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+# The functional form is like(vector, pattern, ignore.case = FALSE, fixed = FALSE)
+R_DT[D %like% "^startswith"]
+R_DT[D %like% "endwith$"]
+```
+</td></tr></tbody></table>
+
+### Regex-replace rows
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+# Create a copy
+copy_PD = PD.copy()
+# Modify in place via subset-select-assign
+copy_PD.loc[copy_PD.D.str.startswith('startswith', na=False), 'D'] = 'replaced_start'
+copy_PD.loc[copy_PD.D.str.endswith('endwith', na=False), 'D'] = 'replaced_end'
+copy_PD
+# Replace all '_' with ' '
+copy_PD.replace(to_replace='_', value=' ', inplace=False, regex=True)
+# Replace 'replaced' with 'key' and '_' with white space all at once
+copy_PD.replace(to_replace='^replaced_', value='key ', inplace=False, regex=True)
+```
+</td><td align="left">
+```{python, eval=FALSE}
+# Pydatatable
+PY_DT[dt.re.match(column=f.D, pattern="^startswith"), f.D] = 'replaced_start'
+PY_DT[dt.re.match(column=f.D, pattern="endwith$"), f.D] = 'replaced_end'
+```
+</td><td align="left">
+Naively traverses the column `D` once with `stringr::str_detect`.
+```{r, eval=TRUE}
+# Dplyr
+mutate(TB,
+  D = base::replace(
+    D, stringr::str_detect(D, "^startswith"), "replaced_start"
+  )
+)
+mutate(TB,
+  D = base::replace(
+    D, stringr::str_detect(D, "endwith$"), "replaced_end"
+  )
+)
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+# Create copy
+copy_R_DT = copy(R_DT)
+copy_R_DT[D %like% "^startswith", D := "replaced_start"]
+copy_R_DT[D %like% "endwith$", D := "replaced_end"]
+copy_R_DT
+```
+</td></tr></tbody></table>
+
+### Select rows between a numeric range
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+# Possible values for 'inclusive' are “both”, “neither”, “left”, “right”
+PD[PD.A.between(left=7, right=15, inclusive='both')]
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Pydatatable
+PY_DT[(f.A >= 7) & (f.A <= 15), :]
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+filter(TB, between(A, 7, 15))
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+R_DT[A %between% c(7, 15), ]
+# Not inclusive
+R_DT[data.table::between(A, 7, 14, incbounds = FALSE), ]
+```
+</td></tr></tbody></table>
