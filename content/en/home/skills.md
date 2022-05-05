@@ -24,16 +24,16 @@ feature:
   name: R
 - icon: database
   icon_pack: fas
-  name: MySQL
+  name: SQL
 - icon: chart-bar
   icon_pack: fas
-  name: Tableau
+  name: Data Visualization
 - icon: python
   icon_pack: fab
   name: Python
 - icon: chart-line
   icon_pack: fas
-  name: Statistics
+  name: Statistics/ Data Science
 - icon: hand-holding-usd
   icon_pack: fas
   name: Finance/ Economics
