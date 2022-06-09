@@ -51,11 +51,11 @@ reticulate::use_condaenv(
 
 # Motivation
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The content and formatting of this post is *shamelessly* taken from the following comprehensive and awesome [post](https://atrebas.github.io/post/2019-03-03-datatable-dplyr/) by [Atrebas](https://atrebas.github.io/about/) and the pydatable [page](https://datatable.readthedocs.io/en/latest/manual/index-manual.html). You could also find Atrebas on Twitter [here](https://twitter.com/atrebas). I use both `R` and `Python` extensively in my work everyday, especially the data wrangling packages and library `data.table` (`pydatatable`), `dplyr` and `pandas`. I find that, in my case, I often have to translate between similar but different syntax when switching from one another. In `R`, there are ways to accomplishing tasks and there are more Pythonic ways to do things in `Python`. This is an attempt to create a list of code snippets that can hopefully become a reference for myself.    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The content and formatting of this post is inspired by the following comprehensive [post](https://atrebas.github.io/post/2019-03-03-datatable-dplyr/) by [Atrebas](https://atrebas.github.io/about/) and the pydatable [page](https://datatable.readthedocs.io/en/latest/manual/index-manual.html). You could also find Atrebas on Twitter [here](https://twitter.com/atrebas). I use both `R` and `Python` extensively in my work everyday, especially the data wrangling packages and library `data.table` (`pydatatable`), `dplyr` and `pandas`. I find that, in my case, I often have to translate between similar but different syntax when switching from one another. In `R`, there are ways to accomplishing tasks and there are more Pythonic ways to do things in `Python`. This is an attempt to create a list of code snippets that can hopefully become a reference for myself.    
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The outputs of code blocks are hidden by default, but they may be shown by clicking the button below:
 
-<div style="text-align: center;"><input type='button' id='hideshow' value='Hide the outputs'></div>
+<div style="text-align: center;"><input type='button' id='hideshow' value='Show the outputs'></div>
 
 <br><hr>
 ## Packages and Library
@@ -623,5 +623,327 @@ filter(TB, between(A, 7, 15))
 R_DT[A %between% c(7, 15), ]
 # Not inclusive
 R_DT[data.table::between(A, 7, 14, incbounds = FALSE), ]
+```
+</td></tr></tbody></table>
+
+## Column Selection
+
+### Select a single column
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+# PD.loc[:, 'D']
+PD['D']
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Pydatatable
+# PY_DT['D']
+# PY_DT[:, f.D]
+PY_DT[:, 'D']
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+# select(TB, D)
+select(TB, "D")
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+# The drop argument preserver dimensionality in base R data frames
+R_DT[, .(D), drop = FALSE]
+```
+</td></tr></tbody></table>
+
+### Select a single column by position
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+PD.iloc[:, 3]
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Pydatatable
+# PY_DT[:, 3]
+PY_DT[3]
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+select(TB, 4)
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+R_DT[, 4]
+```
+</td></tr></tbody></table>
+
+### Select multiple columns 
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+PD.loc[:, ['A', 'B']]
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Pydatatable
+# PY_DT[:, ['A', 'B']]
+PY_DT[:, [f.A, f.B]]
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+select(TB, c(A, B))
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+R_DT[, .(A, B)]
+```
+</td></tr></tbody></table>
+
+### Select multiple columns by position
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+PD.iloc[:, [0, 3]]
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Pydatatable
+PY_DT[:, [0, 3]]
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+select(TB, c(1, 4))
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+R_DT[, c(1, 4)]
+```
+</td></tr></tbody></table>
+
+### Select multiple columns by slicing (position)
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+PD.iloc[:, 2:4]
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Pydatatable
+PY_DT[:, 2:4]
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+select(TB, 4:3)
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+R_DT[, 4:3]
+```
+</td></tr></tbody></table>
+
+### Select multiple columns by slicing (names)
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+PD.loc[:, 'B':'D']
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Pydatatable
+PY_DT[:, 'B':'D']
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+select(TB, B:D)
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+R_DT[, .SD, .SDcols = B:D]
+```
+</td></tr></tbody></table>
+
+### Select multiple columns by position
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+PD.iloc[:, [0, 3]]
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Pydatatable
+PY_DT[:, [0, 3]]
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+select(TB, c(1, 4))
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+R_DT[, c(1, 4)]
+```
+</td></tr></tbody></table>
+
+### Select multiple columns by slicing (position)
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+PD.iloc[:, 2:4]
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Pydatatable
+PY_DT[:, 2:4]
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+select(TB, 4:3)
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+R_DT[, 4:3]
+```
+</td></tr></tbody></table>
+
+### Exclude columns by name
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+PD.drop(columns=['B', 'C'], inplace = False)
+# Second way
+PD.loc[:, PD.columns.difference(['B', 'C'])]
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Pydatatable
+# del PY_DT[: , ['B', 'C']] 
+PY_DT[:, f[:].remove([f.B, f.C])]
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+select(TB, -c(B, C))
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+R_DT[, .SD, .SDcols = !c("B", "C")]
+# Second way
+R_DT[, !c("B", "C")]
+# Delete by reference
+copied <- copy(R_DT)
+copied[, c("B", "C") := NULL]
+copied
+```
+</td></tr></tbody></table>
+
+### Exclude columns by position
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Pandas
+PD.drop(PD.columns[[1, 2, 3]], axis=1, inplace=False)
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Pydatatable
+# Deselecting 
+PY_DT[:, [pos for pos in range(PY_DT.ncols) if pos not in [1, 2, 3]]]
+# Deleting in place
+copied = PY_DT.copy()
+del copied[:, [1, 2, 3]]
+copied
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Dplyr
+select(TB, -c(2, 3, 4))
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Data.table
+R_DT[, !c(2, 3, 4)]
+# Delete by reference
+copied <- copy(R_DT)
+copied[, c(2, 3, 4) := NULL]
+copied
+```
+</td></tr></tbody></table>
+
+### Select columns using regex
+
+<table class="table table-condensed"><tbody><tr><td align="left">
+```{python, eval=TRUE}
+# Import re
+from re import match
+# Add three columns with prefixes
+NEW_PD = pd.concat(
+  (PD, pd.DataFrame(
+    {'prefix_D': list(range(0, 9)),
+    'prefix_F': list(range(0, 9)),
+    'prefix_G': list(range(0, 9))}
+  )),
+  axis=1)
+# Pandas
+NEW_PD.filter(regex='^prefix_', axis=1)
+# Second way via list comp
+NEW_PD.loc[:, [col for col in NEW_PD.columns if match(r'^prefix_', col)]]
+```
+</td><td align="left">
+```{python, eval=TRUE}
+# Add columns with prefix
+copied = PY_DT.copy()
+# Updates in place
+copied[:, update(prefix_D = 3, prefix_F = 4, prefix_G = 4)]
+# Pydatatable
+copied[:, [col for col in copied.names if match(r'^prefix_', col)]]
+```
+</td><td align="left">
+```{r, eval=TRUE}
+# Add columns with prefix
+copied = mutate(
+  TB, 
+  prefix_D = sample(100, size = nrow(TB)), 
+  prefix_F = 3,
+  prefix_G = 'F')
+# contains("pattern")
+# ends_with("pattern")
+# matches("pattern") matches a regular expression
+# Dplyr
+select(copied, starts_with("prefix_"))
+```
+</td><td align="left">
+
+We can filter columns to include in `.SD` based on their names according to regular expressions via `.SDcols=patterns(regex1, regex2, ...)`. The included columns will be the **intersection** of the columns identified by each pattern; pattern **unions** can easily be specified with `|` in a regex.
+```{r, eval=TRUE}
+# Data.table
+# Add columns with prefix
+copied = copy(R_DT)
+copied[, c("prefix_D", "prefix_F", "prefix_G") := .(4, 33, 5)]
+# Data.table
+copied[, .SD, .SDcols = patterns("^prefix_")]
 ```
 </td></tr></tbody></table>

@@ -49,6 +49,20 @@ output:
 <li><a href="#regex-replace-rows">Regex-replace rows</a></li>
 <li><a href="#select-rows-between-a-numeric-range">Select rows between a numeric range</a></li>
 </ul></li>
+<li><a href="#column-selection">Column Selection</a>
+<ul>
+<li><a href="#select-a-single-column">Select a single column</a></li>
+<li><a href="#select-a-single-column-by-position">Select a single column by position</a></li>
+<li><a href="#select-multiple-columns">Select multiple columns</a></li>
+<li><a href="#select-multiple-columns-by-position">Select multiple columns by position</a></li>
+<li><a href="#select-multiple-columns-by-slicing-position">Select multiple columns by slicing (position)</a></li>
+<li><a href="#select-multiple-columns-by-slicing-names">Select multiple columns by slicing (names)</a></li>
+<li><a href="#select-multiple-columns-by-position-1">Select multiple columns by position</a></li>
+<li><a href="#select-multiple-columns-by-slicing-position-1">Select multiple columns by slicing (position)</a></li>
+<li><a href="#exclude-columns-by-name">Exclude columns by name</a></li>
+<li><a href="#exclude-columns-by-position">Exclude columns by position</a></li>
+<li><a href="#select-columns-using-regex">Select columns using regex</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </div>
@@ -66,10 +80,10 @@ output:
 </style>
 <div id="motivation" class="section level1">
 <h1>Motivation</h1>
-<p>         The content and formatting of this post is <em>shamelessly</em> taken from the following comprehensive and awesome <a href="https://atrebas.github.io/post/2019-03-03-datatable-dplyr/">post</a> by <a href="https://atrebas.github.io/about/">Atrebas</a> and the pydatable <a href="https://datatable.readthedocs.io/en/latest/manual/index-manual.html">page</a>. You could also find Atrebas on Twitter <a href="https://twitter.com/atrebas">here</a>. I use both <code>R</code> and <code>Python</code> extensively in my work everyday, especially the data wrangling packages and library <code>data.table</code> (<code>pydatatable</code>), <code>dplyr</code> and <code>pandas</code>. I find that, in my case, I often have to translate between similar but different syntax when switching from one another. In <code>R</code>, there are ways to accomplishing tasks and there are more Pythonic ways to do things in <code>Python</code>. This is an attempt to create a list of code snippets that can hopefully become a reference for myself.</p>
+<p>         The content and formatting of this post is inspired by the following comprehensive <a href="https://atrebas.github.io/post/2019-03-03-datatable-dplyr/">post</a> by <a href="https://atrebas.github.io/about/">Atrebas</a> and the pydatable <a href="https://datatable.readthedocs.io/en/latest/manual/index-manual.html">page</a>. You could also find Atrebas on Twitter <a href="https://twitter.com/atrebas">here</a>. I use both <code>R</code> and <code>Python</code> extensively in my work everyday, especially the data wrangling packages and library <code>data.table</code> (<code>pydatatable</code>), <code>dplyr</code> and <code>pandas</code>. I find that, in my case, I often have to translate between similar but different syntax when switching from one another. In <code>R</code>, there are ways to accomplishing tasks and there are more Pythonic ways to do things in <code>Python</code>. This is an attempt to create a list of code snippets that can hopefully become a reference for myself.</p>
 <p>         The outputs of code blocks are hidden by default, but they may be shown by clicking the button below:</p>
 <div style="text-align: center;">
-<input type='button' id='hideshow' value='Hide the outputs'>
+<input type='button' id='hideshow' value='Show the outputs'>
 </div>
 <br>
 <hr>
@@ -112,15 +126,15 @@ PD = pd.DataFrame({
 })
 PD </code></pre>
 <pre><code>##     A  B  C                D
-## 0   5  1  b  startswith_this
-## 1  16  2  b              NaN
-## 2   2  3  b                c
-## 3   9  4  a                d
-## 4   4  5  a                e
-## 5   3  6  a              NaN
-## 6  19  7  c     this_endwith
-## 7  17  8  c                k
-## 8  11  9  c                z</code></pre>
+## 0  19  1  b  startswith_this
+## 1   4  2  b              NaN
+## 2  13  3  b                c
+## 3   5  4  a                d
+## 4   6  5  a                e
+## 5  10  6  a              NaN
+## 6  14  7  c     this_endwith
+## 7   2  8  c                k
+## 8  18  9  c                z</code></pre>
 </td>
 <td align="left">
 <pre class="python"><code># Pydatatable
@@ -134,15 +148,15 @@ PY_DT</code></pre>
 <pre><code>##    |     A      B  C      D              
 ##    | int32  int32  str32  str32          
 ## -- + -----  -----  -----  ---------------
-##  0 |     5      1  b      startswith_this
-##  1 |    16      2  b      NA             
-##  2 |     2      3  b      c              
-##  3 |     9      4  a      d              
-##  4 |     4      5  a      e              
-##  5 |     3      6  a      NA             
-##  6 |    19      7  c      this_endwith   
-##  7 |    17      8  c      k              
-##  8 |    11      9  c      z              
+##  0 |    19      1  b      startswith_this
+##  1 |     4      2  b      NA             
+##  2 |    13      3  b      c              
+##  3 |     5      4  a      d              
+##  4 |     6      5  a      e              
+##  5 |    10      6  a      NA             
+##  6 |    14      7  c      this_endwith   
+##  7 |     2      8  c      k              
+##  8 |    18      9  c      z              
 ## [9 rows x 4 columns]</code></pre>
 </td>
 <td align="left">
@@ -157,15 +171,15 @@ TB</code></pre>
 <pre><code>## # A tibble: 9 × 4
 ##       A     B C     D              
 ##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;          
-## 1     5     1 b     startswith_this
-## 2    16     2 b     &lt;NA&gt;           
-## 3     2     3 b     c              
-## 4     9     4 a     d              
-## 5     4     5 a     e              
-## 6     3     6 a     &lt;NA&gt;           
-## 7    19     7 c     this_endwith   
-## 8    17     8 c     k              
-## 9    11     9 c     z</code></pre>
+## 1    19     1 b     startswith_this
+## 2     4     2 b     &lt;NA&gt;           
+## 3    13     3 b     c              
+## 4     5     4 a     d              
+## 5     6     5 a     e              
+## 6    10     6 a     &lt;NA&gt;           
+## 7    14     7 c     this_endwith   
+## 8     2     8 c     k              
+## 9    18     9 c     z</code></pre>
 </td>
 <td align="left">
 <pre class="r"><code># Data.table
@@ -177,15 +191,15 @@ R_DT &lt;- data.table(
 )
 R_DT</code></pre>
 <pre><code>##     A B C               D
-## 1:  5 1 b startswith_this
-## 2: 16 2 b            &lt;NA&gt;
-## 3:  2 3 b               c
-## 4:  9 4 a               d
-## 5:  4 5 a               e
-## 6:  3 6 a            &lt;NA&gt;
-## 7: 19 7 c    this_endwith
-## 8: 17 8 c               k
-## 9: 11 9 c               z</code></pre>
+## 1: 19 1 b startswith_this
+## 2:  4 2 b            &lt;NA&gt;
+## 3: 13 3 b               c
+## 4:  5 4 a               d
+## 5:  6 5 a               e
+## 6: 10 6 a            &lt;NA&gt;
+## 7: 14 7 c    this_endwith
+## 8:  2 8 c               k
+## 9: 18 9 c               z</code></pre>
 </td>
 </tr>
 </tbody>
@@ -201,10 +215,10 @@ R_DT</code></pre>
 <td align="left">
 <pre class="python"><code># Pandas
 PD.loc[2]</code></pre>
-<pre><code>## A    2
-## B    3
-## C    b
-## D    c
+<pre><code>## A    13
+## B     3
+## C     b
+## D     c
 ## Name: 2, dtype: object</code></pre>
 </td>
 <td align="left">
@@ -213,7 +227,7 @@ PY_DT[2, :]</code></pre>
 <pre><code>##    |     A      B  C      D    
 ##    | int32  int32  str32  str32
 ## -- + -----  -----  -----  -----
-##  0 |     2      3  b      c    
+##  0 |    13      3  b      c    
 ## [1 row x 4 columns]</code></pre>
 </td>
 <td align="left">
@@ -224,17 +238,17 @@ slice(TB, 2)</code></pre>
 <pre><code>## # A tibble: 1 × 4
 ##       A     B C     D    
 ##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
-## 1    16     2 b     &lt;NA&gt; 
+## 1     4     2 b     &lt;NA&gt; 
 ## # A tibble: 1 × 4
 ##       A     B C     D    
 ##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
-## 1    16     2 b     &lt;NA&gt;</code></pre>
+## 1     4     2 b     &lt;NA&gt;</code></pre>
 </td>
 <td align="left">
 <pre class="r"><code># Data.table
 R_DT[2]</code></pre>
-<pre><code>##     A B C    D
-## 1: 16 2 b &lt;NA&gt;</code></pre>
+<pre><code>##    A B C    D
+## 1: 4 2 b &lt;NA&gt;</code></pre>
 </td>
 </tr>
 </tbody>
@@ -249,10 +263,10 @@ R_DT[2]</code></pre>
 <td align="left">
 <pre class="python"><code># Pandas
 PD.iloc[[2, 3, 4], :]</code></pre>
-<pre><code>##    A  B  C  D
-## 2  2  3  b  c
-## 3  9  4  a  d
-## 4  4  5  a  e</code></pre>
+<pre><code>##     A  B  C  D
+## 2  13  3  b  c
+## 3   5  4  a  d
+## 4   6  5  a  e</code></pre>
 </td>
 <td align="left">
 <pre class="python"><code># Pydatatable
@@ -260,9 +274,9 @@ PY_DT[[2, 3, 4], :]</code></pre>
 <pre><code>##    |     A      B  C      D    
 ##    | int32  int32  str32  str32
 ## -- + -----  -----  -----  -----
-##  0 |     2      3  b      c    
-##  1 |     9      4  a      d    
-##  2 |     4      5  a      e    
+##  0 |    13      3  b      c    
+##  1 |     5      4  a      d    
+##  2 |     6      5  a      e    
 ## [3 rows x 4 columns]</code></pre>
 </td>
 <td align="left">
@@ -273,29 +287,29 @@ slice(TB, c(3, 4, 5))</code></pre>
 <pre><code>## # A tibble: 3 × 4
 ##       A     B C     D    
 ##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
-## 1     2     3 b     c    
-## 2     9     4 a     d    
-## 3     4     5 a     e    
+## 1    13     3 b     c    
+## 2     5     4 a     d    
+## 3     6     5 a     e    
 ## # A tibble: 3 × 4
 ##       A     B C     D    
 ##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
-## 1     2     3 b     c    
-## 2     9     4 a     d    
-## 3     4     5 a     e</code></pre>
+## 1    13     3 b     c    
+## 2     5     4 a     d    
+## 3     6     5 a     e</code></pre>
 </td>
 <td align="left">
 <pre class="r"><code># Data.table
 R_DT[c(3, 4, 5), ]
 # OR
 R_DT[c(3, 4, 5)] </code></pre>
-<pre><code>##    A B C D
-## 1: 2 3 b c
-## 2: 9 4 a d
-## 3: 4 5 a e
-##    A B C D
-## 1: 2 3 b c
-## 2: 9 4 a d
-## 3: 4 5 a e</code></pre>
+<pre><code>##     A B C D
+## 1: 13 3 b c
+## 2:  5 4 a d
+## 3:  6 5 a e
+##     A B C D
+## 1: 13 3 b c
+## 2:  5 4 a d
+## 3:  6 5 a e</code></pre>
 </td>
 </tr>
 </tbody>
@@ -311,14 +325,14 @@ R_DT[c(3, 4, 5)] </code></pre>
 PD.iloc[2:5]
 # Or
 PD.iloc[range(2, 5)]</code></pre>
-<pre><code>##    A  B  C  D
-## 2  2  3  b  c
-## 3  9  4  a  d
-## 4  4  5  a  e
-##    A  B  C  D
-## 2  2  3  b  c
-## 3  9  4  a  d
-## 4  4  5  a  e</code></pre>
+<pre><code>##     A  B  C  D
+## 2  13  3  b  c
+## 3   5  4  a  d
+## 4   6  5  a  e
+##     A  B  C  D
+## 2  13  3  b  c
+## 3   5  4  a  d
+## 4   6  5  a  e</code></pre>
 </td>
 <td align="left">
 <pre class="python"><code># Pydatatable
@@ -328,16 +342,16 @@ PY_DT[range(2, 5), :]</code></pre>
 <pre><code>##    |     A      B  C      D    
 ##    | int32  int32  str32  str32
 ## -- + -----  -----  -----  -----
-##  0 |     2      3  b      c    
-##  1 |     9      4  a      d    
-##  2 |     4      5  a      e    
+##  0 |    13      3  b      c    
+##  1 |     5      4  a      d    
+##  2 |     6      5  a      e    
 ## [3 rows x 4 columns]
 ##    |     A      B  C      D    
 ##    | int32  int32  str32  str32
 ## -- + -----  -----  -----  -----
-##  0 |     2      3  b      c    
-##  1 |     9      4  a      d    
-##  2 |     4      5  a      e    
+##  0 |    13      3  b      c    
+##  1 |     5      4  a      d    
+##  2 |     6      5  a      e    
 ## [3 rows x 4 columns]</code></pre>
 </td>
 <td align="left">
@@ -348,29 +362,29 @@ slice(TB, 3:5)</code></pre>
 <pre><code>## # A tibble: 3 × 4
 ##       A     B C     D    
 ##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
-## 1     2     3 b     c    
-## 2     9     4 a     d    
-## 3     4     5 a     e    
+## 1    13     3 b     c    
+## 2     5     4 a     d    
+## 3     6     5 a     e    
 ## # A tibble: 3 × 4
 ##       A     B C     D    
 ##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
-## 1     2     3 b     c    
-## 2     9     4 a     d    
-## 3     4     5 a     e</code></pre>
+## 1    13     3 b     c    
+## 2     5     4 a     d    
+## 3     6     5 a     e</code></pre>
 </td>
 <td align="left">
 <pre class="r"><code># Data.table
 R_DT[3:5, ]
 # Or
 R_DT[3:5] </code></pre>
-<pre><code>##    A B C D
-## 1: 2 3 b c
-## 2: 9 4 a d
-## 3: 4 5 a e
-##    A B C D
-## 1: 2 3 b c
-## 2: 9 4 a d
-## 3: 4 5 a e</code></pre>
+<pre><code>##     A B C D
+## 1: 13 3 b c
+## 2:  5 4 a d
+## 3:  6 5 a e
+##     A B C D
+## 1: 13 3 b c
+## 2:  5 4 a d
+## 3:  6 5 a e</code></pre>
 </td>
 </tr>
 </tbody>
@@ -385,11 +399,11 @@ R_DT[3:5] </code></pre>
 <pre class="python"><code># Pandas
 PD.iloc[::2]</code></pre>
 <pre><code>##     A  B  C                D
-## 0   5  1  b  startswith_this
-## 2   2  3  b                c
-## 4   4  5  a                e
-## 6  19  7  c     this_endwith
-## 8  11  9  c                z</code></pre>
+## 0  19  1  b  startswith_this
+## 2  13  3  b                c
+## 4   6  5  a                e
+## 6  14  7  c     this_endwith
+## 8  18  9  c                z</code></pre>
 </td>
 <td align="left">
 <pre class="python"><code># Pydatatable
@@ -397,11 +411,11 @@ PY_DT[::2, :]</code></pre>
 <pre><code>##    |     A      B  C      D              
 ##    | int32  int32  str32  str32          
 ## -- + -----  -----  -----  ---------------
-##  0 |     5      1  b      startswith_this
-##  1 |     2      3  b      c              
-##  2 |     4      5  a      e              
-##  3 |    19      7  c      this_endwith   
-##  4 |    11      9  c      z              
+##  0 |    19      1  b      startswith_this
+##  1 |    13      3  b      c              
+##  2 |     6      5  a      e              
+##  3 |    14      7  c      this_endwith   
+##  4 |    18      9  c      z              
 ## [5 rows x 4 columns]</code></pre>
 </td>
 <td align="left">
@@ -412,19 +426,19 @@ slice(TB, seq.int(from = 1, to = nrow(TB), by = 2))</code></pre>
 <pre><code>## # A tibble: 5 × 4
 ##       A     B C     D              
 ##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;          
-## 1     5     1 b     startswith_this
-## 2     2     3 b     c              
-## 3     4     5 a     e              
-## 4    19     7 c     this_endwith   
-## 5    11     9 c     z              
+## 1    19     1 b     startswith_this
+## 2    13     3 b     c              
+## 3     6     5 a     e              
+## 4    14     7 c     this_endwith   
+## 5    18     9 c     z              
 ## # A tibble: 5 × 4
 ##       A     B C     D              
 ##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;          
-## 1     5     1 b     startswith_this
-## 2     2     3 b     c              
-## 3     4     5 a     e              
-## 4    19     7 c     this_endwith   
-## 5    11     9 c     z</code></pre>
+## 1    19     1 b     startswith_this
+## 2    13     3 b     c              
+## 3     6     5 a     e              
+## 4    14     7 c     this_endwith   
+## 5    18     9 c     z</code></pre>
 </td>
 <td align="left">
 <pre class="r"><code># Data.table
@@ -432,17 +446,17 @@ R_DT[seq.int(from = 1, to = nrow(TB), by = 2), ]
 # Or
 R_DT[seq.int(from = 1, to = nrow(TB), by = 2)] </code></pre>
 <pre><code>##     A B C               D
-## 1:  5 1 b startswith_this
-## 2:  2 3 b               c
-## 3:  4 5 a               e
-## 4: 19 7 c    this_endwith
-## 5: 11 9 c               z
+## 1: 19 1 b startswith_this
+## 2: 13 3 b               c
+## 3:  6 5 a               e
+## 4: 14 7 c    this_endwith
+## 5: 18 9 c               z
 ##     A B C               D
-## 1:  5 1 b startswith_this
-## 2:  2 3 b               c
-## 3:  4 5 a               e
-## 4: 19 7 c    this_endwith
-## 5: 11 9 c               z</code></pre>
+## 1: 19 1 b startswith_this
+## 2: 13 3 b               c
+## 3:  6 5 a               e
+## 4: 14 7 c    this_endwith
+## 5: 18 9 c               z</code></pre>
 </td>
 </tr>
 </tbody>
@@ -458,11 +472,11 @@ R_DT[seq.int(from = 1, to = nrow(TB), by = 2)] </code></pre>
 # Start at index 3 and stop at 8, and 1 step at a time
 PD.iloc[slice(3, 8, None)]</code></pre>
 <pre><code>##     A  B  C             D
-## 3   9  4  a             d
-## 4   4  5  a             e
-## 5   3  6  a           NaN
-## 6  19  7  c  this_endwith
-## 7  17  8  c             k</code></pre>
+## 3   5  4  a             d
+## 4   6  5  a             e
+## 5  10  6  a           NaN
+## 6  14  7  c  this_endwith
+## 7   2  8  c             k</code></pre>
 </td>
 <td align="left">
 <pre class="python"><code># Pydatatable
@@ -471,11 +485,11 @@ PY_DT[slice(3, 8, None), :]</code></pre>
 <pre><code>##    |     A      B  C      D           
 ##    | int32  int32  str32  str32       
 ## -- + -----  -----  -----  ------------
-##  0 |     9      4  a      d           
-##  1 |     4      5  a      e           
-##  2 |     3      6  a      NA          
-##  3 |    19      7  c      this_endwith
-##  4 |    17      8  c      k           
+##  0 |     5      4  a      d           
+##  1 |     6      5  a      e           
+##  2 |    10      6  a      NA          
+##  3 |    14      7  c      this_endwith
+##  4 |     2      8  c      k           
 ## [5 rows x 4 columns]</code></pre>
 </td>
 <td align="left">
@@ -486,19 +500,19 @@ slice(TB, -c(1:3, 9))</code></pre>
 <pre><code>## # A tibble: 5 × 4
 ##       A     B C     D           
 ##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;       
-## 1     9     4 a     d           
-## 2     4     5 a     e           
-## 3     3     6 a     &lt;NA&gt;        
-## 4    19     7 c     this_endwith
-## 5    17     8 c     k           
+## 1     5     4 a     d           
+## 2     6     5 a     e           
+## 3    10     6 a     &lt;NA&gt;        
+## 4    14     7 c     this_endwith
+## 5     2     8 c     k           
 ## # A tibble: 5 × 4
 ##       A     B C     D           
 ##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;       
-## 1     9     4 a     d           
-## 2     4     5 a     e           
-## 3     3     6 a     &lt;NA&gt;        
-## 4    19     7 c     this_endwith
-## 5    17     8 c     k</code></pre>
+## 1     5     4 a     d           
+## 2     6     5 a     e           
+## 3    10     6 a     &lt;NA&gt;        
+## 4    14     7 c     this_endwith
+## 5     2     8 c     k</code></pre>
 </td>
 <td align="left">
 <pre class="r"><code># Data.table
@@ -506,17 +520,17 @@ R_DT[!c(1:3, 9), ]
 # Or 
 R_DT[-c(1:3, 9), ]</code></pre>
 <pre><code>##     A B C            D
-## 1:  9 4 a            d
-## 2:  4 5 a            e
-## 3:  3 6 a         &lt;NA&gt;
-## 4: 19 7 c this_endwith
-## 5: 17 8 c            k
+## 1:  5 4 a            d
+## 2:  6 5 a            e
+## 3: 10 6 a         &lt;NA&gt;
+## 4: 14 7 c this_endwith
+## 5:  2 8 c            k
 ##     A B C            D
-## 1:  9 4 a            d
-## 2:  4 5 a            e
-## 3:  3 6 a         &lt;NA&gt;
-## 4: 19 7 c this_endwith
-## 5: 17 8 c            k</code></pre>
+## 1:  5 4 a            d
+## 2:  6 5 a            e
+## 3: 10 6 a         &lt;NA&gt;
+## 4: 14 7 c this_endwith
+## 5:  2 8 c            k</code></pre>
 </td>
 </tr>
 </tbody>
@@ -532,12 +546,12 @@ R_DT[-c(1:3, 9), ]</code></pre>
 # Number of elements must match the number of rows
 PD.iloc[[True, False, True] * 3]</code></pre>
 <pre><code>##     A  B  C                D
-## 0   5  1  b  startswith_this
-## 2   2  3  b                c
-## 3   9  4  a                d
-## 5   3  6  a              NaN
-## 6  19  7  c     this_endwith
-## 8  11  9  c                z</code></pre>
+## 0  19  1  b  startswith_this
+## 2  13  3  b                c
+## 3   5  4  a                d
+## 5  10  6  a              NaN
+## 6  14  7  c     this_endwith
+## 8  18  9  c                z</code></pre>
 </td>
 <td align="left">
 <pre class="python"><code># Pydatatable
@@ -545,12 +559,12 @@ PY_DT[[True, False, True] * 3, :]</code></pre>
 <pre><code>##    |     A      B  C      D              
 ##    | int32  int32  str32  str32          
 ## -- + -----  -----  -----  ---------------
-##  0 |     5      1  b      startswith_this
-##  1 |     2      3  b      c              
-##  2 |     9      4  a      d              
-##  3 |     3      6  a      NA             
-##  4 |    19      7  c      this_endwith   
-##  5 |    11      9  c      z              
+##  0 |    19      1  b      startswith_this
+##  1 |    13      3  b      c              
+##  2 |     5      4  a      d              
+##  3 |    10      6  a      NA             
+##  4 |    14      7  c      this_endwith   
+##  5 |    18      9  c      z              
 ## [6 rows x 4 columns]</code></pre>
 </td>
 <td align="left">
@@ -559,23 +573,23 @@ TB[rep(c(TRUE, FALSE, TRUE), 3), ]</code></pre>
 <pre><code>## # A tibble: 6 × 4
 ##       A     B C     D              
 ##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;          
-## 1     5     1 b     startswith_this
-## 2     2     3 b     c              
-## 3     9     4 a     d              
-## 4     3     6 a     &lt;NA&gt;           
-## 5    19     7 c     this_endwith   
-## 6    11     9 c     z</code></pre>
+## 1    19     1 b     startswith_this
+## 2    13     3 b     c              
+## 3     5     4 a     d              
+## 4    10     6 a     &lt;NA&gt;           
+## 5    14     7 c     this_endwith   
+## 6    18     9 c     z</code></pre>
 </td>
 <td align="left">
 <pre class="r"><code># Data.table
 R_DT[rep(c(TRUE, FALSE, TRUE), 3), ]</code></pre>
 <pre><code>##     A B C               D
-## 1:  5 1 b startswith_this
-## 2:  2 3 b               c
-## 3:  9 4 a               d
-## 4:  3 6 a            &lt;NA&gt;
-## 5: 19 7 c    this_endwith
-## 6: 11 9 c               z</code></pre>
+## 1: 19 1 b startswith_this
+## 2: 13 3 b               c
+## 3:  5 4 a               d
+## 4: 10 6 a            &lt;NA&gt;
+## 5: 14 7 c    this_endwith
+## 6: 18 9 c               z</code></pre>
 </td>
 </tr>
 </tbody>
@@ -589,34 +603,37 @@ R_DT[rep(c(TRUE, FALSE, TRUE), 3), ]</code></pre>
 <td align="left">
 <pre class="python"><code># Pandas
 PD.loc[PD[&#39;A&#39;] &gt; 9]</code></pre>
-<pre><code>##     A  B  C             D
-## 1  16  2  b           NaN
-## 6  19  7  c  this_endwith
-## 7  17  8  c             k
-## 8  11  9  c             z</code></pre>
+<pre><code>##     A  B  C                D
+## 0  19  1  b  startswith_this
+## 2  13  3  b                c
+## 5  10  6  a              NaN
+## 6  14  7  c     this_endwith
+## 8  18  9  c                z</code></pre>
 </td>
 <td align="left">
 <pre class="python"><code># Pydatatable
 PY_DT[f.A &gt; 9, :]</code></pre>
-<pre><code>##    |     A      B  C      D           
-##    | int32  int32  str32  str32       
-## -- + -----  -----  -----  ------------
-##  0 |    16      2  b      NA          
-##  1 |    19      7  c      this_endwith
-##  2 |    17      8  c      k           
-##  3 |    11      9  c      z           
-## [4 rows x 4 columns]</code></pre>
+<pre><code>##    |     A      B  C      D              
+##    | int32  int32  str32  str32          
+## -- + -----  -----  -----  ---------------
+##  0 |    19      1  b      startswith_this
+##  1 |    13      3  b      c              
+##  2 |    10      6  a      NA             
+##  3 |    14      7  c      this_endwith   
+##  4 |    18      9  c      z              
+## [5 rows x 4 columns]</code></pre>
 </td>
 <td align="left">
 <pre class="r"><code># Dplyr
 filter(TB, A &gt; 9)</code></pre>
-<pre><code>## # A tibble: 4 × 4
-##       A     B C     D           
-##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;       
-## 1    16     2 b     &lt;NA&gt;        
-## 2    19     7 c     this_endwith
-## 3    17     8 c     k           
-## 4    11     9 c     z</code></pre>
+<pre><code>## # A tibble: 5 × 4
+##       A     B C     D              
+##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;          
+## 1    19     1 b     startswith_this
+## 2    13     3 b     c              
+## 3    10     6 a     &lt;NA&gt;           
+## 4    14     7 c     this_endwith   
+## 5    18     9 c     z</code></pre>
 </td>
 <td align="left">
 <pre class="r"><code># Data.table
@@ -626,16 +643,18 @@ setkeyv(R_DT, cols = &quot;A&quot;)
 R_DT[A &gt; 9] 
 # Remove key
 setkeyv(R_DT, cols = NULL)</code></pre>
-<pre><code>##     A B C            D
-## 1: 16 2 b         &lt;NA&gt;
-## 2: 19 7 c this_endwith
-## 3: 17 8 c            k
-## 4: 11 9 c            z
-##     A B C            D
-## 1: 11 9 c            z
-## 2: 16 2 b         &lt;NA&gt;
-## 3: 17 8 c            k
-## 4: 19 7 c this_endwith</code></pre>
+<pre><code>##     A B C               D
+## 1: 19 1 b startswith_this
+## 2: 13 3 b               c
+## 3: 10 6 a            &lt;NA&gt;
+## 4: 14 7 c    this_endwith
+## 5: 18 9 c               z
+##     A B C               D
+## 1: 10 6 a            &lt;NA&gt;
+## 2: 13 3 b               c
+## 3: 14 7 c    this_endwith
+## 4: 18 9 c               z
+## 5: 19 1 b startswith_this</code></pre>
 </td>
 </tr>
 </tbody>
@@ -650,12 +669,12 @@ setkeyv(R_DT, cols = NULL)</code></pre>
 <pre class="python"><code># Pandas
 PD.loc[(PD[&#39;A&#39;] &gt; 9) | (PD[&#39;C&#39;] == &#39;b&#39;)]</code></pre>
 <pre><code>##     A  B  C                D
-## 0   5  1  b  startswith_this
-## 1  16  2  b              NaN
-## 2   2  3  b                c
-## 6  19  7  c     this_endwith
-## 7  17  8  c                k
-## 8  11  9  c                z</code></pre>
+## 0  19  1  b  startswith_this
+## 1   4  2  b              NaN
+## 2  13  3  b                c
+## 5  10  6  a              NaN
+## 6  14  7  c     this_endwith
+## 8  18  9  c                z</code></pre>
 </td>
 <td align="left">
 <pre class="python"><code># Pydatatable
@@ -663,12 +682,12 @@ PY_DT[(f.A &gt; 9) | (f.C == &#39;b&#39;), :]</code></pre>
 <pre><code>##    |     A      B  C      D              
 ##    | int32  int32  str32  str32          
 ## -- + -----  -----  -----  ---------------
-##  0 |     5      1  b      startswith_this
-##  1 |    16      2  b      NA             
-##  2 |     2      3  b      c              
-##  3 |    19      7  c      this_endwith   
-##  4 |    17      8  c      k              
-##  5 |    11      9  c      z              
+##  0 |    19      1  b      startswith_this
+##  1 |     4      2  b      NA             
+##  2 |    13      3  b      c              
+##  3 |    10      6  a      NA             
+##  4 |    14      7  c      this_endwith   
+##  5 |    18      9  c      z              
 ## [6 rows x 4 columns]</code></pre>
 </td>
 <td align="left">
@@ -677,12 +696,12 @@ filter(TB, A &gt; 9 | C == &#39;b&#39;)</code></pre>
 <pre><code>## # A tibble: 6 × 4
 ##       A     B C     D              
 ##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;          
-## 1     5     1 b     startswith_this
-## 2    16     2 b     &lt;NA&gt;           
-## 3     2     3 b     c              
-## 4    19     7 c     this_endwith   
-## 5    17     8 c     k              
-## 6    11     9 c     z</code></pre>
+## 1    19     1 b     startswith_this
+## 2     4     2 b     &lt;NA&gt;           
+## 3    13     3 b     c              
+## 4    10     6 a     &lt;NA&gt;           
+## 5    14     7 c     this_endwith   
+## 6    18     9 c     z</code></pre>
 </td>
 <td align="left">
 <pre class="r"><code># Data.table
@@ -693,19 +712,19 @@ R_DT[A &gt; 9 | C == &#39;b&#39;, ]
 # Remove key
 setkeyv(R_DT, cols = NULL)</code></pre>
 <pre><code>##     A B C               D
-## 1:  2 3 b               c
-## 2:  5 1 b startswith_this
-## 3: 11 9 c               z
-## 4: 16 2 b            &lt;NA&gt;
-## 5: 17 8 c               k
-## 6: 19 7 c    this_endwith
+## 1:  4 2 b            &lt;NA&gt;
+## 2: 10 6 a            &lt;NA&gt;
+## 3: 13 3 b               c
+## 4: 14 7 c    this_endwith
+## 5: 18 9 c               z
+## 6: 19 1 b startswith_this
 ##     A B C               D
-## 1:  2 3 b               c
-## 2:  5 1 b startswith_this
-## 3: 11 9 c               z
-## 4: 16 2 b            &lt;NA&gt;
-## 5: 17 8 c               k
-## 6: 19 7 c    this_endwith</code></pre>
+## 1:  4 2 b            &lt;NA&gt;
+## 2: 10 6 a            &lt;NA&gt;
+## 3: 13 3 b               c
+## 4: 14 7 c    this_endwith
+## 5: 18 9 c               z
+## 6: 19 1 b startswith_this</code></pre>
 </td>
 </tr>
 </tbody>
@@ -719,9 +738,8 @@ setkeyv(R_DT, cols = NULL)</code></pre>
 <td align="left">
 <pre class="python"><code># Pandas
 PD.loc[(PD[&#39;A&#39;] &gt; 9) &amp; (PD[&#39;C&#39;] == &#39;a&#39;)]</code></pre>
-<pre><code>## Empty DataFrame
-## Columns: [A, B, C, D]
-## Index: []</code></pre>
+<pre><code>##     A  B  C    D
+## 5  10  6  a  NaN</code></pre>
 </td>
 <td align="left">
 <pre class="python"><code># Pydatatable
@@ -729,13 +747,16 @@ PY_DT[(f.A &gt; 9) &amp; (f.C == &#39;a&#39;), :]</code></pre>
 <pre><code>##    |     A      B  C      D    
 ##    | int32  int32  str32  str32
 ## -- + -----  -----  -----  -----
-## [0 rows x 4 columns]</code></pre>
+##  0 |    10      6  a      NA   
+## [1 row x 4 columns]</code></pre>
 </td>
 <td align="left">
 <pre class="r"><code># Dplyr
 filter(TB, A &gt; 9 &amp; C == &#39;a&#39;)</code></pre>
-<pre><code>## # A tibble: 0 × 4
-## # … with 4 variables: A &lt;int&gt;, B &lt;int&gt;, C &lt;chr&gt;, D &lt;chr&gt;</code></pre>
+<pre><code>## # A tibble: 1 × 4
+##       A     B C     D    
+##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+## 1    10     6 a     &lt;NA&gt;</code></pre>
 </td>
 <td align="left">
 <pre class="r"><code># Data.table
@@ -745,8 +766,10 @@ setkeyv(R_DT, cols = c(&quot;A&quot;, &quot;C&quot;))
 R_DT[A &gt; 9 &amp; C == &#39;a&#39;, ] 
 # Remove key
 setkeyv(R_DT, cols = NULL)</code></pre>
-<pre><code>## Empty data.table (0 rows and 4 cols): A,B,C,D
-## Empty data.table (0 rows and 4 cols): A,B,C,D</code></pre>
+<pre><code>##     A B C    D
+## 1: 10 6 a &lt;NA&gt;
+##     A B C    D
+## 1: 10 6 a &lt;NA&gt;</code></pre>
 </td>
 </tr>
 </tbody>
@@ -761,12 +784,12 @@ setkeyv(R_DT, cols = NULL)</code></pre>
 <pre class="python"><code># Pandas
 PD.loc[PD.C.isin((&#39;a&#39;, &#39;c&#39;))]</code></pre>
 <pre><code>##     A  B  C             D
-## 3   9  4  a             d
-## 4   4  5  a             e
-## 5   3  6  a           NaN
-## 6  19  7  c  this_endwith
-## 7  17  8  c             k
-## 8  11  9  c             z</code></pre>
+## 3   5  4  a             d
+## 4   6  5  a             e
+## 5  10  6  a           NaN
+## 6  14  7  c  this_endwith
+## 7   2  8  c             k
+## 8  18  9  c             z</code></pre>
 </td>
 <td align="left">
 <p>The <code>isin</code> functionality is currently missing but may be implemented; the solution below involves the <code>re.match</code> function, which was added in 1.1.0.</p>
@@ -782,23 +805,23 @@ filter(TB, C %in% c(&quot;a&quot;, &quot;c&quot;))</code></pre>
 <pre><code>## # A tibble: 6 × 4
 ##       A     B C     D           
 ##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;       
-## 1     9     4 a     d           
-## 2     4     5 a     e           
-## 3     3     6 a     &lt;NA&gt;        
-## 4    19     7 c     this_endwith
-## 5    17     8 c     k           
-## 6    11     9 c     z</code></pre>
+## 1     5     4 a     d           
+## 2     6     5 a     e           
+## 3    10     6 a     &lt;NA&gt;        
+## 4    14     7 c     this_endwith
+## 5     2     8 c     k           
+## 6    18     9 c     z</code></pre>
 </td>
 <td align="left">
 <pre class="r"><code># Data.table
 R_DT[C %chin% c(&quot;a&quot;, &quot;c&quot;), ]</code></pre>
 <pre><code>##     A B C            D
-## 1:  3 6 a         &lt;NA&gt;
-## 2:  4 5 a            e
-## 3:  9 4 a            d
-## 4: 11 9 c            z
-## 5: 17 8 c            k
-## 6: 19 7 c this_endwith</code></pre>
+## 1:  2 8 c            k
+## 2:  5 4 a            d
+## 3:  6 5 a            e
+## 4: 10 6 a         &lt;NA&gt;
+## 5: 14 7 c this_endwith
+## 6: 18 9 c            z</code></pre>
 </td>
 </tr>
 </tbody>
@@ -813,9 +836,9 @@ R_DT[C %chin% c(&quot;a&quot;, &quot;c&quot;), ]</code></pre>
 <pre class="python"><code># Pandas
 PD.drop_duplicates(subset=&#39;C&#39;, keep=&#39;first&#39;, inplace=False)</code></pre>
 <pre><code>##     A  B  C                D
-## 0   5  1  b  startswith_this
-## 3   9  4  a                d
-## 6  19  7  c     this_endwith</code></pre>
+## 0  19  1  b  startswith_this
+## 3   5  4  a                d
+## 6  14  7  c     this_endwith</code></pre>
 </td>
 <td align="left">
 <p>The <code>unique</code> functionality from <code>R</code> is currently not implemented. The solution below groups by the column in which we wish to look for duplicates, in which case the duplicated rows will be grouped together. Then, we keep the first row of each group.</p>
@@ -824,9 +847,9 @@ PY_DT[:, first(f[:]), by(f.C)]</code></pre>
 <pre><code>##    | C          A      B  D              
 ##    | str32  int32  int32  str32          
 ## -- + -----  -----  -----  ---------------
-##  0 | a          9      4  d              
-##  1 | b          5      1  startswith_this
-##  2 | c         19      7  this_endwith   
+##  0 | a          5      4  d              
+##  1 | b         19      1  startswith_this
+##  2 | c         14      7  this_endwith   
 ## [3 rows x 4 columns]</code></pre>
 </td>
 <td align="left">
@@ -835,9 +858,9 @@ distinct(TB, C, .keep_all = T)</code></pre>
 <pre><code>## # A tibble: 3 × 4
 ##       A     B C     D              
 ##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;          
-## 1     5     1 b     startswith_this
-## 2     9     4 a     d              
-## 3    19     7 c     this_endwith</code></pre>
+## 1    19     1 b     startswith_this
+## 2     5     4 a     d              
+## 3    14     7 c     this_endwith</code></pre>
 </td>
 <td align="left">
 <p>The <code>duplicated</code> generic has a method defined for <code>data.table</code>, which returns a logical vector indicating which rows of a <code>data.table</code> are duplicates of a row with smaller subscripts. Note that for <code>data.table</code>, the returned unique rows returned may be different from those returned by <code>dplyr</code> and <code>pandas</code> since the rows are sorted by “C” first and foremost.</p>
@@ -847,11 +870,11 @@ duplicated(R_DT, by = c(&quot;C&quot;))
 setkeyv(R_DT, cols = &quot;C&quot;)
 unique(R_DT, by = c(&quot;C&quot;))
 setkeyv(R_DT, cols = NULL)</code></pre>
-<pre><code>## [1] FALSE FALSE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE
-##     A B C    D
-## 1:  3 6 a &lt;NA&gt;
-## 2:  2 3 b    c
-## 3: 11 9 c    z</code></pre>
+<pre><code>## [1] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##    A B C    D
+## 1: 5 4 a    d
+## 2: 4 2 b &lt;NA&gt;
+## 3: 2 8 c    k</code></pre>
 </td>
 </tr>
 </tbody>
@@ -866,13 +889,13 @@ setkeyv(R_DT, cols = NULL)</code></pre>
 <pre class="python"><code># Pandas
 PD.dropna(axis=0, subset=&#39;D&#39;, inplace=False)</code></pre>
 <pre><code>##     A  B  C                D
-## 0   5  1  b  startswith_this
-## 2   2  3  b                c
-## 3   9  4  a                d
-## 4   4  5  a                e
-## 6  19  7  c     this_endwith
-## 7  17  8  c                k
-## 8  11  9  c                z</code></pre>
+## 0  19  1  b  startswith_this
+## 2  13  3  b                c
+## 3   5  4  a                d
+## 4   6  5  a                e
+## 6  14  7  c     this_endwith
+## 7   2  8  c                k
+## 8  18  9  c                z</code></pre>
 </td>
 <td align="left">
 <pre class="python"><code># Pydatatable
@@ -883,13 +906,13 @@ copy_PY_DT</code></pre>
 <pre><code>##    |     A      B  C      D              
 ##    | int32  int32  str32  str32          
 ## -- + -----  -----  -----  ---------------
-##  0 |     5      1  b      startswith_this
-##  1 |     2      3  b      c              
-##  2 |     9      4  a      d              
-##  3 |     4      5  a      e              
-##  4 |    19      7  c      this_endwith   
-##  5 |    17      8  c      k              
-##  6 |    11      9  c      z              
+##  0 |    19      1  b      startswith_this
+##  1 |    13      3  b      c              
+##  2 |     5      4  a      d              
+##  3 |     6      5  a      e              
+##  4 |    14      7  c      this_endwith   
+##  5 |     2      8  c      k              
+##  6 |    18      9  c      z              
 ## [7 rows x 4 columns]</code></pre>
 </td>
 <td align="left">
@@ -898,25 +921,25 @@ drop_na(TB, D)</code></pre>
 <pre><code>## # A tibble: 7 × 4
 ##       A     B C     D              
 ##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;          
-## 1     5     1 b     startswith_this
-## 2     2     3 b     c              
-## 3     9     4 a     d              
-## 4     4     5 a     e              
-## 5    19     7 c     this_endwith   
-## 6    17     8 c     k              
-## 7    11     9 c     z</code></pre>
+## 1    19     1 b     startswith_this
+## 2    13     3 b     c              
+## 3     5     4 a     d              
+## 4     6     5 a     e              
+## 5    14     7 c     this_endwith   
+## 6     2     8 c     k              
+## 7    18     9 c     z</code></pre>
 </td>
 <td align="left">
 <pre class="r"><code># Data.table
 na.omit(R_DT, cols = &quot;D&quot;)</code></pre>
 <pre><code>##     A B C               D
-## 1:  4 5 a               e
-## 2:  9 4 a               d
-## 3:  2 3 b               c
-## 4:  5 1 b startswith_this
-## 5: 11 9 c               z
-## 6: 17 8 c               k
-## 7: 19 7 c    this_endwith</code></pre>
+## 1:  5 4 a               d
+## 2:  6 5 a               e
+## 3: 13 3 b               c
+## 4: 19 1 b startswith_this
+## 5:  2 8 c               k
+## 6: 14 7 c    this_endwith
+## 7: 18 9 c               z</code></pre>
 </td>
 </tr>
 </tbody>
@@ -951,34 +974,34 @@ PD.sample(
   axis=None, 
   ignore_index=False
 )</code></pre>
-<pre><code>##     A  B  C    D
-## 7  17  8  c    k
-## 1  16  2  b  NaN
-## 3   9  4  a    d
-## 5   3  6  a  NaN
-## 8  11  9  c    z
-##    A  B  C                D
-## 0  5  1  b  startswith_this
-## 2  2  3  b                c</code></pre>
+<pre><code>##     A  B  C                D
+## 0  19  1  b  startswith_this
+## 7   2  8  c                k
+## 2  13  3  b                c
+## 6  14  7  c     this_endwith
+## 1   4  2  b              NaN
+##     A  B  C  D
+## 2  13  3  b  c
+## 7   2  8  c  k</code></pre>
 </td>
 <td align="left">
 <pre class="python"><code># Pydatatable
 PY_DT[sample(range(0, PY_DT.nrows), 5), :]
 PY_DT[sample(range(0, PY_DT.nrows), int(PY_DT.nrows * 0.25)), :]</code></pre>
-<pre><code>##    |     A      B  C      D           
+<pre><code>##    |     A      B  C      D              
+##    | int32  int32  str32  str32          
+## -- + -----  -----  -----  ---------------
+##  0 |     5      4  a      d              
+##  1 |    13      3  b      c              
+##  2 |     6      5  a      e              
+##  3 |    19      1  b      startswith_this
+##  4 |     4      2  b      NA             
+## [5 rows x 4 columns]
+##    |     A      B  C      D           
 ##    | int32  int32  str32  str32       
 ## -- + -----  -----  -----  ------------
-##  0 |     4      5  a      e           
-##  1 |    11      9  c      z           
-##  2 |     2      3  b      c           
-##  3 |     3      6  a      NA          
-##  4 |    19      7  c      this_endwith
-## [5 rows x 4 columns]
-##    |     A      B  C      D    
-##    | int32  int32  str32  str32
-## -- + -----  -----  -----  -----
-##  0 |    17      8  c      k    
-##  1 |     4      5  a      e    
+##  0 |    14      7  c      this_endwith
+##  1 |    13      3  b      c           
 ## [2 rows x 4 columns]</code></pre>
 </td>
 <td align="left">
@@ -988,30 +1011,30 @@ slice_sample(TB, prop = 0.25)</code></pre>
 <pre><code>## # A tibble: 5 × 4
 ##       A     B C     D              
 ##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;          
-## 1     2     3 b     c              
-## 2     5     1 b     startswith_this
-## 3     3     6 a     &lt;NA&gt;           
-## 4    17     8 c     k              
-## 5     9     4 a     d              
+## 1    10     6 a     &lt;NA&gt;           
+## 2    19     1 b     startswith_this
+## 3     2     8 c     k              
+## 4     6     5 a     e              
+## 5     4     2 b     &lt;NA&gt;           
 ## # A tibble: 2 × 4
 ##       A     B C     D    
 ##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
-## 1    16     2 b     &lt;NA&gt; 
-## 2    17     8 c     k</code></pre>
+## 1     6     5 a     e    
+## 2    13     3 b     c</code></pre>
 </td>
 <td align="left">
 <pre class="r"><code># Data.table
 R_DT[sample(.N, 5)]
 R_DT[sample(.N, .N * 0.25)]</code></pre>
 <pre><code>##     A B C            D
-## 1:  3 6 a         &lt;NA&gt;
-## 2:  9 4 a            d
-## 3: 19 7 c this_endwith
-## 4:  4 5 a            e
-## 5:  2 3 b            c
-##    A B C               D
-## 1: 5 1 b startswith_this
-## 2: 3 6 a            &lt;NA&gt;</code></pre>
+## 1:  2 8 c            k
+## 2: 10 6 a         &lt;NA&gt;
+## 3:  5 4 a            d
+## 4: 13 3 b            c
+## 5: 14 7 c this_endwith
+##     A B C    D
+## 1:  6 5 a    e
+## 2: 10 6 a &lt;NA&gt;</code></pre>
 </td>
 </tr>
 </tbody>
@@ -1027,10 +1050,10 @@ R_DT[sample(.N, .N * 0.25)]</code></pre>
 <pre class="python"><code># Pandas
 PD.loc[PD.D.str.startswith(&#39;startswith&#39;, na=False)]
 PD.loc[PD.D.str.endswith(&#39;endwith&#39;, na=False)]</code></pre>
-<pre><code>##    A  B  C                D
-## 0  5  1  b  startswith_this
+<pre><code>##     A  B  C                D
+## 0  19  1  b  startswith_this
 ##     A  B  C             D
-## 6  19  7  c  this_endwith</code></pre>
+## 6  14  7  c  this_endwith</code></pre>
 </td>
 <td align="left">
 <pre class="python"><code># Pydatatable
@@ -1044,21 +1067,21 @@ filter(TB, grepl(&quot;endwith$&quot;, D))</code></pre>
 <pre><code>## # A tibble: 1 × 4
 ##       A     B C     D              
 ##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;          
-## 1     5     1 b     startswith_this
+## 1    19     1 b     startswith_this
 ## # A tibble: 1 × 4
 ##       A     B C     D           
 ##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;       
-## 1    19     7 c     this_endwith</code></pre>
+## 1    14     7 c     this_endwith</code></pre>
 </td>
 <td align="left">
 <pre class="r"><code># Data.table
 # The functional form is like(vector, pattern, ignore.case = FALSE, fixed = FALSE)
 R_DT[D %like% &quot;^startswith&quot;]
 R_DT[D %like% &quot;endwith$&quot;]</code></pre>
-<pre><code>##    A B C               D
-## 1: 5 1 b startswith_this
+<pre><code>##     A B C               D
+## 1: 19 1 b startswith_this
 ##     A B C            D
-## 1: 19 7 c this_endwith</code></pre>
+## 1: 14 7 c this_endwith</code></pre>
 </td>
 </tr>
 </tbody>
@@ -1082,35 +1105,35 @@ copy_PD.replace(to_replace=&#39;_&#39;, value=&#39; &#39;, inplace=False, regex=
 # Replace &#39;replaced&#39; with &#39;key&#39; and &#39;_&#39; with white space all at once
 copy_PD.replace(to_replace=&#39;^replaced_&#39;, value=&#39;key &#39;, inplace=False, regex=True)</code></pre>
 <pre><code>##     A  B  C               D
-## 0   5  1  b  replaced_start
-## 1  16  2  b             NaN
-## 2   2  3  b               c
-## 3   9  4  a               d
-## 4   4  5  a               e
-## 5   3  6  a             NaN
-## 6  19  7  c    replaced_end
-## 7  17  8  c               k
-## 8  11  9  c               z
+## 0  19  1  b  replaced_start
+## 1   4  2  b             NaN
+## 2  13  3  b               c
+## 3   5  4  a               d
+## 4   6  5  a               e
+## 5  10  6  a             NaN
+## 6  14  7  c    replaced_end
+## 7   2  8  c               k
+## 8  18  9  c               z
 ##     A  B  C               D
-## 0   5  1  b  replaced start
-## 1  16  2  b             NaN
-## 2   2  3  b               c
-## 3   9  4  a               d
-## 4   4  5  a               e
-## 5   3  6  a             NaN
-## 6  19  7  c    replaced end
-## 7  17  8  c               k
-## 8  11  9  c               z
+## 0  19  1  b  replaced start
+## 1   4  2  b             NaN
+## 2  13  3  b               c
+## 3   5  4  a               d
+## 4   6  5  a               e
+## 5  10  6  a             NaN
+## 6  14  7  c    replaced end
+## 7   2  8  c               k
+## 8  18  9  c               z
 ##     A  B  C          D
-## 0   5  1  b  key start
-## 1  16  2  b        NaN
-## 2   2  3  b          c
-## 3   9  4  a          d
-## 4   4  5  a          e
-## 5   3  6  a        NaN
-## 6  19  7  c    key end
-## 7  17  8  c          k
-## 8  11  9  c          z</code></pre>
+## 0  19  1  b  key start
+## 1   4  2  b        NaN
+## 2  13  3  b          c
+## 3   5  4  a          d
+## 4   6  5  a          e
+## 5  10  6  a        NaN
+## 6  14  7  c    key end
+## 7   2  8  c          k
+## 8  18  9  c          z</code></pre>
 </td>
 <td align="left">
 <pre class="python"><code># Pydatatable
@@ -1133,27 +1156,27 @@ mutate(TB,
 <pre><code>## # A tibble: 9 × 4
 ##       A     B C     D             
 ##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;         
-## 1     5     1 b     replaced_start
-## 2    16     2 b     &lt;NA&gt;          
-## 3     2     3 b     c             
-## 4     9     4 a     d             
-## 5     4     5 a     e             
-## 6     3     6 a     &lt;NA&gt;          
-## 7    19     7 c     this_endwith  
-## 8    17     8 c     k             
-## 9    11     9 c     z             
+## 1    19     1 b     replaced_start
+## 2     4     2 b     &lt;NA&gt;          
+## 3    13     3 b     c             
+## 4     5     4 a     d             
+## 5     6     5 a     e             
+## 6    10     6 a     &lt;NA&gt;          
+## 7    14     7 c     this_endwith  
+## 8     2     8 c     k             
+## 9    18     9 c     z             
 ## # A tibble: 9 × 4
 ##       A     B C     D              
 ##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;          
-## 1     5     1 b     startswith_this
-## 2    16     2 b     &lt;NA&gt;           
-## 3     2     3 b     c              
-## 4     9     4 a     d              
-## 5     4     5 a     e              
-## 6     3     6 a     &lt;NA&gt;           
-## 7    19     7 c     replaced_end   
-## 8    17     8 c     k              
-## 9    11     9 c     z</code></pre>
+## 1    19     1 b     startswith_this
+## 2     4     2 b     &lt;NA&gt;           
+## 3    13     3 b     c              
+## 4     5     4 a     d              
+## 5     6     5 a     e              
+## 6    10     6 a     &lt;NA&gt;           
+## 7    14     7 c     replaced_end   
+## 8     2     8 c     k              
+## 9    18     9 c     z</code></pre>
 </td>
 <td align="left">
 <pre class="r"><code># Data.table
@@ -1163,15 +1186,15 @@ copy_R_DT[D %like% &quot;^startswith&quot;, D := &quot;replaced_start&quot;]
 copy_R_DT[D %like% &quot;endwith$&quot;, D := &quot;replaced_end&quot;]
 copy_R_DT</code></pre>
 <pre><code>##     A B C              D
-## 1:  3 6 a           &lt;NA&gt;
-## 2:  4 5 a              e
-## 3:  9 4 a              d
-## 4:  2 3 b              c
-## 5:  5 1 b replaced_start
-## 6: 16 2 b           &lt;NA&gt;
-## 7: 11 9 c              z
-## 8: 17 8 c              k
-## 9: 19 7 c   replaced_end</code></pre>
+## 1:  5 4 a              d
+## 2:  6 5 a              e
+## 3: 10 6 a           &lt;NA&gt;
+## 4:  4 2 b           &lt;NA&gt;
+## 5: 13 3 b              c
+## 6: 19 1 b replaced_start
+## 7:  2 8 c              k
+## 8: 14 7 c   replaced_end
+## 9: 18 9 c              z</code></pre>
 </td>
 </tr>
 </tbody>
@@ -1186,40 +1209,935 @@ copy_R_DT</code></pre>
 <pre class="python"><code># Pandas
 # Possible values for &#39;inclusive&#39; are “both”, “neither”, “left”, “right”
 PD[PD.A.between(left=7, right=15, inclusive=&#39;both&#39;)]</code></pre>
-<pre><code>##     A  B  C  D
-## 3   9  4  a  d
-## 8  11  9  c  z</code></pre>
+<pre><code>##     A  B  C             D
+## 2  13  3  b             c
+## 5  10  6  a           NaN
+## 6  14  7  c  this_endwith</code></pre>
 </td>
 <td align="left">
 <pre class="python"><code># Pydatatable
 PY_DT[(f.A &gt;= 7) &amp; (f.A &lt;= 15), :]</code></pre>
-<pre><code>##    |     A      B  C      D    
-##    | int32  int32  str32  str32
-## -- + -----  -----  -----  -----
-##  0 |     9      4  a      d    
-##  1 |    11      9  c      z    
-## [2 rows x 4 columns]</code></pre>
+<pre><code>##    |     A      B  C      D           
+##    | int32  int32  str32  str32       
+## -- + -----  -----  -----  ------------
+##  0 |    13      3  b      c           
+##  1 |    10      6  a      NA          
+##  2 |    14      7  c      this_endwith
+## [3 rows x 4 columns]</code></pre>
 </td>
 <td align="left">
 <pre class="r"><code># Dplyr
 filter(TB, between(A, 7, 15))</code></pre>
-<pre><code>## # A tibble: 2 × 4
-##       A     B C     D    
-##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
-## 1     9     4 a     d    
-## 2    11     9 c     z</code></pre>
+<pre><code>## # A tibble: 3 × 4
+##       A     B C     D           
+##   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;       
+## 1    13     3 b     c           
+## 2    10     6 a     &lt;NA&gt;        
+## 3    14     7 c     this_endwith</code></pre>
 </td>
 <td align="left">
 <pre class="r"><code># Data.table
 R_DT[A %between% c(7, 15), ]
 # Not inclusive
 R_DT[data.table::between(A, 7, 14, incbounds = FALSE), ]</code></pre>
-<pre><code>##     A B C D
-## 1:  9 4 a d
-## 2: 11 9 c z
-##     A B C D
-## 1:  9 4 a d
-## 2: 11 9 c z</code></pre>
+<pre><code>##     A B C            D
+## 1: 10 6 a         &lt;NA&gt;
+## 2: 13 3 b            c
+## 3: 14 7 c this_endwith
+##     A B C    D
+## 1: 10 6 a &lt;NA&gt;
+## 2: 13 3 b    c</code></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="column-selection" class="section level2">
+<h2>Column Selection</h2>
+<div id="select-a-single-column" class="section level3">
+<h3>Select a single column</h3>
+<table class="table table-condensed">
+<tbody>
+<tr>
+<td align="left">
+<pre class="python"><code># Pandas
+# PD.loc[:, &#39;D&#39;]
+PD[&#39;D&#39;]</code></pre>
+<pre><code>## 0    startswith_this
+## 1                NaN
+## 2                  c
+## 3                  d
+## 4                  e
+## 5                NaN
+## 6       this_endwith
+## 7                  k
+## 8                  z
+## Name: D, dtype: object</code></pre>
+</td>
+<td align="left">
+<pre class="python"><code># Pydatatable
+# PY_DT[&#39;D&#39;]
+# PY_DT[:, f.D]
+PY_DT[:, &#39;D&#39;]</code></pre>
+<pre><code>##    | D              
+##    | str32          
+## -- + ---------------
+##  0 | startswith_this
+##  1 | NA             
+##  2 | c              
+##  3 | d              
+##  4 | e              
+##  5 | NA             
+##  6 | this_endwith   
+##  7 | k              
+##  8 | z              
+## [9 rows x 1 column]</code></pre>
+</td>
+<td align="left">
+<pre class="r"><code># Dplyr
+# select(TB, D)
+select(TB, &quot;D&quot;)</code></pre>
+<pre><code>## # A tibble: 9 × 1
+##   D              
+##   &lt;chr&gt;          
+## 1 startswith_this
+## 2 &lt;NA&gt;           
+## 3 c              
+## 4 d              
+## 5 e              
+## 6 &lt;NA&gt;           
+## 7 this_endwith   
+## 8 k              
+## 9 z</code></pre>
+</td>
+<td align="left">
+<pre class="r"><code># Data.table
+# The drop argument preserver dimensionality in base R data frames
+R_DT[, .(D), drop = FALSE]</code></pre>
+<pre><code>##                  D
+## 1:               d
+## 2:               e
+## 3:            &lt;NA&gt;
+## 4:            &lt;NA&gt;
+## 5:               c
+## 6: startswith_this
+## 7:               k
+## 8:    this_endwith
+## 9:               z</code></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="select-a-single-column-by-position" class="section level3">
+<h3>Select a single column by position</h3>
+<table class="table table-condensed">
+<tbody>
+<tr>
+<td align="left">
+<pre class="python"><code># Pandas
+PD.iloc[:, 3]</code></pre>
+<pre><code>## 0    startswith_this
+## 1                NaN
+## 2                  c
+## 3                  d
+## 4                  e
+## 5                NaN
+## 6       this_endwith
+## 7                  k
+## 8                  z
+## Name: D, dtype: object</code></pre>
+</td>
+<td align="left">
+<pre class="python"><code># Pydatatable
+# PY_DT[:, 3]
+PY_DT[3]</code></pre>
+<pre><code>##    | D              
+##    | str32          
+## -- + ---------------
+##  0 | startswith_this
+##  1 | NA             
+##  2 | c              
+##  3 | d              
+##  4 | e              
+##  5 | NA             
+##  6 | this_endwith   
+##  7 | k              
+##  8 | z              
+## [9 rows x 1 column]</code></pre>
+</td>
+<td align="left">
+<pre class="r"><code># Dplyr
+select(TB, 4)</code></pre>
+<pre><code>## # A tibble: 9 × 1
+##   D              
+##   &lt;chr&gt;          
+## 1 startswith_this
+## 2 &lt;NA&gt;           
+## 3 c              
+## 4 d              
+## 5 e              
+## 6 &lt;NA&gt;           
+## 7 this_endwith   
+## 8 k              
+## 9 z</code></pre>
+</td>
+<td align="left">
+<pre class="r"><code># Data.table
+R_DT[, 4]</code></pre>
+<pre><code>##                  D
+## 1:               d
+## 2:               e
+## 3:            &lt;NA&gt;
+## 4:            &lt;NA&gt;
+## 5:               c
+## 6: startswith_this
+## 7:               k
+## 8:    this_endwith
+## 9:               z</code></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="select-multiple-columns" class="section level3">
+<h3>Select multiple columns</h3>
+<table class="table table-condensed">
+<tbody>
+<tr>
+<td align="left">
+<pre class="python"><code># Pandas
+PD.loc[:, [&#39;A&#39;, &#39;B&#39;]]</code></pre>
+<pre><code>##     A  B
+## 0  19  1
+## 1   4  2
+## 2  13  3
+## 3   5  4
+## 4   6  5
+## 5  10  6
+## 6  14  7
+## 7   2  8
+## 8  18  9</code></pre>
+</td>
+<td align="left">
+<pre class="python"><code># Pydatatable
+# PY_DT[:, [&#39;A&#39;, &#39;B&#39;]]
+PY_DT[:, [f.A, f.B]]</code></pre>
+<pre><code>##    |     A      B
+##    | int32  int32
+## -- + -----  -----
+##  0 |    19      1
+##  1 |     4      2
+##  2 |    13      3
+##  3 |     5      4
+##  4 |     6      5
+##  5 |    10      6
+##  6 |    14      7
+##  7 |     2      8
+##  8 |    18      9
+## [9 rows x 2 columns]</code></pre>
+</td>
+<td align="left">
+<pre class="r"><code># Dplyr
+select(TB, c(A, B))</code></pre>
+<pre><code>## # A tibble: 9 × 2
+##       A     B
+##   &lt;int&gt; &lt;int&gt;
+## 1    19     1
+## 2     4     2
+## 3    13     3
+## 4     5     4
+## 5     6     5
+## 6    10     6
+## 7    14     7
+## 8     2     8
+## 9    18     9</code></pre>
+</td>
+<td align="left">
+<pre class="r"><code># Data.table
+R_DT[, .(A, B)]</code></pre>
+<pre><code>##     A B
+## 1:  5 4
+## 2:  6 5
+## 3: 10 6
+## 4:  4 2
+## 5: 13 3
+## 6: 19 1
+## 7:  2 8
+## 8: 14 7
+## 9: 18 9</code></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="select-multiple-columns-by-position" class="section level3">
+<h3>Select multiple columns by position</h3>
+<table class="table table-condensed">
+<tbody>
+<tr>
+<td align="left">
+<pre class="python"><code># Pandas
+PD.iloc[:, [0, 3]]</code></pre>
+<pre><code>##     A                D
+## 0  19  startswith_this
+## 1   4              NaN
+## 2  13                c
+## 3   5                d
+## 4   6                e
+## 5  10              NaN
+## 6  14     this_endwith
+## 7   2                k
+## 8  18                z</code></pre>
+</td>
+<td align="left">
+<pre class="python"><code># Pydatatable
+PY_DT[:, [0, 3]]</code></pre>
+<pre><code>##    |     A  D              
+##    | int32  str32          
+## -- + -----  ---------------
+##  0 |    19  startswith_this
+##  1 |     4  NA             
+##  2 |    13  c              
+##  3 |     5  d              
+##  4 |     6  e              
+##  5 |    10  NA             
+##  6 |    14  this_endwith   
+##  7 |     2  k              
+##  8 |    18  z              
+## [9 rows x 2 columns]</code></pre>
+</td>
+<td align="left">
+<pre class="r"><code># Dplyr
+select(TB, c(1, 4))</code></pre>
+<pre><code>## # A tibble: 9 × 2
+##       A D              
+##   &lt;int&gt; &lt;chr&gt;          
+## 1    19 startswith_this
+## 2     4 &lt;NA&gt;           
+## 3    13 c              
+## 4     5 d              
+## 5     6 e              
+## 6    10 &lt;NA&gt;           
+## 7    14 this_endwith   
+## 8     2 k              
+## 9    18 z</code></pre>
+</td>
+<td align="left">
+<pre class="r"><code># Data.table
+R_DT[, c(1, 4)]</code></pre>
+<pre><code>##     A               D
+## 1:  5               d
+## 2:  6               e
+## 3: 10            &lt;NA&gt;
+## 4:  4            &lt;NA&gt;
+## 5: 13               c
+## 6: 19 startswith_this
+## 7:  2               k
+## 8: 14    this_endwith
+## 9: 18               z</code></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="select-multiple-columns-by-slicing-position" class="section level3">
+<h3>Select multiple columns by slicing (position)</h3>
+<table class="table table-condensed">
+<tbody>
+<tr>
+<td align="left">
+<pre class="python"><code># Pandas
+PD.iloc[:, 2:4]</code></pre>
+<pre><code>##    C                D
+## 0  b  startswith_this
+## 1  b              NaN
+## 2  b                c
+## 3  a                d
+## 4  a                e
+## 5  a              NaN
+## 6  c     this_endwith
+## 7  c                k
+## 8  c                z</code></pre>
+</td>
+<td align="left">
+<pre class="python"><code># Pydatatable
+PY_DT[:, 2:4]</code></pre>
+<pre><code>##    | C      D              
+##    | str32  str32          
+## -- + -----  ---------------
+##  0 | b      startswith_this
+##  1 | b      NA             
+##  2 | b      c              
+##  3 | a      d              
+##  4 | a      e              
+##  5 | a      NA             
+##  6 | c      this_endwith   
+##  7 | c      k              
+##  8 | c      z              
+## [9 rows x 2 columns]</code></pre>
+</td>
+<td align="left">
+<pre class="r"><code># Dplyr
+select(TB, 4:3)</code></pre>
+<pre><code>## # A tibble: 9 × 2
+##   D               C    
+##   &lt;chr&gt;           &lt;chr&gt;
+## 1 startswith_this b    
+## 2 &lt;NA&gt;            b    
+## 3 c               b    
+## 4 d               a    
+## 5 e               a    
+## 6 &lt;NA&gt;            a    
+## 7 this_endwith    c    
+## 8 k               c    
+## 9 z               c</code></pre>
+</td>
+<td align="left">
+<pre class="r"><code># Data.table
+R_DT[, 4:3]</code></pre>
+<pre><code>##                  D C
+## 1:               d a
+## 2:               e a
+## 3:            &lt;NA&gt; a
+## 4:            &lt;NA&gt; b
+## 5:               c b
+## 6: startswith_this b
+## 7:               k c
+## 8:    this_endwith c
+## 9:               z c</code></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="select-multiple-columns-by-slicing-names" class="section level3">
+<h3>Select multiple columns by slicing (names)</h3>
+<table class="table table-condensed">
+<tbody>
+<tr>
+<td align="left">
+<pre class="python"><code># Pandas
+PD.loc[:, &#39;B&#39;:&#39;D&#39;]</code></pre>
+<pre><code>##    B  C                D
+## 0  1  b  startswith_this
+## 1  2  b              NaN
+## 2  3  b                c
+## 3  4  a                d
+## 4  5  a                e
+## 5  6  a              NaN
+## 6  7  c     this_endwith
+## 7  8  c                k
+## 8  9  c                z</code></pre>
+</td>
+<td align="left">
+<pre class="python"><code># Pydatatable
+PY_DT[:, &#39;B&#39;:&#39;D&#39;]</code></pre>
+<pre><code>##    |     B  C      D              
+##    | int32  str32  str32          
+## -- + -----  -----  ---------------
+##  0 |     1  b      startswith_this
+##  1 |     2  b      NA             
+##  2 |     3  b      c              
+##  3 |     4  a      d              
+##  4 |     5  a      e              
+##  5 |     6  a      NA             
+##  6 |     7  c      this_endwith   
+##  7 |     8  c      k              
+##  8 |     9  c      z              
+## [9 rows x 3 columns]</code></pre>
+</td>
+<td align="left">
+<pre class="r"><code># Dplyr
+select(TB, B:D)</code></pre>
+<pre><code>## # A tibble: 9 × 3
+##       B C     D              
+##   &lt;int&gt; &lt;chr&gt; &lt;chr&gt;          
+## 1     1 b     startswith_this
+## 2     2 b     &lt;NA&gt;           
+## 3     3 b     c              
+## 4     4 a     d              
+## 5     5 a     e              
+## 6     6 a     &lt;NA&gt;           
+## 7     7 c     this_endwith   
+## 8     8 c     k              
+## 9     9 c     z</code></pre>
+</td>
+<td align="left">
+<pre class="r"><code># Data.table
+R_DT[, .SD, .SDcols = B:D]</code></pre>
+<pre><code>##    B C               D
+## 1: 4 a               d
+## 2: 5 a               e
+## 3: 6 a            &lt;NA&gt;
+## 4: 2 b            &lt;NA&gt;
+## 5: 3 b               c
+## 6: 1 b startswith_this
+## 7: 8 c               k
+## 8: 7 c    this_endwith
+## 9: 9 c               z</code></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="select-multiple-columns-by-position-1" class="section level3">
+<h3>Select multiple columns by position</h3>
+<table class="table table-condensed">
+<tbody>
+<tr>
+<td align="left">
+<pre class="python"><code># Pandas
+PD.iloc[:, [0, 3]]</code></pre>
+<pre><code>##     A                D
+## 0  19  startswith_this
+## 1   4              NaN
+## 2  13                c
+## 3   5                d
+## 4   6                e
+## 5  10              NaN
+## 6  14     this_endwith
+## 7   2                k
+## 8  18                z</code></pre>
+</td>
+<td align="left">
+<pre class="python"><code># Pydatatable
+PY_DT[:, [0, 3]]</code></pre>
+<pre><code>##    |     A  D              
+##    | int32  str32          
+## -- + -----  ---------------
+##  0 |    19  startswith_this
+##  1 |     4  NA             
+##  2 |    13  c              
+##  3 |     5  d              
+##  4 |     6  e              
+##  5 |    10  NA             
+##  6 |    14  this_endwith   
+##  7 |     2  k              
+##  8 |    18  z              
+## [9 rows x 2 columns]</code></pre>
+</td>
+<td align="left">
+<pre class="r"><code># Dplyr
+select(TB, c(1, 4))</code></pre>
+<pre><code>## # A tibble: 9 × 2
+##       A D              
+##   &lt;int&gt; &lt;chr&gt;          
+## 1    19 startswith_this
+## 2     4 &lt;NA&gt;           
+## 3    13 c              
+## 4     5 d              
+## 5     6 e              
+## 6    10 &lt;NA&gt;           
+## 7    14 this_endwith   
+## 8     2 k              
+## 9    18 z</code></pre>
+</td>
+<td align="left">
+<pre class="r"><code># Data.table
+R_DT[, c(1, 4)]</code></pre>
+<pre><code>##     A               D
+## 1:  5               d
+## 2:  6               e
+## 3: 10            &lt;NA&gt;
+## 4:  4            &lt;NA&gt;
+## 5: 13               c
+## 6: 19 startswith_this
+## 7:  2               k
+## 8: 14    this_endwith
+## 9: 18               z</code></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="select-multiple-columns-by-slicing-position-1" class="section level3">
+<h3>Select multiple columns by slicing (position)</h3>
+<table class="table table-condensed">
+<tbody>
+<tr>
+<td align="left">
+<pre class="python"><code># Pandas
+PD.iloc[:, 2:4]</code></pre>
+<pre><code>##    C                D
+## 0  b  startswith_this
+## 1  b              NaN
+## 2  b                c
+## 3  a                d
+## 4  a                e
+## 5  a              NaN
+## 6  c     this_endwith
+## 7  c                k
+## 8  c                z</code></pre>
+</td>
+<td align="left">
+<pre class="python"><code># Pydatatable
+PY_DT[:, 2:4]</code></pre>
+<pre><code>##    | C      D              
+##    | str32  str32          
+## -- + -----  ---------------
+##  0 | b      startswith_this
+##  1 | b      NA             
+##  2 | b      c              
+##  3 | a      d              
+##  4 | a      e              
+##  5 | a      NA             
+##  6 | c      this_endwith   
+##  7 | c      k              
+##  8 | c      z              
+## [9 rows x 2 columns]</code></pre>
+</td>
+<td align="left">
+<pre class="r"><code># Dplyr
+select(TB, 4:3)</code></pre>
+<pre><code>## # A tibble: 9 × 2
+##   D               C    
+##   &lt;chr&gt;           &lt;chr&gt;
+## 1 startswith_this b    
+## 2 &lt;NA&gt;            b    
+## 3 c               b    
+## 4 d               a    
+## 5 e               a    
+## 6 &lt;NA&gt;            a    
+## 7 this_endwith    c    
+## 8 k               c    
+## 9 z               c</code></pre>
+</td>
+<td align="left">
+<pre class="r"><code># Data.table
+R_DT[, 4:3]</code></pre>
+<pre><code>##                  D C
+## 1:               d a
+## 2:               e a
+## 3:            &lt;NA&gt; a
+## 4:            &lt;NA&gt; b
+## 5:               c b
+## 6: startswith_this b
+## 7:               k c
+## 8:    this_endwith c
+## 9:               z c</code></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="exclude-columns-by-name" class="section level3">
+<h3>Exclude columns by name</h3>
+<table class="table table-condensed">
+<tbody>
+<tr>
+<td align="left">
+<pre class="python"><code># Pandas
+PD.drop(columns=[&#39;B&#39;, &#39;C&#39;], inplace = False)
+# Second way
+PD.loc[:, PD.columns.difference([&#39;B&#39;, &#39;C&#39;])]</code></pre>
+<pre><code>##     A                D
+## 0  19  startswith_this
+## 1   4              NaN
+## 2  13                c
+## 3   5                d
+## 4   6                e
+## 5  10              NaN
+## 6  14     this_endwith
+## 7   2                k
+## 8  18                z
+##     A                D
+## 0  19  startswith_this
+## 1   4              NaN
+## 2  13                c
+## 3   5                d
+## 4   6                e
+## 5  10              NaN
+## 6  14     this_endwith
+## 7   2                k
+## 8  18                z</code></pre>
+</td>
+<td align="left">
+<pre class="python"><code># Pydatatable
+# del PY_DT[: , [&#39;B&#39;, &#39;C&#39;]] 
+PY_DT[:, f[:].remove([f.B, f.C])]</code></pre>
+<pre><code>##    |     A  D              
+##    | int32  str32          
+## -- + -----  ---------------
+##  0 |    19  startswith_this
+##  1 |     4  NA             
+##  2 |    13  c              
+##  3 |     5  d              
+##  4 |     6  e              
+##  5 |    10  NA             
+##  6 |    14  this_endwith   
+##  7 |     2  k              
+##  8 |    18  z              
+## [9 rows x 2 columns]</code></pre>
+</td>
+<td align="left">
+<pre class="r"><code># Dplyr
+select(TB, -c(B, C))</code></pre>
+<pre><code>## # A tibble: 9 × 2
+##       A D              
+##   &lt;int&gt; &lt;chr&gt;          
+## 1    19 startswith_this
+## 2     4 &lt;NA&gt;           
+## 3    13 c              
+## 4     5 d              
+## 5     6 e              
+## 6    10 &lt;NA&gt;           
+## 7    14 this_endwith   
+## 8     2 k              
+## 9    18 z</code></pre>
+</td>
+<td align="left">
+<pre class="r"><code># Data.table
+R_DT[, .SD, .SDcols = !c(&quot;B&quot;, &quot;C&quot;)]
+# Second way
+R_DT[, !c(&quot;B&quot;, &quot;C&quot;)]
+# Delete by reference
+copied &lt;- copy(R_DT)
+copied[, c(&quot;B&quot;, &quot;C&quot;) := NULL]
+copied</code></pre>
+<pre><code>##     A               D
+## 1:  5               d
+## 2:  6               e
+## 3: 10            &lt;NA&gt;
+## 4:  4            &lt;NA&gt;
+## 5: 13               c
+## 6: 19 startswith_this
+## 7:  2               k
+## 8: 14    this_endwith
+## 9: 18               z
+##     A               D
+## 1:  5               d
+## 2:  6               e
+## 3: 10            &lt;NA&gt;
+## 4:  4            &lt;NA&gt;
+## 5: 13               c
+## 6: 19 startswith_this
+## 7:  2               k
+## 8: 14    this_endwith
+## 9: 18               z
+##     A               D
+## 1:  5               d
+## 2:  6               e
+## 3: 10            &lt;NA&gt;
+## 4:  4            &lt;NA&gt;
+## 5: 13               c
+## 6: 19 startswith_this
+## 7:  2               k
+## 8: 14    this_endwith
+## 9: 18               z</code></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="exclude-columns-by-position" class="section level3">
+<h3>Exclude columns by position</h3>
+<table class="table table-condensed">
+<tbody>
+<tr>
+<td align="left">
+<pre class="python"><code># Pandas
+PD.drop(PD.columns[[1, 2, 3]], axis=1, inplace=False)</code></pre>
+<pre><code>##     A
+## 0  19
+## 1   4
+## 2  13
+## 3   5
+## 4   6
+## 5  10
+## 6  14
+## 7   2
+## 8  18</code></pre>
+</td>
+<td align="left">
+<pre class="python"><code># Pydatatable
+# Deselecting 
+PY_DT[:, [pos for pos in range(PY_DT.ncols) if pos not in [1, 2, 3]]]
+# Deleting in place
+copied = PY_DT.copy()
+del copied[:, [1, 2, 3]]
+copied</code></pre>
+<pre><code>##    |     A
+##    | int32
+## -- + -----
+##  0 |    19
+##  1 |     4
+##  2 |    13
+##  3 |     5
+##  4 |     6
+##  5 |    10
+##  6 |    14
+##  7 |     2
+##  8 |    18
+## [9 rows x 1 column]
+##    |     A
+##    | int32
+## -- + -----
+##  0 |    19
+##  1 |     4
+##  2 |    13
+##  3 |     5
+##  4 |     6
+##  5 |    10
+##  6 |    14
+##  7 |     2
+##  8 |    18
+## [9 rows x 1 column]</code></pre>
+</td>
+<td align="left">
+<pre class="r"><code># Dplyr
+select(TB, -c(2, 3, 4))</code></pre>
+<pre><code>## # A tibble: 9 × 1
+##       A
+##   &lt;int&gt;
+## 1    19
+## 2     4
+## 3    13
+## 4     5
+## 5     6
+## 6    10
+## 7    14
+## 8     2
+## 9    18</code></pre>
+</td>
+<td align="left">
+<pre class="r"><code># Data.table
+R_DT[, !c(2, 3, 4)]
+# Delete by reference
+copied &lt;- copy(R_DT)
+copied[, c(2, 3, 4) := NULL]
+copied</code></pre>
+<pre><code>##     A
+## 1:  5
+## 2:  6
+## 3: 10
+## 4:  4
+## 5: 13
+## 6: 19
+## 7:  2
+## 8: 14
+## 9: 18
+##     A
+## 1:  5
+## 2:  6
+## 3: 10
+## 4:  4
+## 5: 13
+## 6: 19
+## 7:  2
+## 8: 14
+## 9: 18</code></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="select-columns-using-regex" class="section level3">
+<h3>Select columns using regex</h3>
+<table class="table table-condensed">
+<tbody>
+<tr>
+<td align="left">
+<pre class="python"><code># Import re
+from re import match
+# Add three columns with prefixes
+NEW_PD = pd.concat(
+  (PD, pd.DataFrame(
+    {&#39;prefix_D&#39;: list(range(0, 9)),
+    &#39;prefix_F&#39;: list(range(0, 9)),
+    &#39;prefix_G&#39;: list(range(0, 9))}
+  )),
+  axis=1)
+# Pandas
+NEW_PD.filter(regex=&#39;^prefix_&#39;, axis=1)
+# Second way via list comp
+NEW_PD.loc[:, [col for col in NEW_PD.columns if match(r&#39;^prefix_&#39;, col)]]</code></pre>
+<pre><code>##    prefix_D  prefix_F  prefix_G
+## 0         0         0         0
+## 1         1         1         1
+## 2         2         2         2
+## 3         3         3         3
+## 4         4         4         4
+## 5         5         5         5
+## 6         6         6         6
+## 7         7         7         7
+## 8         8         8         8
+##    prefix_D  prefix_F  prefix_G
+## 0         0         0         0
+## 1         1         1         1
+## 2         2         2         2
+## 3         3         3         3
+## 4         4         4         4
+## 5         5         5         5
+## 6         6         6         6
+## 7         7         7         7
+## 8         8         8         8</code></pre>
+</td>
+<td align="left">
+<pre class="python"><code># Add columns with prefix
+copied = PY_DT.copy()
+# Updates in place
+copied[:, update(prefix_D = 3, prefix_F = 4, prefix_G = 4)]
+# Pydatatable
+copied[:, [col for col in copied.names if match(r&#39;^prefix_&#39;, col)]]</code></pre>
+<pre><code>##    | prefix_D  prefix_F  prefix_G
+##    |    int32     int32     int32
+## -- + --------  --------  --------
+##  0 |        3         4         4
+##  1 |        3         4         4
+##  2 |        3         4         4
+##  3 |        3         4         4
+##  4 |        3         4         4
+##  5 |        3         4         4
+##  6 |        3         4         4
+##  7 |        3         4         4
+##  8 |        3         4         4
+## [9 rows x 3 columns]</code></pre>
+</td>
+<td align="left">
+<pre class="r"><code># Add columns with prefix
+copied = mutate(
+  TB, 
+  prefix_D = sample(100, size = nrow(TB)), 
+  prefix_F = 3,
+  prefix_G = &#39;F&#39;)
+# contains(&quot;pattern&quot;)
+# ends_with(&quot;pattern&quot;)
+# matches(&quot;pattern&quot;) matches a regular expression
+# Dplyr
+select(copied, starts_with(&quot;prefix_&quot;))</code></pre>
+<pre><code>## # A tibble: 9 × 3
+##   prefix_D prefix_F prefix_G
+##      &lt;int&gt;    &lt;dbl&gt; &lt;chr&gt;   
+## 1       63        3 F       
+## 2       45        3 F       
+## 3       13        3 F       
+## 4       68        3 F       
+## 5       70        3 F       
+## 6       60        3 F       
+## 7       23        3 F       
+## 8       39        3 F       
+## 9       74        3 F</code></pre>
+</td>
+<td align="left">
+<p>We can filter columns to include in <code>.SD</code> based on their names according to regular expressions via <code>.SDcols=patterns(regex1, regex2, ...)</code>. The included columns will be the <strong>intersection</strong> of the columns identified by each pattern; pattern <strong>unions</strong> can easily be specified with <code>|</code> in a regex.</p>
+<pre class="r"><code># Data.table
+# Add columns with prefix
+copied = copy(R_DT)
+copied[, c(&quot;prefix_D&quot;, &quot;prefix_F&quot;, &quot;prefix_G&quot;) := .(4, 33, 5)]
+# Data.table
+copied[, .SD, .SDcols = patterns(&quot;^prefix_&quot;)]</code></pre>
+<pre><code>##    prefix_D prefix_F prefix_G
+## 1:        4       33        5
+## 2:        4       33        5
+## 3:        4       33        5
+## 4:        4       33        5
+## 5:        4       33        5
+## 6:        4       33        5
+## 7:        4       33        5
+## 8:        4       33        5
+## 9:        4       33        5</code></pre>
 </td>
 </tr>
 </tbody>
