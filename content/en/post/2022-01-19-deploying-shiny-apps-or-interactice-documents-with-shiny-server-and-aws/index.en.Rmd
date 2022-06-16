@@ -453,6 +453,14 @@ $ stat /etc/passwd
 
 <img src="images/rstudio_ide.png" width="750" height="600">
 
+Some useful commands for managing rstudio-server:
+
+```{r, eval=FALSE}
+$ sudo rstudio-server stop
+$ sudo rstudio-server start
+$ sudo rstudio-server restart
+```
+
 ### User Library
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Once you have set up a user on your EC2 instance, which creates a home directory for the username, your user-level library will be set up as well, so there is nothing extra to do here. Login to your rstudio IDE and run the following function:
