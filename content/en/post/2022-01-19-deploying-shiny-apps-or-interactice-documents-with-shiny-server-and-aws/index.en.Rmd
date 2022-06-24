@@ -58,11 +58,11 @@ The rest of the setup steps may differ quite a bit depending on whether or not y
 
 <img src="images/ami.png" width="750" height="600">
 
-Because many tutorials and resources online are based on the Ubuntu Server AMI, we will use this as well. Not only does this option have the [free tier](https://aws.amazon.com/free/) option but, based on my experience, it could also save us a lot of pain in having to deal with system requirements later on. The Ubuntu 20.04.1 LTS (at the time of writing this post) is a well documented operating system with a large user base and so trouble shooting is relatively easier in my experience compared to an AMI such as the Amazon Linux AMI 1, which is based on Red Hat Enterprise Linux (RHEL). If you work for an organization, you may not be able to choose which AMI to use. But the steps that follow should theoretically work with other AMI (for instance, we use the Amazon Linux AMI at our organization), but note that you may run into problems installing the required system libraries and packages needed for deployment and even for R packages.
+Because many tutorials and resources online are based on Ubuntu, we will use the Ubuntu AMI. Not only does this option have the [free tier](https://aws.amazon.com/free/) option but, based on my experience, it could also save us a lot of pain in having to deal with system requirements later on. The Ubuntu 20.04.1 LTS (at the time of writing this post) is a well documented operating system with a large user base and so trouble shooting is relatively easier in my experience compared to an AMI such as the Amazon Linux AMI 1, which is based on Red Hat Enterprise Linux (RHEL). If you work for an organization, you may not be able to choose which AMI to use. But the steps that follow should work with other AMI (for instance, we use the Amazon Linux AMI at our organization), but note that you may run into problems installing the required system libraries and packages needed for deployment and even for R packages as some of the commands will be different.
 
 ### Choose an Instance Type
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We will choose `t2.micro`, which is free tier eligible. Depending on your needs for computing resources (for instance, installing R packages with complied code), you may run out of memory with 1 CPU and 1GB of RAM, so you could also consider other instance types. I recommend reading the following [article](https://www.qa.com/about-qa/our-thinking/understanding-t2-and-t3-cpu-credits-in-aws/) to better understand the differences between instance types.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We will choose `t2.micro`, which is free tier eligible. Depending on your needs for computing resources (for instance, installing R packages with complied code), you may run out of memory with 1 GiB of Memory and 1 vCPUs, so you could also consider other instance types. I recommend reading the following [article](https://www.qa.com/about-qa/our-thinking/understanding-t2-and-t3-cpu-credits-in-aws/) to better understand the differences between instance types.
 
 <img src="images/instance_type.png" width="750" height="600">
 
@@ -88,8 +88,8 @@ Because many tutorials and resources online are based on the Ubuntu Server AMI, 
 |-------------|----------|------------|--------------------------|-------------------------------------------|
 | SSH         | TCP      | 22         | Anywhere: 0.0.0.0/0, ::0 | SSH                              |
 | HTTP        | TCP      | 80         | Anywhere: 0.0.0.0/0, ::0 | Use nginx to password protect and set up proxy |
-| Custom TCPI | TCP      | 3838       | Anywhere: 0.0.0.0/0, ::0 | Default R Shiny server                     |
-| Custom TCPI | TCP      | 8787       | Anywhere: 0.0.0.0/0, ::0 | Default R Studio server                     |
+| Custom TCP | TCP      | 3838       | Anywhere: 0.0.0.0/0, ::0 | Default Shiny server                     |
+| Custom TCP | TCP      | 8787       | Anywhere: 0.0.0.0/0, ::0 | Default R Studio server                     |
 
 Since our instance is utilized as a web server, we use security rules to allow IP addresses to access our instance using HTTP or Custom TCP so that external users can browse the content on our web server.
 
@@ -117,7 +117,7 @@ Select the `Action` drop down menu in the top right corner and choose `Associate
 
 ### Connecting via SSH
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To connect to our EC2 instance via SSH, we will use the terminal (for windows, the steps for `PuTTY` can be found [here](https://business-science.github.io/shiny-production-with-aws-book/connecting-to-ec2-with-ssh-secure-shell.html)). When you select "Connect" in our AWS console, you should be taken to the following page:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To connect to our EC2 instance via SSH, we will use the terminal (for windows, the steps for `PuTTY` can be found [here](https://business-science.github.io/shiny-production-with-aws-book/connecting-to-ec2-with-ssh-secure-shell.html)). When you select "Connect" in your AWS console, you should be taken to the following page:
 
 <img src="images/connect.png" width="550" height="400">
 
@@ -590,14 +590,12 @@ $ cd /etc/nginx
 $ ls
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The results of `ls` will differ, sometimes substantially, depending on the AMI (and the operating system) that you are using. For instance, on Ubuntu, the default installation of `nginx` will create a `sites-avalable` and a `sites-enabled` directory. On RedHat/CentOS/Fedora, the default installation of `nginx` does not include such directories. For those operating systems, the default place to store the configuration files is the following directory `/etc/nginx/conf.d/*.conf`. Then, in the `/etc/nginx/nginx.conf` file, add the `include /etc/nginx/conf.d/*.conf;` directive in the http block to tell `nginx` to pull in any files in the `conf.d` directory that has the extension `.conf`. We are on Ubuntu, and so the following set up steps are needed:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The results of `ls` may differ, sometimes substantially, depending on the AMI (and the operating system) that we are using. For instance, on Ubuntu, the default installation of `nginx` might create a `sites-avalable` and a `sites-enabled` directory. On RedHat/CentOS/Fedora, the default installation of `nginx` does not include such directories. For those operating systems, the default place to store the configuration files is the following directory `/etc/nginx/conf.d/*.conf`. In addition to that, in the `/etc/nginx/nginx.conf` configuration file, we must ensure that the `include /etc/nginx/conf.d/*.conf;` directive is added in the `http` block to tell `nginx` to pull in any files in the ``/etc/nginx/conf.d` directory that has the extension `.conf`. On Ubuntu, the following set up steps are needed:
 
-* Having navigated to the `/etc/nginx` directory, we should see the following sub-directories:
+* Having navigated to the `/etc/nginx` directory, we should see at least the following sub-directories (if not, we can create them):
 
 ```{r, eval=FALSE}
-conf.d          koi-utf     modules-available  proxy_params     sites-enabled  win-utf
-fastcgi.conf    koi-win     modules-enabled    scgi_params      snippets
-fastcgi_params  mime.types  nginx.conf         sites-available  uwsgi_params
+conf.d sites-enabled nginx.conf  sites-available
 ```
 
 * Navigate to the `sites-available` directory and create a new configuration file specifically for Shiny server:
@@ -1300,6 +1298,8 @@ Refer to the [manual page](https://httpd.apache.org/docs/2.4/programs/htpasswd.h
 
 * http://nginx.org/en/docs/
 
+* https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/
+
 ### Operating Systems and IT
 
 * https://linuxize.com/post/how-to-add-and-delete-users-on-ubuntu-20-04/
@@ -1309,8 +1309,6 @@ Refer to the [manual page](https://httpd.apache.org/docs/2.4/programs/htpasswd.h
 * https://www.cyberciti.biz/faq/understanding-etcshadow-file/
 
 * https://www.cyberciti.biz/faq/understanding-etcgroup-file/
-
-* https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/
 
 * https://httpd.apache.org/docs/
 

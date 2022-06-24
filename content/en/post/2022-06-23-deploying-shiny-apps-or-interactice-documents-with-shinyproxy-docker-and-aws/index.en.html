@@ -1,0 +1,756 @@
+---
+title: Deploying Shiny Apps or Interactice Documents with ShinyProxy, Docker, and
+  AWS
+author: Yang Wu
+date: '2022-06-23'
+slug: deploying-shiny-apps-or-interactice-documents-with-shinyproxy-docker-and-aws
+categories:
+  - AWS
+  - R
+tags:
+  - Docker
+  - AWS
+  - Shiny Application
+subtitle: ''
+summary: 'Steps for deploying shiny applications or interactive documents with AWS, Docker, and ShinyProxy'
+authors: []
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+output:
+  blogdown::html_page:
+    toc: true
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#step-1-aws-ec2">Step 1: AWS EC2</a>
+<ul>
+<li><a href="#launch-an-ec2-instance-and-select-an-ami">Launch an EC2 Instance and Select an AMI</a></li>
+<li><a href="#choose-an-instance-type">Choose an Instance Type</a></li>
+<li><a href="#configure-instance-details">Configure Instance Details</a>
+<ul>
+<li><a href="#add-storage">Add Storage</a></li>
+</ul></li>
+<li><a href="#add-tags">Add Tags</a></li>
+<li><a href="#configure-security-group">Configure Security Group</a></li>
+<li><a href="#key-pair">Key Pair</a></li>
+<li><a href="#elastic-ip">Elastic IP</a></li>
+</ul></li>
+<li><a href="#step-2-connecting-to-aws-ec2">Step 2: Connecting to AWS EC2</a>
+<ul>
+<li><a href="#connecting-via-ssh">Connecting via SSH</a>
+<ul>
+<li><a href="#disconnecting">Disconnecting</a></li>
+</ul></li>
+<li><a href="#install-docker">Install Docker</a>
+<ul>
+<li><a href="#docker-startup-options">Docker Startup Options</a></li>
+<li><a href="#useful-commands-docker">Useful Commands (Docker)</a></li>
+</ul></li>
+<li><a href="#install-nginx">Install Nginx</a>
+<ul>
+<li><a href="#nginx-configurations">Nginx Configurations</a></li>
+<li><a href="#useful-commands-nginx">Useful Commands (Nginx)</a></li>
+</ul></li>
+<li><a href="#install-shinyproxy">Install ShinyProxy</a>
+<ul>
+<li><a href="#shinyproxy-configurations">ShinyProxy Configurations</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#step-3-containerize-shiny-application">Step 3: Containerize Shiny Application</a>
+<ul>
+<li><a href="#dockerfile">Dockerfile</a></li>
+<li><a href="#build-image">Build Image</a></li>
+<li><a href="#shinyproxy-specs">ShinyProxy Specs</a></li>
+<li><a href="#resources">Resources</a>
+<ul>
+<li><a href="#shinyproxy">ShinyProxy</a></li>
+<li><a href="#aws">AWS</a></li>
+<li><a href="#nginx">Nginx</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+
+<p>       In a <a href="https://www.kenwuyang.com/en/post/deploying-shiny-apps-or-interactice-documents-with-shiny-server-and-aws/">previous post</a>, I documented the steps for deploying shiny applications or interactive documents through shiny-server, rstudio-server, and AWS EC2. This post documents the steps for deploying apps and interactive documents using <a href="https://www.docker.com/why-docker/">Docker</a>, <a href="https://www.shinyproxy.io/">ShinyProxy</a>, and AWS EC2. <strong>Note</strong> again that I am a MAC user, which means I’ll be using the Terminal app initially for the EC2 set up.</p>
+<p>       If you are a VS Code or Visual Studio user like myself, you could follow this <a href="https://www.youtube.com/watch?v=R7cUtQu7jww&amp;ab_channel=TrailSix">Youtube video</a> or Microsoft’s official <a href="https://code.visualstudio.com/docs/remote/ssh">documentation</a> to set up remote SSH, which allows you to open a remote folder on any remote machine, virtual machine, or container with a running SSH server.</p>
+<div id="step-1-aws-ec2" class="section level1">
+<h1>Step 1: AWS EC2</h1>
+<p>       If you are working for an organization that uses AWS EC2, the chances are that your data team or IT department may already have an EC2 instance running. In that case, consult your cloud manager or supervisor or whoever manages your organization’s AWS account regarding the following:</p>
+<ul>
+<li><p>The root user could create your <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-iam.html">IAM</a> user account, which gives you certain access rights.</p></li>
+<li><p>You would need to connect to EC2 via a Secure Shell (SSH) using a Command Line Interface (CLI), and so you need to obtain the AWS EC2 <code>.pem</code> private key file.</p></li>
+<li><p>You may also want to obtain the SSH commands that allows you to SSH into your organization’s EC2 instance.</p></li>
+</ul>
+<p>The rest of the setup steps may differ quite a bit depending on whether or not you are using your organization’s EC2 instance or running your own. For the purpose of this post, however, we will create our own personal AWS account and EC2 instance. The first step, though, is to register for an <a href="https://aws.amazon.com/">AWS</a> account, which is free of charge.</p>
+<div id="launch-an-ec2-instance-and-select-an-ami" class="section level2">
+<h2>Launch an EC2 Instance and Select an AMI</h2>
+<p>       Launch an EC2 instance by selecting an <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html">Amazon AMI</a>.</p>
+<p><img src="images/ami.png" width="750" height="600"></p>
+<p>Because many tutorials and resources online are based on Ubuntu, we will use the Ubuntu AMI. The steps that follow should work with Amazon Linux 2; however, because Amazon Linux 2 is based on Red Hat Enterprise Linux (RHEL), some of the commands will be different.</p>
+</div>
+<div id="choose-an-instance-type" class="section level2">
+<h2>Choose an Instance Type</h2>
+<p>       We will choose <code>t2.micro</code>, which is free tier eligible. Depending on your needs for computing resources (for instance, building docker images with R packages that contain complied code), you may run out of memory with 1 GiB of Memory and 1 vCPUs, so you could also consider other instance types. I recommend reading the following <a href="https://www.qa.com/about-qa/our-thinking/understanding-t2-and-t3-cpu-credits-in-aws/">article</a> to better understand the differences between instance types.</p>
+<p><img src="images/instance_type.png" width="750" height="600"></p>
+</div>
+<div id="configure-instance-details" class="section level2">
+<h2>Configure Instance Details</h2>
+<p>       We could leave this as default.</p>
+<div id="add-storage" class="section level3">
+<h3>Add Storage</h3>
+<p>       The default EBS volume size is 8 GB but we get up to 30 GB of General Purpose SSD via the free tier. See the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Storage.html">documentation</a> on EBS volume options.</p>
+<p><img src="images/storage.png" width="750" height="600"></p>
+</div>
+</div>
+<div id="add-tags" class="section level2">
+<h2>Add Tags</h2>
+<p>       Tags may be useful for organizing our AWS services. See the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html">documentation</a> for more on this.</p>
+</div>
+<div id="configure-security-group" class="section level2">
+<h2>Configure Security Group</h2>
+<p>       <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">Security groups</a> function as virtual firewalls for our EC2 instances to control inbound and outbound traffic. By default, AWS blocks traffic from all ports except for port 22, which is the port we use to SSH into our instance. We need the following ports:</p>
+<table>
+<colgroup>
+<col width="12%" />
+<col width="9%" />
+<col width="11%" />
+<col width="25%" />
+<col width="41%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Protocol</th>
+<th>Port Range</th>
+<th>Source</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SSH</td>
+<td>TCP</td>
+<td>22</td>
+<td>Anywhere: 0.0.0.0/0, ::0</td>
+<td>SSH</td>
+</tr>
+<tr class="even">
+<td>HTTP</td>
+<td>TCP</td>
+<td>80</td>
+<td>Anywhere: 0.0.0.0/0, ::0</td>
+<td>HTTP</td>
+</tr>
+<tr class="odd">
+<td>HTTPS</td>
+<td>TCP</td>
+<td>443</td>
+<td>Anywhere: 0.0.0.0/0, ::0</td>
+<td>HTTPS</td>
+</tr>
+<tr class="even">
+<td>Custom TCP</td>
+<td>TCP</td>
+<td>3838</td>
+<td>Anywhere: 0.0.0.0/0, ::0</td>
+<td>Default Shiny server</td>
+</tr>
+<tr class="odd">
+<td>Custom TCP</td>
+<td>TCP</td>
+<td>2375</td>
+<td>Anywhere: 0.0.0.0/0, ::0</td>
+<td>ShinyProxy Connection With Docker Daemon</td>
+</tr>
+<tr class="even">
+<td>Custom TCP</td>
+<td>TCP</td>
+<td>8080</td>
+<td>Anywhere: 0.0.0.0/0, ::0</td>
+<td>Default ShinyProxy</td>
+</tr>
+</tbody>
+</table>
+<p>Since our instance is utilized as a web server, we use security rules to allow IP addresses to access our instance using HTTP or Custom TCP so that external users can browse the content on our web server.</p>
+<ul>
+<li><p>The second and thrid rules allow for inbound <a href="https://www.techopedia.com/definition/15709/port-80">HTTP</a> and <a href="https://sectigostore.com/blog/port-443-everything-you-need-to-know-about-https-443/">HTTPS</a> access from all IPv4 and IPv6 addresses.</p></li>
+<li><p>The third, forth, and fifth rules allow for displaying web data based port numbers.</p></li>
+</ul>
+</div>
+<div id="key-pair" class="section level2">
+<h2>Key Pair</h2>
+<p>       The last step for setting up an EC2 instance is creating our <code>.pem</code> private key <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">file</a>, or select to use an existing key file provided by your organization.</p>
+<p><img src="images/pem.png" width="450" height="300"></p>
+<p>Finally, launch our instance.</p>
+</div>
+<div id="elastic-ip" class="section level2">
+<h2>Elastic IP</h2>
+<p>       An <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html">elastic IP address</a> is different than our EC2 instance’s Public IPv4 address; in short, an Elastic IP address is allocated to our AWS account, and is ours until we release it. Therefore, this IP address can be reused for our EC2 instances. The re-usability of our IP may be useful when we want to upgrade or downgrade our EC2 instance type. Without an elastic IP address, a new Public IPv4 address will be used each time we stop and re-launch our instance. This means that any service that depends on our public IP will need to be updated. The benefit of an elastic IP address is that we can simply associate it to the new server. In other words, the elastic IP address allows us to mask the failure of an instance or software by rapidly remapping the address to a new instance in our account. The setup is as follows:</p>
+<p><img src="images/elastic_ip.png" width="750" height="600"></p>
+<p>Select the <code>Action</code> drop down menu in the top right corner and choose <code>Associate Elastic IP address</code>. From now on, every time we make changes to our EC2 instance, we can simply re-associate this IP address to our new instance. <strong>Note: if we stop our EC2 instance, our elastic IP address will no longer be associated with an EC2 instance and charges will start accruing.</strong></p>
+</div>
+</div>
+<div id="step-2-connecting-to-aws-ec2" class="section level1">
+<h1>Step 2: Connecting to AWS EC2</h1>
+<div id="connecting-via-ssh" class="section level2">
+<h2>Connecting via SSH</h2>
+<p>       To connect to our EC2 instance via SSH, we will use the terminal (for windows, the steps for <code>PuTTY</code> can be found <a href="https://business-science.github.io/shiny-production-with-aws-book/connecting-to-ec2-with-ssh-secure-shell.html">here</a>). When we select “Connect” in our AWS console, we should be taken to the following page:</p>
+<p><img src="images/connect.png" width="550" height="400"></p>
+<ul>
+<li>Open the terminal, navigate to the location of our <code>.pem</code> key:</li>
+</ul>
+<pre class="r"><code># Change working directory 
+# This should be a path to the folder containing your .pem key
+$ cd path_to_pem_file</code></pre>
+<ul>
+<li>Next, run the following command to ensure that our key is not publicly viewable:</li>
+</ul>
+<pre class="r"><code>$ chmod 400 file.pem</code></pre>
+<ul>
+<li>Connect to the instance:</li>
+</ul>
+<pre class="r"><code>$ ssh -i &quot;file.pem&quot; ubuntu@ec2-public-ip-address.compute-1.amazonaws.com</code></pre>
+<ul>
+<li>If this is your first time connecting to your EC2 instance, you may receive an <code>Are you sure you want to continue connecting (yes/no/[fingerprint])?</code> prompt. Entering <code>yes</code> should successfully connect you to you EC2 instance:</li>
+</ul>
+<pre class="r"><code>Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.11.0-1022-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Sat Jan 29 01:27:58 UTC 2022
+
+  System load:  0.0               Processes:             100
+  Usage of /:   4.9% of 29.02GB   Users logged in:       0
+  Memory usage: 21%               IPv4 address for eth0: 172.31.91.243
+  Swap usage:   0%
+
+
+1 update can be applied immediately.
+To see these additional updates run: apt list --upgradable</code></pre>
+<div id="disconnecting" class="section level3">
+<h3>Disconnecting</h3>
+<p>       To disconnect from our instance:</p>
+<pre class="r"><code>$ exit</code></pre>
+<p>In VSCode, simple <code>cmd + shift + P</code> choose <code>Remote: Close Remote Connection</code>.</p>
+</div>
+</div>
+<div id="install-docker" class="section level2">
+<h2>Install Docker</h2>
+<div id="ubuntu" class="section level4">
+<h4>Ubuntu</h4>
+<p>       I followed the instructions in the official Docker <a href="https://docs.docker.com/engine/install/ubuntu/">documentation</a>.</p>
+<pre class="r"><code># Update command
+$ sudo apt-get update
+# Install packages to allow apt to use a repository over HTTPS:
+$ sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+# Add Docker’s official GPG key
+$ sudo mkdir -p /etc/apt/keyrings
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+# Set up the docker repository
+$ echo \
+  &quot;deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable&quot; | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+# Install
+$ sudo apt-get install docker-ce docker-ce-cli
+# Verify installation
+$ sudo docker run hello-world</code></pre>
+<p>       The difference between <code>apt-get</code> and <code>apt</code> is that the former is an older command with more options while <code>apt</code> is a newer, more user-friendly command with fewer options.</p>
+</div>
+<div id="amazon-linux-2" class="section level4">
+<h4>Amazon Linux 2</h4>
+<p>       The installation steps can be found in this <a href="https://www.cyberciti.biz/faq/how-to-install-docker-on-amazon-linux-2/">post</a>.</p>
+<pre class="r"><code># Update
+$ sudo yum update
+$ sudo yum install docker
+# Check status
+$ sudo systemctl status docker</code></pre>
+</div>
+<div id="docker-startup-options" class="section level3">
+<h3>Docker Startup Options</h3>
+<p>       According to the official documentation, ShinyProxy needs to connect to the docker daemon to spin up the containers for the Shiny apps. By default ShinyProxy will do so on port <code>2375</code> of the docker host (our EC2 instance). In order to allow for connections on port <code>2375</code>, the docker startup options need to be edited.</p>
+<div id="ubuntu-1" class="section level4">
+<h4>Ubuntu</h4>
+<pre class="r"><code># Update
+$ mkdir /etc/systemd/system/docker.service.d
+$ touch /etc/systemd/system/docker.service.d/override.conf</code></pre>
+</div>
+<div id="amazon-linux-2-1" class="section level4">
+<h4>Amazon Linux 2</h4>
+<pre class="r"><code># Update
+$ sudo service docker restart</code></pre>
+<p>For both, add the variables:</p>
+<pre class="r"><code># sudo nano /etc/systemd/system/docker.service.d/override.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H unix:// -D -H tcp://127.0.0.1:2375</code></pre>
+</div>
+</div>
+<div id="useful-commands-docker" class="section level3">
+<h3>Useful Commands (Docker)</h3>
+<div id="ubuntu-2" class="section level4">
+<h4>Ubuntu</h4>
+<pre class="r"><code>$ sudo service docker status
+$ sudo service docker start
+$ sudo service docker stop
+$ sudo service docker restart
+$ sudo docker version
+# List docker images
+$ sudo docker image ls
+# Remove docker images with &#39;-f&#39; force remove option
+$ sudo docker image rm -f image_id</code></pre>
+</div>
+<div id="amazon-linux-2-2" class="section level4">
+<h4>Amazon Linux 2</h4>
+<pre class="r"><code>$ sudo systemctl enable docker.service
+$ sudo systemctl status docker.service
+$ sudo systemctl start docker.service
+$ sudo systemctl stop docker.service
+$ sudo systemctl restart docker.service
+$ sudo docker version
+# List docker images
+$ sudo docker image ls
+# Remove docker images with &#39;-f&#39; force remove option
+$ sudo docker image rm -f image_id</code></pre>
+</div>
+</div>
+</div>
+<div id="install-nginx" class="section level2">
+<h2>Install Nginx</h2>
+<p>       We need to use <code>nginx</code> to set up a <a href="https://en.wikipedia.org/wiki/Reverse_proxy#:~:text=In%20computer%20networks%2C%20a%20reverse,%2C%20performance%2C%20resilience%20and%20security.">reverse proxy</a>; the reason by this is explained in my previous <a href="https://www.kenwuyang.com/en/post/deploying-shiny-apps-or-interactice-documents-with-shiny-server-and-aws/">post</a>.</p>
+<div id="ubuntu-3" class="section level4">
+<h4>Ubuntu</h4>
+<pre class="r"><code>$ sudo apt-get install nginx
+$ nginx -v</code></pre>
+</div>
+<div id="amazon-linux-2-3" class="section level4">
+<h4>Amazon Linux 2</h4>
+<pre class="r"><code>$ sudo amazon-linux-extras list | grep epel
+$ sudo amazon-linux-extras enable epel
+$ sudo yum install epel-release
+$ sudo yum install nginx
+$ sudo nginx -v</code></pre>
+<p>       If <code>nginx</code> is installed successfully, you should see the following page by entering your <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html">Public IPv4 address</a> (obtained from <code>Instance summary</code> in your AWS console) into your web browser:</p>
+<p><img src="images/nginx.png" width="550" height="400"></p>
+</div>
+<div id="nginx-configurations" class="section level3">
+<h3>Nginx Configurations</h3>
+<p>       The <code>nginx</code> configuration files are located in the <code>etc</code> (system configuration files) directory:</p>
+<pre class="r"><code>$ cd /etc/nginx
+$ ls</code></pre>
+<p>The results of <code>ls</code> may differ, sometimes substantially, depending on the AMI (and the operating system) that we are using. For instance, on Ubuntu, the default installation of <code>nginx</code> might create a <code>sites-avalable</code> and a <code>sites-enabled</code> directory. On RedHat/CentOS/Fedora, the default installation of <code>nginx</code> does not include such directories. For those operating systems, the default place to store the configuration files is the following directory <code>/etc/nginx/conf.d/*.conf</code>. In addition to that, in the <code>/etc/nginx/nginx.conf</code> configuration file, we must ensure that the <code>include /etc/nginx/conf.d/*.conf;</code> directive is added in the <code>http</code> block to tell <code>nginx</code> to pull in any files in the <code>/etc/nginx/conf.d</code> directory that has the extension <code>.conf</code>.</p>
+<div id="ubuntu-4" class="section level4">
+<h4>Ubuntu</h4>
+<ul>
+<li>Navigate to the <code>/etc/nginx</code> directory, we should see at least the following sub-directories (if not, we can create them):</li>
+</ul>
+<pre class="r"><code>$ cd /etc/nginx
+$ ls
+conf.d sites-enabled nginx.conf sites-available</code></pre>
+<ul>
+<li>Navigate to the <code>sites-available</code> directory and create a new configuration file specifically for ShinyProxy. The ShinyProxy official <a href="https://www.shinyproxy.io/documentation/security/">documentation</a> has an example configuration for <code>nginx</code>:</li>
+</ul>
+<pre class="r"><code>$ cd sites-available
+$ sudo nano shinyproxy.conf</code></pre>
+<ul>
+<li>Write the following block of directives in the <code>shinyproxy.conf</code> file:</li>
+</ul>
+<pre class="r"><code>server {
+  listen                80;
+  # Enter our domain.com or subdomain.domain.com, keeping shinyproxy as a subdomain
+  server_name           shinyproxy.ourdomain.com;
+  rewrite     ^(.*)     https://$server_name$1 permanent;
+}
+
+server {
+  listen                443;
+  # Enter our domain.com or subdomain.domain.com, keeping shinyproxy as a subdomain
+  server_name           shinyproxy.ourdomain.com;
+  access_log            /var/log/nginx/shinyproxy.access.log;
+  error_log             /var/log/nginx/shinyproxy.error.log error;
+
+  ssl on;
+  ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+
+  # Enter the paths to your ssl certificate and key on your EC2
+  ssl_certificate       /etc/ssl/certs/ourdomain.com.crt;
+  ssl_certificate_key   /etc/ssl/private/ourdomain.com.key;
+
+   location / {
+       proxy_pass          http://127.0.0.1:8080/;
+
+       proxy_http_version 1.1;
+       proxy_set_header Upgrade $http_upgrade;
+       proxy_set_header Connection &quot;upgrade&quot;;
+       proxy_read_timeout 600s;
+
+       proxy_redirect    off;
+       proxy_set_header  Host              $http_host;
+       proxy_set_header  X-Real-IP         $remote_addr;
+       proxy_set_header  X-Forwarded-For   $proxy_add_x_forwarded_for;
+       proxy_set_header  X-Forwarded-Proto $scheme;
+     }
+
+}</code></pre>
+<ul>
+<li><p>When <code>nginx</code> proxies a request, it <strong>1)</strong> sends the request (i.e., a client trying to access our shiny application or interactive document hosted on our EC2 instance) to a specified proxied server, <strong>2)</strong> fetches the response, and <strong>3)</strong> sends it back to the client. To understand the configuration above:</p></li>
+<li><p>We would need to purchase our own domain, which is also explained in more details in the previous <a href="https://www.kenwuyang.com/en/post/deploying-shiny-apps-or-interactice-documents-with-shiny-server-and-aws/">post</a>. In particular, we need the following paths, substituting for <code>ourdomain</code>:</p></li>
+</ul>
+<pre class="r"><code># ssl_certificate 
+$ /etc/letsencrypt/live/ourdomain.com/fullchain.pem
+# ssl_certificate_key
+$ /etc/letsencrypt/live/ourdomain.com/privkey.pem</code></pre>
+<ul>
+<li><p>The <code>proxy_pass</code> directive passes all requests processed in location <code>/</code> to the proxied server at the specified address <code>http://127.0.0.1:8080/</code>. See more details on this <a href="https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass">here</a>. Note also that the “/” prefix is used for matching requests. The location block above provides the shortest prefix (length one), and only if all other location blocks fail to provide a match will this block be used. Since we do not have any other location blocks at the moment, this one will be used.</p></li>
+<li><p>The <code>proxy_http_version</code> directive sets the HTTP protocol version for proxying. By default, version 1.0 is used. More details <a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_http_version">here</a>.</p></li>
+<li><p>The two <code>proxy_set_header field value</code> directives have something to do with <a href="http://nginx.org/en/docs/http/websocket.html">WebSocket proxying</a>. These headers have to be passed explicitly so that the proxied server can know the client’s intention to switch a protocol to <a href="https://youtu.be/1BfCnjr_Vjg">WebSocket</a>.</p></li>
+<li><p>By default, the web socket connection will be closed if the proxied server does not transmit any data within 60 seconds. This timeout can be increased with the <code>proxy_read_timeout</code> directive. The configuration measure units can be found <a href="http://nginx.org/en/docs/syntax.html">here</a>.</p></li>
+<li><p>Next, We need to create a shortcut (symbolic link) inside the <code>sites-enabled</code> directory. The reason is that <code>nginx</code> does not look at <code>sites-available</code> but only the <code>sites-enabled</code> directory in the <code>/etc/nginx/nginx.conf</code> configuration file. We create the <code>.conf</code> files inside <code>sites-available</code> and create a shortcut inside <code>sites-enabled</code> to access it. One benefit of this is that, to temporarily deactivate access to ShinyProxy, we only have to delete the shortcut but not the actual configuration file in <code>sites-available</code>:</p></li>
+</ul>
+<pre class="r"><code>$ cd /etc/nginx/sites-enabled
+# Use absolute path
+$ sudo ln -s /etc/nginx/sites-available/shinyproxy.conf /etc/nginx/sites-enabled/
+# To remove a symbolic link
+$ sudo rm your-site-config  </code></pre>
+<ul>
+<li><strong>Important</strong>: By default, there will be a <code>default</code> configuration file located in the <code>sites-available</code> and <code>sites-enabled</code> directories. We must also remove them:</li>
+</ul>
+<pre class="r"><code>$ cd /etc/nginx/sites-enabled
+$ sudo rm default
+$ cd /etc/nginx/sites-available
+$ sudo rm default</code></pre>
+<ul>
+<li>To test if the configuration files are syntactically correct, run the following:</li>
+</ul>
+<pre class="r"><code>$ sudo nginx -t</code></pre>
+<ul>
+<li>This should output the results below if the configuration test has passed:</li>
+</ul>
+<pre class="r"><code>nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful</code></pre>
+<ul>
+<li>Finally, restart <code>nginx</code>:</li>
+</ul>
+<pre class="r"><code>$ sudo service nginx restart</code></pre>
+<hr />
+</div>
+<div id="amazon-linux-2-4" class="section level4">
+<h4>Amazon Linux 2</h4>
+<ul>
+<li>For Amazon Linux 2, we need to place the <code>nginx</code> configuration file above in the <code>conf.d</code> directory:</li>
+</ul>
+<pre class="r"><code>$ cd /etc/nginx/conf.d
+$ sudo nano shinyproxy.conf</code></pre>
+<ul>
+<li>Write the same block of directives in the <code>shinyproxy.conf</code> file:</li>
+</ul>
+<pre class="r"><code>server {
+  listen                80;
+        ...
+}
+
+server {
+  listen                443;
+  
+          ...
+  
+   location / {
+       proxy_pass          http://127.0.0.1:8080/;
+     
+          ...
+}</code></pre>
+<ul>
+<li>Restart nginx:</li>
+</ul>
+<pre class="r"><code>$ sudo systemctl restart nginx</code></pre>
+</div>
+</div>
+<div id="useful-commands-nginx" class="section level3">
+<h3>Useful Commands (Nginx)</h3>
+<div id="ubuntu-5" class="section level4">
+<h4>Ubuntu</h4>
+<pre class="r"><code>$ sudo service nginx status
+$ sudo service nginx start
+$ sudo service nginx stop
+$ sudo service nginx restart</code></pre>
+</div>
+<div id="amazon-linux-2-5" class="section level4">
+<h4>Amazon Linux 2</h4>
+<pre class="r"><code>$ sudo systemctl status nginx
+$ sudo systemctl start nginx
+$ sudo systemctl stop nginx
+$ sudo systemctl restart nginx</code></pre>
+</div>
+</div>
+</div>
+<div id="install-shinyproxy" class="section level2">
+<h2>Install ShinyProxy</h2>
+<div id="ubuntu-6" class="section level4">
+<h4>Ubuntu:</h4>
+<ul>
+<li>Install Java runtime environment:</li>
+</ul>
+<pre class="r"><code># Shinyproxy requires Java 8 (or higher)
+$ sudo apt-get -y update
+$ sudo apt-get -yq install \
+    default-jre \
+    default-jdk \
+# Check version
+$ java -version</code></pre>
+<ul>
+<li>Obtain the latest version number for ShinyProxy <a href="https://www.shinyproxy.io/downloads/">here</a>:</li>
+</ul>
+<pre class="r"><code># Shinyproxy latest at the time of writing this post
+$ export VERSION=&quot;2.6.1&quot;
+# Download and install
+$ wget https://www.shinyproxy.io/downloads/shinyproxy_${VERSION}_amd64.deb
+$ apt install ./shinyproxy_${VERSION}_amd64.deb
+$ rm shinyproxy_${VERSION}_amd64.deb</code></pre>
+</div>
+<div id="amazon-linux-2-6" class="section level4">
+<h4>Amazon Linux 2</h4>
+<ul>
+<li>Java installation:</li>
+</ul>
+<pre class="r"><code>$ sudo yum install java-1.8.0-openjdk
+$ sudo yum install java-11-amazon-corretto
+$ java -version</code></pre>
+<ul>
+<li>Download most recent version shinyproxy from the official <a href="https://www.shinyproxy.io/downloads/">donwload page</a> based on the platform:</li>
+</ul>
+<pre class="r"><code># Downloads RPM package file to current directory
+$ sudo wget https://www.shinyproxy.io/downloads/shinyproxy_2.6.1_x86_64.rpm
+$ sudo yum localinstall ./shinyproxy_2.6.1_x86_64.rpm
+$ sudo rm ./shinyproxy_${VERSION}_amd64.deb
+# Check installation
+$ sudo systemctl status shinyproxy</code></pre>
+</div>
+<div id="shinyproxy-configurations" class="section level3">
+<h3>ShinyProxy Configurations</h3>
+<p>       The server configuration for ShinyProxy is controlled by a file named <code>application.yml</code>. The location of this configuration file is the same for both Ubuntu and Amazon Linux 2:</p>
+<pre class="r"><code># Downloads RPM package file to current directory
+$ cd nano /etc/shinyproxy/application.yml</code></pre>
+<p>Here is an example of a configuration file:</p>
+<pre class="r"><code>proxy:
+  title: My Shiny Dashboards
+  landing-page: /
+  heartbeat-rate: 10000
+  heartbeat-timeout: 60000
+  port: 8080
+  authentication: simple
+  admin-groups: admin_user
+  users:
+  - name: user_1
+    password: password1
+    groups: admin_user
+  - name: user_2
+    password: password2
+    groups: shiny_user
+  docker:
+    url: http://localhost:2375
+  template-groups:
+    - id: viz
+      properties:
+        display-name: Visualization
+    - id: dash
+      properties:
+        display-name: Dashboard
+
+logging:
+  file:
+    name: shinyproxy.log</code></pre>
+<p>       ShinyProxy has a comprehensive <a href="https://www.shinyproxy.io/documentation/configuration/">documentation</a> on the configuration file, including what each directive stands for. The following directives are the most important for a simple set-up:</p>
+<ul>
+<li><p>The <code>port</code> directive uses port <code>8080</code>, which we set up in the first step when creating our EC2 instance.</p></li>
+<li><p>The <code>authentication</code> directive uses the default authentication offered by ShinyProxy, which allows us to define users and groups (which user has access to which applications). This is simple to use but may not be the most secure way to set up authentication. However, ShinyProxy integrates well with other authentication technologies and platforms. For instance, follow the comprehensive guide in this <a href="https://www.databentobox.com/2020/05/03/secure-shinyproxy/">post</a> to set up ShinyProxy with AWS <a href="https://aws.amazon.com/cognito/">Cognito</a>.</p></li>
+<li><p>The <code>docker</code> directive sets the <code>url</code> and port on which to connect to the docker daemon.</p></li>
+<li><p>The <code>template-groups</code> optionally specifies a list of groups that is used to group apps in the template.</p></li>
+<li><p>Finally, every single Shiny app served by ShinyProxy has its own configuration block under <code>specs</code>, which we have not added yet. We would add these once we’ve containerized our shiny applications in the next step.</p></li>
+</ul>
+<p>Save the configuration file and restart ShinyProxy:</p>
+<pre class="r"><code># Ubuntu
+$ sudo service shinyproxy restart
+# Amazon Linux 2
+$ sudo systemctl restart shinyproxy</code></pre>
+</div>
+</div>
+</div>
+<div id="step-3-containerize-shiny-application" class="section level1">
+<h1>Step 3: Containerize Shiny Application</h1>
+<div id="dockerfile" class="section level2">
+<h2>Dockerfile</h2>
+<p>       We start with a directory <code>app</code> on our instance, perhaps as follows:</p>
+<pre class="r"><code>├── app
+│   ├── global.R
+│   ├── server.R
+│   └── ui.R
+├── .gitignore
+├── Dockerfile
+└── README.md</code></pre>
+<p>The file of interest to us is <code>Dockerfile</code>, which allows us to build images automatically by reading the instructions it contains. A <a href="https://docs.docker.com/engine/reference/builder/#from">Dockerfile</a> is a text document that contains all the commands a user could call on the command line to assemble an image. Using <code>docker build</code>, we can create an automated build that executes several command-line instructions in succession. Here is an example Dockerfile for a shiny application I’ve built:</p>
+<pre class="r"><code>###################################################
+# Build from the official base R image with R 4.2 #
+###################################################
+
+FROM r-base:4.2.0
+
+LABEL maintainer=&quot;Yang Wu &lt;yangwu2020@gmail.com&gt;&quot;
+
+###################################
+# System libraries of general use #
+###################################
+
+# The /var/lib/apt/lists stores the package information cache, which can be removed after installations
+RUN apt-get update &amp;&amp; apt-get install --no-install-recommends -y \
+    libcurl4-gnutls-dev \
+    libcairo2-dev \
+    libssl-dev \
+    libxml2-dev \
+    libsodium-dev \
+    &amp;&amp; rm -rf /var/lib/apt/lists/*
+
+#########################################
+# Install dependencies of the dashboard #
+#########################################
+
+RUN install2.r --error --skipinstalled --ncpus -1 \
+    readr \
+    devtools \
+    cranlogs \
+    DBI 
+
+##################
+# Github package #
+##################
+
+RUN installGithub.r YangWu1227/tracker-dashboard
+
+####################################
+# Copy the app source to the image #
+####################################
+
+RUN mkdir /root/app
+COPY app /root/app
+
+#################################################
+# Container listens on the port 3838 at runtime #
+#################################################
+
+EXPOSE 3838
+
+# 1) &#39;-q&#39; means don&#39;t print startup message and 2) &#39;-e&#39; means execute &#39;EXPR&#39; and exit
+CMD [&quot;R&quot;, &quot;-q&quot;, &quot;-e&quot;, &quot;shiny::runApp(&#39;/root/app&#39;, port = 3838, host = &#39;0.0.0.0&#39;)&quot;]</code></pre>
+<p>The most important commands and steps are as follows:</p>
+<ul>
+<li><p>The <code>FROM</code> instruction initializes a new build stage and sets the Base Image for subsequent instructions. The images that are of interest to R users can be found <a href="https://hub.docker.com/u/rocker">here</a>. These images are built on Debian stable.</p></li>
+<li><p>Our shiny applications may depend on other R packages, and so we need to install system libraries in the image. Ensuring all required system libraries are installed is sometimes an iterative process. For one, the CRAN pages for some R packages (particularly those maintained by Rstudio) list their ‘SystemRequirements’. Another approach is to add the missing dependencies on a trial-and-error basis; in other words, we install the required system libraries and packages listed in the the error messages when the build process inevitably fails due to missing dependencies.</p></li>
+<li><p>The <code>install2.r</code> and <code>installGithub.r</code> R scripts are from the <a href="https://github.com/eddelbuettel/littler">littler</a> package, which I use to install R packages in the image.</p></li>
+<li><p>We create a directory in the image <code>RUN mkdir /root/app</code> and copy our source code in the <code>app</code> directory (located in our EC2) to the <code>/root/app</code> directory (located in the image) using <code>COPY app /root/app</code>.</p></li>
+<li><p>We <code>EXPOSE 3838</code> so that the container listens on the port 3838 at runtime.</p></li>
+<li><p>Finally, we run the source code of our shiny application in the <code>/root/app</code> directory in the image (and not in our EC2). This command is dependent on the source code of our shiny applications. For instance, if we used <a href="https://pkgs.rstudio.com/flexdashboard/">flexdashboard</a>, then the command should be:</p></li>
+</ul>
+<pre class="r"><code>CMD [&quot;R&quot;, &quot;-q&quot;, &quot;-e&quot;, &quot;rmarkdown::run(&#39;/root/app/source_code.Rmd&#39;, shiny_args = list(port = 3838, host = &#39;0.0.0.0&#39;))&quot;]</code></pre>
+</div>
+<div id="build-image" class="section level2">
+<h2>Build Image</h2>
+<p>       Navigate to the <code>app</code> directory on our instance, which also contains the <code>Dockerfile</code>:</p>
+<pre class="r"><code>$ sudo docker build . -t TARGET_IMAGE</code></pre>
+<p>A few notes:</p>
+<ul>
+<li><p>The build command above uses the current directory (<code>.</code>) as build context.</p></li>
+<li><p>The <code>-t</code> options allows use to tag our image with a name. For example, we can use <code>sudo docker build . -t tracker-dashboard</code>.</p></li>
+</ul>
+<p>Once the build process completes, we can check the images using:</p>
+<pre class="r"><code>$ sudo docker image ls</code></pre>
+<p>If we need to delete an image:</p>
+<pre class="r"><code>$ sudo docker image rm -f image_id</code></pre>
+</div>
+<div id="shinyproxy-specs" class="section level2">
+<h2>ShinyProxy Specs</h2>
+<p>       Lastly, we add the <code>specs</code> directives into our ShinyProxy configuration file:</p>
+<pre class="r"><code>proxy:
+  title: My Shiny Dashboards
+  landing-page: /
+  heartbeat-rate: 10000
+  heartbeat-timeout: 60000
+  port: 8080
+  authentication: simple
+  admin-groups: admin_user
+  users:
+  - name: user_1
+    password: password1
+    groups: admin_user
+  - name: user_2
+    password: password2
+    groups: shiny_user
+  docker:
+    url: http://localhost:2375
+  template-groups:
+    - id: dash
+      properties:
+        display-name: Dashboard
+  specs:
+    - id: tracker
+      display-name: Tracker Dashboard
+      container-cmd: [&quot;R&quot;, &quot;-q&quot;, &quot;-e&quot;, &quot;shiny::runApp(&#39;/root/app&#39;, port = 3838, host = &#39;0.0.0.0&#39;)&quot;]
+      container-image: tracker-dashboard
+      port: 3838
+      access-groups: [admin_user]
+      template-group: dash
+
+logging:
+  file:
+    name: shinyproxy.log</code></pre>
+<p>In this configuration, we accomplished the following:</p>
+<ul>
+<li><p>Specify the docker image to use for the application using <code>container-image</code>.</p></li>
+<li><p>Restrict access to this application to <code>admin_user</code> only using the <code>access-groups</code> directive.</p></li>
+<li><p>List the application, with <code>id</code> ‘tracker’, under the ‘dash’ template group using <code>template-group</code>.</p></li>
+</ul>
+<p>Save the configuration file and restart ShinyProxy:</p>
+<pre class="r"><code># Ubuntu
+$ sudo service shinyproxy restart
+# Amazon Linux 2
+$ sudo systemctl restart shinyproxy</code></pre>
+<p>The ShinyProxy landing page should now be accessible by entering the domain or subdomain we set up in this <a href="#nginx-configurations">step</a> in the browser.</p>
+</div>
+<div id="resources" class="section level2">
+<h2>Resources</h2>
+<p>       The hyperlinks embedded through out the post are the resources that have helped me throughout deployment process. In addition, I also found the following links extremely useful.</p>
+<div id="shinyproxy" class="section level3">
+<h3>ShinyProxy</h3>
+<ul>
+<li><p><a href="https://hosting.analythium.io/how-to-set-up-shinyproxy-to-host-shiny-apps/" class="uri">https://hosting.analythium.io/how-to-set-up-shinyproxy-to-host-shiny-apps/</a></p></li>
+<li><p><a href="https://www.databentobox.com/2020/05/03/secure-shinyproxy/" class="uri">https://www.databentobox.com/2020/05/03/secure-shinyproxy/</a></p></li>
+<li><p><a href="https://www.shinyproxy.io/documentation/" class="uri">https://www.shinyproxy.io/documentation/</a></p></li>
+<li><p><a href="https://github.com/openanalytics" class="uri">https://github.com/openanalytics</a></p></li>
+</ul>
+</div>
+<div id="aws" class="section level3">
+<h3>AWS</h3>
+<ul>
+<li><p><a href="https://docs.aws.amazon.com/" class="uri">https://docs.aws.amazon.com/</a></p></li>
+<li><p><a href="https://business-science.github.io/shiny-production-with-aws-book/" class="uri">https://business-science.github.io/shiny-production-with-aws-book/</a></p></li>
+</ul>
+</div>
+<div id="nginx" class="section level3">
+<h3>Nginx</h3>
+<ul>
+<li><p><a href="http://nginx.org/en/docs/" class="uri">http://nginx.org/en/docs/</a></p></li>
+<li><p><a href="https://ssl-config.mozilla.org/" class="uri">https://ssl-config.mozilla.org/</a></p></li>
+<li><p><a href="https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/" class="uri">https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/</a></p></li>
+</ul>
+</div>
+</div>
+</div>
