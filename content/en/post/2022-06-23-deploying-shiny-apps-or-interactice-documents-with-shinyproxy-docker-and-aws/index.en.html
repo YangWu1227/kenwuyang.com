@@ -341,8 +341,6 @@ $ sudo amazon-linux-extras enable epel
 $ sudo yum install epel-release
 $ sudo yum install nginx
 $ sudo nginx -v</code></pre>
-<p>       If <code>nginx</code> is installed successfully, you should see the following page by entering your <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html">Public IPv4 address</a> (obtained from <code>Instance summary</code> in your AWS console) into your web browser:</p>
-<p><img src="images/nginx.png" width="550" height="400"></p>
 </div>
 <div id="nginx-configurations" class="section level3">
 <h3>Nginx Configurations</h3>
@@ -539,8 +537,7 @@ $ sudo systemctl status shinyproxy</code></pre>
 <div id="shinyproxy-configurations" class="section level3">
 <h3>ShinyProxy Configurations</h3>
 <p>       The server configuration for ShinyProxy is controlled by a file named <code>application.yml</code>. The location of this configuration file is the same for both Ubuntu and Amazon Linux 2:</p>
-<pre class="r"><code># Downloads RPM package file to current directory
-$ cd nano /etc/shinyproxy/application.yml</code></pre>
+<pre class="r"><code>$ cd nano /etc/shinyproxy/application.yml</code></pre>
 <p>Here is an example of a configuration file:</p>
 <pre class="r"><code>proxy:
   title: My Shiny Dashboards
@@ -714,9 +711,9 @@ logging:
     name: shinyproxy.log</code></pre>
 <p>In this configuration, we accomplished the following:</p>
 <ul>
-<li><p>Specify the docker image to use for the application using <code>container-image</code>.</p></li>
+<li><p>Specify the docker image to use for the application using the <code>container-image</code> directive.</p></li>
 <li><p>Restrict access to this application to <code>admin_user</code> only using the <code>access-groups</code> directive.</p></li>
-<li><p>List the application, with <code>id</code> ‘tracker’, under the ‘dash’ template group using <code>template-group</code>.</p></li>
+<li><p>List the application, with <code>id</code> ‘tracker’, under the ‘dash’ template group using the <code>template-group</code> directive.</p></li>
 </ul>
 <p>Save the configuration file and restart ShinyProxy:</p>
 <pre class="r"><code># Ubuntu

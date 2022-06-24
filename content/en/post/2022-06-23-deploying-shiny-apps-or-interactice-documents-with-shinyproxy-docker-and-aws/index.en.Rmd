@@ -289,10 +289,6 @@ $ sudo yum install nginx
 $ sudo nginx -v
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If `nginx` is installed successfully, you should see the following page by entering your [Public IPv4 address](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html) (obtained from `Instance summary` in your AWS console) into your web browser:
-
-<img src="images/nginx.png" width="550" height="400">
-
 ### Nginx Configurations
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The `nginx` configuration files are located in the `etc` (system configuration files) directory:
@@ -530,7 +526,6 @@ $ sudo systemctl status shinyproxy
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The server configuration for ShinyProxy is controlled by a file named `application.yml`. The location of this configuration file is the same for both Ubuntu and Amazon Linux 2:
 
 ```{r, eval=FALSE}
-# Downloads RPM package file to current directory
 $ cd nano /etc/shinyproxy/application.yml
 ```
 
@@ -747,11 +742,11 @@ logging:
 
 In this configuration, we accomplished the following:
 
-* Specify the docker image to use for the application using `container-image`.
+* Specify the docker image to use for the application using the `container-image` directive.
 
 * Restrict access to this application to `admin_user` only using the `access-groups` directive. 
 
-* List the application, with `id` 'tracker', under the 'dash' template group using `template-group`.
+* List the application, with `id` 'tracker', under the 'dash' template group using the `template-group` directive.
 
 Save the configuration file and restart ShinyProxy:
 
