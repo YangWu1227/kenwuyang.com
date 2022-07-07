@@ -674,6 +674,48 @@ The most important commands and steps are as follows:
 CMD ["R", "-q", "-e", "rmarkdown::run('/root/app/source_code.Rmd', shiny_args = list(port = 3838, host = '0.0.0.0'))"]
 ```
 
+### R Environment Variables
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If our application requires sensitive information such as API keys or tokens (for GitHub), database credentials and secrets, or R specific environment variables, we could store them in a `.Renviron` file as name-value pairs of the form `name=value`. For example, below is an example file containing database credentials:
+
+```{r, eval=FALSE}
+# Credentials for sql database
+db_name = "x"
+db_password = "xxxx"
+db_host = "xxxxx.redshift.amazonaws.com"
+db_port = "xxxx"
+db_user = "xxxx"
+```
+
+These variables can then be access in our application source code as follows:
+
+```{r, eval=FALSE}
+Sys.getenv("db_host")
+Sys.getenv("db_port")
+Sys.getenv("db_user")
+Sys.getenv("db_password")
+Sys.getenv("db_name")
+```
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The `.Renviron` file is run only once for each R session. Every time a user runs our application, a container spins up and serves the application, which accesses the environment variables we set. The `.Renviron` file can be placed in our `app` directory:
+
+```{r, eval=FALSE}
+├── app
+│   ├── global.R
+│   ├── server.R
+│   └── ui.R
+├── .Renviron
+├── .gitignore
+├── Dockerfile
+└── README.md
+```
+
+We then copy the file to the root directory in the image:
+
+```{r, eval=FALSE}
+COPY .Renviron /root/.Renviron
+```
+
 ## Build Image
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Navigate to the `app` directory on our instance, which also contains the `Dockerfile`:
@@ -686,7 +728,7 @@ A few notes:
 
 * The build command above uses the current directory (`.`) as build context.
 
-* The `-t` options allows use to tag our image with a name. For example, we can use `sudo docker build . -t tracker-dashboard`.
+* The `-t` options allows us to tag our image with a name. For example, we can use `sudo docker build . -t tracker-dashboard`.
 
 Once the build process completes, we can check the images using:
 
@@ -746,7 +788,7 @@ In this configuration, we accomplished the following:
 
 * Restrict access to this application to `admin_user` only using the `access-groups` directive. 
 
-* List the application, with `id` 'tracker', under the 'dash' template group using the `template-group` directive.
+* List the application (`id: tracker`) under a template group called 'Dashboard' using the `template-group` directive. This directive allows use to group together applications in the ShinyProxy user interface.
 
 Save the configuration file and restart ShinyProxy:
 

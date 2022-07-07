@@ -64,7 +64,10 @@ output:
 </ul></li>
 <li><a href="#step-3-containerize-shiny-application">Step 3: Containerize Shiny Application</a>
 <ul>
-<li><a href="#dockerfile">Dockerfile</a></li>
+<li><a href="#dockerfile">Dockerfile</a>
+<ul>
+<li><a href="#r-environment-variables">R Environment Variables</a></li>
+</ul></li>
 <li><a href="#build-image">Build Image</a></li>
 <li><a href="#shinyproxy-specs">ShinyProxy Specs</a></li>
 <li><a href="#resources">Resources</a>
@@ -658,6 +661,33 @@ CMD [&quot;R&quot;, &quot;-q&quot;, &quot;-e&quot;, &quot;shiny::runApp(&#39;/ro
 <li><p>Finally, we run the source code of our shiny application in the <code>/root/app</code> directory in the image (and not in our EC2). This command is dependent on the source code of our shiny applications. For instance, if we used <a href="https://pkgs.rstudio.com/flexdashboard/">flexdashboard</a>, then the command should be:</p></li>
 </ul>
 <pre class="r"><code>CMD [&quot;R&quot;, &quot;-q&quot;, &quot;-e&quot;, &quot;rmarkdown::run(&#39;/root/app/source_code.Rmd&#39;, shiny_args = list(port = 3838, host = &#39;0.0.0.0&#39;))&quot;]</code></pre>
+<div id="r-environment-variables" class="section level3">
+<h3>R Environment Variables</h3>
+<p>       If our application requires sensitive information such as API keys or tokens (for GitHub), database credentials and secrets, or R specific environment variables, we could store them in a <code>.Renviron</code> file as name-value pairs of the form <code>name=value</code>. For example, below is an example file containing database credentials:</p>
+<pre class="r"><code># Credentials for sql database
+db_name = &quot;x&quot;
+db_password = &quot;xxxx&quot;
+db_host = &quot;xxxxx.redshift.amazonaws.com&quot;
+db_port = &quot;xxxx&quot;
+db_user = &quot;xxxx&quot;</code></pre>
+<p>These variables can then be access in our application source code as follows:</p>
+<pre class="r"><code>Sys.getenv(&quot;db_host&quot;)
+Sys.getenv(&quot;db_port&quot;)
+Sys.getenv(&quot;db_user&quot;)
+Sys.getenv(&quot;db_password&quot;)
+Sys.getenv(&quot;db_name&quot;)</code></pre>
+<p>       The <code>.Renviron</code> file is run only once for each R session. Every time a user runs our application, a container spins up and serves the application, which accesses the environment variables we set. The <code>.Renviron</code> file can be placed in our <code>app</code> directory:</p>
+<pre class="r"><code>├── app
+│   ├── global.R
+│   ├── server.R
+│   └── ui.R
+├── .Renviron
+├── .gitignore
+├── Dockerfile
+└── README.md</code></pre>
+<p>We then copy the file to the root directory in the image:</p>
+<pre class="r"><code>COPY .Renviron /root/.Renviron</code></pre>
+</div>
 </div>
 <div id="build-image" class="section level2">
 <h2>Build Image</h2>
@@ -666,7 +696,7 @@ CMD [&quot;R&quot;, &quot;-q&quot;, &quot;-e&quot;, &quot;shiny::runApp(&#39;/ro
 <p>A few notes:</p>
 <ul>
 <li><p>The build command above uses the current directory (<code>.</code>) as build context.</p></li>
-<li><p>The <code>-t</code> options allows use to tag our image with a name. For example, we can use <code>sudo docker build . -t tracker-dashboard</code>.</p></li>
+<li><p>The <code>-t</code> options allows us to tag our image with a name. For example, we can use <code>sudo docker build . -t tracker-dashboard</code>.</p></li>
 </ul>
 <p>Once the build process completes, we can check the images using:</p>
 <pre class="r"><code>$ sudo docker image ls</code></pre>
@@ -713,7 +743,7 @@ logging:
 <ul>
 <li><p>Specify the docker image to use for the application using the <code>container-image</code> directive.</p></li>
 <li><p>Restrict access to this application to <code>admin_user</code> only using the <code>access-groups</code> directive.</p></li>
-<li><p>List the application, with <code>id</code> ‘tracker’, under the ‘dash’ template group using the <code>template-group</code> directive.</p></li>
+<li><p>List the application (<code>id: tracker</code>) under a template group called ‘Dashboard’ using the <code>template-group</code> directive. This directive allows use to group together applications in the ShinyProxy user interface.</p></li>
 </ul>
 <p>Save the configuration file and restart ShinyProxy:</p>
 <pre class="r"><code># Ubuntu
