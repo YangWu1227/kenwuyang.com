@@ -13,4 +13,4 @@ title: Privacy Policy
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This site is not responsible for the information collection, use, or other privacy practices of Google. Nor does this site share, sell, trade, or rent any non-personally identifiable information to others. 
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To learn more, please see Google's [privacy policy](https://policies.google.com/privacy?hl=en-US).
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; To learn more, please refer to Google's [privacy policy](https://policies.google.com/privacy?hl=en-US).
